@@ -103,4 +103,4 @@ if ( $chmodFolderUser && isset($_GET['file']) && $_GET['file'] == 'transdroid' )
 elseif ( $chmodFolderUser && isset($_GET['file']) && $_GET['file'] == 'filezilla' )
     Server::FileDownload('filezilla.xml', $conf_xml_filezilla, $userName);
 else
-    echo 'Le fichier demandé n\'existe pas.';
+    echo 'Le fichier demand&eacute; n\'existe pas.';
