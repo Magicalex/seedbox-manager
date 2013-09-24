@@ -1,0 +1,158 @@
+    <!-- CONTENEUR -->
+    <div class="container marg">
+        <h1 class="icone-seed-managerdashboard page-header dashboard">Tableau de bord</h1>
+        
+        <?php if ( !$chmodRebootRtorrent || !$chmodFolderUser ) { ?>
+        <div class="alert alert-danger">
+            <h4>Attention !</h4>
+            <?php if ( !$chmodRebootRtorrent ) { ?>
+            <p>
+                Il faut appliquer le chmod 4755 au programme <strong>reboot-rtorrent</strong>.<br>
+                Dans un terminal tapez cette commande en root : <code># chown root:root <?php echo $current_path; ?>/reboot-rtorrent && chmod 4755 <?php echo $current_path; ?>/reboot-rtorrent</code>.
+            </p>
+            <?php } if ( !$chmodFolderUser ) { ?>
+            <p>
+                Il faut créer ou appliquer le chmod 777 au dossier <strong><?php echo $current_path.'/conf/users/'.$userName.'/'; ?></strong> .<br>
+                Dans un terminal tapez cette commande en root : <code># chmod 777 <?php echo $current_path.'/conf/users/*'; ?></code>.
+            </p>
+            <?php } ?>
+        </div>
+
+    <?php } if ( $controleUser && isset($_POST['reboot']) && $rebootRtorrent['statusReboot'] == 0 ) { ?>
+
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Votre session rtorrent a été redémarré avec succès.
+        </div>
+
+    <?php } elseif ( $controleUser && isset($_POST['reboot']) && $rebootRtorrent['statusReboot'] != 0 ) { ?>
+        
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Erreur</strong> un problème est survenu lors du redémarrage de rtorrent, vérifiez votre configuration.
+        </div>
+
+    <?php } elseif ( !$controleUser ) { ?>
+        
+        <div class="alert alert-warning">
+            <h4>Pas d'utilisateur trouvé !</h4>
+            Vérifiez si cette interface est protégé par votre serveur web grâce à un mot de passe.
+        </div>
+
+    <?php } if ( $controleUser && isset($_POST['reboot']) ) { ?>
+
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Log :</strong><br>
+            <?php
+
+                echo 'commande exécuté : '.$current_path.'/reboot-rtorrent '.$userName.'<br>';
+                echo 'status : '.$rebootRtorrent['statusReboot'].'<br>';
+                echo 'résultat de la commande :<br>';
+                $i=0;
+                while( $i < count( $rebootRtorrent['logReboot'] ) )
+                {
+                    echo ' $ '.$rebootRtorrent['logReboot'][$i].'<br>';
+                    $i++;
+                }
+            ?>
+        </div>
+
+    <?php } ?>
+
+    <section class="row">
+        <article class="col-md-6">
+            <div class="well well-sm" id="blockInfo">
+                <h4 class="titre-head icone-seed-managerhome">Information compte utilisateur</h4>
+                <div class="trait"></div>
+
+                <p class="icone-seed-managerlocation"><strong>Votre adresse Ip</strong></p>
+                <ul>
+                    <li><strong class="text-success"><?php echo $_SERVER['REMOTE_ADDR']; ?></strong></li>
+                </ul>
+                <p class="icone-seed-managerstorage"><strong>Espace disque</strong></p>
+                <p class="text-center text-defaut-color">Vous utilisez <strong><?php echo $data_disk['percentage_used']; ?>%</strong> <em>soit <?php echo $data_disk['used_disk']; ?> sur <?php echo $data_disk['total_disk']; ?></em></p>
+
+                <div class="progress progress-striped fix-progress">
+                    <div class="progress-bar <?php echo $data_disk['progessBarColor']; ?>" role="progressbar" aria-valuenow="<?php echo $data_disk['percentage_used']; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $data_disk['percentage_used']; ?>%;">
+                        <span class="sr-only"><?php echo $data_disk['percentage_used']; ?>% Complete</span>
+                    </div>
+                </div>
+
+                <p class="icone-seed-managerclock"><strong>Uptime serveur</strong></p>
+                <ul>
+                    <li><strong class="text-success"><?php echo $serveur->getUptime(); ?></strong></li>
+                </ul>
+
+                <p class="icone-seed-managerstats"><strong>Charge serveur</strong></p>
+                <ul>
+                    <li style="cursor:default;">
+                        <span class="text-defaut-color">load average : </span>
+                        <span id="tooltip" data-original-title="Charge moyenne depuis 1 min" class="label label-primary"><?php echo $load_server['load_average'][0]; ?></span>
+                        <span id="tooltip" data-original-title="Charge moyenne depuis 5 min" class="label label-primary"><?php echo $load_server['load_average'][1]; ?></span>
+                        <span id="tooltip" data-original-title="Charge moyenne depuis 15 min" class="label label-primary"><?php echo $load_server['load_average'][2]; ?></span>
+                    </li>
+                    <li id="load-info"><?php echo $load_server['info_charge']; ?></li>
+                </ul>
+            </div>
+        </article>
+
+        <article class="col-md-6">
+            <div class="well well-sm" id="blockFtp">
+                <h4 class="icone-seed-managertree titre-head">Les accès ftp / sftp / transdroid</h4>
+                <div class="trait"></div>
+
+                <h5 class="icone-seed-managerlaptop"><strong>Serveur FTP et sFTP</strong></h5>
+                <ul>
+                    <li>Adresse (s)FTP : <em>(s)ftp://<?php echo $host; ?></em></li>
+                    <li>User (s)FTP : <em><?php echo $userName; ?></em></li>
+                    <li>Port FTP : <em><?php echo $user->portFtp(); ?></em></li>
+                    <li>Port sFTP : <em><?php echo $user->portSftp(); ?></em></li>
+                    <li><a class="btn btn-info btn-xs icone-seed-managerdownload" href="http://filezilla.fr/">Télécharger filezilla</a></li>
+                    <li><a id="popupfilezilla" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="php/downloads.php?file=filezilla">Fichier de configuration</a></li>
+                </ul>
+
+                <h5 class="icone-seed-managerandroid"><strong>Application Transdroid</strong></h5>
+                <ul>
+                    <li>Dossier SCGI : <em><strong>/<?php echo strtoupper(substr($userName,0,3)); ?>0</strong></em></li>
+                    <li>Adresse http : <em>http://<?php echo $host; ?></em></li>
+                    <li>User transdroid : <em><?php echo $userName; ?></em></li>
+                    <li><a class="btn btn-info btn-xs icone-seed-managerdownload" href="http://transdroid.org/latest">Télécharger Transdroid</a></li>
+                    <li><a id="popuptransdroid" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="php/downloads.php?file=transdroid">Fichier de configuration</a></li>
+                </ul>
+        </article>
+
+    </section>
+    
+    <section class="row">
+        <article class="col-md-6">
+            <div class="well well-sm" id="blockRtorrent">
+                <h4 class="titre-head icone-seed-managerlightning">Gestion de rtorrent</h4>
+                <div class="trait"></div>
+                <p class="text-center btn-reboot">
+                    <a data-toggle="modal" href="#popupreboot" class="btn btn-info btn-lg" style="vertical-align: middle;"><span class="glyphicon glyphicon-refresh"></span>Redémarrer rtorrent</a>
+                </p>
+                <?php if ( $read_data_reboot['file_exist'] ) { ?>
+                <small class="text-defaut-color"><em>Dernier redémarrage le <?php echo $read_data_reboot['read_file']; ?></em></small>
+                <?php } ?>
+            </div>
+        </article>
+
+        <?php if ( $user->blocSupport() ) { ?>
+        <article class="col-md-6">
+            <div class="well well-sm" id="blockSupport">
+                <h4 class="icone-seed-managersupport titre-head">Contacter le Support</h4>
+                <div class="trait"></div>
+                <address>
+                    <strong>Adresse mail :</strong>
+                    <?php echo '<a href="mailto:'.$user->supportMail().'" target="_blank">'.$user->supportMail().'</a>'; ?>
+                </address>
+            </div>
+        </article>
+        <?php } ?>        
+
+    </section>
+
+    <em class="text-right"><a class="aboutlink hidden-xs hidden-sm" data-toggle="modal" href="#popupinfo">A propos</a></em>
+
+    </div><!-- FIN DIV CONTENEUR -->

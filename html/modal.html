@@ -1,0 +1,69 @@
+<!-- MODAL BOOTSTRAP -->
+
+    <div class="modal fade" id="popupreboot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Avertissement</h4>
+                </div>
+                <div class="modal-body">
+                    <p>&Ecirc;tes-vous sûr de vouloir redémarrer votre session rtorrent ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <form action="index.php" method="post">
+                        <input type="hidden" name="reboot" />
+                        <input type="submit" value="Redémarrer" class="btn btn-info" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- popup about us -->
+    <div class="modal fade" id="popupinfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">A propos</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="textmodaleabout">Application web par Backtoback & Magicalex</p>
+                    <p class="textmodaleabout">Contacter les développeurs : <a href="http://buxum.fr/contact.php">http://buxum.fr/contact.php</a></p>
+                    <p class="textmodaleabout"><strong>Version 2.0 stable</strong> (le 12/09/13)</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- popup logout -->
+    <div class="modal fade" id="popuplogout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title icone-seed-managerswitch">Déconnexion</h4>
+                </div>
+                <div class="modal-body">
+                    <p>&Ecirc;tes-vous sûr de vouloir vous déconnecter du serveur ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <a href="?logout" class="btn btn-danger">Déconnexion</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/application.js"></script>
+
+</html>
