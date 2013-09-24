@@ -1,0 +1,20 @@
+{
+    "name": "magicalex/seedbox-manager",
+    "description": "Web app for manage your seedbox",
+    "keywords": ["seedbox", "rtorrent"],
+    "license": "GPL-3.0",
+    "type": "project",
+    "require": {
+        "php": ">=5.4.0",
+        "twig/twig": "1.*"
+    },
+    "authors": [
+        {
+            "name": "Magicalex",
+            "email": "magicalex14000@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "app\\": "app" }
+    }
+}
