@@ -8,10 +8,4 @@ On n'y trouve aussi :
  * des informations utilisateurs (espace disque, adresse ip visiteur).
  * un outil pour générer des fichiers de configuration filezilla et transdroid.
 
-##Installation
-
-##Configuration
-
-######exemple d'un fichier de configuration :
-
 **Auteur :** Backtoback & Magicalex (magicalex14000@gmail.com)
