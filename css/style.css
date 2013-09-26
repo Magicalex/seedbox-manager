@@ -12,7 +12,6 @@
 
 body {
   background:url("../img/background.png");
-
 }
 
 ul {
@@ -22,6 +21,7 @@ ul {
 .marg {
   padding:15px;
   margin-bottom:50px;
+  background-color: #999; /* fixe ie8 */
   background-color: rgba(255,255,255,0.2);
 }
 
@@ -89,9 +89,11 @@ ul {
 .nav-link:first-child {
   border-left:1px solid rgba(0,0,0,0.1);
 }
+
 .nav-link {
   border-right:1px solid rgba(0,0,0,0.1);
 }
+
 .nav-link:hover {
   background-color:#E7E7E7;
 }
@@ -135,7 +137,6 @@ ul {
   font-weight: normal;
   font-style: normal;
 }
-
 
 .icone-seed-managerhome:before, .icone-seed-managerlocation:before, .icone-seed-managerclock:before, .icone-seed-managerdownload:before, .icone-seed-managerspinner:before, .icone-seed-manageruser:before, .icone-seed-managersupport:before, .icone-seed-managerstats:before, .icone-seed-managerdashboard:before, .icone-seed-managerlightning:before, .icone-seed-managerswitch:before, .icone-seed-managertree:before, .icone-seed-managerglobe:before, .icone-seed-managerlaptop:before, .icone-seed-managerstorage:before, .icone-seed-managerbug:before, .icone-seed-managerandroid:before, .icone-seed-managerfile-zip:before, .icone-seed-managerfile-xml:before {
   font-family:'seedmanager';
