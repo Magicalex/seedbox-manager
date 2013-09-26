@@ -1,19 +1,27 @@
     <!-- CONTENEUR -->
     <div class="container marg">
         <h1 class="icone-seed-managerdashboard page-header dashboard">Tableau de bord</h1>
-        
-        <?php if ( !$chmodRebootRtorrent || !$chmodFolderUser ) { ?>
+        <noscript>
+            <div class="alert alert-info">
+                <h4>Information</h4>
+                Javascript n'est pas activé ou quelque chose empêche sa bonne exécution sur votre navigateur web.<br>
+                Pour pouvoir utiliser cette interface l'activation de javascript est nécessaire.
+            </div>
+        </noscript>
+
+    <?php if ( !$chmodRebootRtorrent || !$chmodFolderUser ) { ?>
+
         <div class="alert alert-danger">
             <h4>Attention !</h4>
             <?php if ( !$chmodRebootRtorrent ) { ?>
             <p>
                 Il faut appliquer le chmod 4755 au programme <strong>reboot-rtorrent</strong>.<br>
-                Dans un terminal tapez cette commande en root : <code># chown root:root <?php echo $current_path; ?>/reboot-rtorrent && chmod 4755 <?php echo $current_path; ?>/reboot-rtorrent</code>.
+                Dans un terminal tapez cette commande en root : <code># chown root:root <?php echo $current_path; ?>/reboot-rtorrent && chmod 4755 <?php echo $current_path; ?>/reboot-rtorrent</code>
             </p>
             <?php } if ( !$chmodFolderUser ) { ?>
             <p>
                 Il faut créer ou appliquer le chmod 777 au dossier <strong><?php echo $current_path.'/conf/users/'.$userName.'/'; ?></strong> .<br>
-                Dans un terminal tapez cette commande en root : <code># chmod 777 <?php echo $current_path.'/conf/users/*'; ?></code>.
+                Dans un terminal tapez cette commande en root : <code># chmod 777 <?php echo $current_path.'/conf/users/*'; ?></code>
             </p>
             <?php } ?>
         </div>
@@ -120,6 +128,7 @@
                     <li><a class="btn btn-info btn-xs icone-seed-managerdownload" href="http://transdroid.org/latest">Télécharger Transdroid</a></li>
                     <li><a id="popuptransdroid" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="php/downloads.php?file=transdroid">Fichier de configuration</a></li>
                 </ul>
+            </div>
         </article>
 
     </section>
