@@ -37,20 +37,20 @@
 
 ( function() {
     
-    // ajustement des blocks
+    // ajustement du style css des blocs
     var blockInfo = document.getElementById("blockInfo");
     var blockFtp = document.getElementById("blockFtp");
     var blockRtorrent = document.getElementById("blockRtorrent");
     var blockSupport = document.getElementById("blockSupport");
 
     if(blockInfo.offsetHeight > blockFtp.offsetHeight)
-        blockFtp.style.minHeight = blockInfo.offsetHeight+"px";
+        blockFtp.style.height = blockInfo.offsetHeight+"px";
     else
-        blockInfo.style.minHeight = blockFtp.offsetHeight+"px";
+        blockInfo.style.height = blockFtp.offsetHeight+"px";
 
     if(blockRtorrent.offsetHeight > blockSupport.offsetHeight)
-        blockSupport.style.minHeight = blockRtorrent.offsetHeight+"px";
+        blockSupport.style.height = blockRtorrent.offsetHeight+"px";
     else
-        blockRtorrent.style.minHeight = blockSupport.offsetHeight+"px";
+        blockRtorrent.style.height = blockSupport.offsetHeight+"px";
 
 }) ();
