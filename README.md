@@ -1,4 +1,5 @@
-##Description
+#Description du seedbox-manager
+
 L'application web seedbox manager est une interface pour redémarrer une session rtorrent d'un utilisateur unix.
 On n'y trouve aussi :
 
