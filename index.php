@@ -42,12 +42,7 @@ if ( isset($_POST['reboot']) )
     $rebootRtorrent = $user->rebootRtorrent();
 
 if ( isset($_POST['submit']) )
-{
-    $uplog = $update->update_file_config($_POST, './conf/users/'.$userName);
-    echo '<pre>';
-    print_r($uplog);
-    echo '</pre>';
-}
+    $update_ini_file_log = $update->update_file_config($_POST, './conf/users/'.$userName);
 
 //inclusion html
 include_once('html/header.php');
