@@ -6,7 +6,7 @@
         trigger: 'hover'
     }).tooltip('hide');
 
-}) ();
+} ) ();
 
 ( function () {
 
@@ -33,7 +33,7 @@
         }
     });
 
-}) ();
+} ) ();
 
 ( function() {
     
@@ -53,4 +53,4 @@
     else
         blockRtorrent.style.height = blockSupport.offsetHeight+"px";
 
-}) ();
+} ) ();

@@ -3,12 +3,22 @@
 function chargerClasse($classe) { require_once($classe.'.class.php'); }
 spl_autoload_register('chargerClasse');
 
-$user = new Users;
-$serveur = new Server;
+if ( isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']) )
+    $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
+else
+    die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
 
-$userName = $user->userName();
+if ( file_exists('../conf/users/'.$userName.'/config.ini') )
+    $file_user_ini = '../conf/users/'.$userName.'/config.ini';
+else
+    $file_user_ini = '../conf/config.ini';
+
+// initialisation des objets
+$user = new Users($file_user_ini, $userName );
+$serveur = new Server($file_user_ini, $userName);
+
 $host = $_SERVER['HTTP_HOST'];
-$chmod_folder_user = file_exists('../conf/users/'.$userName) ? Server::getChmod('../conf/users/'.$userName, -3):null;
+$chmod_folder_user = file_exists('../conf/users/'.$userName) ? Server::getChmod('../conf/users/'.$userName, 3):null;
 $chmodFolderUser = $chmod_folder_user == 777 ? true:false;
 $folder_scgi = '/'.strtoupper(substr($userName,0,3)).'0';
 $title_seedbox = 'Seedbox '.$userName;
@@ -99,8 +109,8 @@ $conf_xml_filezilla =
 '</FileZilla3>';
 
 if ( $chmodFolderUser && isset($_GET['file']) && $_GET['file'] == 'transdroid' )
-    Server::FileDownload('settings.json', $conf_json_trandroid, $userName);
+    $serveur->FileDownload('settings.json', $conf_json_trandroid);
 elseif ( $chmodFolderUser && isset($_GET['file']) && $_GET['file'] == 'filezilla' )
-    Server::FileDownload('filezilla.xml', $conf_xml_filezilla, $userName);
+    $serveur->FileDownload('filezilla.xml', $conf_xml_filezilla);
 else
     echo 'Le fichier demand&eacute; n\'existe pas.';
