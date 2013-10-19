@@ -1,9 +1,11 @@
 <?php
 
-class Server
+class Server extends Users
 {
+    
     public static function getChmod($file, $precision)
     {
+        $precision = $precision * -1;
         $chmod = substr(sprintf('%o', fileperms($file)), $precision);
         return $chmod;
     }
@@ -21,7 +23,7 @@ class Server
         $hours = floor($hours - ($days * 24));
         $min   = floor($min - ($days * 60 * 24) - ($hours * 60));
 
-        $result = null;
+        $result = '';
         if ($days != 0) $result = $days.' jours et ';
         if ($hours != 0) $result .= $hours.' h ';
         $result .= $min.' min';
@@ -43,34 +45,31 @@ class Server
                       'info_charge' => $info_charge );
     }
 
-    public static function logout($realm)
+    public function logout()
     {
         if ( preg_match( "#Basic#i", $_SERVER['HTTP_AUTHORIZATION'] ) || $_SERVER[AUTH_TYPE] == 'Basic' )
         {
-            header('WWW-Authenticate: Basic realm="'.$realm.'"');
+            header('WWW-Authenticate: Basic realm="'.$this->realmWebServer.'"');
             header('HTTP/1.0 401 Unauthorized');
-            echo "<script>document.location.href = 'http://google.fr'</script>";
+            echo "<script>document.location.href = '$this->url_redirect'</script>";
             exit;
         }
 
         if ( preg_match( "#Digest#i", $_SERVER['HTTP_AUTHORIZATION'] ) || $_SERVER[AUTH_TYPE] == 'Digest' )
         {
             header('HTTP/1.1 401 Unauthorized');
-            header('WWW-Authenticate: Digest realm="'.$realm.'",qop="auth",nonce="'.uniqid().'",opaque="'.md5($realm).'"');
-            echo "<script>document.location.href = 'http://google.fr'</script>";
+            header('WWW-Authenticate: Digest realm="'.$this->realmWebServer.'",qop="auth",nonce="'.uniqid().'",opaque="'.md5($this->realmWebServer).'"');
+            echo "<script>document.location.href = '$this->url_redirect'</script>";
             exit;
         }
     }
 
-    public static function FileDownload( $file_config_name, $conf_ext_prog, $user)
+    public function FileDownload($file_config_name, $conf_ext_prog)
     {
-        $createFile = fopen('../conf/users/'.$user.'/'.$file_config_name, 'a+');
-        ftruncate($createFile,0);
-        fputs($createFile, $conf_ext_prog);
-        fclose($createFile);
+        file_put_contents('../conf/users/'.$this->userName.'/'.$file_config_name, $conf_ext_prog);
 
         set_time_limit(0);
-        $path_file_name = '../conf/users/'.$user.'/'.$file_config_name;
+        $path_file_name = '../conf/users/'.$this->userName.'/'.$file_config_name;
         $file_name = $file_config_name;
         $file_size = filesize($path_file_name);
 

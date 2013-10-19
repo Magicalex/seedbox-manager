@@ -2,52 +2,47 @@
 
 class Users
 {
-    private $_userName;
-    private $_controlUser;
-    private $_directory;
-    private $_rutorrentUrl;
-    private $_cakeboxActiveUrl;
-    private $_cakeboxUrl;
-    private $_portFtp;
-    private $_portSftp;
-    private $_blocSupport;
-    private $_supportMail;
-    private $_realmWebServer;
-    private $_currentPath;
+    protected $userName;
+    protected $url_redirect;
+    protected $realmWebServer;
+    protected $directory;
+    protected $rutorrentUrl;
+    protected $cakeboxActiveUrl;
+    protected $cakeboxUrl;
+    protected $portFtp;
+    protected $portSftp;
+    protected $blocSupport;
+    protected $supportMail;
+    protected $currentPath;
+    protected $blocInfo;
+    protected $blocRtorrent;
+    protected $blocFtp;
 
-    public function __construct()
+    public function __construct($file_ini, $user)
     {
-        if ( isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']) )
-        {
-            $this->_userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
-            $this->_controlUser = true;
-        }
-        else
-        {
-            $this->_userName = 'Aucun user';
-            $this->_controlUser = false;
-        }
+        $setting_user_array = parse_ini_file($file_ini, true);
+        $this->userName = $user;
+        $this->hydrate($setting_user_array);
+    }
 
-        if (file_exists('./conf/users/'.$this->_userName.'/config.ini'))
-            $fileIni = './conf/users/'.$this->_userName.'/config.ini';
-        elseif (file_exists('../conf/users/'.$this->_userName.'/config.ini'))
-            $fileIni = '../conf/users/'.$this->_userName.'/config.ini';
-        elseif (file_exists('./conf/config.ini'))
-            $fileIni = './conf/config.ini';
-        else
-            $fileIni = '../conf/config.ini';
+    public function hydrate(array $array)
+    {
+        $this->cakeboxActiveUrl = (bool) $array['nav']['active_cakebox'];
+        $this->blocInfo         = (bool) $array['user']['active_bloc_info'];
+        $this->blocFtp          = (bool) $array['ftp']['active_ftp'];
+        $this->blocRtorrent     = (bool) $array['rtorrent']['active_reboot'];
+        $this->blocSupport      = (bool) $array['support']['active_support'];
 
-        $setting_array           = parse_ini_file($fileIni, true);
-        $this->_directory        = $setting_array['user']['user_directory'];
-        $this->_rutorrentUrl     = $setting_array['rutorrent']['url'];
-        $this->_cakeboxActiveUrl = $setting_array['cakebox']['active_cakebox'];
-        $this->_cakeboxUrl       = $setting_array['cakebox']['url'];
-        $this->_portFtp          = $setting_array['ftp']['port_ftp'];
-        $this->_portSftp         = $setting_array['ftp']['port_sftp'];
-        $this->_blocSupport      = $setting_array['support']['active_support'];
-        $this->_supportMail      = $setting_array['support']['adresse_mail'];
-        $this->_realmWebServer   = $setting_array['logout']['realm'];
-        $this->_currentPath      = getcwd();
+        $this->directory        = (string) $array['user']['user_directory'];
+        $this->rutorrentUrl     = (string) $array['nav']['url_rutorrent'];
+        $this->cakeboxUrl       = (string) $array['nav']['url_cakebox'];
+        $this->supportMail      = (string) $array['support']['adresse_mail'];
+        $this->realmWebServer   = (string) $array['logout']['realm'];
+        $this->url_redirect     = (string) $array['logout']['url_redirect'];
+
+        $this->portFtp          = (int) $array['ftp']['port_ftp'];
+        $this->portSftp         = (int) $array['ftp']['port_sftp'];
+        $this->currentPath      = getcwd();
     }
 
     private static function convertFileSize($octets)
@@ -60,8 +55,8 @@ class Users
 
     public function userdisk()
     {
-        $total_disk = disk_total_space($this->_directory);
-        $used_disk = $total_disk - disk_free_space($this->_directory);
+        $total_disk = disk_total_space($this->directory);
+        $used_disk = $total_disk - disk_free_space($this->directory);
         $percentage_used = round(($used_disk*100)/$total_disk, 2);
         $used_disk = self::convertFileSize($used_disk);
         $total_disk = self::convertFileSize($total_disk);
@@ -80,37 +75,43 @@ class Users
 
     public function rebootRtorrent()
     {
-        exec( $this->_currentPath.'/reboot-rtorrent '.$this->_userName, $log, $status);
+        exec( $this->currentPath.'/reboot-rtorrent '.$this->userName, $log, $status);
         $date_updated = date('d/m/y \à H\hi');
-        $enter_data_reboot = fopen('./conf/users/'.$this->_userName.'/data_reboot.txt', 'a+');
-        ftruncate($enter_data_reboot,0);
-        fputs($enter_data_reboot, $date_updated);
-        fclose($enter_data_reboot);
+        file_put_contents('./conf/users/'.$this->userName.'/data_reboot.txt', $date_updated);
 
         return array( 'logReboot' => $log,
                       'statusReboot' => $status );
     }
 
-    public function readFileDataReboot()
+    public function readFileDataReboot($file)
     {
-        $data_reboot = fopen('./conf/users/'.$this->_userName.'/data_reboot.txt', 'r');
-        $date_reboot_rtorrent = fgets($data_reboot);
-        fclose($data_reboot);
-        $exist_reboot_rtorrent = true;
+        if (file_exists($file))
+        {
+            $data_reboot = fopen($file, 'r');
+            $date_reboot_rtorrent = fgets($data_reboot);
+            fclose($data_reboot);
+            $exist_reboot_rtorrent = true;
+        }
+        else
+        {
+            $exist_reboot_rtorrent = false;
+            $date_reboot_rtorrent = null;
+        }
 
         return array( 'read_file' => $date_reboot_rtorrent,
                       'file_exist' => $exist_reboot_rtorrent );
     }
 
-    public function userName() { return $this->_userName; }
-    public function controlUser() { return $this->_controlUser; }
-    public function rutorrentUrl() { return $this->_rutorrentUrl; }
-    public function cakeboxActiveUrl() { return $this->_cakeboxActiveUrl; }
-    public function cakeboxUrl() { return $this->_cakeboxUrl; }
-    public function portFtp() { return $this->_portFtp; }
-    public function portSftp() { return $this->_portSftp; }
-    public function blocSupport() { return $this->_blocSupport; }
-    public function supportMail() { return $this->_supportMail; }
-    public function realmWebServer() { return $this->_realmWebServer; }
-    public function currentPath() { return $this->_currentPath; }
+    public function url_redirect() { return $this->url_redirect; }
+    public function rutorrentUrl() { return $this->rutorrentUrl; }
+    public function cakeboxActiveUrl() { return $this->cakeboxActiveUrl; }
+    public function cakeboxUrl() { return $this->cakeboxUrl; }
+    public function portFtp() { return $this->portFtp; }
+    public function portSftp() { return $this->portSftp; }
+    public function blocSupport() { return $this->blocSupport; }
+    public function supportMail() { return $this->supportMail; }
+    public function currentPath() { return $this->currentPath; }
+    public function blocInfo() { return $this->blocInfo; }
+    public function blocFtp() { return $this->blocFtp; }
+    public function blocRtorrent() { return $this->blocRtorrent; }
 }

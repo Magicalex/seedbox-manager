@@ -69,10 +69,6 @@ ul {
   color:#B94A48;
 }
 
-#logout:hover {
-  color:#990000;
-}
-
 .text-defaut-color {
   color:#5A5A5A;
 }
@@ -125,6 +121,10 @@ ul {
 
 #popupfilezilla, #popuptransdroid {
   margin-top:4px;
+}
+
+.fix-marg-input {
+  margin-bottom: 0px;
 }
 
 @font-face {
@@ -184,4 +184,94 @@ ul {
   .marg {
     margin-bottom:0px !important;
   }
+}
+
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  vertical-align: middle;
+  left: -9999px;
+}
+  
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 75px;
+  cursor: pointer;
+}
+
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before,
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '';
+  position: absolute;
+}
+
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  left:0; top: -3px;
+  width: 60px; height: 20px;
+  background: #DDDDDD;
+  border-radius: 20px;
+  -webkit-transition: background-color .2s;
+  -moz-transition: background-color .2s;
+  -ms-transition: background-color .2s;
+  transition: background-color .2s;
+}
+
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  width: 12px; height: 12px;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -ms-transition: all .2s;
+  transition: all .2s;
+  border-radius: 14px;
+  background: #7F8C9A;
+  top: 1px; left: 5px;
+}
+
+[type="checkbox"]:checked + label:before {
+  background:#34495E; 
+}
+
+[type="checkbox"]:checked + label:after {
+  background: #39D2B4;
+  top: 1px; left: 43px;
+}
+
+[type="checkbox"]:checked + label .ui,
+[type="checkbox"]:not(:checked) + label .ui:before,
+[type="checkbox"]:checked + label .ui:after {
+  position: absolute;
+  left: 6px;
+  width: 65px;
+  border-radius: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 16px;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -ms-transition: all .2s;
+  transition: all .2s;
+}
+
+[type="checkbox"]:not(:checked) + label .ui:before {
+  content: "non";
+  left: 25px;
+}
+
+[type="checkbox"]:checked + label .ui:after {
+  content: "oui";
+  color: #39D2B4;
+}
+
+[type="checkbox"]:focus + label:before {
+  border: 1px dashed #777;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: -1px;
 }

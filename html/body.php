@@ -9,7 +9,15 @@
             </div>
         </noscript>
 
-    <?php if ( !$chmodRebootRtorrent || !$chmodFolderUser ) { ?>
+    <?php if ( $bad_config_user === true ) { ?>
+
+        <div class="alert alert-warning">
+            <h4>Cette utilisateur n'est pas configurer ! </h4>
+            Pour pouvoir utiliser pleinement cette interface il faut créer un dossier au nom de votre utilisateur dans ./conf/users/<br>
+            Pour configurer votre utilisateur, veuillez suivre les instructions juste en dessous.
+        </div>
+    
+    <?php } if ( !$chmodRebootRtorrent || !$chmodFolderUser ) { ?>
 
         <div class="alert alert-danger">
             <h4>Attention !</h4>
@@ -26,28 +34,21 @@
             <?php } ?>
         </div>
 
-    <?php } if ( $controleUser && isset($_POST['reboot']) && $rebootRtorrent['statusReboot'] == 0 ) { ?>
+    <?php } if ( isset($_POST['reboot']) && $rebootRtorrent['statusReboot'] == 0 ) { ?>
 
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             Votre session rtorrent a été redémarré avec succès.
         </div>
 
-    <?php } elseif ( $controleUser && isset($_POST['reboot']) && $rebootRtorrent['statusReboot'] != 0 ) { ?>
+    <?php } elseif ( isset($_POST['reboot']) && $rebootRtorrent['statusReboot'] != 0 ) { ?>
         
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <strong>Erreur</strong> un problème est survenu lors du redémarrage de rtorrent, vérifiez votre configuration.
         </div>
 
-    <?php } elseif ( !$controleUser ) { ?>
-        
-        <div class="alert alert-warning">
-            <h4>Pas d'utilisateur trouvé !</h4>
-            Vérifiez si cette interface est protégé par votre serveur web grâce à un mot de passe.
-        </div>
-
-    <?php } if ( $controleUser && isset($_POST['reboot']) ) { ?>
+    <?php } if ( isset($_POST['reboot']) ) { ?>
 
         <div class="alert alert-info">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -69,6 +70,8 @@
     <?php } ?>
 
     <section class="row">
+
+        <?php if ( $user->blocInfo() === true ) { ?>
         <article class="col-md-6">
             <div class="well well-sm" id="blockInfo">
                 <h4 class="titre-head icone-seed-managerhome">Information compte utilisateur</h4>
@@ -105,6 +108,7 @@
             </div>
         </article>
 
+        <?php } if ( $user->blocFtp() === true ) { ?>
         <article class="col-md-6">
             <div class="well well-sm" id="blockFtp">
                 <h4 class="icone-seed-managertree titre-head">Les accès ftp / sftp / transdroid</h4>
@@ -130,10 +134,8 @@
                 </ul>
             </div>
         </article>
+        <?php } if ( $user->blocRtorrent() === true ) { ?>
 
-    </section>
-    
-    <section class="row">
         <article class="col-md-6">
             <div class="well well-sm" id="blockRtorrent">
                 <h4 class="titre-head icone-seed-managerlightning">Gestion de rtorrent</h4>
@@ -147,7 +149,7 @@
             </div>
         </article>
 
-        <?php if ( $user->blocSupport() ) { ?>
+        <?php } if ( $user->blocSupport() === true ) { ?>
         <article class="col-md-6">
             <div class="well well-sm" id="blockSupport">
                 <h4 class="icone-seed-managersupport titre-head">Contacter le Support</h4>
@@ -161,7 +163,5 @@
         <?php } ?>        
 
     </section>
-
-    <em class="text-right"><a class="aboutlink hidden-xs hidden-sm" data-toggle="modal" href="#popupinfo">A propos</a></em>
 
     </div><!-- FIN DIV CONTENEUR -->
