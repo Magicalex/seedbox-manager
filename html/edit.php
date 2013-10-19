@@ -2,22 +2,27 @@
     <div class="container marg">
         <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Paramètres de <?php echo $userName; ?></h1>
         
-        <?php // PROBLEME AVEC EMPTY REVOIR CA if ( empty($uplog['function_write_ini_file']) && empty($uplog['bad_chmod_user_folder'])  &&  empty($uplog['not_acces_file_ini']) ) { ?>
+        <?php if ( isset($_POST['submit']) && !isset($update_ini_file_log['function_write_ini_file']) && !isset($update_ini_file_log['bad_chmod_user_folder'])  &&  !isset($update_ini_file_log['not_acces_file_ini']) ) { ?>
 
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             Vos préférences ont été mises à jour avec succès.
         </div>
 
-        <?php // } else { ?>
+        <?php } elseif ( isset($_POST['submit']) ) { ?>
 
-        <div class="alert alert-warning">
+        <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            Une erreur est survenue, impossible de mettre à jour votre configuration.
-            <?php // AFFICHER LE BON MESSAGE D'ERREUR ?>
+            <h4>Impossible de mettre à jour votre configuration !</h4>
+            <ul class="text-danger">
+            <?php foreach ($update_ini_file_log as $key => $data_error_update)
+            {
+                echo '<li>'.$data_error_update.'</li>';
+            } ?>
+            </ul>
         </div>
 
-        <?php //} ?>
+        <?php } ?>
 
         <section class="row">
             <article class="col-md-6">

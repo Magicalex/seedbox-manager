@@ -32,27 +32,39 @@ class Edit extends Server
             )
         );
 
+        $log = array();
         $log['function_write_ini_file'] = '';
         $log['bad_chmod_user_folder'] = '';
         $log['not_acces_file_ini'] = '';
-        if ( $this->getChmod($conf_user_folder, 3) == 777 )
+        $log['not_exist_conf_user_folder'] = '';
+
+        if ( file_exists($conf_user_folder) )
         {
-            if (file_exists($conf_user_folder.'/config.ini'))
+            if ( $this->getChmod($conf_user_folder, 3) == 777 )
             {
-                if(is_writable($conf_user_folder.'/config.ini'))
-                    $log['function_write_ini_file'] = $this->write_ini_file($content, $conf_user_folder.'/config.ini');
+                if (file_exists($conf_user_folder.'/config.ini'))
+                {
+                    if(is_writable($conf_user_folder.'/config.ini'))
+                        $log['function_write_ini_file'] = $this->write_ini_file($content, $conf_user_folder.'/config.ini');
+                    else
+                        $log['not_acces_file_ini'] = 'L\'interface n\'a pas les droits sur le fichier config.ini pour mettre à jour la configuration.';
+                }
                 else
-                    $log['not_acces_file_ini'] = 'L\'interface n\'a pas les droits sur le fichier config.ini pour mettre à jour la configuration.';
+                    $log['function_write_ini_file'] = $this->write_ini_file($content, $conf_user_folder.'/config.ini');
             }
             else
-                $log['function_write_ini_file'] = $this->write_ini_file($content, $conf_user_folder.'/config.ini');
+                $log['bad_chmod_user_folder'] = 'Le chmod sur le dossier de configuration de l\'utilisateur '.$this->userName.' n\'est pas correcte.';
         }
         else
-            $log['bad_chmod_user_folder'] = 'Le chmod sur le dossier de configuration de l\'utilisateur '.$this->userName.' n\'est pas correcte.';
+            $log['not_acces_file_ini'] = 'Le dossier de configuration de l\'utilisateur '.$this->userName.' n\'éxiste pas. Merci de le créer.';
 
-        return array( 'function_write_ini_file' => $log['function_write_ini_file'],
-                      'bad_chmod_user_folder' => $log['bad_chmod_user_folder'],
-                      'not_acces_file_ini' => $log['not_acces_file_ini'] );
+        // destruction des éléments du tableau qui sont vide
+        if ( empty($log['function_write_ini_file']) ) unset($log['function_write_ini_file']);
+        if ( empty($log['bad_chmod_user_folder']) ) unset($log['bad_chmod_user_folder']);
+        if ( empty($log['not_acces_file_ini']) ) unset($log['not_acces_file_ini']);
+        if ( empty($log['not_exist_conf_user_folder']) ) unset($log['not_exist_conf_user_folder']);
+
+        return $log;
     }
 
     public function write_ini_file(array $data_array, $file_path)
@@ -75,7 +87,7 @@ class Edit extends Server
         }
 
         if ( false === @file_put_contents ($file_path , $file_content) )
-            $write_error = 'Une erreur est survenue lors de l\'écriture dans le fichier config.ini. Cause inconnu.';
+            $write_error = 'Une erreur est survenue lors de l\'écriture dans le fichier config.ini : cause inconnu.';
 
         return $write_error;
     }
