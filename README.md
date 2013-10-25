@@ -12,7 +12,7 @@ On n'y trouve aussi :
  * Un espace administrateur pour gérer facilement la configuration de vos utilisateurs
  * Une page paramètre pour désactiver les blocs que vous n'utilisez pas.
 
-**Auteur :** Backtoback (c) & Magicalex (php) & hydrog3n (php)
+**Auteur :** Backtoback (c) & Magicalex (php) & hydrog3n (php).
 Nous contacter : <magicalex14000@gmail.com>
 
 #Installation
@@ -31,7 +31,7 @@ chmod +x install.sh && ./install.sh
 
 ##Configuration du serveur web
 
-1. Il faut protéger l'interface via une authentification basic ou digest
+1. Il faut protéger l'interface via une authentification basic ou digest.
 Je vous conseille d'étendre la protection de rutorrent à cette interface.
 
 2. Il faut protéger le dossier conf récursivement via votre serveur web.
@@ -58,9 +58,9 @@ pour apache :
 ```
 Puis redémarrer votre serveur web préféré via service
 ```
-service nginx restart # pour redémarrer nginx
-service lighttpd restart # pour redémarrer lighttpd
-service apache2 restart # pour redémarrer apache
+service nginx restart # pour recharger la config nginx
+service lighttpd restart # pour recharger la config lighttpd
+service apache2 restart # pour recharger la config apache
 ```
 
 ##Première connexion
@@ -74,6 +74,6 @@ pour obtenir les droits administrateurs
 ```
 vim /var/www/manager/conf/users/<utilisateur>/config.ini
 ```
-puis modifier à la ligne ## (admin = no par admin = yes=
+puis modifier à la ligne ## (admin = no par admin = yes
 
 Après avoir récupéré les droits administrateurs vous pouvez configurer tous les utilisateurs
