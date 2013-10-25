@@ -17,6 +17,7 @@ class Update
     protected $blocInfo;
     protected $blocRtorrent;
     protected $blocFtp;
+    protected $is_owner;
 
     public function __construct($file_ini, $user)
     {
@@ -29,6 +30,7 @@ class Update
     {
         $this->cakeboxActiveUrl = (bool) $array['nav']['active_cakebox'];
         $this->blocInfo         = (bool) $array['user']['active_bloc_info'];
+        $this->is_owner         = (bool) $array['user']['owner'];
         $this->blocFtp          = (bool) $array['ftp']['active_ftp'];
         $this->blocRtorrent     = (bool) $array['rtorrent']['active_reboot'];
         $this->blocSupport      = (bool) $array['support']['active_support'];
@@ -48,7 +50,8 @@ class Update
         $content = array( 
             'user' => array(
                 'active_bloc_info' => isset($data_upgrade['blocinfo']) ? true:false,
-                'user_directory' => $this->directory
+                'user_directory' => $this->directory,
+                'owner' => $this->is_owner
             ),
             'nav' => array(
                 'url_rutorrent' => $this->rutorrentUrl,

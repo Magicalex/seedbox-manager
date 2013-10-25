@@ -54,7 +54,10 @@ location ^~ /conf/
 ```
 pour apache :
 ```
-# à faire
+<Location ~ "^/conf/">
+    Order deny,allow
+    Deny from all
+</Location>
 ```
 Puis redémarrer votre serveur web préféré via service
 ```
@@ -65,6 +68,9 @@ service lighttpd restart
 # pour recharger la config apache
 service apache2 restart
 ```
+note : vérifiez si vous avez bien une erreur 403 si vous tentez d'accèder à cette url :
+http://www.domaine.fr/conf/config.ini
+
 
 ##Première connexion
 

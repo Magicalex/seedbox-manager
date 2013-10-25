@@ -17,6 +17,7 @@ class Users
     protected $blocInfo;
     protected $blocRtorrent;
     protected $blocFtp;
+    protected $is_owner;
 
     public function __construct($file_ini, $user)
     {
@@ -29,6 +30,7 @@ class Users
     {
         $this->cakeboxActiveUrl = (bool) $array['nav']['active_cakebox'];
         $this->blocInfo         = (bool) $array['user']['active_bloc_info'];
+        $this->is_owner         = (bool) $array['user']['owner'];
         $this->blocFtp          = (bool) $array['ftp']['active_ftp'];
         $this->blocRtorrent     = (bool) $array['rtorrent']['active_reboot'];
         $this->blocSupport      = (bool) $array['support']['active_support'];
@@ -100,6 +102,20 @@ class Users
                       'file_exist' => $exist_reboot_rtorrent );
     }
 
+    public static function get_all_users()
+    {
+        $scan = scandir('./conf/users/');
+        $i = 0;
+        $all_users = array();
+        foreach ($scan as $i => $file_name)
+        {
+            if ($file_name != '.' && $file_name != '..' && is_dir('./conf/users/'.$file_name))
+                $all_users[$i] = $file_name;
+        }
+
+        return $all_users;
+    }
+
     public function url_redirect() { return $this->url_redirect; }
     public function rutorrentUrl() { return $this->rutorrentUrl; }
     public function cakeboxActiveUrl() { return $this->cakeboxActiveUrl; }
@@ -112,4 +128,6 @@ class Users
     public function blocInfo() { return $this->blocInfo; }
     public function blocFtp() { return $this->blocFtp; }
     public function blocRtorrent() { return $this->blocRtorrent; }
+    public function is_owner() { return $this->is_owner; }
+
 }
