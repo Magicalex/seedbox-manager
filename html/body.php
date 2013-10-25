@@ -96,7 +96,7 @@
                     <li>Port FTP : <em><?php echo $user->portFtp(); ?></em></li>
                     <li>Port sFTP : <em><?php echo $user->portSftp(); ?></em></li>
                     <li><a class="btn btn-info btn-xs icone-seed-managerdownload" href="http://filezilla.fr/">Télécharger filezilla</a></li>
-                    <li><a id="popupfilezilla" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="php/downloads.php?file=filezilla">Fichier de configuration</a></li>
+                    <li><a id="popupfilezilla" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="lib/downloads.php?file=filezilla">Fichier de configuration</a></li>
                 </ul>
 
                 <h5 class="icone-seed-managerandroid"><strong>Application Transdroid</strong></h5>
@@ -105,7 +105,7 @@
                     <li>Adresse http : <em>http://<?php echo $host; ?></em></li>
                     <li>User transdroid : <em><?php echo $userName; ?></em></li>
                     <li><a class="btn btn-info btn-xs icone-seed-managerdownload" href="http://transdroid.org/latest">Télécharger Transdroid</a></li>
-                    <li><a id="popuptransdroid" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="php/downloads.php?file=transdroid">Fichier de configuration</a></li>
+                    <li><a id="popuptransdroid" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="lib/downloads.php?file=transdroid">Fichier de configuration</a></li>
                 </ul>
             </div>
         </article>

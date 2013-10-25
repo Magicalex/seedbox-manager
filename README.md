@@ -12,7 +12,7 @@ On n'y trouve aussi :
  * Un espace administrateur pour gérer facilement la configuration de vos utilisateurs
  * Une page paramètre pour désactiver les blocs que vous n'utilisez pas.
 
-**Auteur :** Backtoback (c) & Magicalex (php) & hydrog3n (php).<br>
+**Auteur :** Backtoback (c) & Magicalex (php) & hydrog3n (php).
 Nous contacter : <magicalex14000@gmail.com>
 
 #Installation
@@ -31,12 +31,12 @@ chmod +x install.sh && ./install.sh
 
 ##Configuration du serveur web
 
-1. Il faut protéger l'interface via une authentification basic ou digest.<br>
+1. Il faut protéger l'interface via une authentification basic ou digest.
 Je vous conseille d'étendre la protection de rutorrent à cette interface.
 
 2. Il faut protéger le dossier conf récursivement via votre serveur web.
 
-Pour l'exemple l'url sera égale à : http://www.domaine.fr/conf/<br>
+Pour l'exemple l'url sera égale à : http://www.domaine.fr/conf/
 Rajoutez dans le fichier de configuration de votre serveur wev ceci.
 pour lighttpd :
 ```
