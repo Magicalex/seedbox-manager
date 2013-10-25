@@ -2,7 +2,7 @@
     <div class="container marg">
         <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Paramètres de <?php echo $userName; ?></h1>
         
-        <?php if ( isset($_POST['submit']) && !isset($update_ini_file_log['function_write_ini_file']) && !isset($update_ini_file_log['bad_chmod_user_folder'])  &&  !isset($update_ini_file_log['not_acces_file_ini']) ) { ?>
+        <?php if ( isset($_POST['submit']) && empty($update_ini_file_log) ) { ?>
 
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -25,7 +25,7 @@
         <?php } ?>
 
         <section class="row">
-            <article class="col-md-6">
+            <article class="col-md-12">
                 <div class="well well-sm">
                     <h4 class="titre-head">Configuration de l'interface</h4>
                     <div class="trait"></div>

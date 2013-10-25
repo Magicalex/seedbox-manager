@@ -32,14 +32,12 @@ class Users
         $this->blocFtp          = (bool) $array['ftp']['active_ftp'];
         $this->blocRtorrent     = (bool) $array['rtorrent']['active_reboot'];
         $this->blocSupport      = (bool) $array['support']['active_support'];
-
         $this->directory        = (string) $array['user']['user_directory'];
         $this->rutorrentUrl     = (string) $array['nav']['url_rutorrent'];
         $this->cakeboxUrl       = (string) $array['nav']['url_cakebox'];
         $this->supportMail      = (string) $array['support']['adresse_mail'];
         $this->realmWebServer   = (string) $array['logout']['realm'];
         $this->url_redirect     = (string) $array['logout']['url_redirect'];
-
         $this->portFtp          = (int) $array['ftp']['port_ftp'];
         $this->portSftp         = (int) $array['ftp']['port_sftp'];
         $this->currentPath      = getcwd();

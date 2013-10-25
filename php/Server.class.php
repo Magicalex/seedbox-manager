@@ -3,13 +3,6 @@
 class Server extends Users
 {
     
-    public static function getChmod($file, $precision)
-    {
-        $precision = $precision * -1;
-        $chmod = substr(sprintf('%o', fileperms($file)), $precision);
-        return $chmod;
-    }
-
     public static function getUptime()
     {
         $fd = fopen('/proc/uptime', 'r');
