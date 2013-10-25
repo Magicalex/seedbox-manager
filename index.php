@@ -20,8 +20,8 @@ if (file_exists('./reboot-rtorrent') && $uid_reboot_rtorrent == 0 && $get_chmod_
     $uid_user_php = Install::get_user_php();
     if ( $uid_folder_users != $uid_user_php['num_uid'] )
     {
-        include('./html/installation.php');
-        exit('<p style="color:white">FILE USER PHP ERROR</p>');
+        require_once('./html/installation.php');
+        exit();
     }
     else
     {
@@ -36,8 +36,8 @@ if (file_exists('./reboot-rtorrent') && $uid_reboot_rtorrent == 0 && $get_chmod_
 }
 else
 {
-    include('./html/installation.php');
-    exit('<p style="color:white">BAD LAW REBOOT-RTORRENT</p>');
+    require_once('./html/installation.php');
+    exit();
 }
 
 /* REQUEST POST AND GET */

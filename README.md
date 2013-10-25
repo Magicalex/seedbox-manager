@@ -9,10 +9,15 @@ On n'y trouve aussi :
  * des statistiques serveurs (load average, uptime).
  * des informations utilisateurs (espace disque, adresse ip visiteur).
  * un outil pour générer des fichiers de configuration filezilla et transdroid.
+ * Un espace administrateur pour gérer facilement la configuration de vos utilisateurs
+ * Une page paramètre pour désactiver les blocs que vous n'utilisez pas.
 
-**Auteur :** Backtoback & Magicalex (magicalex14000@gmail.com)
+**Auteur :** Backtoback (c) & Magicalex (php) & hydrog3n (php)
+Nous contacter : <magicalex14000@gmail.com>
 
 #Installation
+
+note : pour installer l'interface il faut les droits root ou avoir la possiblité d'utiliser sudo.
 
 ```
 cd /var/www
@@ -20,25 +25,55 @@ wget http://XX.XXX.XX.XX/seedbox-manager.zip
 unzip seedbox-manager.zip && rm seedbox-manager.zip
 mv seedbox-manager manager
 chown www-data:www-data ./manager/
+cd ./manager/source-rtorrent/
+chmod +x install.sh && ./install.sh
 ```
 
 ##Configuration du serveur web
 
-attention protéger le dossier conf récursivement etc
- -> config nginx + config lighttpd + config apache (htaccess -Index)
- ->
-possiblité de faire un alias?
+1. Il faut protéger l'interface via une authentification basic ou digest
+Je vous conseille d'étendre la protection de rutorrent à cette interface.
 
-type d'authantification supporté basic et digest -> protéger de la même manière cette interface que rutorrent.
+2. Il faut protéger le dossier conf récursivement via votre serveur web.
+
+Pour l'exemple l'url sera égale à : http://www.domaine.fr/conf/
+Rajoutez dans le fichier de configuration de votre serveur wev ceci.
+pour lighttpd :
+```
+$http["url"] =~ "^/conf/"
+{
+	url.access-deny = ("")
+}
+```
+pour nginx :
+```
+location ^~ /conf/
+{
+	deny all;
+}
+```
+pour apache :
+```
+# à faire
+```
+Puis redémarrer votre serveur web préféré via service
+```
+service nginx restart # pour redémarrer nginx
+service lighttpd restart # pour redémarrer lighttpd
+service apache2 restart # pour redémarrer apache
+```
 
 ##Première connexion
 
-Se connecter à l'interface puis on termine.
+Se connecter à l'interface avec ses identifiants rutorrent.
+Cela va générer des fichiers de configuration pour l'utilisateur dans le dossier conf/users/<utilisateur>/config.ini
 
-```
-cd ./manager/prog/
-chmod +x install.sh && ./install.sh
-```
+note : à chaque fois qu'un nouvel utilisateur se connecte ses fichiers de configuration sont automatiquement généré à partir du fichier ./conf/config.ini
 
-Se donner les droits admin.
-Configurer les users depuis l'interface etc
+pour obtenir les droits administrateurs
+```
+vim /var/www/manager/conf/users/<utilisateur>/config.ini
+```
+puis modifier à la ligne ## (admin = no par admin = yes=
+
+Après avoir récupéré les droits administrateurs vous pouvez configurer tous les utilisateurs
