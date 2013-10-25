@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <label for="url-deconnexion">Url de redirection à la déconnexion</label>
                             <div class="row">
-                                <div class="col-lg-7">
+                                <div class="col-lg-4">
                                     <input type="text" name="url_redirect" class="form-control" id="url-deconnexion" value="<?php echo $user->url_redirect(); ?>">
                                 </div>
                             </div>

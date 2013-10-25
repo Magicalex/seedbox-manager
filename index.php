@@ -8,39 +8,36 @@ spl_autoload_register('chargerClasse');
 if ( isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']) )
     $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
 else
-    die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
+    $userName = 'magicalex';//die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
 
 // check conf + create new user
-if (file_exists('./reboot-rtorrent'))
+$install = new Install;
+$uid_reboot_rtorrent = Install::check_uid_file('./reboot-rtorrent');
+$get_chmod_reboot_rtorrent = Install::getChmod('./reboot-rtorrent', 4);
+if (file_exists('./reboot-rtorrent') && $uid_reboot_rtorrent == 0 && $get_chmod_reboot_rtorrent == 4755)
 {
-    $install = new Install;
-    $uid_reboot_rtorrent = Install::check_uid_file('./reboot-rtorrent');
-    $get_chmod_reboot_rtorrent = Install::getChmod('./reboot-rtorrent', 4);
-    if ( $uid_reboot_rtorrent == 0 && $get_chmod_reboot_rtorrent == 4755)
+    $uid_folder_users = Install::check_uid_file('./conf/users/');
+    $uid_user_php = Install::get_user_php();
+    if ( $uid_folder_users != $uid_user_php['num_uid'] )
     {
-        $uid_folder_users = Install::check_uid_file('./conf/users/');
-        $uid_user_php = Install::get_user_php();
-        if ( $uid_folder_users != $uid_user_php['num_uid'] )
-        {
-            include('./html/installation.php');
-            exit('<p style="color:white">FILE USER PHP ERROR</p>');
-        }
+        include('./html/installation.php');
+        exit('<p style="color:white">FILE USER PHP ERROR</p>');
+    }
+    else
+    {
+        if (file_exists('./conf/users/'.$userName.'/config.ini'))
+            $file_user_ini = './conf/users/'.$userName.'/config.ini';
         else
         {
-            if (file_exists('./conf/users/'.$userName.'/config.ini'))
-                $file_user_ini = './conf/users/'.$userName.'/config.ini';
-            else
-            {
-                Install::create_new_user($userName);
-                $file_user_ini = './conf/users/'.$userName.'/config.ini';
-            }
+            Install::create_new_user($userName);
+            $file_user_ini = './conf/users/'.$userName.'/config.ini';
         }
     }
 }
 else
 {
     include('./html/installation.php');
-    exit();
+    exit('<p style="color:white">BAD LAW REBOOT-RTORRENT</p>');
 }
 
 /* REQUEST POST AND GET */
