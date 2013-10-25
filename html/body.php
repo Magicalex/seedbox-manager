@@ -135,7 +135,30 @@
                 </address>
             </div>
         </article>
-        <?php } ?>        
+
+        <?php } if ( $user->is_owner() === true ) { ?>
+        <article class="col-md-6">
+            <div class="well well-sm" id="blockSupport">
+                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Gestion utilisateurs</h4>
+                <div class="trait"></div>
+                <table class="table table-bordered table-striped">
+                    <tr><td><strong>#</strong></td><td><strong>Utilisateur</strong></td><td><strong>Modifier</strong></td><td><strong>Supprimer</strong></td></tr>
+                    <?php
+                    $i = 0;
+                    $num_user = 1;
+                    foreach (Users::get_all_users() as $i => $user_name)
+                    { ?>
+                        <tr>
+                            <td><?php echo $num_user; ?></td>
+                            <td><?php echo $user_name; ?></td>
+                            <td><a href="?u=<?php echo $user_name; ?>" title="éditer"><i class="glyphicon glyphicon-edit"></i></a></td>
+                            <td><form><i class="glyphicon glyphicon-trash"></i></form></td>
+                        </tr>
+                    <?php $num_user++; } ?>
+                </table>
+            </div>
+        </article>
+        <?php } ?>
 
     </section>
 
