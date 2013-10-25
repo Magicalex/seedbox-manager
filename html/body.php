@@ -8,33 +8,8 @@
                 Pour pouvoir utiliser cette interface l'activation de javascript est nécessaire.
             </div>
         </noscript>
-
-    <?php if ( $bad_config_user === true ) { ?>
-
-        <div class="alert alert-warning">
-            <h4>Cette utilisateur n'est pas configurer ! </h4>
-            Pour pouvoir utiliser pleinement cette interface il faut créer un dossier au nom de votre utilisateur dans ./conf/users/<br>
-            Pour configurer votre utilisateur, veuillez suivre les instructions juste en dessous.
-        </div>
     
-    <?php } if ( !$chmodRebootRtorrent || !$chmodFolderUser ) { ?>
-
-        <div class="alert alert-danger">
-            <h4>Attention !</h4>
-            <?php if ( !$chmodRebootRtorrent ) { ?>
-            <p>
-                Il faut appliquer le chmod 4755 au programme <strong>reboot-rtorrent</strong>.<br>
-                Dans un terminal tapez cette commande en root : <code># chown root:root <?php echo $current_path; ?>/reboot-rtorrent && chmod 4755 <?php echo $current_path; ?>/reboot-rtorrent</code>
-            </p>
-            <?php } if ( !$chmodFolderUser ) { ?>
-            <p>
-                Il faut créer ou appliquer le chmod 777 au dossier <strong><?php echo $current_path.'/conf/users/'.$userName.'/'; ?></strong> .<br>
-                Dans un terminal tapez cette commande en root : <code># chmod 777 <?php echo $current_path.'/conf/users/*'; ?></code>
-            </p>
-            <?php } ?>
-        </div>
-
-    <?php } if ( isset($_POST['reboot']) && $rebootRtorrent['statusReboot'] == 0 ) { ?>
+    <?php if ( isset($_POST['reboot']) && $rebootRtorrent['statusReboot'] == 0 ) { ?>
 
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -45,10 +20,10 @@
         
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <strong>Erreur</strong> un problème est survenu lors du redémarrage de rtorrent, vérifiez votre configuration.
+            <strong>Un problème est survenu lors du redémarrage de rtorrent</strong>, vérifiez votre configuration.
         </div>
 
-    <?php } if ( isset($_POST['reboot']) ) { ?>
+    <?php } if ( isset($_POST['reboot']) && $rebootRtorrent['statusReboot'] == 0 ) { ?>
 
         <div class="alert alert-info">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -92,7 +67,7 @@
 
                 <p class="icone-seed-managerclock"><strong>Uptime serveur</strong></p>
                 <ul>
-                    <li><strong class="text-success"><?php echo $serveur->getUptime(); ?></strong></li>
+                    <li><strong class="text-success"><?php echo Server::getUptime(); ?></strong></li>
                 </ul>
 
                 <p class="icone-seed-managerstats"><strong>Charge serveur</strong></p>
