@@ -58,52 +58,51 @@ $tableau_conf_trandroid = array(
     'ui_ask_before_remove' => true
 );
 
-$conf_json_trandroid = json_encode($tableau_conf_trandroid);
+$conf_json_trandroid = json_encode($tableau_conf_trandroid, JSON_PRETTY_PRINT);
 
 // setting filezilla
-$conf_xml_filezilla =
-'<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'.
-'<FileZilla3>'.
-    '<Servers>'.
-        '<Server>'.
-            '<Host>'.$host.'</Host>'.
-            '<Port>'.$user->portFtp().'</Port>'.
-            '<Protocol>0</Protocol>'.
-            '<Type>0</Type>'.
-            '<User>'.$userName.'</User>'.
-            '<Pass>'.$passwd.'</Pass>'.
-            '<Logontype>1</Logontype>'.
-            '<TimezoneOffset>0</TimezoneOffset>'.
-            '<PasvMode>MODE_DEFAULT</PasvMode>'.
-            '<MaximumMultipleConnections>0</MaximumMultipleConnections>'.
-            '<EncodingType>UTF-8</EncodingType>'.
-            '<BypassProxy>0</BypassProxy>'.
-            '<Name>'.$title_seedbox.' ftp</Name>'.
-            '<Comments />'.
-            '<LocalDir />'.
-            '<RemoteDir />'.
-            '<SyncBrowsing>0</SyncBrowsing>'.$title_seedbox.' ftp&#x0A;'.
-        '</Server>'.
-        '<Server>'.
-            '<Host>'.$host.'</Host>'.
-            '<Port>'.$user->portSftp().'</Port>'.
-            '<Protocol>1</Protocol>'.
-            '<Type>0</Type>'.
-            '<User>'.$userName.'</User>'.
-            '<Pass>'.$passwd.'</Pass>'.
-            '<Logontype>1</Logontype>'.
-            '<TimezoneOffset>0</TimezoneOffset>'.
-            '<PasvMode>MODE_DEFAULT</PasvMode>'.
-            '<MaximumMultipleConnections>0</MaximumMultipleConnections>'.
-            '<EncodingType>Auto</EncodingType>'.
-            '<BypassProxy>0</BypassProxy>'.
-            '<Name>'.$title_seedbox.' sftp</Name>'.
-            '<Comments />'.
-            '<LocalDir />'.
-            '<RemoteDir />'.
-            '<SyncBrowsing>0</SyncBrowsing>'.$title_seedbox.' sftp&#x0A;'.
-        '</Server>'.
-    '</Servers>'.
+$conf_xml_filezilla = '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".
+'<FileZilla3>'."\n".
+    '<Servers>'."\n".
+        '<Server>'."\n".
+            '<Host>'.$host.'</Host>'."\n".
+            '<Port>'.$user->portFtp().'</Port>'."\n".
+            '<Protocol>0</Protocol>'."\n".
+            '<Type>0</Type>'."\n".
+            '<User>'.$userName.'</User>'."\n".
+            '<Pass>'.$passwd.'</Pass>'."\n".
+            '<Logontype>1</Logontype>'."\n".
+            '<TimezoneOffset>0</TimezoneOffset>'."\n".
+            '<PasvMode>MODE_DEFAULT</PasvMode>'."\n".
+            '<MaximumMultipleConnections>0</MaximumMultipleConnections>'."\n".
+            '<EncodingType>UTF-8</EncodingType>'."\n".
+            '<BypassProxy>0</BypassProxy>'."\n".
+            '<Name>'.$title_seedbox.' ftp</Name>'."\n".
+            '<Comments />'."\n".
+            '<LocalDir />'."\n".
+            '<RemoteDir />'."\n".
+            '<SyncBrowsing>0</SyncBrowsing>'.$title_seedbox.' ftp&#x0A;'."\n".
+        '</Server>'."\n".
+        '<Server>'."\n".
+            '<Host>'.$host.'</Host>'."\n".
+            '<Port>'.$user->portSftp().'</Port>'."\n".
+            '<Protocol>1</Protocol>'."\n".
+            '<Type>0</Type>'."\n".
+            '<User>'.$userName.'</User>'."\n".
+            '<Pass>'.$passwd.'</Pass>'."\n".
+            '<Logontype>1</Logontype>'."\n".
+            '<TimezoneOffset>0</TimezoneOffset>'."\n".
+            '<PasvMode>MODE_DEFAULT</PasvMode>'."\n".
+            '<MaximumMultipleConnections>0</MaximumMultipleConnections>'."\n".
+            '<EncodingType>Auto</EncodingType>'."\n".
+            '<BypassProxy>0</BypassProxy>'."\n".
+            '<Name>'.$title_seedbox.' sftp</Name>'."\n".
+            '<Comments />'."\n".
+            '<LocalDir />'."\n".
+            '<RemoteDir />'."\n".
+            '<SyncBrowsing>0</SyncBrowsing>'.$title_seedbox.' sftp&#x0A;'."\n".
+        '</Server>'."\n".
+    '</Servers>'."\n".
 '</FileZilla3>';
 
 if ( $_GET['file'] == 'transdroid' )
