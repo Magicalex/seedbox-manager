@@ -13,8 +13,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                     <form action="index.php" method="post">
-                        <input type="hidden" name="reboot" />
-                        <input type="submit" value="Redémarrer" class="btn btn-info" />
+                        <input type="hidden" name="reboot">
+                        <input type="submit" value="Redémarrer" class="btn btn-info">
                     </form>
                 </div>
             </div>
@@ -59,6 +59,31 @@
             </div>
         </div>
     </div>
+
+    <?php if ( $user->is_owner() === true && isset($_GET['edit']) ) { ?>
+    <!-- popup delete user -->
+    <div class="modal fade" id="delete-user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="user-titre-modal"></h4>
+                </div>
+                <div class="modal-body">
+                    <p>&Ecirc;tes-vous sûr de vouloir supprimer la configuration de cette utilisateur ?</p>
+                    <p>Cette action est réversible.<br>Dès que votre utilisateur va se connecter les fichiers de configuration seront généré automatiquement (configuration par défaut).</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <form action="index.php?edit" method="post">
+                        <input type="hidden" name="delete-userName" id="delete-userName">
+                        <input type="submit" value="Supprimer" class="btn btn-danger">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
 
     </body>
 

@@ -37,20 +37,38 @@
 
 ( function() {
     
-    // ajustement du style css des blocs
-    var blockInfo = document.getElementById("blockInfo");
-    var blockFtp = document.getElementById("blockFtp");
-    var blockRtorrent = document.getElementById("blockRtorrent");
-    var blockSupport = document.getElementById("blockSupport");
+    if ( document.getElementById("blockInfo") && document.getElementById("blockFtp") && document.getElementById("blockRtorrent") && document.getElementById("blockSupport") )
+    {
+        // ajustement du style css des blocs
+        var blockInfo = document.getElementById("blockInfo");
+        var blockFtp = document.getElementById("blockFtp");
+        var blockRtorrent = document.getElementById("blockRtorrent");
+        var blockSupport = document.getElementById("blockSupport");
 
-    if(blockInfo.offsetHeight > blockFtp.offsetHeight)
-        blockFtp.style.height = blockInfo.offsetHeight+"px";
-    else
-        blockInfo.style.height = blockFtp.offsetHeight+"px";
+        if(blockInfo.offsetHeight > blockFtp.offsetHeight)
+            blockFtp.style.height = blockInfo.offsetHeight+"px";
+        else
+            blockInfo.style.height = blockFtp.offsetHeight+"px";
 
-    if(blockRtorrent.offsetHeight > blockSupport.offsetHeight)
-        blockSupport.style.height = blockRtorrent.offsetHeight+"px";
-    else
-        blockRtorrent.style.height = blockSupport.offsetHeight+"px";
+        if(blockRtorrent.offsetHeight > blockSupport.offsetHeight)
+            blockSupport.style.height = blockRtorrent.offsetHeight+"px";
+        else
+            blockRtorrent.style.height = blockSupport.offsetHeight+"px";
+    }
 
 } ) ();
+
+
+(function() {
+
+    $(document).on('click', '.popup-delete-user', function ()
+    {
+        var userName = $(this).data('user');
+         // remplace value par le bon pseudo
+        $("#delete-userName").val(userName);
+         // ajout du html dans le div
+        $("#user-titre-modal").html('<i class="glyphicon glyphicon-trash"></i> Suppression de l\'utilisateur <strong>'+userName+'</strong>');
+
+    });
+
+}) ();

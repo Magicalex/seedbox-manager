@@ -135,7 +135,7 @@ class Users
 
         $s = rmdir($path_conf_user);
         if ( $s === true )
-            $log[] = 'Le dossier '.$path_conf_user.' a été supprimé.';
+            $log[] = 'Le dossier '.$path_conf_user.'/ a été supprimé.';
         else
             $log[] = 'Impossible de supprimer le dossier '.$path_conf_user.'.';
 
