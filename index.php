@@ -74,7 +74,7 @@ require_once('html/header.php');
 if ( isset($_GET['edit']) )
     require_once ('html/edit.php');
 elseif ( !empty($_GET['u']))
-    require_once('html/admin.php')
+    require_once('html/admin.php');
 else
     require_once('html/body.php');
 
