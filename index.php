@@ -59,6 +59,17 @@ if ( isset($_POST['submit']) )
     $update_ini_file_log = $update->update_file_config($_POST, './conf/users/'.$userName);
 }
 
+if ( isset($_POST['delete-userName']) )
+{
+    $user = new Users($file_user_ini, $userName);
+    $log_delete_user = Users::delete_config_old_user('./conf/users/'.$_POST['delete-userName']);
+/*
+    echo '<pre>';
+    print_r($log_delete_user);
+    echo '</pre>';
+*/
+}
+
 // init objet
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
@@ -78,4 +89,4 @@ elseif ( !empty($_GET['u']))
 else
     require_once('html/body.php');
 
-require_once('html/modal.html');
+require_once('html/modal.php');

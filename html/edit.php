@@ -22,6 +22,19 @@
             </ul>
         </div>
 
+        <?php } if ( isset($_POST['delete-userName']) ) { ?>
+
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            Les fichiers de configuration de l'utilisateur <?php echo $_POST['delete-userName']; ?> ont été supprimé avec succès.
+            <ul class="text-success">
+            <?php foreach ($log_delete_user as $key => $file_delete)
+            {
+                echo '<li>'.$file_delete.'</li>';
+            } ?>
+            <ul>
+        </div>
+
         <?php } ?>
 
         <section class="row">
@@ -75,7 +88,13 @@
                             <td><?php echo $num_user; ?></td>
                             <td><?php echo $user_name; ?></td>
                             <td><a href="?u=<?php echo $user_name; ?>" title="éditer"><i class="glyphicon glyphicon-edit"></i></a></td>
-                            <td><form><i class="glyphicon glyphicon-trash"></i></form></td>
+                            <td>
+                            <?php if ( $userName != $user_name) { ?>
+
+                            <a data-toggle="modal" class="popup-delete-user" data-user="<?php echo $user_name ?>" href="#delete-user"><i class="glyphicon glyphicon-trash"></i></a>
+
+                            <?php } ?>
+                            </td>
                         </tr>
                     <?php $num_user++; } ?>
                 </table>
