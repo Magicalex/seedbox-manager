@@ -116,6 +116,32 @@ class Users
         return $all_users;
     }
 
+    public static function delete_config_old_user($path_conf_user)
+    {
+        $scan = scandir($path_conf_user);
+        $i=0;
+        $log = array();
+        foreach ($scan as $file_name)
+        {
+            if ($file_name != '.' && $file_name != '..')
+            {
+                $t = unlink($path_conf_user.'/'.$file_name);
+                if ($t === true)
+                    $log[] = 'Le fichier '.$file_name.' a été supprimé.';
+                else
+                    $log[] = 'Impossible de supprimer le fichier '.$file_name.'.';
+            }
+        }
+
+        $s = rmdir($path_conf_user);
+        if ( $s === true )
+            $log[] = 'Le dossier '.$path_conf_user.' a été supprimé.';
+        else
+            $log[] = 'Impossible de supprimer le dossier '.$path_conf_user.'.';
+
+        return $log;
+    }
+
     public function url_redirect() { return $this->url_redirect; }
     public function rutorrentUrl() { return $this->rutorrentUrl; }
     public function cakeboxActiveUrl() { return $this->cakeboxActiveUrl; }
