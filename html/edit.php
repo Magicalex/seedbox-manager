@@ -45,16 +45,16 @@
 
                     <form method="post" action="?edit" role="form">
                         <div class="checkbox">
-                            <input type="checkbox" name="blocinfo" value="true" id="blocinfo" <?php if ($user->blocInfo() === true) echo 'checked'; ?>><label for="blocinfo"><span class="ui"></span> Activer le bloc information utilisateur</label>
+                            <input type="checkbox" name="active_bloc_info" value="true" id="active_bloc_info" <?php if ($user->blocInfo() === true) echo 'checked'; ?>><label for="active_bloc_info"><span class="ui"></span> Activer le bloc information utilisateur</label>
                         </div>
                         <div class="checkbox">
-                            <input type="checkbox" name="blocftp" value="true" id="blocftp" <?php if ($user->blocFtp() === true) echo 'checked'; ?>><label for="blocftp"><span class="ui"></span> Activer le bloc accès ftp / sftp / transdroid</label>
+                            <input type="checkbox" name="active_ftp" value="true" id="active_ftp" <?php if ($user->blocFtp() === true) echo 'checked'; ?>><label for="active_ftp"><span class="ui"></span> Activer le bloc accès ftp / sftp / transdroid</label>
                         </div>
                         <div class="checkbox">
-                            <input type="checkbox" name="blocrtorrent" value="true" id="blocrtorrent" <?php if ($user->blocRtorrent() === true) echo 'checked'; ?>><label for="blocrtorrent"><span class="ui"></span> Activer le bloc gestion de rtorrent</label>
+                            <input type="checkbox" name="active_reboot" value="true" id="active_reboot" <?php if ($user->blocRtorrent() === true) echo 'checked'; ?>><label for="active_reboot"><span class="ui"></span> Activer le bloc gestion de rtorrent</label>
                         </div>
                         <div class="checkbox">
-                            <input type="checkbox" name="blocsupport" value="true" id="blocsupport" <?php if ($user->blocSupport() === true) echo 'checked'; ?>><label for="blocsupport"><span class="ui"></span> Activer le bloc support</label>
+                            <input type="checkbox" name="active_support" value="true" id="active_support" <?php if ($user->blocSupport() === true) echo 'checked'; ?>><label for="active_support"><span class="ui"></span> Activer le bloc support</label>
                         </div>
                         <div class="form-group">
                             <label for="url-deconnexion">Url de redirection à la déconnexion</label>
@@ -65,6 +65,7 @@
                             </div>
                         </div>
                         <p class="text-right fix-marg-input">
+                            <input type="hidden" name="simple_conf_user">
                             <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
                         </p>
                     </form>
