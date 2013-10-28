@@ -47,9 +47,24 @@ class Update
 
     public function update_file_config(array $data_upgrade, $conf_user_folder)
     {
+        
+        // mettre en place un système édition admin
+        /* choisir en admin : 8 champs/inputs
+        
+        1. 'user_directory' => $this->directory
+        2. 'url_rutorrent' => $this->rutorrentUrl
+        3. 'active_cakebox' => $this->cakeboxActiveUrl
+        4. 'url_cakebox' => $this->cakeboxUrl
+        5. 'port_ftp' => $this->portFtp
+        6. 'port_sftp' => $this->portSftp
+        7. 'adresse_mail' => $this->supportMail
+        8. 'realm' => $this->realmWebServer
+
+        */
+
         $content = array( 
             'user' => array(
-                'active_bloc_info' => isset($data_upgrade['blocinfo']) ? true:false,
+                'active_bloc_info' => isset($data_upgrade['simple_conf_user']) ? isset($data_upgrade['active_bloc_info']) ? true:false:$this->blocInfo,
                 'user_directory' => $this->directory,
                 'owner' => $this->is_owner
             ),
@@ -59,20 +74,20 @@ class Update
                 'url_cakebox' => $this->cakeboxUrl
             ),
             'ftp' => array(
-                'active_ftp' => isset($data_upgrade['blocftp']) ? true:false,
+                'active_ftp' => isset($data_upgrade['simple_conf_user']) ? isset($data_upgrade['active_ftp']) ? true:false:$this->blocFtp,
                 'port_ftp' => $this->portFtp,
                 'port_sftp' => $this->portSftp
             ),
             'rtorrent' => array(
-                'active_reboot' => isset($data_upgrade['blocrtorrent']) ? true:false
+                'active_reboot' => isset($data_upgrade['simple_conf_user']) ? isset($data_upgrade['active_reboot']) ? true:false:$this->blocRtorrent
             ),
             'support' => array(
-                'active_support' => isset($data_upgrade['blocsupport']) ? true:false,
+                'active_support' => isset($data_upgrade['simple_conf_user']) ? isset($data_upgrade['active_support']) ? true:false:$this->blocSupport,
                 'adresse_mail' => $this->supportMail
             ),
             'logout' => array(
                 'realm' => $this->realmWebServer,
-                'url_redirect' => $data_upgrade['url_redirect']
+                'url_redirect' => isset($data_upgrade['simple_conf_user']) ? $data_upgrade['url_redirect']:$this->url_redirect
             )
         );
 
