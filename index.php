@@ -8,7 +8,7 @@ spl_autoload_register('chargerClasse');
 if ( isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']) )
     $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
 else
-    $userName = 'magicalex';//die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
+    die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
 
 // check conf + create new user
 $install = new Install;
@@ -79,6 +79,11 @@ if ( isset($_GET['edit']) )
     require_once ('html/edit.php');
 elseif ( !empty($_GET['u']))
     require_once('html/admin.php');
+elseif ( isset($_GET['download']))
+{
+    require_once('lib/downloads.php');
+    require_once('html/body.php');
+}
 else
     require_once('html/body.php');
 

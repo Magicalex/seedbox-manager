@@ -59,10 +59,10 @@ class Server extends Users
 
     public function FileDownload($file_config_name, $conf_ext_prog)
     {
-        file_put_contents('../conf/users/'.$this->userName.'/'.$file_config_name, $conf_ext_prog);
+        file_put_contents('./conf/users/'.$this->userName.'/'.$file_config_name, $conf_ext_prog);
 
         set_time_limit(0);
-        $path_file_name = '../conf/users/'.$this->userName.'/'.$file_config_name;
+        $path_file_name = './conf/users/'.$this->userName.'/'.$file_config_name;
         $file_name = $file_config_name;
         $file_size = filesize($path_file_name);
 
