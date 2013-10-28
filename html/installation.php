@@ -1,15 +1,8 @@
 <?php
 
-/*
-Indiquer les commandes pour démarrer
+$user_name_php = Install::get_user_php();
 
-Expliquer comme on obtient les droits admins sur l'interface
-note : les droits admins que en ligne de commande
-
-
-*/
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -26,11 +19,28 @@ note : les droits admins que en ligne de commande
     </head>
 
     <body>
-        <div  class="container marg" style="margin-top:100px">
-            <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Installation</h1>
+        <div  class="container marg" style="margin-top:50px">
+            <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Guide d'installation</h1>
             <section class="row">
-                
-                <p >texte</p>
+                <article class="col-md-12">
+                    <div class="well well-sm">
+                        <h4 class="titre-head">Démarrage de l'application</h4>
+                        <div class="trait"></div>
+                        <p>Indiquez le bon propriétaire des fichiers de l'application, copiez cette commande et l'éxécuter en ROOT (super utilisateur).</p>
+                        <code style="border:1px solid #CE534D;">chown -R <?php echo $user_name_php['name'].':'.$user_name_php['name'].' '.getcwd(); ?></code>
+                        <p></p>
+                        <p>Exécutez le script install.sh pour compiler le programme de reboot en ROOT.</p>
+                        <code style="border:1px solid #CE534D;">cd <?php echo getcwd(); ?>/source-reboot/ </code><br>
+                        <code style="border:1px solid #CE534D;">chmod +x install.sh && ./install.sh</code><br>
+                    </div>
+                </article>
+                <article class="col-md-12">
+                    <div class="well well-sm">
+                        <h4 class="titre-head">Configuration des utilisateurs</h4>
+                        <div class="trait"></div>
+                        <p></p>
+                    </div>
+                </article>
             </section>
         </div>
     </body>

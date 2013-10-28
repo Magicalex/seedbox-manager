@@ -12,9 +12,7 @@ else
 
 // check conf + create new user
 $install = new Install;
-$uid_reboot_rtorrent = Install::check_uid_file('./reboot-rtorrent');
-$get_chmod_reboot_rtorrent = Install::getChmod('./reboot-rtorrent', 4);
-if (file_exists('./reboot-rtorrent') && $uid_reboot_rtorrent == 0 && $get_chmod_reboot_rtorrent == 4755)
+if (file_exists('./reboot-rtorrent') && Install::check_uid_file('./reboot-rtorrent') == 0 && Install::getChmod('./reboot-rtorrent', 4) == 4755)
 {
     $uid_folder_users = Install::check_uid_file('./conf/users/');
     $uid_user_php = Install::get_user_php();
@@ -63,11 +61,6 @@ if ( isset($_POST['delete-userName']) )
 {
     $user = new Users($file_user_ini, $userName);
     $log_delete_user = Users::delete_config_old_user('./conf/users/'.$_POST['delete-userName']);
-/*
-    echo '<pre>';
-    print_r($log_delete_user);
-    echo '</pre>';
-*/
 }
 
 // init objet
