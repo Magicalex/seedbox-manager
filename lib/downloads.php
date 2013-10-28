@@ -1,23 +1,5 @@
 <?php
 
-function chargerClasse($classe) { require_once($classe.'.class.php'); }
-spl_autoload_register('chargerClasse');
-
-if ( isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']) )
-    $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
-else
-    $userName = 'magicalex';//die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
-
-if ( file_exists('../conf/users/'.$userName.'/config.ini') )
-    $file_user_ini = '../conf/users/'.$userName.'/config.ini';
-else
-    $file_user_ini = '../conf/config.ini';
-
-// initialisation des objets
-$user = new Users($file_user_ini, $userName );
-$serveur = new Server($file_user_ini, $userName);
-
-$host = $_SERVER['HTTP_HOST'];
 $folder_scgi = '/'.strtoupper(substr($userName,0,3)).'0';
 $title_seedbox = 'Seedbox '.$userName;
 $passwd = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW']:null;
@@ -105,9 +87,7 @@ $conf_xml_filezilla = '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'
     '</Servers>'."\n".
 '</FileZilla3>';
 
-if ( $_GET['file'] == 'transdroid' )
+if ( isset($_GET['file']) && $_GET['file'] == 'transdroid' )
     $serveur->FileDownload('settings.json', $conf_json_trandroid);
-elseif ( $_GET['file'] == 'filezilla' )
+elseif ( isset($_GET['file']) && $_GET['file'] == 'filezilla' )
     $serveur->FileDownload('filezilla.xml', $conf_xml_filezilla);
-else
-    echo 'Le fichier demand&eacute; n\'existe pas.';
