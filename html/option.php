@@ -38,12 +38,12 @@
         <?php } ?>
 
         <section class="row">
-            <article class="col-md-6">
+            <article class="col-md-6" id="conf-simple-user">
                 <div class="well well-sm">
                     <h4 class="titre-head">Configuration de l'interface  de <?php echo $userName; ?></h4>
                     <div class="trait"></div>
 
-                    <form method="post" action="?edit" role="form">
+                    <form method="post" action="?option" role="form">
                         <div class="checkbox">
                             <input type="checkbox" name="active_bloc_info" value="true" id="active_bloc_info" <?php if ($user->blocInfo() === true) echo 'checked'; ?>><label for="active_bloc_info"><span class="ui"></span> Activer le bloc information utilisateur</label>
                         </div>
@@ -76,33 +76,59 @@
 
         <article class="col-md-6">
             <div class="well well-sm">
-                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Administration : gestion utilisateurs</h4>
+                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Administration : gestion utilisateurs <button class="btn btn-info btn-xs text-right" id="back-owner">retour</button></h4>
                 <div class="trait"></div>
                 <table class="table table-bordered table-striped">
-                    <tr><td><strong>#</strong></td><td><strong>Utilisateur</strong></td><td><strong>Modifier</strong></td><td><strong>Supprimer</strong></td></tr>
-                    <?php
-                    $i = 0;
-                    $num_user = 1;
-                    foreach (Users::get_all_users() as $i => $user_name)
-                    { ?>
-                        <tr>
-                            <td><?php echo $num_user; ?></td>
-                            <td><?php echo $user_name; ?></td>
-                            <td><a href="?u=<?php echo $user_name; ?>" title="éditer"><i class="glyphicon glyphicon-edit"></i></a></td>
-                            <td>
-                            <?php if ( $userName != $user_name) { ?>
-
-                            <a data-toggle="modal" class="popup-delete-user" data-user="<?php echo $user_name ?>" href="#delete-user"><i class="glyphicon glyphicon-trash"></i></a>
-
-                            <?php } ?>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><strong>#</strong></td>
+                        <td><strong>Utilisateur</strong></td>
+                        <td><strong>Modifier</strong></td>
+                        <td><strong>Supprimer</strong></td>
+                    </tr>
+                    <?php $i = 0; $num_user = 1; foreach (Users::get_all_users() as $i => $user_name) { ?>
+                    <tr>
+                        <td><?php echo $num_user; ?></td>
+                        <td><?php echo $user_name; ?></td>
+                        <td>
+                            <button class="btn btn-default btn-xs edit-btn-user" title="éditer" data-user="<?php echo $user_name ?>">
+                                <i class="glyphicon glyphicon-edit"></i>
+                            </button>
+                        </td>
+                        <td>
+                        <?php if ( $userName != $user_name) { ?>
+                        <a data-toggle="modal" class="popup-delete-user btn btn-danger btn-xs" data-user="<?php echo $user_name ?>" href="#delete-user">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                        <?php } ?>
+                        </td>
+                    </tr>
                     <?php $num_user++; } ?>
                 </table>
             </div>
         </article>
 
+        <article class="col-md-6" id="config-owner" style="display:none">
+            <div class="well well-sm">
+                <h4 class="titre-head" id="titre-edit-owner"></h4>
+                <div class="trait"></div>
+                
+                <form method="post" action="?option" role="form">
+                    <h5 style="text-decoration:underline">Généralité utilisateur</h5>
+                    <h5>Paramètre de la barre de navigation</h5>
+                    <h5>Paramètre de votre serveur FTP/sFTP</h5>
+                    <h5>Paramètre de votre serveur http</h5>
+                    <h5>Support</h5>
+
+                    <p class="text-right fix-marg-input">
+                        <input type="hidden" name="user">
+                        <input type="hidden" name="owner_change_config">
+                        <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
+                    </p>
+                </form>
+            </div>
+        </article>
         <?php } ?>
 
         </section>
+
     </div>

@@ -51,14 +51,14 @@ class Update
         // mettre en place un système édition admin
         /* choisir en admin : 8 champs/inputs
         
-        1. 'user_directory' => $this->directory
-        2. 'url_rutorrent' => $this->rutorrentUrl
-        3. 'active_cakebox' => $this->cakeboxActiveUrl
-        4. 'url_cakebox' => $this->cakeboxUrl
-        5. 'port_ftp' => $this->portFtp
-        6. 'port_sftp' => $this->portSftp
-        7. 'adresse_mail' => $this->supportMail
-        8. 'realm' => $this->realmWebServer
+        1. 'user_directory' => $this->directory           [input text]
+        2. 'url_rutorrent' => $this->rutorrentUrl         [input text]
+        3. 'active_cakebox' => $this->cakeboxActiveUrl    [input checkbox]
+        4. 'url_cakebox' => $this->cakeboxUrl             [input text]
+        5. 'port_ftp' => $this->portFtp                   [input num]
+        6. 'port_sftp' => $this->portSftp                 [input num]
+        7. 'adresse_mail' => $this->supportMail           [input text]
+        8. 'realm' => $this->realmWebServer               [input text]
 
         */
 
@@ -91,8 +91,7 @@ class Update
             )
         );
 
-        $log = array();
-   
+        $log = array();   
         $log[0] = $this->write_ini_file($content, $conf_user_folder.'/config.ini');
         if (empty($log[0])) unset($log[0]);
 
@@ -119,7 +118,7 @@ class Update
             }
         }
 
-        if ( false === @file_put_contents ($file_path , $file_content) )
+        if ( false === @file_put_contents($file_path , $file_content) )
             $error = 'Une erreur est survenue lors de l\'écriture dans le fichier config.ini';
 
         return $error;
