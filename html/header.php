@@ -37,7 +37,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle user icone-seed-manageruser" data-toggle="dropdown"><?php echo $userName; ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="?edit"><i class="glyphicon glyphicon-wrench"></i> Paramètres</a></li>
+                        <li><a href="?option"><i class="glyphicon glyphicon-wrench"></i> Paramètres</a></li>
                         <li><a class="aboutlink" data-toggle="modal" href="#popupinfo"><i class="glyphicon glyphicon-info-sign"></i> A propos</a></li>
                         <li><a id="logout" data-toggle="modal" href="#popuplogout" title="Se déconnecter"><strong><i class="glyphicon glyphicon-log-out"></i> Déconnexion</strong></a></li>
                     </ul>

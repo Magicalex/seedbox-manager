@@ -60,15 +60,40 @@
 
 
 (function() {
-
+    // remplacer document par le bon id
     $(document).on('click', '.popup-delete-user', function ()
     {
         var userName = $(this).data('user');
          // remplace value par le bon pseudo
         $("#delete-userName").val(userName);
          // ajout du html dans le div
-        $("#user-titre-modal").html('<i class="glyphicon glyphicon-trash"></i> Suppression de l\'utilisateur <strong>'+userName+'</strong>');
+        $("#user-titre-modal").html('<i class="glyphicon glyphicon-trash"></i> Suppression de l\'utilisateur : <strong>'+userName+'</strong>');
 
     });
 
 }) ();
+
+
+$( "#back-owner" ).hide();
+
+$( ".edit-btn-user" ).click( function()
+{
+    $( "#conf-simple-user" ).hide( "slow" );
+    $( "#config-owner" ).delay(600).show( "slow", "linear" );
+    $( "#back-owner" ).show();
+
+    var userName = $(this).data('user');
+    
+    // remplace value par le bon pseudo
+    $("#titre-edit-owner").html('<i class="glyphicon glyphicon-th-list"></i> Configuration de l\'utilisateur : <strong class="text-info">'+userName+'</strong>');
+});
+
+
+
+$( "#back-owner" ).click( function()
+{
+    
+    $( "#config-owner" ).hide( "slow" );
+    $( "#conf-simple-user" ).delay(1000).show( "slow" );
+    $( "#back-owner" ).hide();
+});

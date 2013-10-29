@@ -81,10 +81,8 @@ $read_data_reboot = $user->readFileDataReboot('./conf/users/'.$userName.'/data_r
 /* views */
 require_once('html/header.php');
 
-if ( isset($_GET['edit']) )
-    require_once ('html/edit.php');
-elseif ( !empty($_GET['u']))
-    require_once('html/admin.php');
+if ( isset($_GET['option']) )
+    require_once ('html/option.php');
 elseif ( isset($_GET['download']))
 {
     require_once('lib/downloads.php');
