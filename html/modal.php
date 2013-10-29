@@ -75,7 +75,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                    <form action="index.php?edit" method="post">
+                    <form action="index.php?option" method="post">
                         <input type="hidden" name="delete-userName" id="delete-userName">
                         <input type="submit" value="Supprimer" class="btn btn-danger">
                     </form>
