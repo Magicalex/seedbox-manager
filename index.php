@@ -59,8 +59,12 @@ if ( isset($_POST['simple_conf_user']) )
 
 if ( isset($_POST['owner_change_config']) )
 {
-    //$update = new Update('./conf/users/'.$_POST['userName'].'/config.ini', $_POST['userName']);
-    //$update_ini_file_log = $update->update_file_config($_POST, './conf/users/'.$_POST['userName']);
+    $update = new Update('./conf/users/'.$_POST['user'].'/config.ini', $_POST['user']);
+    $update_ini_file_log_owner = $update->update_file_config($_POST, './conf/users/'.$_POST['user']);
+    
+    echo '<pre>';
+    print_r($update_ini_file_log_owner);
+    echo '</pre>';
 }
 
 if ( isset($_POST['delete-userName']) )

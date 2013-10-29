@@ -2,14 +2,14 @@
     <div class="container marg">
         <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Paramètres</h1>
         
-        <?php if ( isset($_POST['submit']) && empty($update_ini_file_log) ) { ?>
+        <?php if ( isset($_POST['simple_conf_user']) && empty($update_ini_file_log) ) { ?>
 
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 Vos préférences ont été mises à jour avec succès.
             </div>
 
-        <?php } elseif ( isset($_POST['submit']) ) { ?>
+        <?php } elseif ( isset($_POST['simple_conf_user']) ) { ?>
 
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -120,7 +120,7 @@
                     <h5>Support</h5>
 
                     <p class="text-right fix-marg-input">
-                        <input type="hidden" name="user">
+                        <input type="hidden" name="user" id="user-change-config">
                         <input type="hidden" name="owner_change_config">
                         <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
                     </p>
