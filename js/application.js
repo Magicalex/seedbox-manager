@@ -59,19 +59,12 @@
 } ) ();
 
 
-(function() {
-    // remplacer document par le bon id
-    $(document).on('click', '.popup-delete-user', function ()
-    {
-        var userName = $(this).data('user');
-         // remplace value par le bon pseudo
-        $("#delete-userName").val(userName);
-         // ajout du html dans le div
-        $("#user-titre-modal").html('<i class="glyphicon glyphicon-trash"></i> Suppression de l\'utilisateur : <strong>'+userName+'</strong>');
-
-    });
-
-}) ();
+$(document).on('click', '.popup-delete-user', function ()
+{
+    var userName = $(this).data('user');
+    $('#delete-userName').val(userName);
+    $('#user-titre-modal').html('<i class="glyphicon glyphicon-trash"></i> Suppression de l\'utilisateur : <strong>'+userName+'</strong>');
+});
 
 $('#back-owner').hide();
 $('.edit-btn-user').click( function()
