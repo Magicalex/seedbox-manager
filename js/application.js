@@ -73,27 +73,22 @@
 
 }) ();
 
-
-$( "#back-owner" ).hide();
-
-$( ".edit-btn-user" ).click( function()
+$('#back-owner').hide();
+$('.edit-btn-user').click( function()
 {
-    $( "#conf-simple-user" ).hide( "slow" );
-    $( "#config-owner" ).delay(600).show( "slow", "linear" );
-    $( "#back-owner" ).show();
+
+    $('#conf-simple-user').hide('slow');
+    $('#config-owner').delay(600).show('slow');
+    $('#back-owner').show();
 
     var userName = $(this).data('user');
-    
-    // remplace value par le bon pseudo
-    $("#titre-edit-owner").html('<i class="glyphicon glyphicon-th-list"></i> Configuration de l\'utilisateur : <strong class="text-info">'+userName+'</strong>');
+    $('#titre-edit-owner').html('<i class="glyphicon glyphicon-th-list"></i> Configuration de l\'utilisateur : <strong class="text-info">'+userName+'</strong>');
+    $('#user-change-config').val(userName);
 });
 
-
-
-$( "#back-owner" ).click( function()
+$('#back-owner').click( function()
 {
-    
-    $( "#config-owner" ).hide( "slow" );
-    $( "#conf-simple-user" ).delay(1000).show( "slow" );
-    $( "#back-owner" ).hide();
+    $('#config-owner').hide('slow');
+    $('#conf-simple-user').delay(600).show('slow');
+    $('#back-owner').hide();
 });

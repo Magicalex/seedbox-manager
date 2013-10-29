@@ -60,7 +60,7 @@
         </div>
     </div>
 
-    <?php if ( $user->is_owner() === true && isset($_GET['edit']) ) { ?>
+    <?php if ( $user->is_owner() === true && isset($_GET['option']) ) { ?>
     <!-- popup delete user -->
     <div class="modal fade" id="delete-user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
