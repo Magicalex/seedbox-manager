@@ -2,7 +2,6 @@
 
 class Update
 {
-    protected $userName;
     protected $url_redirect;
     protected $realmWebServer;
     protected $directory;
@@ -19,10 +18,9 @@ class Update
     protected $blocFtp;
     protected $is_owner;
 
-    public function __construct($file_ini, $user)
+    public function __construct($file_ini)
     {
         $setting_user_array = parse_ini_file($file_ini, true);
-        $this->userName = $user;
         $this->hydrate($setting_user_array);
     }
 

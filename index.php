@@ -8,7 +8,7 @@ spl_autoload_register('chargerClasse');
 if ( isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']) )
     $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
 else
-    $userName = 'max';//die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
+    $userName = 'slayt';//die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
 
 // check conf + create new user
 $install = new Install;
@@ -53,13 +53,13 @@ if ( isset($_POST['reboot']) )
 
 if ( isset($_POST['simple_conf_user']) )
 {
-    $update = new Update($file_user_ini, $userName);
+    $update = new Update($file_user_ini);
     $update_ini_file_log = $update->update_file_config($_POST, './conf/users/'.$userName);
 }
 
 if ( isset($_POST['owner_change_config']) )
 {
-    $update = new Update('./conf/users/'.$_POST['user'].'/config.ini', $_POST['user']);
+    $update = new Update('./conf/users/'.$_POST['user'].'/config.ini');
     $update_ini_file_log_owner = $update->update_file_config($_POST, './conf/users/'.$_POST['user']);
     
     echo '<pre>';

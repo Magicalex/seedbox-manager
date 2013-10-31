@@ -14,6 +14,10 @@ body {
   background:url("../img/background.png");
 }
 
+code {
+  border:1px solid #CE534D;
+}
+
 ul {
   color:#5A5A5A;
 }
