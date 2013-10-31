@@ -69,7 +69,6 @@ $(document).on('click', '.popup-delete-user', function ()
 $('#back-owner').hide();
 $('.edit-btn-user').click( function()
 {
-
     $('#conf-simple-user').hide('slow');
     $('#config-owner').delay(600).show('slow');
     $('#back-owner').show();

@@ -1,7 +1,6 @@
 <?php
-
 $user_name_php = Install::get_user_php();
-
+$root_path = getcwd();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -26,19 +25,23 @@ $user_name_php = Install::get_user_php();
                     <div class="well well-sm">
                         <h4 class="titre-head">Démarrage de l'application</h4>
                         <div class="trait"></div>
-                        <p>Indiquez le bon propriétaire des fichiers de l'application, copiez cette commande et l'éxécuter en ROOT (super utilisateur).</p>
-                        <code style="border:1px solid #CE534D;">chown -R <?php echo $user_name_php['name'].':'.$user_name_php['name'].' '.getcwd(); ?></code>
-                        <p></p>
+                        <p>Indiquez le bon propriétaire des fichiers de l'application, copiez cette commande et l'exécuter en ROOT (super utilisateur).</p>
+                        <code>chown -R <?php echo $user_name_php['name'].':'.$user_name_php['name'].' '.$root_path; ?>/</code>
                         <p>Exécutez le script install.sh pour compiler le programme de reboot en ROOT.</p>
-                        <code style="border:1px solid #CE534D;">cd <?php echo getcwd(); ?>/source-reboot/ </code><br>
-                        <code style="border:1px solid #CE534D;">chmod +x install.sh && ./install.sh</code><br>
+                        <code>cd <?php echo $root_path; ?>/source-reboot/ </code><br>
+                        <code>chmod +x install.sh && ./install.sh</code><br>
                     </div>
                 </article>
                 <article class="col-md-12">
                     <div class="well well-sm">
-                        <h4 class="titre-head">Configuration des utilisateurs</h4>
+                        <h4 class="titre-head">Comment obtenir les droits administrateurs ?</h4>
                         <div class="trait"></div>
-                        <p></p>
+                        <p>Pour obtenir les droits administrateurs il faut avant cela exécuter les commandes ci-dessus.</p>
+                        <p>Ensuite rafraîchir cette page avec F5 par exemple. Cela aura pour conséquence de générer vos fichiers de configuration.</p>
+                        <p>Puis ouvrez votre fichier de configuration avec un éditeur de texte.</p>
+                        <code>nano <?php echo $root_path; ?>/conf/users/<?php echo $userName; ?>/config.ini</code><br>
+                        <small><em>Je vous conseille de copier cette commande après rafraichissement normalement cette page ne s'affichera plus jamais.</em></small>
+                        <p>Pour terminer, il vous suffit de mettre owner = yes à la place de no et de quitter en enregistrant.</p>
                     </div>
                 </article>
             </section>
