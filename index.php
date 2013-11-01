@@ -60,10 +60,10 @@ if ( isset($_POST['simple_conf_user']) )
 if ( isset($_POST['owner_change_config']) )
 {
     $update = new Update('./conf/users/'.$_POST['user'].'/config.ini');
-    $update_ini_file_log_owner = $update->update_file_config($_POST, './conf/users/'.$_POST['user']);
+    //$update_ini_file_log_owner = $update->update_file_config($_POST, './conf/users/'.$_POST['user']);
     
     echo '<pre>';
-    print_r($update_ini_file_log_owner);
+    print_r($_POST);
     echo '</pre>';
 }
 

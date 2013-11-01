@@ -153,5 +153,6 @@ class Users
     public function blocFtp() { return $this->blocFtp; }
     public function blocRtorrent() { return $this->blocRtorrent; }
     public function is_owner() { return $this->is_owner; }
-
+    public function user_directory() { return $this->directory; }
+    public function realmWebServer() { return $this->realmWebServer; }
 }
