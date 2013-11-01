@@ -87,9 +87,7 @@ class Users
     {
         if (file_exists($file))
         {
-            $data_reboot = fopen($file, 'r');
-            $date_reboot_rtorrent = fgets($data_reboot);
-            fclose($data_reboot);
+            $date_reboot_rtorrent = file_get_contents($file);
             $exist_reboot_rtorrent = true;
         }
         else
