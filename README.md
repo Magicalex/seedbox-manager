@@ -83,6 +83,6 @@ pour obtenir les droits administrateurs
 ```
 vim /var/www/manager/conf/users/<utilisateur>/config.ini
 ```
-puis modifier à la ligne ## (admin = no par admin = yes)
+puis modifier à la ligne ## (owner = no par owner = yes)
 
 Après avoir récupéré les droits administrateurs vous pouvez configurer tous les utilisateurs
