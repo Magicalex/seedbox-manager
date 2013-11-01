@@ -2,21 +2,21 @@
 
 class Update
 {
-    protected $url_redirect;
-    protected $realmWebServer;
-    protected $directory;
-    protected $rutorrentUrl;
-    protected $cakeboxActiveUrl;
-    protected $cakeboxUrl;
-    protected $portFtp;
-    protected $portSftp;
-    protected $blocSupport;
-    protected $supportMail;
-    protected $currentPath;
-    protected $blocInfo;
-    protected $blocRtorrent;
-    protected $blocFtp;
-    protected $is_owner;
+    private $url_redirect;
+    private $realmWebServer;
+    private $directory;
+    private $rutorrentUrl;
+    private $cakeboxActiveUrl;
+    private $cakeboxUrl;
+    private $portFtp;
+    private $portSftp;
+    private $blocSupport;
+    private $supportMail;
+    private $currentPath;
+    private $blocInfo;
+    private $blocRtorrent;
+    private $blocFtp;
+    private $is_owner;
 
     public function __construct($file_ini)
     {
@@ -40,29 +40,78 @@ class Update
         $this->url_redirect     = (string) $array['logout']['url_redirect'];
         $this->portFtp          = (int) $array['ftp']['port_ftp'];
         $this->portSftp         = (int) $array['ftp']['port_sftp'];
-        $this->currentPath      = getcwd();
     }
 
     public function update_file_config(array $data_upgrade, $conf_user_folder)
     {
-        
-        // mettre en place un système édition admin
-        /* choisir en admin : 8 champs/inputs
-        
-        1. 'user_directory' => $this->directory           [input text]
-        2. 'url_rutorrent' => $this->rutorrentUrl         [input text]
-        3. 'active_cakebox' => $this->cakeboxActiveUrl    [input checkbox]
-        4. 'url_cakebox' => $this->cakeboxUrl             [input text]
-        5. 'port_ftp' => $this->portFtp                   [input num]
-        6. 'port_sftp' => $this->portSftp                 [input num]
-        7. 'adresse_mail' => $this->supportMail           [input text]
-        8. 'realm' => $this->realmWebServer               [input text]
 
-        */
+        if ( isset($data_upgrade['simple_conf_user']) )
+        {
+            if ( isset($data_upgrade['active_bloc_info']) )
+                $this->blocInfo = true;
+            else
+                $this->blocInfo = false;
+        }
+
+        if ( isset($data_upgrade['owner_change_config']) )
+            $this->directory = $data_upgrade['user_directory'];
+
+        if ( isset($data_upgrade['owner_change_config']) )
+            $this->rutorrentUrl = $data_upgrade['url_rutorrent'];
+
+        if ( isset($data_upgrade['owner_change_config']) )
+        {
+            if ( isset($data_upgrade['active_cakebox']) )
+                $this->cakeboxActiveUrl = true;
+            else
+                $this->cakeboxActiveUrl = false;
+        }
+
+        if ( isset($data_upgrade['owner_change_config']) )
+            $this->cakeboxUrl = $data_upgrade['url_cakebox'];
+
+        if ( isset($data_upgrade['simple_conf_user']) )
+        {
+            if ( isset($data_upgrade['active_ftp']) )
+                $this->blocFtp = true;
+            else
+                $this->blocFtp = false;
+        }
+
+        if ( isset($data_upgrade['owner_change_config']) )
+            $this->portFtp = (int) $data_upgrade['port_ftp'];
+
+        if ( isset($data_upgrade['owner_change_config']) )
+            $this->portSftp = (int) $data_upgrade['port_sftp'];
+
+        if ( isset($data_upgrade['simple_conf_user']) )
+        {
+            if ( isset($data_upgrade['active_reboot']) )
+                $this->blocRtorrent = true;
+            else
+                $this->blocRtorrent = false;
+        }
+
+        if ( isset($data_upgrade['simple_conf_user']) )
+        {
+            if ( isset($data_upgrade['active_support']) )
+                $this->blocSupport = true;
+            else
+                $this->blocSupport = false;
+        }
+
+        if ( isset($data_upgrade['owner_change_config']) )
+            $this->supportMail = $data_upgrade['adresse_mail'];
+
+        if ( isset($data_upgrade['owner_change_config']) )
+            $this->realmWebServer = $data_upgrade['realm'];
+
+        if ( isset($data_upgrade['simple_conf_user']) )
+            $this->url_redirect = $data_upgrade['url_redirect'];
 
         $content = array( 
             'user' => array(
-                'active_bloc_info' => isset($data_upgrade['simple_conf_user']) ? isset($data_upgrade['active_bloc_info']) ? true:false:$this->blocInfo,
+                'active_bloc_info' => $this->blocInfo,
                 'user_directory' => $this->directory,
                 'owner' => $this->is_owner
             ),
@@ -72,31 +121,31 @@ class Update
                 'url_cakebox' => $this->cakeboxUrl
             ),
             'ftp' => array(
-                'active_ftp' => isset($data_upgrade['simple_conf_user']) ? isset($data_upgrade['active_ftp']) ? true:false:$this->blocFtp,
+                'active_ftp' => $this->blocFtp,
                 'port_ftp' => $this->portFtp,
                 'port_sftp' => $this->portSftp
             ),
             'rtorrent' => array(
-                'active_reboot' => isset($data_upgrade['simple_conf_user']) ? isset($data_upgrade['active_reboot']) ? true:false:$this->blocRtorrent
+                'active_reboot' => $this->blocRtorrent
             ),
             'support' => array(
-                'active_support' => isset($data_upgrade['simple_conf_user']) ? isset($data_upgrade['active_support']) ? true:false:$this->blocSupport,
+                'active_support' => $this->blocSupport,
                 'adresse_mail' => $this->supportMail
             ),
             'logout' => array(
                 'realm' => $this->realmWebServer,
-                'url_redirect' => isset($data_upgrade['simple_conf_user']) ? $data_upgrade['url_redirect']:$this->url_redirect
+                'url_redirect' => $this->url_redirect
             )
         );
 
         $log = array();   
-        $log[0] = $this->write_ini_file($content, $conf_user_folder.'/config.ini');
+        $log[0] = self::write_ini_file($content, $conf_user_folder.'/config.ini');
         if (empty($log[0])) unset($log[0]);
 
         return $log;
     }
 
-    public function write_ini_file(array $data_array, $file_path)
+    private static function write_ini_file(array $data_array, $file_path)
     {
         $file_content = '';
         $error = '';

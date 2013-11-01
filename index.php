@@ -4,13 +4,13 @@
 function chargerClasse($classe) { require_once('lib/'.$classe.'.class.php'); }
 spl_autoload_register('chargerClasse');
 
-/* recup user */
+/* recuperation nom utilisateur connecte */
 if ( isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']) )
     $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
 else
-    $userName = 'magicalex';//die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
+    die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
 
-// check conf + create new user
+/* check config app */
 $install = new Install;
 if (file_exists('./reboot-rtorrent') && Install::check_uid_file('./reboot-rtorrent') == 0 && Install::getChmod('./reboot-rtorrent', 4) == 4755)
 {
@@ -60,11 +60,7 @@ if ( isset($_POST['simple_conf_user']) )
 if ( isset($_POST['owner_change_config']) )
 {
     $update = new Update('./conf/users/'.$_POST['user'].'/config.ini');
-    //$update_ini_file_log_owner = $update->update_file_config($_POST, './conf/users/'.$_POST['user']);
-    
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
+    $update_ini_file_log_owner = $update->update_file_config($_POST, './conf/users/'.$_POST['user']);
 }
 
 if ( isset($_POST['delete-userName']) )
@@ -73,7 +69,7 @@ if ( isset($_POST['delete-userName']) )
     $log_delete_user = Users::delete_config_old_user('./conf/users/'.$_POST['delete-userName']);
 }
 
-// init objet
+/* init objet */
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
 $host = $_SERVER['HTTP_HOST'];

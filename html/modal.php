@@ -30,9 +30,9 @@
                     <h4 class="modal-title">A propos</h4>
                 </div>
                 <div class="modal-body">
-                    <p class="textmodaleabout">Application web par Backtoback & Magicalex</p>
+                    <p class="textmodaleabout">Application web par Backtoback & Magicalex & hydrog3n</p>
                     <p class="textmodaleabout">Contacter les développeurs : <a href="mailto:magicalex14000@gmail.com" target="_blank">magicalex14000@gmail.com</a></p>
-                    <p class="textmodaleabout"><strong>Version 2.2-alpha</strong> <em>en développement.</em></p>
+                    <p class="textmodaleabout"><strong>Version 2.3-beta</strong> <em>dev</em></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>

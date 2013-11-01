@@ -11,10 +11,7 @@
     
     <?php if ( isset($_POST['reboot']) && $rebootRtorrent['statusReboot'] == 0 ) { ?>
 
-        <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            Votre session rtorrent a été redémarré avec succès.
-        </div>
+        <div class="alert alert-success">Votre session rtorrent a été redémarré avec succès.</div>
 
     <?php } elseif ( isset($_POST['reboot']) && $rebootRtorrent['statusReboot'] != 0 ) { ?>
         
