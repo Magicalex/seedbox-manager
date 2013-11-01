@@ -45,16 +45,16 @@
 
                     <form method="post" action="?option" role="form">
                         <div class="checkbox">
-                            <input type="checkbox" name="active_bloc_info" value="true" id="active_bloc_info" <?php if ($user->blocInfo() === true) echo 'checked'; ?>><label for="active_bloc_info"><span class="ui"></span> Activer le bloc information utilisateur</label>
+                            <input type="checkbox" name="active_bloc_info" value="true" id="active_bloc_info" <?php if ($user->blocInfo() === true) echo 'checked'; ?> ><label for="active_bloc_info"><span class="ui"></span> Activer le bloc information utilisateur</label>
                         </div>
                         <div class="checkbox">
-                            <input type="checkbox" name="active_ftp" value="true" id="active_ftp" <?php if ($user->blocFtp() === true) echo 'checked'; ?>><label for="active_ftp"><span class="ui"></span> Activer le bloc accès ftp / sftp / transdroid</label>
+                            <input type="checkbox" name="active_ftp" value="true" id="active_ftp" <?php if ($user->blocFtp() === true) echo 'checked'; ?> ><label for="active_ftp"><span class="ui"></span> Activer le bloc accès ftp / sftp / transdroid</label>
                         </div>
                         <div class="checkbox">
-                            <input type="checkbox" name="active_reboot" value="true" id="active_reboot" <?php if ($user->blocRtorrent() === true) echo 'checked'; ?>><label for="active_reboot"><span class="ui"></span> Activer le bloc gestion de rtorrent</label>
+                            <input type="checkbox" name="active_reboot" value="true" id="active_reboot" <?php if ($user->blocRtorrent() === true) echo 'checked'; ?> ><label for="active_reboot"><span class="ui"></span> Activer le bloc gestion de rtorrent</label>
                         </div>
                         <div class="checkbox">
-                            <input type="checkbox" name="active_support" value="true" id="active_support" <?php if ($user->blocSupport() === true) echo 'checked'; ?>><label for="active_support"><span class="ui"></span> Activer le bloc support</label>
+                            <input type="checkbox" name="active_support" value="true" id="active_support" <?php if ($user->blocSupport() === true) echo 'checked'; ?> ><label for="active_support"><span class="ui"></span> Activer le bloc support</label>
                         </div>
                         <div class="form-group">
                             <label for="url-deconnexion">Url de redirection à la déconnexion</label>
@@ -111,7 +111,10 @@
             </div>
         </article>
 
-        <?php } if ( isset($_GET['user']) ) { ?>
+        <?php } if ( isset($_GET['user']) )
+        { 
+            $update_owner = new Users('./conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] );
+        ?>
 
         <article class="col-md-6">
             <div class="well well-sm">
@@ -123,7 +126,7 @@
                         <legend>Généralité utilisateur</legend>
                         <div class="form-group">
                             <label for="user_directory">Dossier /home de l'utilisateur</label>
-                            <input type="text" class="form-control" name="user_directory" id="user_directory" placeholder="/home/magicalex">
+                            <input type="text" class="form-control" name="user_directory" id="user_directory" value="<?php echo $update_owner->user_directory(); ?>">
                         </div>
                     </fieldset>
 
@@ -131,16 +134,16 @@
                         <legend>Barre de navigation</legend>
                         <div class="form-group">
                             <label for="url_rutorrent">L'url de rutorrent</label>
-                            <input type="url" class="form-control" name="url_rutorrent" id="url_rutorrent" placeholder="http://rutorrent.fr">
+                            <input type="url" class="form-control" name="url_rutorrent" id="url_rutorrent" value="<?php echo $update_owner->rutorrentUrl(); ?>">
                         </div>
 
                         <div class="checkbox">
-                            <input type="checkbox" name="active_cakebox" id="active_cakebox"><label for="active_cakebox"><span class="ui"></span> Afficher le lien cakebox</label>
+                            <input type="checkbox" name="active_cakebox" id="active_cakebox" <?php if ($user->cakeboxActiveUrl() === true) echo 'checked'; ?> ><label for="active_cakebox"><span class="ui"></span> Afficher le lien cakebox</label>
                         </div>
 
                         <div class="form-group">
                             <label for="url_cakebox">L'url de cakebox</label>
-                            <input type="url" class="form-control" name="url_cakebox" id="url_cakebox" placeholder="http://cakebox.fr">
+                            <input type="url" class="form-control" name="url_cakebox" id="url_cakebox" value="<?php echo $update_owner->cakeboxUrl(); ?>">
                         </div>
                     </fieldset>
 
@@ -148,12 +151,12 @@
                         <legend>Paramètre des serveurs FTP/sFTP</legend>
                         <div class="form-group">
                             <label for="port_ftp">Port ftp</label>
-                            <input type="number" class="form-control" name="port_ftp" id="port_ftp" placeholder="21">
+                            <input type="number" class="form-control" name="port_ftp" id="port_ftp" value="<?php echo $update_owner->portFtp(); ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="port_sftp">Port sftp</label>
-                            <input type="number" class="form-control" name="port_sftp" id="port_sftp" placeholder="22">
+                            <input type="number" class="form-control" name="port_sftp" id="port_sftp" value="<?php echo $update_owner->portSftp(); ?>">
                         </div>
                     </fieldset>
 
@@ -161,7 +164,7 @@
                         <legend>Support</legend>
                         <div class="form-group">
                             <label for="adresse_mail">Adresse du support</label>
-                            <input type="email" class="form-control" name="adresse_mail" id="adresse_mail" placeholder="contact@exemple.fr">
+                            <input type="email" class="form-control" name="adresse_mail" id="adresse_mail" value="<?php echo $update_owner->supportMail(); ?>">
                         </div>
                     </fieldset>
 
@@ -169,7 +172,7 @@
                         <legend>Paramètre de déconnexion</legend>
                         <div class="form-group">
                             <label for="realm">realm de l'authentification du serveur web</label>
-                            <input type="text" class="form-control" name="realm" id="realm" placeholder="seedbox Rutorrent">
+                            <input type="text" class="form-control" name="realm" id="realm" value="<?php echo $update_owner->realmWebServer(); ?>">
                         </div>
                     </fieldset>
 
