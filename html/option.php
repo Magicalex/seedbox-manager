@@ -35,7 +35,7 @@
             <ul>
         </div>
 
-        <?php } ?>
+        <?php } if ( !isset($_GET['user']) ) { ?>
 
         <section class="row">
             <article class="col-md-6" id="conf-simple-user">
@@ -72,11 +72,11 @@
                 </div>
             </article>
 
-        <?php if ( $user->is_owner() === true ) { ?>
+        <?php } if ( $user->is_owner() === true ) { ?>
 
         <article class="col-md-6">
             <div class="well well-sm">
-                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Administration : gestion utilisateurs <button class="btn btn-info btn-xs text-right" id="back-owner">retour</button></h4>
+                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Administration : gestion utilisateurs</h4>
                 <div class="trait"></div>
                 <table class="table table-bordered table-striped">
                     <tr>
@@ -90,14 +90,18 @@
                         <td><?php echo $num_user; ?></td>
                         <td><?php echo $user_name; ?></td>
                         <td>
-                            <button class="btn btn-default btn-xs edit-btn-user" title="éditer" data-user="<?php echo $user_name ?>">
-                                <i class="glyphicon glyphicon-edit"></i>
-                            </button>
+                            <a href="?option&user=<?php echo $user_name; ?>" class="btn btn-default btn-xs edit-btn-user">
+                                <i class="glyphicon glyphicon-edit"></i> éditer
+                            </a>
                         </td>
                         <td>
                         <?php if ( $userName != $user_name) { ?>
                         <a data-toggle="modal" class="popup-delete-user btn btn-danger btn-xs" data-user="<?php echo $user_name ?>" href="#delete-user">
-                            <i class="glyphicon glyphicon-trash"></i>
+                            <i class="glyphicon glyphicon-trash"></i> supprimer
+                        </a>
+                        <?php } else { ?>
+                        <a class="popup-delete-user btn btn-danger btn-xs" disabled>
+                            <i class="glyphicon glyphicon-trash"></i> supprimer
                         </a>
                         <?php } ?>
                         </td>
@@ -107,24 +111,75 @@
             </div>
         </article>
 
-        <article class="col-md-6" id="config-owner" style="display:none">
+        <?php } if ( isset($_GET['user']) ) { ?>
+
+        <article class="col-md-6">
             <div class="well well-sm">
-                <h4 class="titre-head" id="titre-edit-owner"></h4>
+                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Configuration de l'utilisateur : <strong class="text-info"><?php echo $_GET['user']; ?></strong></h4>
                 <div class="trait"></div>
                 
                 <form method="post" action="?option" role="form">
-                    <h5 style="text-decoration:underline">Généralité utilisateur</h5>
-                    <h5>Paramètre de la barre de navigation</h5>
-                    <h5>Paramètre de votre serveur FTP/sFTP</h5>
-                    <h5>Paramètre de votre serveur http</h5>
-                    <h5>Support</h5>
+                    <fieldset>
+                        <legend>Généralité utilisateur</legend>
+                        <div class="form-group">
+                            <label for="user_directory">Dossier /home de l'utilisateur</label>
+                            <input type="text" class="form-control" name="user_directory" id="user_directory" placeholder="/home/magicalex">
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Barre de navigation</legend>
+                        <div class="form-group">
+                            <label for="url_rutorrent">L'url de rutorrent</label>
+                            <input type="url" class="form-control" name="url_rutorrent" id="url_rutorrent" placeholder="http://rutorrent.fr">
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" name="active_cakebox" id="active_cakebox"><label for="active_cakebox"><span class="ui"></span> Afficher le lien cakebox</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="url_cakebox">L'url de cakebox</label>
+                            <input type="url" class="form-control" name="url_cakebox" id="url_cakebox" placeholder="http://cakebox.fr">
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Paramètre des serveurs FTP/sFTP</legend>
+                        <div class="form-group">
+                            <label for="port_ftp">Port ftp</label>
+                            <input type="number" class="form-control" name="port_ftp" id="port_ftp" placeholder="21">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="port_sftp">Port sftp</label>
+                            <input type="number" class="form-control" name="port_sftp" id="port_sftp" placeholder="22">
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Support</legend>
+                        <div class="form-group">
+                            <label for="adresse_mail">Adresse du support</label>
+                            <input type="email" class="form-control" name="adresse_mail" id="adresse_mail" placeholder="contact@exemple.fr">
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Paramètre de déconnexion</legend>
+                        <div class="form-group">
+                            <label for="realm">realm de l'authentification du serveur web</label>
+                            <input type="text" class="form-control" name="realm" id="realm" placeholder="seedbox Rutorrent">
+                        </div>
+                    </fieldset>
 
                     <p class="text-right fix-marg-input">
-                        <input type="hidden" name="user" id="user-change-config">
+                        <input type="hidden" name="user" value="<?php echo $_GET['user']; ?>">
                         <input type="hidden" name="owner_change_config">
                         <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
                     </p>
                 </form>
+
             </div>
         </article>
         <?php } ?>

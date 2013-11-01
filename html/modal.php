@@ -71,7 +71,7 @@
                 </div>
                 <div class="modal-body">
                     <p>&Ecirc;tes-vous sûr de vouloir supprimer la configuration de cette utilisateur ?</p>
-                    <p>Cette action est réversible.<br>Dès que votre utilisateur va se connecter les fichiers de configuration seront généré automatiquement (configuration par défaut).</p>
+                    <p>Cette action est réversible.<br>Dès que votre utilisateur va se connecter les fichiers de configuration seront généré automatiquement (avec une configuration par défaut).</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>

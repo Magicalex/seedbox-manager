@@ -279,3 +279,23 @@ ul {
   box-sizing: border-box;
   margin-top: -1px;
 }
+
+/* formulaire owner */
+
+fieldset {
+  border:1px solid #B4B4B4;
+  padding: 0px 10px 0px 10px;
+  margin-bottom: 10px;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  -ms-border-radius:5px;
+  border-radius:5px;
+}
+
+legend {
+  padding-left:7px;
+}
+
+fieldset .checkbox {
+  padding-left: 0px;
+}
