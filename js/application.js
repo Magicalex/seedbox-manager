@@ -64,3 +64,5 @@ $(document).on('click', '.popup-delete-user', function ()
     $('#delete-userName').val(userName);
     $('#user-titre-modal').html('<i class="glyphicon glyphicon-trash"></i> Suppression de l\'utilisateur : <strong>'+userName+'</strong>');
 });
+
+$('.alert-success').delay(4500).hide('slow');

@@ -4,10 +4,7 @@
         
         <?php if ( isset($_POST['simple_conf_user']) && empty($update_ini_file_log) ) { ?>
 
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                Vos préférences ont été mises à jour avec succès.
-            </div>
+            <div class="alert alert-success">Vos préférences ont été mises à jour avec succès.</div>
 
         <?php } elseif ( isset($_POST['simple_conf_user']) ) { ?>
 
@@ -25,19 +22,36 @@
         <?php } if ( isset($_POST['delete-userName']) ) { ?>
 
         <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             Les fichiers de configuration de l'utilisateur <?php echo $_POST['delete-userName']; ?> ont été supprimé avec succès.
             <ul class="text-success">
             <?php foreach ($log_delete_user as $key => $file_delete)
             {
                 echo '<li>'.$file_delete.'</li>';
             } ?>
-            <ul>
+            </ul>
         </div>
 
-        <?php } if ( !isset($_GET['user']) ) { ?>
+        <?php } if ( isset($_POST['owner_change_config']) && empty($update_ini_file_log_owner) ) { ?>
+
+        <div class="alert alert-success">La configuration de l'utilisateur <strong><?php echo $_POST['user']; ?></strong> a été mise à jour avec succès.</div>
+
+        <?php } elseif ( isset($_POST['owner_change_config']) ) { ?>
+
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4>Impossible de mettre à jour la configuration de l'utilisateur <strong><?php echo $_POST['user']; ?></strong> !</h4>
+            <ul class="text-danger">
+            <?php foreach ($update_ini_file_log_owner as $key => $data_error_update)
+            {
+                echo '<li>'.$data_error_update.'</li>';
+            } ?>
+            </ul>
+        </div>
+
+        <?php } ?>
 
         <section class="row">
+        <?php if ( empty($_GET['user']) ) { ?>
             <article class="col-md-6" id="conf-simple-user">
                 <div class="well well-sm">
                     <h4 class="titre-head">Configuration de l'interface  de <?php echo $userName; ?></h4>
@@ -60,7 +74,7 @@
                             <label for="url-deconnexion">Url de redirection à la déconnexion</label>
                             <div class="row">
                                 <div class="col-lg-7">
-                                    <input type="text" name="url_redirect" class="form-control" id="url-deconnexion" value="<?php echo $user->url_redirect(); ?>">
+                                    <input type="url" name="url_redirect" class="form-control" id="url-deconnexion" value="<?php echo $user->url_redirect(); ?>">
                                 </div>
                             </div>
                         </div>
@@ -111,10 +125,7 @@
             </div>
         </article>
 
-        <?php } if ( isset($_GET['user']) )
-        { 
-            $update_owner = new Users('./conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] );
-        ?>
+        <?php } if ( $user->is_owner() === true && !empty($_GET['user']) ) { $update_owner = new Users('./conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] ); ?>
 
         <article class="col-md-6">
             <div class="well well-sm">
@@ -138,7 +149,7 @@
                         </div>
 
                         <div class="checkbox">
-                            <input type="checkbox" name="active_cakebox" id="active_cakebox" <?php if ($user->cakeboxActiveUrl() === true) echo 'checked'; ?> ><label for="active_cakebox"><span class="ui"></span> Afficher le lien cakebox</label>
+                            <input type="checkbox" name="active_cakebox" value="true" id="active_cakebox" <?php if ($update_owner->cakeboxActiveUrl() === true) echo 'checked'; ?> ><label for="active_cakebox"><span class="ui"></span> Afficher le lien cakebox</label>
                         </div>
 
                         <div class="form-group">
