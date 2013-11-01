@@ -89,6 +89,6 @@
 
     <script type="text/javascript" src="./js/jquery.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./js/application.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
 
 </html>
