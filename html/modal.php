@@ -1,11 +1,11 @@
 <!-- MODAL BOOTSTRAP -->
 
-    <div class="modal fade" id="popupreboot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="popupreboot" tabindex="-1" role="dialog" aria-labelledby="target-rtorrent" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                  <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Avertissement</h4>
+                    <h4 class="modal-title" id="target-rtorrent">Avertissement</h4>
                 </div>
                 <div class="modal-body">
                     <p>&Ecirc;tes-vous sûr de vouloir redémarrer votre session rtorrent ?</p>
@@ -22,15 +22,15 @@
     </div>
 
     <!-- popup about us -->
-    <div class="modal fade" id="popupinfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="popupinfo" tabindex="-1" role="dialog" aria-labelledby="target-about-us" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                  <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">A propos</h4>
+                    <h4 class="modal-title" id="target-about-us">A propos</h4>
                 </div>
                 <div class="modal-body">
-                    <p class="textmodaleabout">Application web par Backtoback & Magicalex & hydrog3n</p>
+                    <p class="textmodaleabout">Application web par Backtoback &amp; Magicalex &amp; hydrog3n</p>
                     <p class="textmodaleabout">Contacter les développeurs : <a href="mailto:magicalex14000@gmail.com" target="_blank">magicalex14000@gmail.com</a></p>
                     <p class="textmodaleabout"><strong>Version 2.3-beta</strong> <em>dev</em></p>
                 </div>
@@ -42,12 +42,12 @@
     </div>
 
     <!-- popup logout -->
-    <div class="modal fade" id="popuplogout" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="popuplogout" tabindex="-1" role="dialog" aria-labelledby="target-logout" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                  <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><i class="glyphicon glyphicon-log-out"></i> Déconnexion</h4>
+                    <h4 class="modal-title" id="target-logout"><i class="glyphicon glyphicon-log-out"></i> Déconnexion</h4>
                 </div>
                 <div class="modal-body">
                     <p>&Ecirc;tes-vous sûr de vouloir vous déconnecter du serveur ?</p>
@@ -62,12 +62,12 @@
 
     <?php if ( $user->is_owner() === true && isset($_GET['option']) ) { ?>
     <!-- popup delete user -->
-    <div class="modal fade" id="delete-user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="delete-user" tabindex="-1" role="dialog" aria-labelledby="target-delete-user" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                  <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="user-titre-modal"></h4>
+                    <h4 class="modal-title" id="target-delete-user"></h4>
                 </div>
                 <div class="modal-body">
                     <p>&Ecirc;tes-vous sûr de vouloir supprimer la configuration de cette utilisateur ?</p>

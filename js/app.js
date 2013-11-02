@@ -1,7 +1,7 @@
 ( function () {
 
     //code activation tooltip
-    $("[id='tooltip']").tooltip({
+    $('.load-average').tooltip({
         placement: 'top',
         trigger: 'hover'
     }).tooltip('hide');
@@ -62,7 +62,7 @@ $(document).on('click', '.popup-delete-user', function ()
 {
     var userName = $(this).data('user');
     $('#delete-userName').val(userName);
-    $('#user-titre-modal').html('<i class="glyphicon glyphicon-trash"></i> Suppression de l\'utilisateur : <strong>'+userName+'</strong>');
+    $('#target-delete-user').html('<i class="glyphicon glyphicon-trash"></i> Suppression de l\'utilisateur : <strong>'+userName+'</strong>');
 });
 
 $('.alert-success').delay(4500).hide('slow');

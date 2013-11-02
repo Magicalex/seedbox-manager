@@ -104,7 +104,7 @@
                         <td><?php echo $num_user; ?></td>
                         <td><?php echo $user_name; ?></td>
                         <td>
-                            <a href="?option&user=<?php echo $user_name; ?>" class="btn btn-default btn-xs edit-btn-user">
+                            <a href="?option&amp;user=<?php echo $user_name; ?>" class="btn btn-default btn-xs edit-btn-user">
                                 <i class="glyphicon glyphicon-edit"></i> éditer
                             </a>
                         </td>
