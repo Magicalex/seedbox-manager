@@ -71,9 +71,9 @@
                 <ul>
                     <li style="cursor:default;">
                         <span class="text-defaut-color">load average : </span>
-                        <span id="tooltip" data-original-title="Charge moyenne depuis 1 min" class="label label-primary"><?php echo $load_server['load_average'][0]; ?></span>
-                        <span id="tooltip" data-original-title="Charge moyenne depuis 5 min" class="label label-primary"><?php echo $load_server['load_average'][1]; ?></span>
-                        <span id="tooltip" data-original-title="Charge moyenne depuis 15 min" class="label label-primary"><?php echo $load_server['load_average'][2]; ?></span>
+                        <span data-original-title="Charge moyenne depuis 1 min" class="label label-primary load-average"><?php echo $load_server['load_average'][0]; ?></span>
+                        <span data-original-title="Charge moyenne depuis 5 min" class="label label-primary load-average"><?php echo $load_server['load_average'][1]; ?></span>
+                        <span data-original-title="Charge moyenne depuis 15 min" class="label label-primary load-average"><?php echo $load_server['load_average'][2]; ?></span>
                     </li>
                     <li id="load-info"><?php echo $load_server['info_charge']; ?></li>
                 </ul>
@@ -93,7 +93,7 @@
                     <li>Port FTP : <em><?php echo $user->portFtp(); ?></em></li>
                     <li>Port sFTP : <em><?php echo $user->portSftp(); ?></em></li>
                     <li><a class="btn btn-info btn-xs icone-seed-managerdownload" href="http://filezilla.fr/">Télécharger filezilla</a></li>
-                    <li><a id="popupfilezilla" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="?download&file=filezilla">Fichier de configuration</a></li>
+                    <li><a id="popupfilezilla" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="?download&amp;file=filezilla">Fichier de configuration</a></li>
                 </ul>
 
                 <h5 class="icone-seed-managerandroid"><strong>Application Transdroid</strong></h5>
@@ -102,7 +102,7 @@
                     <li>Adresse http : <em>http://<?php echo $host; ?></em></li>
                     <li>User transdroid : <em><?php echo $userName; ?></em></li>
                     <li><a class="btn btn-info btn-xs icone-seed-managerdownload" href="http://transdroid.org/latest">Télécharger Transdroid</a></li>
-                    <li><a id="popuptransdroid" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="?download&file=transdroid">Fichier de configuration</a></li>
+                    <li><a id="popuptransdroid" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="?download&amp;file=transdroid">Fichier de configuration</a></li>
                 </ul>
             </div>
         </article>
