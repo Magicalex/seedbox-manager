@@ -114,7 +114,7 @@
                             <i class="glyphicon glyphicon-trash"></i> supprimer
                         </a>
                         <?php } else { ?>
-                        <a class="popup-delete-user btn btn-danger btn-xs" disabled>
+                        <a class="popup-delete-user btn btn-danger btn-xs disabled">
                             <i class="glyphicon glyphicon-trash"></i> supprimer
                         </a>
                         <?php } ?>
