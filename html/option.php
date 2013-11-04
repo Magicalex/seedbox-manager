@@ -100,34 +100,38 @@
                 <div class="trait"></div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
-                        <tr>
-                            <td><strong>#</strong></td>
-                            <td><strong>Utilisateur</strong></td>
-                            <td><strong>Modifier</strong></td>
-                            <td><strong>Supprimer</strong></td>
-                        </tr>
-                        <?php $i = 0; $num_user = 1; foreach (Users::get_all_users() as $i => $user_name) { ?>
-                        <tr>
-                            <td><?php echo $num_user; ?></td>
-                            <td><?php echo $user_name; ?></td>
-                            <td>
-                                <a href="?option&amp;user=<?php echo $user_name; ?>" class="btn btn-default btn-xs edit-btn-user">
-                                    <i class="glyphicon glyphicon-edit"></i> éditer
+                        <thead>
+                            <tr>
+                                <th><strong>#</strong></th>
+                                <th><strong>Utilisateur</strong></th>
+                                <th><strong>Modifier</strong></th>
+                                <th><strong>Supprimer</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $i = 0; $num_user = 1; foreach (Users::get_all_users() as $i => $user_name) { ?>
+                            <tr>
+                                <td><?php echo $num_user; ?></td>
+                                <td><?php echo $user_name; ?></td>
+                                <td>
+                                    <a href="?option&amp;user=<?php echo $user_name; ?>" class="btn btn-default btn-xs edit-btn-user">
+                                        <i class="glyphicon glyphicon-edit"></i> éditer
+                                    </a>
+                                </td>
+                                <td>
+                                <?php if ( $userName != $user_name) { ?>
+                                <a data-toggle="modal" class="popup-delete-user btn btn-danger btn-xs" data-user="<?php echo $user_name ?>" href="#delete-user">
+                                    <i class="glyphicon glyphicon-trash"></i> supprimer
                                 </a>
-                            </td>
-                            <td>
-                            <?php if ( $userName != $user_name) { ?>
-                            <a data-toggle="modal" class="popup-delete-user btn btn-danger btn-xs" data-user="<?php echo $user_name ?>" href="#delete-user">
-                                <i class="glyphicon glyphicon-trash"></i> supprimer
-                            </a>
-                            <?php } else { ?>
-                            <a class="popup-delete-user btn btn-danger btn-xs disabled">
-                                <i class="glyphicon glyphicon-trash"></i> supprimer
-                            </a>
-                            <?php } ?>
-                            </td>
-                        </tr>
-                        <?php $num_user++; } ?>
+                                <?php } else { ?>
+                                <a class="popup-delete-user btn btn-danger btn-xs disabled">
+                                    <i class="glyphicon glyphicon-trash"></i> supprimer
+                                </a>
+                                <?php } ?>
+                                </td>
+                            </tr>
+                            <?php $num_user++; } ?>
+                        </tbody>
                     </table>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-/* code jquery for mod boostrap and more */
+/* code jquery for mod bootstrap and more */
 
 $('.load-average').tooltip({
     placement: 'top',
@@ -36,8 +36,7 @@ $(document).on('click', '.popup-delete-user', function ()
 
 $('.alert-success').delay(4000).hide('slow');
 
-   
-if ( document.getElementById("blockInfo") && document.getElementById("blockFtp") && document.getElementById("blockRtorrent") && document.getElementById("blockSupport") )
+if ( document.getElementById('blockInfo') && document.getElementById('blockFtp') && document.getElementById('blockRtorrent') && document.getElementById('blockSupport') )
 {
     var blockInfo = document.getElementById('blockInfo');
     var blockFtp = document.getElementById('blockFtp');
