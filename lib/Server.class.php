@@ -43,7 +43,7 @@ class Server extends Users
         if ( preg_match( "#Basic#i", $_SERVER['HTTP_AUTHORIZATION'] ) || $_SERVER[AUTH_TYPE] == 'Basic' )
         {
             header('WWW-Authenticate: Basic realm="'.$this->realmWebServer.'"');
-            header('HTTP/1.0 401 Unauthorized');
+            header('HTTP/1.1 401 Unauthorized');
             echo "<script>document.location.href = '$this->url_redirect'</script>";
             exit;
         }
