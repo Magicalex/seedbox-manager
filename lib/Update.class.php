@@ -5,6 +5,7 @@ class Update
     private $url_redirect;
     private $realmWebServer;
     private $directory;
+    private $rutorrentActiveUrl;
     private $rutorrentUrl;
     private $cakeboxActiveUrl;
     private $cakeboxUrl;
@@ -26,20 +27,22 @@ class Update
 
     public function hydrate(array $array)
     {
-        $this->cakeboxActiveUrl = (bool) $array['nav']['active_cakebox'];
-        $this->blocInfo         = (bool) $array['user']['active_bloc_info'];
-        $this->is_owner         = (bool) $array['user']['owner'];
-        $this->blocFtp          = (bool) $array['ftp']['active_ftp'];
-        $this->blocRtorrent     = (bool) $array['rtorrent']['active_reboot'];
-        $this->blocSupport      = (bool) $array['support']['active_support'];
-        $this->directory        = (string) $array['user']['user_directory'];
-        $this->rutorrentUrl     = (string) $array['nav']['url_rutorrent'];
-        $this->cakeboxUrl       = (string) $array['nav']['url_cakebox'];
-        $this->supportMail      = (string) $array['support']['adresse_mail'];
-        $this->realmWebServer   = (string) $array['logout']['realm'];
-        $this->url_redirect     = (string) $array['logout']['url_redirect'];
-        $this->portFtp          = (int) $array['ftp']['port_ftp'];
-        $this->portSftp         = (int) $array['ftp']['port_sftp'];
+        $this->cakeboxActiveUrl   = (bool) $array['nav']['active_cakebox'];
+        $this->rutorrentActiveUrl = (bool) $array['nav']['active_rutorrent'];
+        $this->blocInfo           = (bool) $array['user']['active_bloc_info'];
+        $this->is_owner           = (bool) $array['user']['owner'];
+        $this->blocFtp            = (bool) $array['ftp']['active_ftp'];
+        $this->blocRtorrent       = (bool) $array['rtorrent']['active_reboot'];
+        $this->blocSupport        = (bool) $array['support']['active_support'];
+        $this->directory          = (string) $array['user']['user_directory'];
+        $this->rutorrentUrl       = (string) $array['nav']['url_rutorrent'];
+        $this->cakeboxUrl         = (string) $array['nav']['url_cakebox'];
+        $this->supportMail        = (string) $array['support']['adresse_mail'];
+        $this->realmWebServer     = (string) $array['logout']['realm'];
+        $this->url_redirect       = (string) $array['logout']['url_redirect'];
+        $this->portFtp            = (int) $array['ftp']['port_ftp'];
+        $this->portSftp           = (int) $array['ftp']['port_sftp'];
+        $this->currentPath        = getcwd();
     }
 
     public function update_file_config(array $data_upgrade, $conf_user_folder)
@@ -55,6 +58,14 @@ class Update
 
         if ( isset($data_upgrade['owner_change_config']) )
             $this->directory = $data_upgrade['user_directory'];
+
+        if ( isset($data_upgrade['owner_change_config']) )
+        {
+            if ( isset($data_upgrade['active_rutorrent']) )
+                $this->rutorrentActiveUrl = true;
+            else
+                $this->rutorrentActiveUrl = false;
+        }
 
         if ( isset($data_upgrade['owner_change_config']) )
             $this->rutorrentUrl = $data_upgrade['url_rutorrent'];
@@ -116,6 +127,7 @@ class Update
                 'owner' => $this->is_owner
             ),
             'nav' => array(
+                'active_rutorrent' => $this->rutorrentActiveUrl,
                 'url_rutorrent' => $this->rutorrentUrl,
                 'active_cakebox' => $this->cakeboxActiveUrl,
                 'url_cakebox' => $this->cakeboxUrl

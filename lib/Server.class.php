@@ -78,6 +78,9 @@ class Server extends Users
         ob_clean();
         flush();
         readfile($path_file_name);
+
+        //delete file config (transdroid|filezilla) for security.
+        unlink('./conf/users/'.$this->userName.'/'.$file_config_name);
         exit;
     }
 }
