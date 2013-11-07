@@ -27,8 +27,9 @@
         </div>
         <nav class="collapse navbar-collapse phone-menu">
             <ul class="nav navbar-nav">
+                <?php if ( $user->rutorrentActiveUrl() ) { ?>
                 <li class="nav-link"><a href="<?php echo $user->rutorrentUrl(); ?>">Rutorrent</a></li>
-                <?php if ( $user->cakeboxActiveUrl() ) { ?>
+                <?php } if ( $user->cakeboxActiveUrl() ) { ?>
                 <li class="nav-link"><a href="<?php echo $user->cakeboxUrl(); ?>">Cakebox</a></li>
                 <?php } ?>
             </ul>

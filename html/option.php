@@ -61,16 +61,16 @@
                         <fieldset>
                             <legend>Paramètre page d'accueil</legend>
                             <div class="checkbox">
-                                <input type="checkbox" name="active_bloc_info" value="true" id="active_bloc_info" <?php if ($user->blocInfo() === true) echo 'checked'; ?> ><label for="active_bloc_info"><span class="ui"></span> Activer le bloc information utilisateur</label>
+                                <input type="checkbox" name="active_bloc_info" value="true" id="active_bloc_info" <?php if ($user->blocInfo() === true) echo 'checked'; ?> ><label for="active_bloc_info">Activer le bloc information utilisateur</label>
                             </div>
                             <div class="checkbox">
-                                <input type="checkbox" name="active_ftp" value="true" id="active_ftp" <?php if ($user->blocFtp() === true) echo 'checked'; ?> ><label for="active_ftp"><span class="ui"></span> Activer le bloc accès ftp / sftp / transdroid</label>
+                                <input type="checkbox" name="active_ftp" value="true" id="active_ftp" <?php if ($user->blocFtp() === true) echo 'checked'; ?> ><label for="active_ftp">Activer le bloc accès ftp / sftp / transdroid</label>
                             </div>
                             <div class="checkbox">
-                                <input type="checkbox" name="active_reboot" value="true" id="active_reboot" <?php if ($user->blocRtorrent() === true) echo 'checked'; ?> ><label for="active_reboot"><span class="ui"></span> Activer le bloc gestion de rtorrent</label>
+                                <input type="checkbox" name="active_reboot" value="true" id="active_reboot" <?php if ($user->blocRtorrent() === true) echo 'checked'; ?> ><label for="active_reboot">Activer le bloc gestion de rtorrent</label>
                             </div>
                             <div class="checkbox">
-                                <input type="checkbox" name="active_support" value="true" id="active_support" <?php if ($user->blocSupport() === true) echo 'checked'; ?> ><label for="active_support"><span class="ui"></span> Activer le bloc support</label>
+                                <input type="checkbox" name="active_support" value="true" id="active_support" <?php if ($user->blocSupport() === true) echo 'checked'; ?> ><label for="active_support">Activer le bloc support</label>
                             </div>
                         </fieldset>
                         <fieldset>
@@ -155,13 +155,18 @@
 
                     <fieldset>
                         <legend>Barre de navigation</legend>
+
+                        <div class="checkbox">
+                            <input type="checkbox" name="active_rutorrent" value="true" id="active_rutorrent" <?php if ($update_owner->rutorrentActiveUrl() === true) echo 'checked'; ?> ><label for="active_rutorrent">Afficher le lien rutorrent</label>
+                        </div>
+
                         <div class="form-group">
                             <label for="url_rutorrent">L'url de rutorrent</label>
                             <input type="url" class="form-control" name="url_rutorrent" id="url_rutorrent" value="<?php echo $update_owner->rutorrentUrl(); ?>">
                         </div>
 
                         <div class="checkbox">
-                            <input type="checkbox" name="active_cakebox" value="true" id="active_cakebox" <?php if ($update_owner->cakeboxActiveUrl() === true) echo 'checked'; ?> ><label for="active_cakebox"><span class="ui"></span> Afficher le lien cakebox</label>
+                            <input type="checkbox" name="active_cakebox" value="true" id="active_cakebox" <?php if ($update_owner->cakeboxActiveUrl() === true) echo 'checked'; ?> ><label for="active_cakebox">Afficher le lien cakebox</label>
                         </div>
 
                         <div class="form-group">

@@ -6,6 +6,7 @@ class Users
     protected $url_redirect;
     protected $realmWebServer;
     protected $directory;
+    protected $rutorrentActiveUrl;
     protected $rutorrentUrl;
     protected $cakeboxActiveUrl;
     protected $cakeboxUrl;
@@ -28,21 +29,22 @@ class Users
 
     public function hydrate(array $array)
     {
-        $this->cakeboxActiveUrl = (bool) $array['nav']['active_cakebox'];
-        $this->blocInfo         = (bool) $array['user']['active_bloc_info'];
-        $this->is_owner         = (bool) $array['user']['owner'];
-        $this->blocFtp          = (bool) $array['ftp']['active_ftp'];
-        $this->blocRtorrent     = (bool) $array['rtorrent']['active_reboot'];
-        $this->blocSupport      = (bool) $array['support']['active_support'];
-        $this->directory        = (string) $array['user']['user_directory'];
-        $this->rutorrentUrl     = (string) $array['nav']['url_rutorrent'];
-        $this->cakeboxUrl       = (string) $array['nav']['url_cakebox'];
-        $this->supportMail      = (string) $array['support']['adresse_mail'];
-        $this->realmWebServer   = (string) $array['logout']['realm'];
-        $this->url_redirect     = (string) $array['logout']['url_redirect'];
-        $this->portFtp          = (int) $array['ftp']['port_ftp'];
-        $this->portSftp         = (int) $array['ftp']['port_sftp'];
-        $this->currentPath      = getcwd();
+        $this->cakeboxActiveUrl   = (bool) $array['nav']['active_cakebox'];
+        $this->rutorrentActiveUrl = (bool) $array['nav']['active_rutorrent'];
+        $this->blocInfo           = (bool) $array['user']['active_bloc_info'];
+        $this->is_owner           = (bool) $array['user']['owner'];
+        $this->blocFtp            = (bool) $array['ftp']['active_ftp'];
+        $this->blocRtorrent       = (bool) $array['rtorrent']['active_reboot'];
+        $this->blocSupport        = (bool) $array['support']['active_support'];
+        $this->directory          = (string) $array['user']['user_directory'];
+        $this->rutorrentUrl       = (string) $array['nav']['url_rutorrent'];
+        $this->cakeboxUrl         = (string) $array['nav']['url_cakebox'];
+        $this->supportMail        = (string) $array['support']['adresse_mail'];
+        $this->realmWebServer     = (string) $array['logout']['realm'];
+        $this->url_redirect       = (string) $array['logout']['url_redirect'];
+        $this->portFtp            = (int) $array['ftp']['port_ftp'];
+        $this->portSftp           = (int) $array['ftp']['port_sftp'];
+        $this->currentPath        = getcwd();
     }
 
     private static function convertFileSize($octets)
@@ -141,6 +143,7 @@ class Users
     }
 
     public function url_redirect() { return $this->url_redirect; }
+    public function rutorrentActiveUrl() { return $this->rutorrentActiveUrl; }
     public function rutorrentUrl() { return $this->rutorrentUrl; }
     public function cakeboxActiveUrl() { return $this->cakeboxActiveUrl; }
     public function cakeboxUrl() { return $this->cakeboxUrl; }
