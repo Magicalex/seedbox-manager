@@ -10,19 +10,17 @@ if ( isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']) )
 else
     die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
 
-/* check config app */
+/*check config app */
 $install = new Install;
-if (file_exists('./reboot-rtorrent') && Install::check_uid_file('./reboot-rtorrent') == 0 && Install::getChmod('./reboot-rtorrent', 4) == 4755)
-{
+
     $uid_folder_users = Install::check_uid_file('./conf/users/');
     $uid_user_php = Install::get_user_php();
-    if ( $uid_folder_users != $uid_user_php['num_uid'] )
+   /* if ( $uid_folder_users != $uid_user_php['num_uid'] )
     {
         require_once('./html/installation.php');
         exit();
-    }
-    else
-    {
+    }*/
+
         if (file_exists('./conf/users/'.$userName.'/config.ini'))
             $file_user_ini = './conf/users/'.$userName.'/config.ini';
         else
@@ -30,14 +28,6 @@ if (file_exists('./reboot-rtorrent') && Install::check_uid_file('./reboot-rtorre
             Install::create_new_user($userName);
             $file_user_ini = './conf/users/'.$userName.'/config.ini';
         }
-    }
-}
-else
-{
-    require_once('./html/installation.php');
-    exit();
-}
-
 /* REQUEST POST AND GET */
 if ( isset($_GET['logout']) )
 {
@@ -67,6 +57,13 @@ if ( isset($_POST['delete-userName']) )
 {
     $user = new Users($file_user_ini, $userName);
     $log_delete_user = Users::delete_config_old_user('./conf/users/'.$_POST['delete-userName']);
+}
+
+if ( isset($_POST['support']) && isset($_POST['message']) )
+{
+    $message = $_POST['message'];
+    $user = new Users($file_user_ini, $userName);
+    $support = $user->support($message, './conf/users/'.$userName);
 }
 
 /* init objet */

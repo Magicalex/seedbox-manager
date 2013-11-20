@@ -141,6 +141,37 @@ class Users
 
         return $log;
     }
+    
+    public function support($message) 
+    {
+        $name = $this->userName;
+        $message = nl2br(htmlspecialchars($message));
+        $content = 'Message de '.$name.' envoyer le '.date("d-m-Y").' à '.date("H:i:s").' :'.PHP_EOL.$message.PHP_EOL;
+        file_put_contents('./conf/users/'.$this->userName.'/support.txt', $content, FILE_APPEND);
+        if ( file_exists('./conf/users/'.$this->userName.'/support.txt'))
+        {
+            return array( 'file_exist' => 1,
+                      'message' => $content );
+        }
+        else
+        {
+            return array( 'file_exist' => 0,
+                      'message' => $content );
+        }
+    }
+    
+    public function ticketList()
+    {
+        $scan = scandir('./conf/users/'.$this->userName);
+        $i = 0;
+        $all_ticket = array();
+        foreach ($scan as $i => $ticket_number)
+        {
+            if ($ticket_number != '.' && $ticket_number != '..' && $ticket_number != 'config.ini' && is_file('./conf/users/'.$this->userName.'/'.$ticket_number))
+                $all_ticket[$i] = './conf/users/'.$this->userName.'/'.$ticket_number;
+        }
+        return $all_ticket;
+    }
 
     public function url_redirect() { return $this->url_redirect; }
     public function rutorrentActiveUrl() { return $this->rutorrentActiveUrl; }

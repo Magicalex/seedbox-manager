@@ -39,6 +39,8 @@
             ?>
         </div>
 
+    <?php } if ( isset($_POST['support']) && $support['file_exist'] == 1) {?>
+        <div class="alert alert-success">Votre ticket a était envoyé.</div>
     <?php } ?>
 
     <section class="row">
@@ -126,6 +128,37 @@
             <div class="well well-sm" id="blockSupport">
                 <h4 class="icone-seed-managersupport titre-head">Contacter le Support</h4>
                 <div class="trait"></div>
+                <?php if ( $user->is_owner() === true) { 
+                    
+                        $list = $user->ticketList();
+                        $i = 0;
+                        $num_ticket = 1;
+                        
+                        foreach ($list as $i => $ticket)
+                        {
+                            echo nl2br(file_get_contents($ticket)).'<br />';
+                            $num_ticket++;                                                    
+                        }
+                    ?>
+                
+                    <form method="post" action="index.php">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="support">Message du ticket</label>
+                                <textarea rows="3" cols="80%" name="message"></textarea>
+                            </div>
+                        </fieldset>
+                        
+                        <p class="text-right fix-marg-input">
+                            <input type="submit" name="support" value="Envoyer Ticket" class="btn btn-info">
+                        </p>
+                        
+                    </form>
+               <?php } else {
+                   echo $user->ticketList();
+                    
+                    
+                } ?>
                 <address>
                     <strong>Adresse mail :</strong>
                     <?php echo '<a href="mailto:'.$user->supportMail().'" target="_blank">'.$user->supportMail().'</a>'; ?>
@@ -136,5 +169,4 @@
         <?php } ?>
 
     </section>
-
     </div><!-- FIN DIV CONTENEUR -->
