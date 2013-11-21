@@ -39,7 +39,7 @@
             ?>
         </div>
 
-    <?php } if ( isset($_POST['support']) && $support['file_exist'] == 1) {?>
+    <?php } if ( isset($_POST['support']) && $support['file_exist'] === true) {?>
         <div class="alert alert-success">Votre ticket a était envoyé.</div>
     <?php } ?>
 
@@ -136,8 +136,16 @@
                         
                         foreach ($list as $i => $ticket)
                         {
-                            echo nl2br(file_get_contents($ticket)).'<br />';
-                            $num_ticket++;                                                    
+                            $json = json_decode(file_get_contents($ticket), true);
+                            $j=0;
+                            while ($j != count($json))
+                            {
+                                echo 'Message de '.$json[$j]['datas']['user'].' le '.$json[$j]['datas']['date'].'<br />';
+                                echo nl2br($json[$j]['datas']['message']);
+
+                                $j++;
+                            }
+                            $num_ticket++;
                         }
                     ?>
                 
@@ -155,7 +163,7 @@
                         
                     </form>
                <?php } else {
-                   echo $user->ticketList();
+                   
                     
                     
                 } ?>

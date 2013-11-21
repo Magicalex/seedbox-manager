@@ -144,19 +144,44 @@ class Users
     
     public function support($message) 
     {
+        // enregistrement txt 
+        
         $name = $this->userName;
-        $message = nl2br(htmlspecialchars($message));
+        $message = htmlspecialchars($message);
         $content = 'Message de '.$name.' envoyer le '.date("d-m-Y").' à '.date("H:i:s").' :'.PHP_EOL.$message.PHP_EOL;
-        file_put_contents('./conf/users/'.$this->userName.'/support.txt', $content, FILE_APPEND);
-        if ( file_exists('./conf/users/'.$this->userName.'/support.txt'))
+        //file_put_contents('./conf/users/'.$this->userName.'/support.txt', $content, FILE_APPEND);
+        
+        // enregistrement json 
+        
+        $date = date("d/m/Y \à H:i:s");
+       
+        
+        if (file_exists('./conf/users/'.$this->userName.'/support.json'))
         {
-            return array( 'file_exist' => 1,
-                      'message' => $content );
+            $supjson = './conf/users/'.$this->userName.'/support.json';
+            $json = json_decode(file_get_contents($supjson));
+
+            $json[] = array( 'datas' => array('user' => $name, 'date' => $date, 'message' => $message));
+            $jsonencod = json_encode($json);
+            file_put_contents('./conf/users/'.$this->userName.'/support.json', $jsonencod.PHP_EOL);
+            
         }
         else
         {
-            return array( 'file_exist' => 0,
-                      'message' => $content );
+            $json = array ( array ('datas' => array( 'user' => $name, 'date' => $date, 'message' => $message)));
+            $jsonencod = json_encode($json);
+            file_put_contents('./conf/users/'.$this->userName.'/support.json', $jsonencod.PHP_EOL, FILE_APPEND);
+        }
+        
+        if ( file_exists('./conf/users/'.$this->userName.'/support.json'))
+        {
+            return array( 'file_exist' => true,
+                      'message' => $content);
+        }
+        else
+        {
+            return array( 'file_exist' => false,
+                      'message' => $content);
         }
     }
     
