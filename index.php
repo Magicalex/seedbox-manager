@@ -63,7 +63,7 @@ if ( isset($_POST['support']) && isset($_POST['message']) )
 {
     $message = $_POST['message'];
     $user = new Users($file_user_ini, $userName);
-    $support = $user->support($message, './conf/users/'.$userName);
+    $support = $user->support($message);
 }
 
 /* init objet */
