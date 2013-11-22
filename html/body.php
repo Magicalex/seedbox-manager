@@ -128,25 +128,25 @@
             <div class="well well-sm" id="blockSupport">
                 <h4 class="icone-seed-managersupport titre-head">Contacter le Support</h4>
                 <div class="trait"></div>
-                <?php if ( $user->is_owner() === true) { 
-                    
-                        $list = $user->ticketList();
-                        $i = 0;
-                        $num_ticket = 1;
-                        
-                        foreach ($list as $i => $ticket)
-                        {
-                            $json = json_decode(file_get_contents($ticket), true);
-                            $j=0;
-                            while ($j != count($json))
+                <?php if ( $user->is_owner() === false) 
+                        {                    
+                            $list = $user->ticketList();
+                            $i = 0;
+                            $num_ticket = 1;
+                            print_r($list);
+                            foreach ($list as $i => $ticket)
                             {
-                                echo 'Message de '.$json[$j]['datas']['user'].' le '.$json[$j]['datas']['date'].'<br />';
-                                echo nl2br($json[$j]['datas']['message']);
-
-                                $j++;
+                                $json = json_decode(file_get_contents($ticket), true);
+                                $j=0;
+                                while ($j != count($json))
+                                {
+                                    if ($userName != $json[$j]['datas']['user']) { echo 'Réponse'; } else { echo 'Message';} echo ' de '.$json[$j]['datas']['user'].' le '.$json[$j]['datas']['date'].'<br />';
+                                    echo nl2br($json[$j]['datas']['message']);
+                                    echo '<br />';
+                                    $j++;
+                                }
+                                $num_ticket++;
                             }
-                            $num_ticket++;
-                        }
                     ?>
                 
                     <form method="post" action="index.php">
@@ -158,15 +158,43 @@
                         </fieldset>
                         
                         <p class="text-right fix-marg-input">
-                            <input type="submit" name="support" value="Envoyer Ticket" class="btn btn-info">
+                            <input type="submit" name="cloture" value="Fermer le Ticket" class="btn btn-info">
+                            <input type="submit" name="reponse" value="Repondre au Ticket" class="btn btn-info">                            
                         </p>
                         
                     </form>
-               <?php } else {
-                   
-                    
-                    
-                } ?>
+               <?php } else 
+                        {
+                            $list = $user->ticketList();
+                            $i = 0;
+                            $num_ticket = 1;
+
+                            foreach ($list as $i => $ticket)
+                            {
+                                $json = json_decode(file_get_contents($ticket), true);
+                                $j=0;
+                                while ($j != count($json))
+                                {
+                                    if ($userName != $json[$j]['datas']['user']) { echo 'Réponse'; } else { echo 'Message';} echo ' de '.$json[$j]['datas']['user'].' le '.$json[$j]['datas']['date'].'<br />';
+                                    echo nl2br($json[$j]['datas']['message']);
+                                    echo '<br />';
+                                    $j++;
+                                }
+                                $num_ticket++;
+                            } ?>
+                    <form method="post" action="index.php">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="support">Message du ticket</label>
+                                <textarea rows="3" cols="80%" name="message"></textarea>
+                            </div>
+                        </fieldset>
+                        
+                        <p class="text-right fix-marg-input">                           
+                            <input type="submit" name="reponse" value="Envoyer un Ticket" class="btn btn-info">                            
+                        </p>                        
+                    </form>
+                     <?php   } ?>
                 <address>
                     <strong>Adresse mail :</strong>
                     <?php echo '<a href="mailto:'.$user->supportMail().'" target="_blank">'.$user->supportMail().'</a>'; ?>

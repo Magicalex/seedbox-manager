@@ -144,17 +144,9 @@ class Users
     
     public function support($message) 
     {
-        // enregistrement txt 
-        
         $name = $this->userName;
-        $message = htmlspecialchars($message);
-        $content = 'Message de '.$name.' envoyer le '.date("d-m-Y").' à '.date("H:i:s").' :'.PHP_EOL.$message.PHP_EOL;
-        //file_put_contents('./conf/users/'.$this->userName.'/support.txt', $content, FILE_APPEND);
-        
-        // enregistrement json 
-        
-        $date = date("d/m/Y \à H:i:s");
-       
+        $message = htmlspecialchars($message);            
+        $date = date("d/m/Y \à H:i:s");       
         
         if (file_exists('./conf/users/'.$this->userName.'/support.json'))
         {
@@ -163,8 +155,7 @@ class Users
 
             $json[] = array( 'datas' => array('user' => $name, 'date' => $date, 'message' => $message));
             $jsonencod = json_encode($json);
-            file_put_contents('./conf/users/'.$this->userName.'/support.json', $jsonencod.PHP_EOL);
-            
+            file_put_contents('./conf/users/'.$this->userName.'/support.json', $jsonencod.PHP_EOL);       
         }
         else
         {
@@ -175,18 +166,39 @@ class Users
         
         if ( file_exists('./conf/users/'.$this->userName.'/support.json'))
         {
-            return array( 'file_exist' => true,
-                      'message' => $content);
+            return array( 'file_exist' => true);
         }
         else
         {
-            return array( 'file_exist' => false,
-                      'message' => $content);
+            return array( 'file_exist' => false);
         }
     }
     
     public function ticketList()
     {
+        if ($this->is_owner() === true)
+        {
+            $scan = scandir('./conf/users/');
+            $i = 0;
+            $all_ticket = array();
+            foreach ($scan as $i => $userDir)
+            {
+                if ($userDir != '.' && $userDir != '..' && is_dir('./conf/users/'.$userDir))
+                {
+                    $userConf = scandir('./conf/users/'.$userDir);
+                    foreach ($userConf as $j => $numTicket) 
+                    {
+                        if ($numTicket != '.' && $numTicket != '..' && $numTicket != 'config.ini' && is_file('./conf/users/'.$userDir.'/'.$numTicket))
+                        {
+                            $all_ticket[$j] = './conf/users/'.$userDir.'/'.$numTicket;
+                        }
+                    }
+                }
+            }
+            return $all_ticket; 
+        }
+        else
+        {
         $scan = scandir('./conf/users/'.$this->userName);
         $i = 0;
         $all_ticket = array();
@@ -195,7 +207,9 @@ class Users
             if ($ticket_number != '.' && $ticket_number != '..' && $ticket_number != 'config.ini' && is_file('./conf/users/'.$this->userName.'/'.$ticket_number))
                 $all_ticket[$i] = './conf/users/'.$this->userName.'/'.$ticket_number;
         }
-        return $all_ticket;
+        return $all_ticket; 
+        }
+
     }
 
     public function url_redirect() { return $this->url_redirect; }
