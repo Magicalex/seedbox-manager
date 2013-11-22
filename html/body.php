@@ -153,7 +153,7 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="support">Message du ticket</label>
-                                <textarea rows="3" cols="80%" name="message"></textarea>
+                                <textarea class="form-control" name="message" rows="3"></textarea>
                             </div>
                         </fieldset>
                         
