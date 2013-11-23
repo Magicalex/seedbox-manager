@@ -41,8 +41,11 @@
 
     <?php } if ( isset($_POST['support']) && $support['file_exist'] === true) {?>
         <div class="alert alert-success">Votre ticket a était envoyé.</div>
-    <?php } ?>
-
+    <?php } if ( isset($_POST['cloture']) && $cloture === true) {?>
+        <div class="alert alert-success">Ticket a était fermé.</div>
+   <?php } if ( isset($_POST['cloture']) && $cloture === false ) {?>
+        <div class="alert alert-info">Erreur de fermeture</div>
+   <?php }?>
     <section class="row">
 
         <?php if ( $user->blocInfo() === true ) { ?>
@@ -128,43 +131,51 @@
             <div class="well well-sm" id="blockSupport">
                 <h4 class="icone-seed-managersupport titre-head">Contacter le Support</h4>
                 <div class="trait"></div>
-                <?php if ( $user->is_owner() === false) 
+                <?php if ( $user->is_owner() === true) 
                         {                    
                             $list = $user->ticketList();
                             $i = 0;
-                            $num_ticket = 1;
-                            print_r($list);
+                            $num_ticket = 1; 
+                           
                             foreach ($list as $i => $ticket)
-                            {
+                            {                                
                                 $json = json_decode(file_get_contents($ticket), true);
                                 $j=0;
                                 while ($j != count($json))
                                 {
-                                    if ($userName != $json[$j]['datas']['user']) { echo 'Réponse'; } else { echo 'Message';} echo ' de '.$json[$j]['datas']['user'].' le '.$json[$j]['datas']['date'].'<br />';
+                                    if ($userName != $json[$j]['datas']['user']) 
+                                    { 
+                                        echo 'Réponse de '.$json[$j]['datas']['user']; 
+                                        
+                                    } 
+                                    else { echo 'Votre message envoyé';} echo ' le '.$json[$j]['datas']['date'].'<br />';
                                     echo nl2br($json[$j]['datas']['message']);
                                     echo '<br />';
                                     $j++;
                                 }
-                                $num_ticket++;
-                            }
-                    ?>
-                
+                                
+                                if ( stripos($ticket, 'support_') === false) { ?>
                     <form method="post" action="index.php">
                         <fieldset>
                             <div class="form-group">
-                                <label for="support">Message du ticket</label>
+                                <label for="support">Réponse</label>
                                 <textarea class="form-control" name="message" rows="3"></textarea>
                             </div>
                         </fieldset>
                         
                         <p class="text-right fix-marg-input">
+                            <input type="hidden" name="user" value="<?php $supp= array('./conf/users/','/support.json'); echo str_replace($supp, "", $ticket); ?>" class="btn btn-info">
                             <input type="submit" name="cloture" value="Fermer le Ticket" class="btn btn-info">
-                            <input type="submit" name="reponse" value="Repondre au Ticket" class="btn btn-info">                            
+                            <input type="submit" name="support" value="Repondre au Ticket" class="btn btn-info">                            
                         </p>
                         
-                    </form>
-               <?php } else 
+                    </form>                                   
+                               <?php }                                
+                                $num_ticket++;
+                            }                                                        
+                        } else 
                         {
+                            
                             $list = $user->ticketList();
                             $i = 0;
                             $num_ticket = 1;
@@ -175,7 +186,12 @@
                                 $j=0;
                                 while ($j != count($json))
                                 {
-                                    if ($userName != $json[$j]['datas']['user']) { echo 'Réponse'; } else { echo 'Message';} echo ' de '.$json[$j]['datas']['user'].' le '.$json[$j]['datas']['date'].'<br />';
+                                    if ($userName != $json[$j]['datas']['user']) 
+                                    { 
+                                        echo 'Réponse de '.$json[$j]['datas']['user']; 
+                                        
+                                    } 
+                                    else { echo 'Votre message envoyé';} echo ' le '.$json[$j]['datas']['date'].'<br />';
                                     echo nl2br($json[$j]['datas']['message']);
                                     echo '<br />';
                                     $j++;
@@ -186,12 +202,13 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="support">Message du ticket</label>
-                                <textarea rows="3" cols="80%" name="message"></textarea>
+                                <textarea class="form-control" name="message" rows="3"></textarea>
                             </div>
                         </fieldset>
                         
-                        <p class="text-right fix-marg-input">                           
-                            <input type="submit" name="reponse" value="Envoyer un Ticket" class="btn btn-info">                            
+                        <p class="text-right fix-marg-input"> 
+                            <input type="hidden" name="user" value="<?php echo $userName; ?>" class="btn btn-info">
+                            <input type="submit" name="support" value="Envoyer un Ticket" class="btn btn-info">                            
                         </p>                        
                     </form>
                      <?php   } ?>
