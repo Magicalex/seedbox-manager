@@ -142,34 +142,36 @@ class Users
         return $log;
     }
     
-    public function support($message) 
+    public function support($message,$destinataire) 
     {
-        $name = $this->userName;
+       if ($this->is_owner() === true)
+       {
+           $name = $destinataire;
+       } else
+       {
+           $name = $this->userName;
+       }
+       
         $message = htmlspecialchars($message);            
         $date = date("d/m/Y \à H:i:s");       
         
-        if (file_exists('./conf/users/'.$this->userName.'/support.json'))
+        if (file_exists('./conf/users/'.$name.'/support.json'))
         {
-            $supjson = './conf/users/'.$this->userName.'/support.json';
+            $supjson = './conf/users/'.$name.'/support.json';
             $json = json_decode(file_get_contents($supjson));
 
-            $json[] = array( 'datas' => array('user' => $name, 'date' => $date, 'message' => $message));
+            $json[] = array( 'datas' => array('user' => $this->userName, 'date' => $date, 'message' => $message));
             $jsonencod = json_encode($json);
-            file_put_contents('./conf/users/'.$this->userName.'/support.json', $jsonencod.PHP_EOL);       
-        }
-        else
-        {
-            $json = array ( array ('datas' => array( 'user' => $name, 'date' => $date, 'message' => $message)));
-            $jsonencod = json_encode($json);
-            file_put_contents('./conf/users/'.$this->userName.'/support.json', $jsonencod.PHP_EOL, FILE_APPEND);
-        }
-        
-        if ( file_exists('./conf/users/'.$this->userName.'/support.json'))
-        {
+            file_put_contents('./conf/users/'.$name.'/support.json', $jsonencod.PHP_EOL); 
+            
             return array( 'file_exist' => true);
         }
         else
         {
+            $json = array ( array ('datas' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message)));
+            $jsonencod = json_encode($json);
+            file_put_contents('./conf/users/'.$this->userName.'/support.json', $jsonencod.PHP_EOL, FILE_APPEND);
+            
             return array( 'file_exist' => false);
         }
     }
@@ -181,16 +183,18 @@ class Users
             $scan = scandir('./conf/users/');
             $i = 0;
             $all_ticket = array();
+            
             foreach ($scan as $i => $userDir)
-            {
+            {              
                 if ($userDir != '.' && $userDir != '..' && is_dir('./conf/users/'.$userDir))
                 {
                     $userConf = scandir('./conf/users/'.$userDir);
+                    $j=0;                    
                     foreach ($userConf as $j => $numTicket) 
-                    {
+                    {                        
                         if ($numTicket != '.' && $numTicket != '..' && $numTicket != 'config.ini' && is_file('./conf/users/'.$userDir.'/'.$numTicket))
                         {
-                            $all_ticket[$j] = './conf/users/'.$userDir.'/'.$numTicket;
+                            $all_ticket[$i] = './conf/users/'.$userDir.'/'.$numTicket;
                         }
                     }
                 }
@@ -210,6 +214,19 @@ class Users
         return $all_ticket; 
         }
 
+    }
+    public function cloture($user) {
+        $i=0;
+        $nbticket=0;
+       foreach (glob('./conf/users/'.$user.'/*.json') as $filename) 
+        {
+            if ($filename == '*_'.$i.'.json')
+            {
+                $i++;
+            }           
+        }
+       return rename('./conf/users/'.$user.'/support.json', './conf/users/'.$user.'/support_'.$i.'.json' );
+        
     }
 
     public function url_redirect() { return $this->url_redirect; }

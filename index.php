@@ -63,7 +63,13 @@ if ( isset($_POST['support']) && isset($_POST['message']) )
 {
     $message = $_POST['message'];
     $user = new Users($file_user_ini, $userName);
-    $support = $user->support($message);
+    $support = $user->support($message,$_POST['user']);
+}
+
+if ( isset($_POST['cloture']) && isset($_POST['user']))
+{
+    $user = new Users($file_user_ini, $userName);
+    $cloture = $user->cloture($_POST['user']);
 }
 
 /* init objet */
