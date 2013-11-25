@@ -178,7 +178,7 @@ class Users
     
     public function ticketList()
     {
-        if ($this->is_owner() === true)
+        if ($this->is_owner === true)
         {
             $scan = scandir('./conf/users/');
             $i = 0;
@@ -193,9 +193,7 @@ class Users
                     foreach ($userConf as $j => $numTicket) 
                     {                        
                         if ($numTicket != '.' && $numTicket != '..' && $numTicket != 'config.ini' && is_file('./conf/users/'.$userDir.'/'.$numTicket))
-                        {
                             $all_ticket[$i] = './conf/users/'.$userDir.'/'.$numTicket;
-                        }
                     }
                 }
             }
@@ -203,30 +201,34 @@ class Users
         }
         else
         {
-        $scan = scandir('./conf/users/'.$this->userName);
-        $i = 0;
-        $all_ticket = array();
-        foreach ($scan as $i => $ticket_number)
-        {
-            if ($ticket_number != '.' && $ticket_number != '..' && $ticket_number != 'config.ini' && is_file('./conf/users/'.$this->userName.'/'.$ticket_number))
-                $all_ticket[$i] = './conf/users/'.$this->userName.'/'.$ticket_number;
-        }
-        return $all_ticket; 
-        }
-
-    }
-    public function cloture($user) {
-        $i=0;
-        $nbticket=0;
-       foreach (glob('./conf/users/'.$user.'/*.json') as $filename) 
-        {
-            if ($filename == '*_'.$i.'.json')
+            $scan = scandir('./conf/users/'.$this->userName);
+            $i = 0;
+            $all_ticket = array();
+            foreach ($scan as $i => $ticket_number)
             {
-                $i++;
-            }           
+                if ($ticket_number != '.' && $ticket_number != '..' && $ticket_number != 'config.ini' && is_file('./conf/users/'.$this->userName.'/'.$ticket_number))
+                    $all_ticket[$i] = './conf/users/'.$this->userName.'/'.$ticket_number;
+            }
+            return $all_ticket; 
         }
-       return rename('./conf/users/'.$user.'/support.json', './conf/users/'.$user.'/support_'.$i.'.json' );
-        
+    }
+
+    /*
+        Methode cloture :
+        Cherche tous les fichiers avec l'extension .json puis les comptes
+        Renomme le fichier support.json (dernier ticket) en support_X.json
+    */
+
+    public function cloture($user)
+    {
+        $num_ticket = 0;
+
+        foreach (glob('./conf/users/'.$user.'/*.json') as $filename) 
+        {
+            if ($filename == '*_'.$num_ticket.'.json')
+                $i++;
+        }
+       return rename('./conf/users/'.$user.'/support.json', './conf/users/'.$user.'/support_'.$num_ticket.'.json' );
     }
 
     public function url_redirect() { return $this->url_redirect; }
