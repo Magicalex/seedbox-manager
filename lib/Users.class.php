@@ -102,6 +102,10 @@ class Users
                       'file_exist' => $exist_reboot_rtorrent );
     }
 
+    /*
+        Retourne la liste de tous les users.
+    */
+
     public static function get_all_users()
     {
         $scan = scandir('./conf/users/');
@@ -115,6 +119,10 @@ class Users
 
         return $all_users;
     }
+
+    /*
+        Méthode pour supprimer le dossier et ses fichiers du user voulu par l'admin.
+    */
 
     public static function delete_config_old_user($path_conf_user)
     {
@@ -175,60 +183,52 @@ class Users
             return array( 'file_exist' => false);
         }
     }
+
+    /*
+        Cette méthode renvoie deux listes des fichiers tickets.
+            Une liste pour l'admin.
+            OU une liste pour le user.
+
+        La liste est sous forme d'array.
+    */
     
     public function ticketList()
     {
         if ($this->is_owner === true)
         {
-            $scan = scandir('./conf/users/');
-            $i = 0;
-            $all_ticket = array();
-            
-            foreach ($scan as $i => $userDir)
-            {              
-                if ($userDir != '.' && $userDir != '..' && is_dir('./conf/users/'.$userDir))
-                {
-                    $userConf = scandir('./conf/users/'.$userDir);
-                    $j=0;                    
-                    foreach ($userConf as $j => $numTicket) 
-                    {                        
-                        if ($numTicket != '.' && $numTicket != '..' && $numTicket != 'config.ini' && is_file('./conf/users/'.$userDir.'/'.$numTicket))
-                            $all_ticket[$i] = './conf/users/'.$userDir.'/'.$numTicket;
-                    }
-                }
+            $all_users = $this->get_all_users();
+
+            foreach ( $all_users as $user )
+            {
+                if ( $user != $this->userName)
+                    $files_ticket[] = glob('./conf/users/'.$user.'/support*.json');
             }
-            return $all_ticket; 
+
+            //converti un tableau multidimensionnel en un tableau unidimensionnel.
+            array_walk_recursive( $files_ticket, function( $a, $b) use (&$all_files_tickets) { $all_files_tickets[] = $a; } );
+
+            return $all_files_tickets;
         }
         else
         {
-            $scan = scandir('./conf/users/'.$this->userName);
-            $i = 0;
-            $all_ticket = array();
-            foreach ($scan as $i => $ticket_number)
-            {
-                if ($ticket_number != '.' && $ticket_number != '..' && $ticket_number != 'config.ini' && is_file('./conf/users/'.$this->userName.'/'.$ticket_number))
-                    $all_ticket[$i] = './conf/users/'.$this->userName.'/'.$ticket_number;
-            }
-            return $all_ticket; 
+            $files_tickets = glob('./conf/users/'.$this->userName.'/support*.json');
+
+            return $files_tickets;
         }
     }
 
     /*
         Methode cloture :
-        Cherche tous les fichiers avec l'extension .json puis les comptes
+        Cherche tous les fichiers avec l'extension avec le pattern support*.json puis les comptes
         Renomme le fichier support.json (dernier ticket) en support_X.json
     */
 
     public function cloture($user)
     {
-        $num_ticket = 0;
+        $scan_ticket = glob('./conf/users/'.$user.'/support*.json');
+        $nb_ticket = count($scan_ticket);
 
-        foreach (glob('./conf/users/'.$user.'/*.json') as $filename) 
-        {
-            if ($filename == '*_'.$num_ticket.'.json')
-                $i++;
-        }
-       return rename('./conf/users/'.$user.'/support.json', './conf/users/'.$user.'/support_'.$num_ticket.'.json' );
+        return rename('./conf/users/'.$user.'/support.json', './conf/users/'.$user.'/support_'.$nb_ticket.'.json' );
     }
 
     public function url_redirect() { return $this->url_redirect; }
