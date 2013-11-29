@@ -148,14 +148,11 @@ class Users
     
     public function support($message,$destinataire) 
     {
-       if ($this->is_owner() === true)
-       {
-           $name = $destinataire;
-       } else
-       {
-           $name = $this->userName;
-       }
-       
+        if ($this->is_owner === true)
+            $name = $destinataire;
+        else
+            $name = $this->userName;
+
         $message = htmlspecialchars($message);            
         $date = date("d/m/Y \à H:i:s");       
         
@@ -193,7 +190,6 @@ class Users
         if ($this->is_owner === true)
         {
             $all_users = $this->get_all_users();
-
             foreach ( $all_users as $user )
             {
                 if ( $user != $this->userName)
