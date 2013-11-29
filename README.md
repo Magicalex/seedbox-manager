@@ -12,7 +12,7 @@ On n'y trouve aussi :
  * Un espace administrateur pour gérer facilement la configuration de vos utilisateurs
  * Une page paramètre pour désactiver les blocs que vous n'utilisez pas.
 
-**Auteur :** Backtoback (c) & Magicalex (php) & hydrog3n (php).
+**Auteur :** Backtoback (c) & Magicalex (php) & hydrog3n (php).  
 Nous contacter : <magicalex14000@gmail.com>
 
 #Installation
@@ -31,28 +31,29 @@ chmod +x install.sh && ./install.sh
 
 ##Configuration du serveur web
 
-1. Il faut protéger l'interface via une authentification basic ou digest.
-Je vous conseille d'étendre la protection de rutorrent à cette interface.
+1. Il faut protéger l'interface via une authentification basic ou digest.  
+Je vous conseille d'étendre la protection de rutorrent à cette interface.  
 
 2. Il faut protéger le dossier conf récursivement via votre serveur web.
 
-Pour l'exemple l'url sera égale à : http://www.domaine.fr/conf/
+Pour l'exemple l'url sera égale à : http://www.domaine.fr/conf/  
 Rajoutez dans le fichier de configuration de votre serveur wev ceci.
-pour lighttpd :
+
+Pour lighttpd :
 ```
 $http["url"] =~ "^/conf/"
 {
 	url.access-deny = ("")
 }
 ```
-pour nginx :
+Pour nginx :
 ```
 location ^~ /conf/
 {
 	deny all;
 }
 ```
-pour apache :
+Pour apache :
 ```
 <Location ~ "^/conf/">
     Order deny,allow
@@ -68,21 +69,21 @@ service lighttpd restart
 # pour recharger la config apache
 service apache2 restart
 ```
-note : vérifiez si vous avez bien une erreur 403 si vous tentez d'accèder à cette url :
+note : vérifiez si vous avez bien une erreur 403 si vous tentez d'accèder à cette url :  
 http://www.domaine.fr/conf/config.ini
 
 
 ##Première connexion
 
-Se connecter à l'interface avec ses identifiants rutorrent.
+Se connecter à l'interface avec ses identifiants rutorrent.  
 Cela va générer des fichiers de configuration pour l'utilisateur dans le dossier conf/users/<utilisateur>/config.ini
 
 note : à chaque fois qu'un nouvel utilisateur se connecte ses fichiers de configuration sont automatiquement généré à partir du fichier ./conf/config.ini
 
-pour obtenir les droits administrateurs
+pour obtenir les droits administrateurs :
 ```
 vim /var/www/manager/conf/users/<utilisateur>/config.ini
 ```
 puis modifier à la ligne ## (owner = no par owner = yes)
 
-Après avoir récupéré les droits administrateurs vous pouvez configurer tous les utilisateurs
+Après avoir récupéré les droits administrateurs vous pouvez configurer tous les utilisateurs.
