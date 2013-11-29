@@ -109,12 +109,10 @@ class Users
     public static function get_all_users()
     {
         $scan = scandir('./conf/users/');
-        $i = 0;
-        $all_users = array();
-        foreach ($scan as $i => $file_name)
+        foreach ($scan as $key => $file_name)
         {
             if ($file_name != '.' && $file_name != '..' && is_dir('./conf/users/'.$file_name))
-                $all_users[$i] = $file_name;
+                $all_users[] = $file_name;
         }
 
         return $all_users;
@@ -127,22 +125,20 @@ class Users
     public static function delete_config_old_user($path_conf_user)
     {
         $scan = scandir($path_conf_user);
-        $i=0;
-        $log = array();
         foreach ($scan as $file_name)
         {
             if ($file_name != '.' && $file_name != '..')
             {
-                $t = unlink($path_conf_user.'/'.$file_name);
-                if ($t === true)
+                $delete_file_log = unlink($path_conf_user.'/'.$file_name);
+                if ($delete_file_log === true)
                     $log[] = 'Le fichier '.$file_name.' a été supprimé.';
                 else
                     $log[] = 'Impossible de supprimer le fichier '.$file_name.'.';
             }
         }
 
-        $s = rmdir($path_conf_user);
-        if ( $s === true )
+        $delete_folder_log = rmdir($path_conf_user);
+        if ($delete_folder_log === true)
             $log[] = 'Le dossier '.$path_conf_user.'/ a été supprimé.';
         else
             $log[] = 'Impossible de supprimer le dossier '.$path_conf_user.'.';
@@ -206,13 +202,11 @@ class Users
 
             //converti un tableau multidimensionnel en un tableau unidimensionnel.
             array_walk_recursive( $files_ticket, function( $a, $b) use (&$all_files_tickets) { $all_files_tickets[] = $a; } );
-
             return $all_files_tickets;
         }
         else
         {
             $files_tickets = glob('./conf/users/'.$this->userName.'/support*.json');
-
             return $files_tickets;
         }
     }
