@@ -12,15 +12,17 @@ else
 
 /*check config app */
 $install = new Install;
-
+if (file_exists('./reboot-rtorrent') && Install::check_uid_file('./reboot-rtorrent') == 0 && Install::getChmod('./reboot-rtorrent', 4) == 4755)
+{
     $uid_folder_users = Install::check_uid_file('./conf/users/');
     $uid_user_php = Install::get_user_php();
-   /* if ( $uid_folder_users != $uid_user_php['num_uid'] )
+    if ( $uid_folder_users != $uid_user_php['num_uid'] )
     {
         require_once('./html/installation.php');
         exit();
-    }*/
-
+    }
+    else
+    {
         if (file_exists('./conf/users/'.$userName.'/config.ini'))
             $file_user_ini = './conf/users/'.$userName.'/config.ini';
         else
@@ -28,6 +30,14 @@ $install = new Install;
             Install::create_new_user($userName);
             $file_user_ini = './conf/users/'.$userName.'/config.ini';
         }
+    }
+}
+else
+{
+    require_once('./html/installation.php');
+    exit();
+}
+
 /* REQUEST POST AND GET */
 if ( isset($_GET['logout']) )
 {
