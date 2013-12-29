@@ -196,14 +196,6 @@
                         </div>
                     </fieldset>
 
-                    <fieldset>
-                        <legend>Paramètre de déconnexion</legend>
-                        <div class="form-group">
-                            <label for="realm">realm de l'authentification du serveur web</label>
-                            <input type="text" class="form-control" name="realm" id="realm" value="<?php echo $update_owner->realmWebServer(); ?>">
-                        </div>
-                    </fieldset>
-
                     <p class="text-right fix-marg-input">
                         <input type="hidden" name="user" value="<?php echo $_GET['user']; ?>">
                         <input type="hidden" name="owner_change_config">

@@ -4,7 +4,6 @@ class Users
 {
     protected $userName;
     protected $url_redirect;
-    protected $realmWebServer;
     protected $directory;
     protected $rutorrentActiveUrl;
     protected $rutorrentUrl;
@@ -40,7 +39,6 @@ class Users
         $this->rutorrentUrl       = (string) $array['nav']['url_rutorrent'];
         $this->cakeboxUrl         = (string) $array['nav']['url_cakebox'];
         $this->supportMail        = (string) $array['support']['adresse_mail'];
-        $this->realmWebServer     = (string) $array['logout']['realm'];
         $this->url_redirect       = (string) $array['logout']['url_redirect'];
         $this->portFtp            = (int) $array['ftp']['port_ftp'];
         $this->portSftp           = (int) $array['ftp']['port_sftp'];
@@ -236,5 +234,4 @@ class Users
     public function blocRtorrent() { return $this->blocRtorrent; }
     public function is_owner() { return $this->is_owner; }
     public function user_directory() { return $this->directory; }
-    public function realmWebServer() { return $this->realmWebServer; }
 }

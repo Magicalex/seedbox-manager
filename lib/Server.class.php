@@ -40,21 +40,8 @@ class Server extends Users
 
     public function logout()
     {
-        if ( preg_match( "#Basic#i", $_SERVER['HTTP_AUTHORIZATION'] ) || $_SERVER[AUTH_TYPE] == 'Basic' )
-        {
-            header('WWW-Authenticate: Basic realm="'.$this->realmWebServer.'"');
-            header('HTTP/1.1 401 Unauthorized');
-            echo "<script>document.location.href = '$this->url_redirect'</script>";
-            exit;
-        }
-
-        if ( preg_match( "#Digest#i", $_SERVER['HTTP_AUTHORIZATION'] ) || $_SERVER[AUTH_TYPE] == 'Digest' )
-        {
-            header('HTTP/1.1 401 Unauthorized');
-            header('WWW-Authenticate: Digest realm="'.$this->realmWebServer.'",qop="auth",nonce="'.uniqid().'",opaque="'.md5($this->realmWebServer).'"');
-            echo "<script>document.location.href = '$this->url_redirect'</script>";
-            exit;
-        }
+        header('Location: http://logout:logout@'.$_SERVER['HTTP_HOST']);
+        echo '<script>document.location.href = \''.$this->url_redirect.'\'</script>';
     }
 
     public function FileDownload($file_config_name, $conf_ext_prog)
