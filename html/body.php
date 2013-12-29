@@ -50,7 +50,7 @@
 
         <?php if ( $user->blocInfo() === true ) { ?>
         <article class="col-md-6">
-            <div class="well well-sm" id="blockInfo">
+            <div class="well well-sm">
                 <h4 class="titre-head icone-seed-managerhome">Information compte utilisateur</h4>
                 <div class="trait"></div>
 
@@ -87,7 +87,7 @@
 
         <?php } if ( $user->blocFtp() === true ) { ?>
         <article class="col-md-6">
-            <div class="well well-sm" id="blockFtp">
+            <div class="well well-sm">
                 <h4 class="icone-seed-managertree titre-head">Les accès ftp / sftp / transdroid</h4>
                 <div class="trait"></div>
 
@@ -114,7 +114,7 @@
         <?php } if ( $user->blocRtorrent() === true ) { ?>
 
         <article class="col-md-6">
-            <div class="well well-sm" id="blockRtorrent">
+            <div class="well well-sm">
                 <h4 class="titre-head icone-seed-managerlightning">Gestion de rtorrent</h4>
                 <div class="trait"></div>
                 <p class="text-center btn-reboot">
@@ -128,7 +128,7 @@
 
         <?php } if ( $user->blocSupport() === true ) { ?>
         <article class="col-md-6">
-            <div class="well well-sm" id="blockSupport">
+            <div class="well well-sm">
                 <h4 class="icone-seed-managersupport titre-head">Contacter le Support</h4>
                 <div class="trait"></div>
                 <?php if ( $user->is_owner() === true) 
