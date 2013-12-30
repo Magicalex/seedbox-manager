@@ -53,13 +53,13 @@ if ( isset($_POST['reboot']) )
 
 if ( isset($_POST['simple_conf_user']) )
 {
-    $update = new Update($file_user_ini);
+    $update = new UpdateFileIni($file_user_ini, $userName);
     $update_ini_file_log = $update->update_file_config($_POST, './conf/users/'.$userName);
 }
 
 if ( isset($_POST['owner_change_config']) )
 {
-    $update = new Update('./conf/users/'.$_POST['user'].'/config.ini');
+    $update = new UpdateFileIni('./conf/users/'.$_POST['user'].'/config.ini', $_POST['user']);
     $update_ini_file_log_owner = $update->update_file_config($_POST, './conf/users/'.$_POST['user']);
 }
 

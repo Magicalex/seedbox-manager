@@ -141,7 +141,7 @@
 
         <article class="col-md-6">
             <div class="well well-sm">
-                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Configuration de l'utilisateur : <strong class="text-info"><?php echo $_GET['user']; ?></strong></h4>
+                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Configuration de l'utilisateur : <strong><?php echo $_GET['user']; ?></strong></h4>
                 <div class="trait"></div>
                 
                 <form method="post" action="?option" role="form">
