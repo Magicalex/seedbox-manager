@@ -131,30 +131,78 @@
             <div class="well well-sm">
                 <h4 class="icone-seed-managersupport titre-head">Contacter le Support</h4>
                 <div class="trait"></div>
+
                 <?php if ( $user->is_owner() === true) 
-                        {                    
+                        {  ?>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>                      
+                            <th>Utilisateur</th>                       
+                                                   
+                            <th>Status</th>                       
+                            <th>Créé le</th>                        
+                            <th>Màj</th>                        
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                   <?php
                             $list = $user->ticketList();
                             $i = 0;
                             $num_ticket = 1; 
-                            if (count($list) != 0) 
-                            {
-                                foreach ($list as $i => $ticket)
-                                {                                
-                                    $json = json_decode(file_get_contents($ticket), true);
+                            
+                            if (count($list) != 0) //Vérification de l'exitence d'un ticket.
+                            {                              
+                                foreach ($list as $i => $ticket) // On boucle les ticket
+                                {   
+                                    echo '<tr>'; 
+                                    echo '<td><button id="boutton">'.$i.'</button></td>';
+                                    
+                                    $json = json_decode(file_get_contents($ticket), true); //Décodage json
                                     $j=0;
+                                    
+                                    echo "<td>".$json[0]['datas']['user']."</td>"; //affichage du user qui a ouver le support
+                                    
+                                    if ( stripos($ticket, 'support_') === false )
+                                    {
+                                        echo "<td>Ouvert</td>";
+                                    } else echo "<td>Fermer</td>";
+                                    
+                                    echo "<td>".$json[0]['datas']['date']."</td>"; //Date d'ouverture
+                                    echo "<td>".$json[(count($json)-1)]['datas']['date']."</td>"; //Date de derniere modification (Dernier message envoier)
+                                    // Formulaire pour fermer le topic si ouvert.
+                                    
+                                    if ( stripos($ticket, 'support_') === false )
+                                    {
+                                        $supp= array('./conf/users/','/support.json'); //chaine a supprimer
+                                        echo '<form method="post" action="">';
+                                        echo '<input type="hidden" name="user" value="'.str_replace($supp, "", $ticket).'" class="btn btn-info">';
+                                        echo '<td><input type="submit" name="cloture" value="Fermer le Ticket" class="btn btn-info">';
+                                        echo '</form>';
+                                        echo '</tr>';
+                                    }
+                                    
+                                    // Debut de la div à afficher avec js
+                                    
+                                    echo '<div id="test" style="display:none">';
+                                    
+                                    // Affichage du message
                                     while ($j != count($json))
                                     {
                                         if ($userName != $json[$j]['datas']['user']) 
                                         { 
                                             echo 'Réponse de '.$json[$j]['datas']['user']; 
-
                                         } 
                                         else { echo 'Votre message envoyé';} echo ' le '.$json[$j]['datas']['date'].'<br />';
                                         echo nl2br($json[$j]['datas']['message']);
                                         echo '<br />';
                                         $j++;
+                                        
                                     }
-
+                                    
+                                    
                                     if ( stripos($ticket, 'support_') === false) { ?>
                     <form method="post" action="index.php">
                         <fieldset>
@@ -163,17 +211,16 @@
                                 <textarea class="form-control" name="message" rows="3"></textarea>
                             </div>
                         </fieldset>
-                        
                         <p class="text-right fix-marg-input">
-                            <input type="hidden" name="user" value="<?php $supp= array('./conf/users/','/support.json'); echo str_replace($supp, "", $ticket); ?>" class="btn btn-info">
-                            <input type="submit" name="cloture" value="Fermer le Ticket" class="btn btn-info">
                             <input type="submit" name="support" value="Repondre au Ticket" class="btn btn-info">                            
                         </p>
                         
                     </form>                                   
-                                    <?php }                                
+                                    <?php }
+                                    echo "</div>"; 
                                      $num_ticket++;
                                  }
+                                echo "</tbody></table>";
                             } 
                             else 
                             {
@@ -195,7 +242,7 @@
                                     {
                                         if ($userName != $json[$j]['datas']['user']) 
                                         { 
-                                            echo 'Réponse de '.$json[$j]['datas']['user']; 
+                                            echo 'Message de '.$json[$j]['datas']['user']; 
 
                                         } 
                                         else { echo 'Message envoyé';} echo ' le '.$json[$j]['datas']['date'].'<br />';
