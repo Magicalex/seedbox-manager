@@ -136,25 +136,26 @@
                             $list = $user->ticketList();
                             $i = 0;
                             $num_ticket = 1; 
-                           
-                            foreach ($list as $i => $ticket)
-                            {                                
-                                $json = json_decode(file_get_contents($ticket), true);
-                                $j=0;
-                                while ($j != count($json))
-                                {
-                                    if ($userName != $json[$j]['datas']['user']) 
-                                    { 
-                                        echo 'Réponse de '.$json[$j]['datas']['user']; 
-                                        
-                                    } 
-                                    else { echo 'Votre message envoyé';} echo ' le '.$json[$j]['datas']['date'].'<br />';
-                                    echo nl2br($json[$j]['datas']['message']);
-                                    echo '<br />';
-                                    $j++;
-                                }
-                                
-                                if ( stripos($ticket, 'support_') === false) { ?>
+                            if (count($list) != 0) 
+                            {
+                                foreach ($list as $i => $ticket)
+                                {                                
+                                    $json = json_decode(file_get_contents($ticket), true);
+                                    $j=0;
+                                    while ($j != count($json))
+                                    {
+                                        if ($userName != $json[$j]['datas']['user']) 
+                                        { 
+                                            echo 'Réponse de '.$json[$j]['datas']['user']; 
+
+                                        } 
+                                        else { echo 'Votre message envoyé';} echo ' le '.$json[$j]['datas']['date'].'<br />';
+                                        echo nl2br($json[$j]['datas']['message']);
+                                        echo '<br />';
+                                        $j++;
+                                    }
+
+                                    if ( stripos($ticket, 'support_') === false) { ?>
                     <form method="post" action="index.php">
                         <fieldset>
                             <div class="form-group">
@@ -170,34 +171,41 @@
                         </p>
                         
                     </form>                                   
-                               <?php }                                
-                                $num_ticket++;
-                            }                                                        
+                                    <?php }                                
+                                     $num_ticket++;
+                                 }
+                            } 
+                            else 
+                            {
+                                echo 'Il n\'y a pas de message.'; 
+                            } 
                         } else 
                         {
                             
                             $list = $user->ticketList();
                             $i = 0;
                             $num_ticket = 1;
-
-                            foreach ($list as $i => $ticket)
-                            {
-                                $json = json_decode(file_get_contents($ticket), true);
-                                $j=0;
-                                while ($j != count($json))
+                            
+                            
+                                foreach ($list as $i => $ticket)
                                 {
-                                    if ($userName != $json[$j]['datas']['user']) 
-                                    { 
-                                        echo 'Réponse de '.$json[$j]['datas']['user']; 
-                                        
-                                    } 
-                                    else { echo 'Votre message envoyé';} echo ' le '.$json[$j]['datas']['date'].'<br />';
-                                    echo nl2br($json[$j]['datas']['message']);
-                                    echo '<br />';
-                                    $j++;
-                                }
-                                $num_ticket++;
-                            } ?>
+                                    $json = json_decode(file_get_contents($ticket), true);
+                                    $j=0;
+                                    while ($j != count($json))
+                                    {
+                                        if ($userName != $json[$j]['datas']['user']) 
+                                        { 
+                                            echo 'Réponse de '.$json[$j]['datas']['user']; 
+
+                                        } 
+                                        else { echo 'Message envoyé';} echo ' le '.$json[$j]['datas']['date'].'<br />';
+                                        echo nl2br($json[$j]['datas']['message']);
+                                        echo '<br />';
+                                        $j++;
+                                    }
+                                    $num_ticket++;
+                                } 
+                           ?>
                     <form method="post" action="index.php">
                         <fieldset>
                             <div class="form-group">
@@ -211,7 +219,8 @@
                             <input type="submit" name="support" value="Envoyer un Ticket" class="btn btn-info">                            
                         </p>                        
                     </form>
-                     <?php   } ?>
+                     <?php                             
+                        } ?>
                 <address>
                     <strong>Adresse mail :</strong>
                     <?php echo '<a href="mailto:'.$user->supportMail().'" target="_blank">'.$user->supportMail().'</a>'; ?>
