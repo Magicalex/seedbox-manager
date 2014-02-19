@@ -40,8 +40,11 @@ class Server extends Users
 
     public function logout()
     {
-        header('Location: http://logout:logout@'.$_SERVER['HTTP_HOST']);
+        header('HTTP/1.1 401 Unauthorized');
+
+        usleep(500000); /*sleep(1); */ /* = 1/2 sec ~ 500 ms */
         echo '<script>document.location.href = \''.$this->url_redirect.'\'</script>';
+        exit();
     }
 
     public function FileDownload($file_config_name, $conf_ext_prog)
