@@ -1,11 +1,11 @@
 #include "Bib.h"
 
-void reboot (char nick1, char nick2, char nick3)
+void reboot (char nickname[])
 {
     //Déclarations
-    char chaine [30] = {0};
+    char chaine [100] = {0};
 
-    snprintf(chaine, 30, "/etc/init.d/%c%c%c.rtord start\n", nick1, nick2, nick3);
+    snprintf(chaine, 100, "service %s-rtorrent start\n", nickname);
     printf("%s", chaine);
     system (chaine);
 }
