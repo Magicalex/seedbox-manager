@@ -2,6 +2,6 @@
 #define REBOOT_H
 
 ///Prototypes
-void reboot (char nick1, char nick2, char nick3);
+void reboot (char nickname[]);
 
 #endif

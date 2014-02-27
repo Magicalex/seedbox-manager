@@ -10,7 +10,6 @@
 
 ///Librairies Perso
 #include "reboot.h"
-#include "nick.h"
 #include "suppression.h"
 #include "kill.h"
 
