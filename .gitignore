@@ -1,0 +1,3 @@
+.htpasswd
+/conf/users/*
+reboot-rtorrent
