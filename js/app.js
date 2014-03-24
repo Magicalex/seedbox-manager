@@ -36,7 +36,7 @@ $(document).on('click', '.popup-delete-user', function ()
 
 $('.alert-success').delay(4000).hide('slow');
 
-$(document).on('click', '#bouton', function ()
-{
-    $('#test').show('slow');
+$('.collapse').collapse({
+    hide : true,
+    toggle : false
 });
