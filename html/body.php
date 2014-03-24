@@ -134,36 +134,42 @@
 
                 <?php if ( $user->is_owner() === true) 
                         {  ?>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>                      
-                            <th>Utilisateur</th>                       
-                                                   
-                            <th>Status</th>                       
-                            <th>Créé le</th>                        
-                            <th>Màj</th>                        
-                            <th>Supprimer</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>                      
+                                        <th>Utilisateur</th>                       
+                                                               
+                                        <th>Status</th>                       
+                                        <th>Créé le</th>                        
+                                        <th>Màj</th>                        
+                                        <th>Supprimer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                         
-                   <?php
-                            $list = $user->ticketList();
-                            $i = 0;
-                            $num_ticket = 1; 
+               <?php
+                                $list = $user->ticketList();
+                                $i = 0;
+                                $num_ticket = 1; 
                             
                             if (count($list) != 0) //Vérification de l'exitence d'un ticket.
                             {                              
                                 foreach ($list as $i => $ticket) // On boucle les ticket
                                 {   
+                                   
+
                                     echo '<tr>'; 
-                                    echo '<td><button id="boutton">'.$i.'</button></td>';
+                                    echo '<td><button class="btn ';
+                                    if (stripos($ticket, 'support_') === false) {echo 'btn-danger" data-toggle="collapse"';} else echo 'btn-success"';
+                                    echo ' data-target="#bouton_'.$i.'">'.$i.'</button></td>';
                                     
                                     $json = json_decode(file_get_contents($ticket), true); //Décodage json
                                     $j=0;
-                                    
-                                    echo "<td>".$json[0]['datas']['user']."</td>"; //affichage du user qui a ouver le support
+
+                                    $userSupport = $json[0]['datas']['user'];
+
+                                    echo "<td>".$userSupport."</td>"; //affichage du user qui a ouver le support
                                     
                                     if ( stripos($ticket, 'support_') === false )
                                     {
@@ -172,6 +178,7 @@
                                     
                                     echo "<td>".$json[0]['datas']['date']."</td>"; //Date d'ouverture
                                     echo "<td>".$json[(count($json)-1)]['datas']['date']."</td>"; //Date de derniere modification (Dernier message envoier)
+                                    
                                     // Formulaire pour fermer le topic si ouvert.
                                     
                                     if ( stripos($ticket, 'support_') === false )
@@ -186,83 +193,96 @@
                                     
                                     // Debut de la div à afficher avec js
                                     
-                                    echo '<div id="test" style="display:none">';
+                                    echo '<div id="bouton_'.$i.'" class="collapse">';
                                     
-                                    // Affichage du message
+                                    // Affichage des messages
+                                    echo '<div class="panel panel-default">';
                                     while ($j != count($json))
                                     {
                                         if ($userName != $json[$j]['datas']['user']) 
                                         { 
-                                            echo 'Réponse de '.$json[$j]['datas']['user']; 
+                                            echo '<div class="panel-heading">Réponse de '.$json[$j]['datas']['user']; 
                                         } 
-                                        else { echo 'Votre message envoyé';} echo ' le '.$json[$j]['datas']['date'].'<br />';
-                                        echo nl2br($json[$j]['datas']['message']);
+                                        else  echo '<div class="panel-heading">Votre message envoyé';
+
+                                        echo ' le '.$json[$j]['datas']['date'].'</div>';
+                                        echo '<div class="panel-body">'.nl2br($json[$j]['datas']['message']).'</div>';
                                         echo '<br />';
+
                                         $j++;
                                         
                                     }
-                                    
+                                    echo '</div>';
                                     
                                     if ( stripos($ticket, 'support_') === false) { ?>
-                    <form method="post" action="index.php">
-                        <fieldset>
-                            <div class="form-group">
-                                <label for="support">Réponse</label>
-                                <textarea class="form-control" name="message" rows="3"></textarea>
-                            </div>
-                        </fieldset>
-                        <p class="text-right fix-marg-input">
-                            <input type="submit" name="support" value="Repondre au Ticket" class="btn btn-info">                            
-                        </p>
-                        
-                    </form>                                   
-                                    <?php }
+                                            <form method="post" action="index.php">
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label for="support">Réponse</label>
+                                                        <textarea class="form-control" name="message" rows="3"></textarea>
+                                                    </div>
+                                                </fieldset>
+                                                <p class="text-right fix-marg-input">
+                                                    <input type="hidden" name="user" value="<?php echo $userSupport; ?>" class="btn btn-info">
+                                                    <input type="submit" name="support" value="Repondre au Ticket" class="btn btn-info">                            
+                                                </p>
+                                            </form>                                   
+                            <?php   }
                                     echo "</div>"; 
                                      $num_ticket++;
-                                 }
-                                echo "</tbody></table>";
+                                }
+                               
                             } 
                             else 
                             {
-                                echo 'Il n\'y a pas de message.'; 
+                                echo '<div class="panel panel-default"><div class="panel-body">Il n\'y a pas de message.</div></div>'; 
                             } 
+                             echo "</tbody></table>";
                         } else 
-                        {
-                            
+                        { 
                             $list = $user->ticketList();
                             $i = 0;
                             $num_ticket = 1;
                             
-                            
-                                foreach ($list as $i => $ticket)
+                                // HTML pour faire joli !!
+                            if (!empty($list))
+                                echo '<div class="panel panel-default">';
+                             
+                            foreach ($list as $i => $ticket)
+                            {
+                                $json = json_decode(file_get_contents($ticket), true);
+                                $j=0;
+                                while ($j != count($json))
                                 {
-                                    $json = json_decode(file_get_contents($ticket), true);
-                                    $j=0;
-                                    while ($j != count($json))
-                                    {
-                                        if ($userName != $json[$j]['datas']['user']) 
-                                        { 
-                                            echo 'Message de '.$json[$j]['datas']['user']; 
+                                    if ($userName != $json[$j]['datas']['user']) 
+                                    { 
+                                        echo '<div class="panel-heading">Message de '.$json[$j]['datas']['user']; 
 
-                                        } 
-                                        else { echo 'Message envoyé';} echo ' le '.$json[$j]['datas']['date'].'<br />';
-                                        echo nl2br($json[$j]['datas']['message']);
-                                        echo '<br />';
-                                        $j++;
-                                    }
-                                    $num_ticket++;
-                                } 
-                           ?>
+                                    } 
+                                    else  echo '<div class="panel-heading">Message envoyé';
+
+                                    echo ' le '.$json[$j]['datas']['date'].'</div><br />';
+                                    echo '<div class="panel-body">'.nl2br($json[$j]['datas']['message']).'</div>';
+                                    echo '<br />';
+                                    $j++;
+                                }
+                                $num_ticket++;
+                            } 
+                           
+                        if (!empty($list))
+                      echo '</div>';
+                   ?>
                     <form method="post" action="index.php">
                         <fieldset>
                             <div class="form-group">
                                 <label for="support">Message du ticket</label>
                                 <textarea class="form-control" name="message" rows="3"></textarea>
+                                <input type="hidden" name="user" value="<?php echo $userName; ?>" class="btn btn-info">
                             </div>
                         </fieldset>
                         
                         <p class="text-right fix-marg-input"> 
-                            <input type="hidden" name="user" value="<?php echo $userName; ?>" class="btn btn-info">
+                            
                             <input type="submit" name="support" value="Envoyer un Ticket" class="btn btn-info">                            
                         </p>                        
                     </form>
