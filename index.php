@@ -72,19 +72,20 @@ if ( isset($_POST['delete-userName']) )
 if ( isset($_POST['support']) && isset($_POST['message']) )
 {
     $message = $_POST['message'];
-    $user = new Users($file_user_ini, $userName);
-    $support = $user->support($message,$_POST['user']);
+    $support = new Support($file_user_ini, $userName);
+    $supportInfo = $support->sendTicket($message,$_POST['user']);
 }
 
 if ( isset($_POST['cloture']) && isset($_POST['user']))
 {
-    $user = new Users($file_user_ini, $userName);
-    $cloture = $user->cloture($_POST['user']);
+    $support = new Support($file_user_ini, $userName);
+    $cloture = $support->cloture($_POST['user']);
 }
 
 /* init objet */
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
+$support = new Support($file_user_ini, $userName);
 $host = $_SERVER['HTTP_HOST'];
 $current_path = $user->currentPath();
 $data_disk = $user->userdisk();
