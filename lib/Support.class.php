@@ -78,82 +78,16 @@ Class Support extends Users {
         return rename('./conf/users/'.$user.'/support.json', './conf/users/'.$user.'/support_'.$nb_ticket.'.json' );
     }
 
-    public function afficheList($list,$userName,$user) 
+    public function etatTicket($ticket)
     {
-        $i = 0;
-        $num_ticket = 1;
-       
-        foreach ($list as $i => $ticket)
-        {   
-            if ($user->is_owner() === true) 
-            {
-                echo '<tr>'; 
-                echo '<td><button class="btn ';
-                if (stripos($ticket, 'support_') === false) {echo 'btn-danger" data-toggle="collapse"';} else echo 'btn-success"';
-                echo ' data-target="#bouton_'.$i.'">'.$i.'</button></td>';
-            }
-            $json = json_decode(file_get_contents($ticket), true);
-            $j=0;
-            if ($user->is_owner()) 
-            {
-                $userSupport = $json[0]['datas']['user'];
+        $etat = stripos($ticket, 'support_');
+        return $etat;
+    }
 
-                echo "<td>".$userSupport."</td>"; //affichage du user qui a ouver le support
-                
-                if ( stripos($ticket, 'support_') === false )
-                {
-                    echo "<td>Ouvert</td>";
-                } else echo "<td>Fermer</td>";
-                
-                echo "<td>".$json[0]['datas']['date']."</td>"; //Date d'ouverture
-                echo "<td>".$json[(count($json)-1)]['datas']['date']."</td>"; //Date de derniere modification (Dernier message envoier)
-                
-                // Formulaire pour fermer le topic si ouvert.
-                
-                if ( stripos($ticket, 'support_') === false )
-                {
-                    $supp= array('./conf/users/','/support.json'); //chaine a supprimer
-                    echo '<form method="post" action="">';
-                    echo '<input type="hidden" name="user" value="'.str_replace($supp, "", $ticket).'" class="btn btn-info">';
-                    echo '<td><input type="submit" name="cloture" value="Fermer le Ticket" class="btn btn-info">';
-                    echo '</form>';
-                    echo '</tr>';
-                }
-                echo '<div id="bouton_'.$i.'" class="collapse">';
-            }
-            echo '<div class="panel panel-default">';
-            while ($j != count($json))
-            {
-                if ($userName != $json[$j]['datas']['user']) 
-                { 
-                    echo '<div class="panel-heading">Message de '.$json[$j]['datas']['user']; 
+    public function decodeJson($ticket)
+    {
+        $json = json_decode(file_get_contents($ticket), true);
 
-                } 
-                else  echo '<div class="panel-heading">Votre message';
-
-                echo ' - le '.$json[$j]['datas']['date'].'</div><br />';
-                echo '<div class="panel-body">'.nl2br($json[$j]['datas']['message']).'</div>';
-                echo '<br />';
-                $j++;
-            }
-            $num_ticket++;
-            echo '</div>';
-            if ( stripos($ticket, 'support_') === false && $user->is_owner()) {
-                echo '<form method="post" action="index.php">
-                    <fieldset>
-                        <div class="form-group">
-                            <label for="support">Réponse</label>
-                            <textarea class="form-control" name="message" rows="3"></textarea>
-                        </div>
-                    </fieldset>
-                    <p class="text-right fix-marg-input">
-                        <input type="hidden" name="user" value="'.$userSupport.'" class="btn btn-info">
-                        <input type="submit" name="support" value="Repondre au Ticket" class="btn btn-info">                            
-                    </p>
-                </form>';                                   
-            }  
-        }
-        
-
+        return $json;
     }
 }
