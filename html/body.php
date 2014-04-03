@@ -223,7 +223,7 @@
                                 }
                             }                                                                        
                             else { ?>
-                                <div class="panel panel-default"><div class="panel-body">Il n\'y a pas de message.</div></div>
+                                <div class="panel panel-default"><div class="panel-body">Il n'y a pas de message.</div></div>
                             <?php } ?>
                             </tbody></table>
                 <?php   } 
