@@ -2,15 +2,15 @@
 
 Class Support extends Users {
 
-	public function sendTicket($message,$destinataire) 
+    public function sendTicket($message,$destinataire) 
     {
         if ($this->is_owner === true)
             $name = $destinataire;
         else
             $name = $this->userName;
 
-        $message = htmlspecialchars($message);            
-        $date = date("d/m/Y \à H:i:s");       
+        $message = htmlspecialchars($message);
+        $date = date("d/m/Y \à H:i:s");
         
         if (file_exists('./conf/users/'.$name.'/support.json'))
         {
@@ -33,7 +33,7 @@ Class Support extends Users {
         }
     }
    
-	/*
+    /*
         Cette méthode renvoie deux listes des fichiers tickets.
             Une liste pour l'admin.
             OU une liste pour le user.
@@ -53,7 +53,12 @@ Class Support extends Users {
             }
 
             //converti un tableau multidimensionnel en un tableau unidimensionnel.
-            array_walk_recursive( $files_ticket, function( $a, $b) use (&$all_files_tickets) { $all_files_tickets[] = $a; } );
+            array_walk_recursive( $files_ticket,
+                function( $a, $b) use (&$all_files_tickets)
+                { 
+                    $all_files_tickets[] = $a;
+                });
+
             return $all_files_tickets;
         }
         else
@@ -70,7 +75,7 @@ Class Support extends Users {
         Renomme le fichier support.json (dernier ticket) en support_X.json
     */
 
-	public function cloture($user)
+    public function cloture($user)
     {
         $scan_ticket = glob('./conf/users/'.$user.'/support*.json');
         $nb_ticket = count($scan_ticket);
