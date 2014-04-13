@@ -1,0 +1,13 @@
+{
+    "name": "magicalex/seedbox-manager",
+    "description": "Web app for manage your seedbox",
+    "require": {
+        "twig/twig": "1.*"
+    },
+    "authors": [
+        {
+            "name": "Magicalex",
+            "email": "magicalex14000@gmail.com"
+        }
+    ]
+}
