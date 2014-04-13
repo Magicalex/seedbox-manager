@@ -151,6 +151,10 @@
                             <label for="user_directory">Dossier /home de l'utilisateur</label>
                             <input type="text" class="form-control" name="user_directory" id="user_directory" value="<?php echo $update_owner->user_directory(); ?>">
                         </div>
+                        <div class="form-group">
+                            <label for="user_directory">Dossier scgi de l'utilisateur</label>
+                            <input type="text" class="form-control" name="scgi_folder" id="scgi_folder" value="<?php echo $update_owner->scgi_folder(); ?>">
+                        </div>
                     </fieldset>
 
                     <fieldset>

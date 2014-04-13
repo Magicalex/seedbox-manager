@@ -9,6 +9,7 @@ class UpdateFileIni extends Users
                 'active_bloc_info' => !isset($data_upgrade['simple_conf_user']) ? $this->blocInfo:
                                        isset($data_upgrade['active_bloc_info']) ? true:false,
                 'user_directory' => isset($data_upgrade['owner_change_config']) ? $data_upgrade['user_directory']:$this->directory,
+                'scgi_folder' => isset($data_upgrade['owner_change_config']) ? $data_upgrade['scgi_folder']:$this->scgi_folder,
                 'owner' => $this->is_owner
             ),
             'nav' => array(

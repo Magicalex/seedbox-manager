@@ -19,7 +19,7 @@ $('#popupfilezilla').popover({
 $('#popuptransdroid').popover({
     html : true,
     trigger : 'hover',
-    content : 'Fonctionnalité en cour de développement.<br>La génération du fichier de configuration fonctionne pour ceux qui sont à l\'aise sous android peuvent le copier/coller via leur pc.',
+    content : "Génère un fichier de configuration pour l'application transdroid.",
     title : 'Configurer transdroid rapidement !',
     placement : function() {
         var width = $(window).width();
