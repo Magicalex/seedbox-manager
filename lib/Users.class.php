@@ -36,6 +36,7 @@ class Users
         $this->blocRtorrent       = (bool) $array['rtorrent']['active_reboot'];
         $this->blocSupport        = (bool) $array['support']['active_support'];
         $this->directory          = (string) $array['user']['user_directory'];
+        $this->scgi_folder        = (string) $array['user']['scgi_folder'];
         $this->rutorrentUrl       = (string) $array['nav']['url_rutorrent'];
         $this->cakeboxUrl         = (string) $array['nav']['url_cakebox'];
         $this->supportMail        = (string) $array['support']['adresse_mail'];
@@ -159,4 +160,5 @@ class Users
     public function blocRtorrent() { return $this->blocRtorrent; }
     public function is_owner() { return $this->is_owner; }
     public function user_directory() { return $this->directory; }
+    public function scgi_folder() { return $this->scgi_folder; }
 }

@@ -103,7 +103,7 @@
 
                 <h5 class="icone-seed-managerandroid"><strong>Application Transdroid</strong></h5>
                 <ul>
-                    <li>Dossier SCGI : <em><strong>/<?php echo strtoupper(substr($userName,0,3)); ?>0</strong></em></li>
+                    <li>Dossier SCGI : <em><strong><?php echo $user->scgi_folder; ?></strong></em></li>
                     <li>Adresse http : <em>http://<?php echo $host; ?></em></li>
                     <li>User transdroid : <em><?php echo $userName; ?></em></li>
                     <li><a class="btn btn-info btn-xs icone-seed-managerdownload" href="http://transdroid.org/latest">Télécharger Transdroid</a></li>
@@ -136,16 +136,15 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th>                      
-                                        <th>Utilisateur</th>                       
-                                                               
-                                        <th>Status</th>                       
-                                        <th>Créé le</th>                        
-                                        <th>Màj</th>                        
+                                        <th>#</th>
+                                        <th>Utilisateur</th>
+                                        <th>Status</th>
+                                        <th>Créé le</th>
+                                        <th>Màj</th>
                                         <th>Fermer/Supprimer</th>
                                     </tr>
                                 </thead>
-                                <tbody>    
+                                <tbody>
                 <?php
                             $list = $support->ticketList();
                             
@@ -197,13 +196,12 @@
                                         else  
                                             echo '<div class="panel-heading">Votre message';
 
-                                        echo ' - le '.$json[$j]['datas']['date'].'</div><br />';
-                                        echo '<div class="panel-body">'.nl2br($json[$j]['datas']['message']).'</div>';
-                                        echo '<br />';
+                                        echo ' - le '.$json[$j]['datas']['date'].'</div>';
+                                        echo '<div class="panel-body">' . nl2br($json[$j]['datas']['message']) . '</div>';
                                         $j++;
                                     }
                                     echo '</div>';
-                                    echo '<div class="trait"></div>';
+                                    //echo '<div class="trait"></div>';
                                     if ($etat===false) {
                 ?>
                                         <form method="post" action="index.php">
@@ -253,9 +251,8 @@
                                             else  
                                                 echo '<div class="panel-heading">Votre message';
 
-                                            echo ' - le '.$json[$j]['datas']['date'].'</div><br />';
+                                            echo ' - le '.$json[$j]['datas']['date'].'</div>';
                                             echo '<div class="panel-body">'.nl2br($json[$j]['datas']['message']).'</div>';
-                                            echo '<br />';
                                             $j++;
                                         }
                                         echo '</div>';
