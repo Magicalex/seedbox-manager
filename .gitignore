@@ -1,3 +1,4 @@
 .htpasswd
-/conf/users/*
+/public/components
+/conf/users
 reboot-rtorrent

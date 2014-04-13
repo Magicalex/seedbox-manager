@@ -1,0 +1,13 @@
+{
+  "name": "seedbox-manager",
+  "version": "2.4.0",
+  "authors": [
+    "Magicalex <magicalex14000@gmail.com>"
+  ],
+  "description": "Web app for manager your seedbox",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.1.1"
+  }
+}

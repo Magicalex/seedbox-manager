@@ -201,7 +201,6 @@
                                         $j++;
                                     }
                                     echo '</div>';
-                                    //echo '<div class="trait"></div>';
                                     if ($etat===false) {
                 ?>
                                         <form method="post" action="index.php">
