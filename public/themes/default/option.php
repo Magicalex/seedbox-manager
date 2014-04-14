@@ -52,12 +52,13 @@
 
         <section class="row">
         <?php if ( empty($_GET['user']) ) { ?>
-            <article class="col-md-6" id="conf-simple-user">
+            <article class="col-md-12" id="conf-simple-user">
                 <div class="well well-sm">
                     <h4 class="titre-head">Configuration de l'interface  de <?php echo $userName; ?></h4>
                     <div class="trait"></div>
 
                     <form method="post" action="?option" role="form">
+                        <div class="col-md-6">
                         <fieldset>
                             <legend>Paramètre page d'accueil</legend>
                             <div class="checkbox">
@@ -73,6 +74,8 @@
                                 <input type="checkbox" name="active_support" value="true" id="active_support" <?php if ($user->blocSupport() === true) echo 'checked'; ?> ><label for="active_support">Activer le bloc support</label>
                             </div>
                         </fieldset>
+                        </div>
+                        <div class="col-md-6">
                         <fieldset>
                             <legend>Paramètre de déconnexion</legend>
                             <div class="form-group">
@@ -84,6 +87,7 @@
                                 </div>
                             </div>
                         </fieldset>
+                        </div>
                         <p class="text-right fix-marg-input">
                             <input type="hidden" name="simple_conf_user">
                             <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
