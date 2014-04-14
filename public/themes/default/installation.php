@@ -7,8 +7,8 @@ $root_path = getcwd();
     <head>
         <meta charset="utf-8">
         <title>Installation - Seedbox Manager</title>        
-        <link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link type="text/css" rel="stylesheet" href="./css/style.css">
+        <link href="./components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link type="text/css" rel="stylesheet" href="./themes/default/css/style.css">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!--[if lt IE 9]>

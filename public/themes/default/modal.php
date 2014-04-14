@@ -85,9 +85,9 @@
     </div>
     <?php } ?>
 
-    <script type="text/javascript" src="./js/jquery.js"></script>
-    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./js/app.js"></script>
+    <script type="text/javascript" src="./components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./themes/default/js/app.js"></script>
 
     </body>
 

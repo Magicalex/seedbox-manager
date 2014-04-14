@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 Class Support extends Users {
 
-    public function sendTicket($message,$destinataire) 
+    public function sendTicket($message,$destinataire)
     {
         if ($this->is_owner === true)
             $name = $destinataire;
@@ -11,7 +11,7 @@ Class Support extends Users {
 
         $message = htmlspecialchars($message);
         $date = date("d/m/Y \à H:i:s");
-        
+
         if (file_exists('./conf/users/'.$name.'/support.json'))
         {
             $supjson = './conf/users/'.$name.'/support.json';
@@ -19,8 +19,8 @@ Class Support extends Users {
 
             $json[] = array( 'datas' => array('user' => $this->userName, 'date' => $date, 'message' => $message));
             $jsonencod = json_encode($json);
-            file_put_contents('./conf/users/'.$name.'/support.json', $jsonencod.PHP_EOL); 
-            
+            file_put_contents('./conf/users/'.$name.'/support.json', $jsonencod.PHP_EOL);
+
             return array( 'file_exist' => true);
         }
         else
@@ -28,11 +28,11 @@ Class Support extends Users {
             $json = array ( array ('datas' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message)));
             $jsonencod = json_encode($json);
             file_put_contents('./conf/users/'.$this->userName.'/support.json', $jsonencod.PHP_EOL, FILE_APPEND);
-            
+
             return array( 'file_exist' => false);
         }
     }
-   
+
     /*
         Cette méthode renvoie deux listes des fichiers tickets.
             Une liste pour l'admin.
@@ -40,7 +40,7 @@ Class Support extends Users {
 
         La liste est sous forme d'array.
     */
-    
+
     public function ticketList()
     {
         if ($this->is_owner === true)
@@ -55,7 +55,7 @@ Class Support extends Users {
             //converti un tableau multidimensionnel en un tableau unidimensionnel.
             array_walk_recursive( $files_ticket,
                 function( $a, $b) use (&$all_files_tickets)
-                { 
+                {
                     $all_files_tickets[] = $a;
                 });
 
@@ -67,7 +67,6 @@ Class Support extends Users {
             return $files_tickets;
         }
     }
-
 
     /*
         Methode cloture :
