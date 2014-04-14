@@ -1,7 +1,7 @@
 <?php
 
 /* autoload class php */
-function chargerClasse($classe) { require_once('lib/'.$classe.'.class.php'); }
+function chargerClasse($classe) { require_once('../app/lib/'.$classe.'.class.php'); }
 spl_autoload_register('chargerClasse');
 
 /* recuperation nom utilisateur connecte */
@@ -12,29 +12,29 @@ else
 
 /*check config app */
 $install = new Install;
-if (file_exists('./reboot-rtorrent') && Install::check_uid_file('./reboot-rtorrent') == 0 && Install::getChmod('./reboot-rtorrent', 4) == 4755)
+if (file_exists('./../reboot-rtorrent') && Install::check_uid_file('./../reboot-rtorrent') == 0 && Install::getChmod('./../reboot-rtorrent', 4) == 4755)
 {
-    $uid_folder_users = Install::check_uid_file('./conf/users/');
+    $uid_folder_users = Install::check_uid_file('./../conf/users/');
     $uid_user_php = Install::get_user_php();
     if ( $uid_folder_users != $uid_user_php['num_uid'] )
     {
-        require_once('./html/installation.php');
+        require_once('./themes/default/installation.php');
         exit();
     }
     else
     {
-        if (file_exists('./conf/users/'.$userName.'/config.ini'))
-            $file_user_ini = './conf/users/'.$userName.'/config.ini';
+        if (file_exists('./../conf/users/'.$userName.'/config.ini'))
+            $file_user_ini = './../conf/users/'.$userName.'/config.ini';
         else
         {
             Install::create_new_user($userName);
-            $file_user_ini = './conf/users/'.$userName.'/config.ini';
+            $file_user_ini = './../conf/users/'.$userName.'/config.ini';
         }
     }
 }
 else
 {
-    require_once('./html/installation.php');
+    require_once('./themes/default/installation.php');
     exit();
 }
 
@@ -93,16 +93,16 @@ $load_server = Server::load_average();
 $read_data_reboot = $user->readFileDataReboot('./conf/users/'.$userName.'/data_reboot.txt');
 
 /* views */
-require_once('html/header.php');
+require_once('themes/default/header.php');
 
 if ( isset($_GET['option']) )
-    require_once ('html/option.php');
+    require_once ('themes/default/option.php');
 elseif ( isset($_GET['download']))
 {
     require_once('lib/downloads.php');
-    require_once('html/body.php');
+    require_once('themes/default/body.php');
 }
 else
-    require_once('html/body.php');
+    require_once('themes/default/body.php');
 
-require_once('html/modal.php');
+require_once('themes/default/modal.php');
