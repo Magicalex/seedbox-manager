@@ -30,11 +30,8 @@
                 echo 'commande exécuté : '.$current_path.'/reboot-rtorrent '.$userName.'<br>';
                 echo 'status : '.$rebootRtorrent['statusReboot'].'<br>';
                 echo 'résultat de la commande :<br>';
-                $i=0;
-                while( $i < count( $rebootRtorrent['logReboot'] ) )
-                {
-                    echo ' $ '.$rebootRtorrent['logReboot'][$i].'<br>';
-                    $i++;
+                for ($i = 0; $i < count( $rebootRtorrent['logReboot']); $i++ ) {
+                    echo ' $ ' . $rebootRtorrent['logReboot'][$i] . '<br>';
                 }
             ?>
         </div>

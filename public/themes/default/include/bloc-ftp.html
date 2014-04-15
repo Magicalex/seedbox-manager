@@ -1,0 +1,25 @@
+<article class="col-md-6">
+    <div class="well well-sm">
+        <h4 class="icone-seed-managertree titre-head">Les accès ftp / sftp / transdroid</h4>
+        <div class="trait"></div>
+
+        <h5 class="icone-seed-managerlaptop"><strong>Serveur FTP et sFTP</strong></h5>
+        <ul>
+            <li>Adresse (s)FTP : <em>(s)ftp://{{ host }}</em></li>
+            <li>User (s)FTP : <em>{{ userName }}</em></li>
+            <li>Port FTP : <em>{{ portFtp }}</em></li>
+            <li>Port sFTP : <em>{{ portSftp }}</em></li>
+            <li><a class="btn btn-info btn-xs icone-seed-managerdownload" href="http://filezilla.fr/">Télécharger filezilla</a></li>
+            <li><a id="popupfilezilla" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="?download&amp;file=filezilla">Fichier de configuration</a></li>
+        </ul>
+
+        <h5 class="icone-seed-managerandroid"><strong>Application Transdroid</strong></h5>
+        <ul>
+            <li>Dossier SCGI : <em><strong>{{ scgi_folder }}</strong></em></li>
+            <li>Adresse http : <em>http://{{ host }}</em></li>
+            <li>User transdroid : <em>{{ userName }}</em></li>
+            <li><a class="btn btn-info btn-xs icone-seed-managerdownload" href="http://transdroid.org/latest">Télécharger Transdroid</a></li>
+            <li><a id="popuptransdroid" class="btn btn-info btn-xs icone-seed-managerfile-xml" data-toggle="popover" href="?download&amp;file=transdroid">Fichier de configuration</a></li>
+        </ul>
+    </div>
+</article>

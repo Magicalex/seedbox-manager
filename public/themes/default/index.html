@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Seedbox Manager</title>
+        <link href="./../components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link type="text/css" rel="stylesheet" href="../themes/default/css/style.css">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1">
+        <!--[if lt IE 9]>
+            <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script type="text/javascript" src="./../components/respond/dest/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+    
+    <header class="navbar navbar-default navbar-static-top">
+        {% include 'include/header.html' %}
+    </header>
+
+    <!-- CONTENEUR -->
+    <div class="container marg">
+        <h1 class="icone-seed-managerdashboard page-header dashboard">Tableau de bord</h1>
+        <noscript>
+            <div class="alert alert-info">
+                <h4>Information</h4>
+                Javascript n'est pas activé ou quelque chose empêche sa bonne exécution sur votre navigateur web.<br>
+                Pour pouvoir utiliser cette interface l'activation de javascript est nécessaire.
+            </div>
+        </noscript>
+
+         {% include 'include/notif.html' %}       
+
+        <section class="row">
+            {% if userBlocInfo == true %}
+                {% include 'include/bloc-info.html' %}
+            {% endif %}
+
+            {% if userBlocFtp ==true %}
+                {% include 'include/bloc-ftp.html' %}
+            {% endif %}
+
+            {% if userBlocRtorrent == true %}
+                {% include 'include/bloc-rtorrent.html' %}
+            {% endif %}
+
+            {% include 'include/bloc-support.html' %}
+        </section>
+
+    </div>
+{% include 'include/modal.html' %}
+{% include 'include/footer.html' %}
