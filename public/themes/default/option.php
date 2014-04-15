@@ -141,7 +141,7 @@
             </div>
         </article>
 
-        <?php } if ( $user->is_owner() === true && !empty($_GET['user']) ) { $update_owner = new Users('./conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] ); ?>
+        <?php } if ( $user->is_owner() === true && !empty($_GET['user']) ) { $update_owner = new Users('./../conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] ); ?>
 
         <article class="col-md-6">
             <div class="well well-sm">

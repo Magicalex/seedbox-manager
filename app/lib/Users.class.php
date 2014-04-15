@@ -76,9 +76,9 @@ class Users
 
     public function rebootRtorrent()
     {
-        exec( $this->currentPath.'/reboot-rtorrent '.$this->userName.' 2>&1', $log, $status);
+        exec( $this->currentPath.'/../reboot-rtorrent '.$this->userName.' 2>&1', $log, $status);
         $date_updated = date('d/m/y \à H\hi');
-        file_put_contents('./conf/users/'.$this->userName.'/data_reboot.txt', $date_updated);
+        file_put_contents('./../conf/users/'.$this->userName.'/data_reboot.txt', $date_updated);
 
         return array( 'logReboot' => $log,
                       'statusReboot' => $status );
@@ -107,10 +107,10 @@ class Users
 
     public static function get_all_users()
     {
-        $scan = scandir('./conf/users/');
+        $scan = scandir('./../conf/users/');
         foreach ($scan as $key => $file_name)
         {
-            if ($file_name != '.' && $file_name != '..' && is_dir('./conf/users/'.$file_name))
+            if ($file_name != '.' && $file_name != '..' && is_dir('./../conf/users/'.$file_name))
                 $all_users[] = $file_name;
         }
 
