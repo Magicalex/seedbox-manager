@@ -73,6 +73,7 @@ echo $twig->render(
         'post' => $_POST,
         'get' => $_GET,
         'userName' => $userName,
+        'is_owner' => $user->is_owner(),
         'userRutorrentActiveUrl' => $user->rutorrentActiveUrl(),
         'rutorrentUrl' => $user->rutorrentUrl(),
         'userCakeboxActiveUrl' => $user->cakeboxActiveUrl(),
@@ -91,7 +92,8 @@ echo $twig->render(
         'portSftp' => $user->portSftp(),
         'scgi_folder' => $user->scgi_folder,
         'userBlocRtorrent' => $user->blocRtorrent(),
-        'read_data_reboot' => $read_data_reboot
-
+        'read_data_reboot' => $read_data_reboot,
+        'userBlocSupport' => $user->blocSupport(),
+        'userSupportMail' => $user->supportMail()
     )
 );

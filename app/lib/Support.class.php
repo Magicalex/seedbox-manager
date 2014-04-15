@@ -2,32 +2,37 @@
 
 Class Support extends Users {
 
-    public function sendTicket($message,$destinataire)
+    /*
+        Cette méthode crée les tickets pour les utilisateurs.
+        Elle permet au admin de répondre dans les tickets
+
+        Crée un fichier support.json dans le dossier conf/ du user qui crée le topic
+    */
+
+    public function sendTicket( $message, $destinataire)
     {
         if ($this->is_owner === true)
             $name = $destinataire;
         else
             $name = $this->userName;
 
-        $message = htmlspecialchars($message);
         $date = date("d/m/Y \à H:i:s");
 
-        if (file_exists('./conf/users/'.$name.'/support.json'))
+        if (file_exists('./../conf/users/'.$name.'/support.json'))
         {
-            $supjson = './conf/users/'.$name.'/support.json';
-            $json = json_decode(file_get_contents($supjson));
-
-            $json[] = array( 'datas' => array('user' => $this->userName, 'date' => $date, 'message' => $message));
-            $jsonencod = json_encode($json);
-            file_put_contents('./conf/users/'.$name.'/support.json', $jsonencod.PHP_EOL);
+            $open_ticket = './../conf/users/'.$name.'/support.json';
+            $ticket = json_decode(file_get_contents($open_ticket));
+            $ticket[] = array( 'data' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message));
+            $encoded_ticket = json_encode($ticket);
+            file_put_contents('./../conf/users/'.$name.'/support.json', $encoded_ticket.PHP_EOL);
 
             return array( 'file_exist' => true);
         }
         else
         {
-            $json = array ( array ('datas' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message)));
-            $jsonencod = json_encode($json);
-            file_put_contents('./conf/users/'.$this->userName.'/support.json', $jsonencod.PHP_EOL, FILE_APPEND);
+            $ticket = array( array('data' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message)));
+            $encoded_ticket = json_encode($ticket);
+            file_put_contents('./../conf/users/'.$this->userName.'/support.json', $encoded_ticket.PHP_EOL);
 
             return array( 'file_exist' => false);
         }
@@ -38,7 +43,7 @@ Class Support extends Users {
             Une liste pour l'admin.
             OU une liste pour le user.
 
-        La liste est sous forme d'array.
+        La liste des fichiers est sous forme d'array.
     */
 
     public function ticketList()
@@ -49,7 +54,7 @@ Class Support extends Users {
             foreach ( $all_users as $user )
             {
                 if ( $user != $this->userName)
-                    $files_ticket[] = glob('./conf/users/'.$user.'/support*.json');
+                    $files_ticket[] = glob('./../conf/users/'.$user.'/support*.json');
             }
 
             //converti un tableau multidimensionnel en un tableau unidimensionnel.
@@ -63,7 +68,7 @@ Class Support extends Users {
         }
         else
         {
-            $files_tickets = glob('./conf/users/'.$this->userName.'/support*.json');
+            $files_tickets = glob('./../conf/users/'.$this->userName.'/support*.json');
             return $files_tickets;
         }
     }
@@ -76,22 +81,25 @@ Class Support extends Users {
 
     public function cloture($user)
     {
-        $scan_ticket = glob('./conf/users/'.$user.'/support*.json');
+        $scan_ticket = glob('./../conf/users/'.$user.'/support*.json');
         $nb_ticket = count($scan_ticket);
 
-        return rename('./conf/users/'.$user.'/support.json', './conf/users/'.$user.'/support_'.$nb_ticket.'.json' );
+        return rename('./../conf/users/'.$user.'/support.json', './../conf/users/'.$user.'/support_'.$nb_ticket.'.json' );
     }
 
-    public function etatTicket($ticket)
+    /* retourne si un ticket est fermé ou non */
+
+    public function EtatTicket($ticket)
     {
         $etat = stripos($ticket, 'support_');
         return $etat;
     }
 
+    /* Méthode qui décode le ticket */
+
     public function decodeJson($ticket)
     {
         $json = json_decode(file_get_contents($ticket), true);
-
         return $json;
     }
 }

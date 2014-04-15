@@ -1,0 +1,31 @@
+
+<article class="col-md-6">
+    <div class="well well-sm">
+    <h4 class="icone-seed-managersupport titre-head">Contacter le Support</h4>
+    <div class="trait"></div>
+
+    {% if is_owner == true %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Utilisateur</th>
+                <th>Status</th>
+                <th>Créé le</th>
+                <th>Màj</th>
+                <th>Fermer/Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% endif %}
+
+    <ul>
+        <li>
+            <strong>contact mail :</strong>
+            <a href="mailto:{{ userSupportMail }}" target="_blank">{{ userSupportMail }}</a>
+        </li>
+    </ul>
+
+    </div>
+</article>
+

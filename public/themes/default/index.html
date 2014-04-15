@@ -44,7 +44,9 @@
                 {% include 'include/bloc-rtorrent.html' %}
             {% endif %}
 
-            {% include 'include/bloc-support.html' %}
+            {% if userBlocSupport == true %}
+                {% include 'include/bloc-support.html' %}
+            {% endif %}
         </section>
 
     </div>
