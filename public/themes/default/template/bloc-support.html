@@ -5,6 +5,16 @@
     <div class="trait"></div>
 
     {% if is_owner == true %}
+
+    {% for list in ticket_list %}
+    <div class="panel panel-default">
+        {% for message in list %}
+            <div class="panel-heading">Message de : {{ message.data.user }} le {{ message.data.date }}</div>
+            <div class="panel-body">{{ message.data.message }}</div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -17,6 +27,9 @@
             </tr>
         </thead>
         <tbody>
+        </tbody>
+    </table>
+
     {% endif %}
 
     <ul>

@@ -2,6 +2,16 @@
 
 Class Support extends Users {
 
+    public function ReadTicket()
+    {
+        foreach ( $this->TicketList() as $encoded_ticket )
+        {
+            $ticket[] = $this->DecodeTicket( $encoded_ticket );
+        }
+
+        return $ticket;
+    }
+
     /*
         Cette méthode crée les tickets pour les utilisateurs.
         Elle permet au admin de répondre dans les tickets
@@ -46,7 +56,7 @@ Class Support extends Users {
         La liste des fichiers est sous forme d'array.
     */
 
-    public function ticketList()
+    private function TicketList()
     {
         if ($this->is_owner === true)
         {
@@ -97,7 +107,7 @@ Class Support extends Users {
 
     /* Méthode qui décode le ticket */
 
-    public function decodeJson($ticket)
+    private function DecodeTicket($ticket)
     {
         $json = json_decode(file_get_contents($ticket), true);
         return $json;
