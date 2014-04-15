@@ -101,8 +101,8 @@ Class Support extends Users {
 
     public function EtatTicket($ticket)
     {
-        $etat = stripos($ticket, 'support_');
-        return $etat;
+        $log = stripos($ticket, 'support_');
+        return $log;
     }
 
     /* Méthode qui décode le ticket */
