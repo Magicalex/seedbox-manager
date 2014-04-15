@@ -149,7 +149,7 @@
                             {
                                 foreach ($list as $i => $ticket)
                                 {   
-                                    $etat = $support->etatTicket($ticket); //Ticket ouvert ou fermé
+                                    $etat = $support->EtatTicket($ticket); //Ticket ouvert ou fermé
                                     $json = $support->decodeJson($ticket); // Decode du json
                                     $nbTicket = count($json);
                                     $userSupport = $json[0]['datas']['user']; // Nom de la personne qui a ouvert du ticket
@@ -229,7 +229,7 @@
                             if (!empty($list)) {
                                 foreach ($list as $i => $ticket)
                                 {   
-                                    $etat = $support->etatTicket($ticket);
+                                    $etat = $support->EtatTicket($ticket);
                                     if ($etat == false){
                                         
                                         $json = $support->decodeJson($ticket); // Decode du json
