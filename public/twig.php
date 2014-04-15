@@ -62,7 +62,6 @@ $load_server = Server::load_average();
 $read_data_reboot = $user->readFileDataReboot('./../conf/users/'.$userName.'/data_reboot.txt');
 
 
-
 $loader = new Twig_Loader_Filesystem('./themes/default');
 $twig = new Twig_Environment($loader, array(
     'cache' => false
@@ -94,6 +93,11 @@ echo $twig->render(
         'userBlocRtorrent' => $user->blocRtorrent(),
         'read_data_reboot' => $read_data_reboot,
         'userBlocSupport' => $user->blocSupport(),
-        'userSupportMail' => $user->supportMail()
+        'userSupportMail' => $user->supportMail(),
+        'ticket_list' => $support->ReadTicket()
     )
 );
+
+
+
+

@@ -15,7 +15,7 @@
     <body>
     
     <header class="navbar navbar-default navbar-static-top">
-        {% include 'include/header.html' %}
+        {% include './template/header.html' %}
     </header>
 
     <!-- CONTENEUR -->
@@ -29,26 +29,26 @@
             </div>
         </noscript>
 
-         {% include 'include/notif.html' %}       
+         {% include './template/notif.html' %}       
 
         <section class="row">
             {% if userBlocInfo == true %}
-                {% include 'include/bloc-info.html' %}
+                {% include './template/bloc-info.html' %}
             {% endif %}
 
             {% if userBlocFtp ==true %}
-                {% include 'include/bloc-ftp.html' %}
+                {% include './template/bloc-ftp.html' %}
             {% endif %}
 
             {% if userBlocRtorrent == true %}
-                {% include 'include/bloc-rtorrent.html' %}
+                {% include './template/bloc-rtorrent.html' %}
             {% endif %}
 
             {% if userBlocSupport == true %}
-                {% include 'include/bloc-support.html' %}
+                {% include './template/bloc-support.html' %}
             {% endif %}
         </section>
 
     </div>
-{% include 'include/modal.html' %}
-{% include 'include/footer.html' %}
+{% include './template/modal.html' %}
+{% include './template/footer.html' %}
