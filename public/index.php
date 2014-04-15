@@ -18,19 +18,19 @@ if ( isset($_POST['reboot']) )
 if ( isset($_POST['simple_conf_user']) )
 {
     $update = new UpdateFileIni($file_user_ini, $userName);
-    $update_ini_file_log = $update->update_file_config($_POST, './conf/users/'.$userName);
+    $update_ini_file_log = $update->update_file_config($_POST, './../conf/users/'.$userName);
 }
 
 if ( isset($_POST['owner_change_config']) )
 {
-    $update = new UpdateFileIni('./conf/users/'.$_POST['user'].'/config.ini', $_POST['user']);
-    $update_ini_file_log_owner = $update->update_file_config($_POST, './conf/users/'.$_POST['user']);
+    $update = new UpdateFileIni('./../conf/users/'.$_POST['user'].'/config.ini', $_POST['user']);
+    $update_ini_file_log_owner = $update->update_file_config($_POST, './../conf/users/'.$_POST['user']);
 }
 
 if ( isset($_POST['delete-userName']) )
 {
     $user = new Users($file_user_ini, $userName);
-    $log_delete_user = Users::delete_config_old_user('./conf/users/'.$_POST['delete-userName']);
+    $log_delete_user = Users::delete_config_old_user('./../conf/users/'.$_POST['delete-userName']);
 }
 
 if ( isset($_POST['support']) && isset($_POST['message']) )
@@ -54,7 +54,7 @@ $host = $_SERVER['HTTP_HOST'];
 $current_path = $user->currentPath();
 $data_disk = $user->userdisk();
 $load_server = Server::load_average();
-$read_data_reboot = $user->readFileDataReboot('./conf/users/'.$userName.'/data_reboot.txt');
+$read_data_reboot = $user->readFileDataReboot('./../conf/users/'.$userName.'/data_reboot.txt');
 
 /*
 
