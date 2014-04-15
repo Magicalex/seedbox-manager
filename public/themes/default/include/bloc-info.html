@@ -1,0 +1,36 @@
+<article class="col-md-6">
+    <div class="well well-sm">
+        <h4 class="titre-head icone-seed-managerhome">Information compte utilisateur</h4>
+        <div class="trait"></div>
+        <p class="icone-seed-managerlocation"><strong>Votre adresse Ip</strong></p>
+        <ul>
+            <li><strong class="text-success">{{ ipUser }}</strong></li>
+        </ul>
+        <p class="icone-seed-managerstorage"><strong>Espace disque</strong></p>
+        <p class="text-center text-defaut-color">
+            Vous utilisez <strong>{{ data_disk.percentage_used }}%</strong>
+            <em>soit {{ data_disk.used_disk}} sur {{ data_disk.total_disk }} </em>
+        </p>
+        <div class="progress progress-striped fix-progress">
+            <div class="progress-bar {{ data_disk.progessBarColor }}" role="progressbar" aria-valuenow="{{ data_disk.percentage_used }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ data_disk.percentage_used }}%;">
+                <span class="sr-only">{{ data_disk.percentage_used }}% Complete</span>
+            </div>
+        </div>
+
+        <p class="icone-seed-managerclock"><strong>Uptime serveur</strong></p>
+        <ul>
+            <li><strong class="text-success">{{ uptime }}</strong></li>
+        </ul>
+
+        <p class="icone-seed-managerstats"><strong>Charge serveur</strong></p>
+        <ul>
+            <li style="cursor:default;">
+                <span class="text-defaut-color">load average : </span>
+                <span data-original-title="Charge moyenne depuis 1 min" class="label label-primary load-average">{{ load_server.load_average.0 }}</span>
+                <span data-original-title="Charge moyenne depuis 5 min" class="label label-primary load-average">{{ load_server.load_average.1 }}</span>
+                <span data-original-title="Charge moyenne depuis 15 min" class="label label-primary load-average">{{ load_server.load_average.2 }}</span>
+            </li>
+            <li id="load-info">{{ load_server.info_charge|raw }}</li>
+        </ul>
+    </div>
+</article>
