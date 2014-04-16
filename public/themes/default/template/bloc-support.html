@@ -1,4 +1,3 @@
-
 <article class="col-md-6">
     <div class="well well-sm">
     <h4 class="icone-seed-managersupport titre-head">Contacter le Support</h4>
@@ -29,7 +28,7 @@
         <tbody>
             {% for list in ticket_list %}
             <tr>
-                <td><button type="button" class="btn btn-link show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
+                <td><button type="button" class="show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
                 {% for info in list %}
                     {% if loop.first %}
                     <td>{{ info.data.user }}</td>

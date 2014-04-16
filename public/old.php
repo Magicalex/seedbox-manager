@@ -1,8 +1,6 @@
 <?php
 
-require_once './../vendor/autoload.php';
-require_once './../app/manager.php';
-
+require_once '../app/manager.php';
 
 /* REQUEST POST AND GET */
 if ( isset($_GET['logout']) )
@@ -48,7 +46,6 @@ if ( isset($_POST['cloture']) && isset($_POST['user']))
     $cloture = $support->cloture($_POST['user']);
 }
 
-
 /* init objet */
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
@@ -59,39 +56,24 @@ $data_disk = $user->userdisk();
 $load_server = Server::load_average();
 $read_data_reboot = $user->readFileDataReboot('./../conf/users/'.$userName.'/data_reboot.txt');
 
+/*
 
-$loader = new Twig_Loader_Filesystem('./themes/default');
-$twig = new Twig_Environment($loader, array(
-    'cache' => false
-));
+Pour les views charger le bon index.php en fonction du themes
 
-echo $twig->render(
-    'index.html', array(
-        'post' => $_POST,
-        'get' => $_GET,
-        'userName' => $userName,
-        'is_owner' => $user->is_owner(),
-        'userRutorrentActiveUrl' => $user->rutorrentActiveUrl(),
-        'rutorrentUrl' => $user->rutorrentUrl(),
-        'userCakeboxActiveUrl' => $user->cakeboxActiveUrl(),
-        'userCakeboxUrl' => $user->cakeboxUrl(),
-        'rebootRtorrent' => @$rebootRtorrent,
-        'supportFileExist' => @$supportInfo['file_exist'],
-        'cloture' => @$cloture,
-        'userBlocInfo' => $user->blocInfo(),
-        'ipUser' => $_SERVER['REMOTE_ADDR'],
-        'data_disk' => $data_disk,
-        'uptime' => Server::getUptime(),
-        'load_server' => $load_server,
-        'userBlocFtp' => $user->blocFtp(),
-        'host' => $host,
-        'portFtp' => $user->portFtp(),
-        'portSftp' => $user->portSftp(),
-        'scgi_folder' => $user->scgi_folder,
-        'userBlocRtorrent' => $user->blocRtorrent(),
-        'read_data_reboot' => $read_data_reboot,
-        'userBlocSupport' => $user->blocSupport(),
-        'userSupportMail' => $user->supportMail(),
-        'ticket_list' => $support->ReadTicket()
-    )
-);
+
+*/
+
+/* views */
+require_once('themes/default/old/header.php');
+
+if ( isset($_GET['option']) )
+    require_once ('themes/default/old/option.php');
+elseif ( isset($_GET['download']))
+{
+    require_once('lib/downloads.php');
+    require_once('themes/default/old/body.php');
+}
+else
+    require_once('themes/default/old/body.php');
+
+require_once('themes/default/old/modal.php');
