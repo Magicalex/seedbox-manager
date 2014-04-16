@@ -37,9 +37,8 @@ if ( isset($_POST['delete-userName']) )
 
 if ( isset($_POST['support']) && isset($_POST['message']) )
 {
-    $message = $_POST['message'];
     $support = new Support($file_user_ini, $userName);
-    $supportInfo = $support->sendTicket($message,$_POST['user']);
+    $LogSupport = $support->sendTicket( $_POST['message'], $_POST['user']);
 }
 
 if ( isset($_POST['cloture']) && isset($_POST['user']))
@@ -76,7 +75,7 @@ echo $twig->render(
         'userCakeboxActiveUrl' => $user->cakeboxActiveUrl(),
         'userCakeboxUrl' => $user->cakeboxUrl(),
         'rebootRtorrent' => @$rebootRtorrent,
-        'supportFileExist' => @$supportInfo['file_exist'],
+        'supportTicketSend' => @$LogSupport,
         'cloture' => @$cloture,
         'userBlocInfo' => $user->blocInfo(),
         'ipUser' => $_SERVER['REMOTE_ADDR'],

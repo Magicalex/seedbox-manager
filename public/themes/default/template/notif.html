@@ -20,7 +20,7 @@
     </div>
 {% endif %}
 
-{% if post.support is defined and supportFileExist == true %}
+{% if post.support is defined and supportTicketSend == true %}
     <div class="alert alert-success">Votre ticket a était envoyé.</div>
 {% elseif post.cloture is defined and cloture == true %}
     <div class="alert alert-success">Ticket a était fermé.</div>
