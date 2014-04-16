@@ -6,8 +6,12 @@ Class Support extends Users {
     {
         foreach ( $this->TicketList() as $encoded_ticket )
         {
-            $ticket[] = $this->DecodeTicket( $encoded_ticket );
+            $ticket[] = $this->DecodeTicket($encoded_ticket);
+            // indiquer ici si le ticket et fermé
+            // avec cette méthode 
         }
+        if (empty($ticket))
+            $ticket = 'Aucun ticket';
 
         return $ticket;
     }
@@ -26,7 +30,7 @@ Class Support extends Users {
         else
             $name = $this->userName;
 
-        $date = date("d/m/Y \à H:i:s");
+        $date = date("d/m/y \à H\hi");
 
         if (file_exists('./../conf/users/'.$name.'/support.json'))
         {
@@ -105,9 +109,9 @@ Class Support extends Users {
 
     /* retourne si un ticket est fermé ou non */
 
-    public function EtatTicket($ticket)
+    public function EtatTicket($file_ticket)
     {
-        $log = stripos($ticket, 'support_');
+        $log = stripos($file_ticket, 'support_');
         return $log;
     }
 

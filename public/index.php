@@ -94,3 +94,7 @@ echo $twig->render(
         'ticket_list' => $support->ReadTicket()
     )
 );
+
+echo '<pre>';
+print_r($support->ReadTicket());
+echo '</pre>';
