@@ -49,8 +49,6 @@ if ( isset($_POST['cloture']) && isset($_POST['user']))
 }
 
 
-
-
 /* init objet */
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
@@ -97,7 +95,3 @@ echo $twig->render(
         'ticket_list' => $support->ReadTicket()
     )
 );
-
-
-
-

@@ -7,7 +7,7 @@
     {% if is_owner == true %}
 
     {% for list in ticket_list %}
-    <div class="panel panel-default">
+    <div class="panel panel-default ticket" id="ticket-{{ loop.index }}">
         {% for message in list %}
             <div class="panel-heading">Message de : {{ message.data.user }} le {{ message.data.date }}</div>
             <div class="panel-body">{{ message.data.message }}</div>
@@ -15,29 +15,43 @@
     </div>
     {% endfor %}
 
-    <table class="table table-striped">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>#</th>
-                <th>Utilisateur</th>
-                <th>Status</th>
-                <th>Créé le</th>
-                <th>Màj</th>
-                <th>Fermer/Supprimer</th>
+                <th>utilisateur</th>
+                <th>status</th>
+                <th>créé le</th>
+                <th>màj</th>
+                <th>fermer</th>
             </tr>
         </thead>
         <tbody>
+            {% for list in ticket_list %}
+            <tr>
+                <td><button type="button" class="btn btn-link show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
+                {% for info in list %}
+                    {% if loop.first %}
+                    <td>{{ info.data.user }}</td>
+                    <td>status</td>
+                    <td>{{ info.data.date }}</td>
+                    {% endif %}
+                    {% if loop.last %}
+                    <td>{{ info.data.date }}</td>
+                    {% endif %}
+                {% endfor %}
+                <td><a href="index.php">fermer</a></td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
 
-    {% endif %}
+    {% endif %} {# if is_owner #}
 
-    <ul>
-        <li>
-            <strong>contact mail :</strong>
-            <a href="mailto:{{ userSupportMail }}" target="_blank">{{ userSupportMail }}</a>
-        </li>
-    </ul>
+    <p>
+        <strong>contact mail :</strong>
+        <a href="mailto:{{ userSupportMail }}" target="_blank">{{ userSupportMail }}</a>
+    </p>
 
     </div>
 </article>

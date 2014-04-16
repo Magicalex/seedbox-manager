@@ -36,7 +36,8 @@ $(document).on('click', '.popup-delete-user', function ()
 
 $('.alert-success').delay(4000).hide('slow');
 
-$('.collapse').collapse({
-    hide : true,
-    toggle : false
+$('.ticket').hide();
+$('.show-ticket').click( function ()
+{
+    $('#ticket-' + this.id).slideToggle();
 });
