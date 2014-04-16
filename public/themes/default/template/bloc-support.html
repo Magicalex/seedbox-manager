@@ -6,18 +6,35 @@
     {% if is_owner == true %}
 
     {% for list in ticket_list %}
-    <div class="panel panel-default ticket" id="ticket-{{ loop.index }}">
-    {% set id = loop.index %}
+    <div class="panel panel-default ticket ticket-{{ loop.index }}">
+    {% set idTicket = loop.index %}
         {% for message in list %}
             <div class="panel-heading">
                 Message de : {{ message.data.user }} le {{ message.data.date }}
                 {% if loop.first %}
-                <span class="text-right"><button type="button" id="{{ id }}" class="btn btn-link btn-xs close-ticket">Cacher</button></span>
+                <span class="text-right"><button type="button" id="{{ idTicket }}" class="btn btn-link btn-xs close-ticket">Cacher</button></span>
                 {% endif %}
             </div>
-            <div class="panel-body">{{ message.data.message }}</div>
+            <div class="panel-body">{{ message.data.message|nl2br }}</div>
         {% endfor %}
     </div>
+    <form method="post" action="index.php" class="ticket ticket-{{ loop.index }}">
+        <fieldset>
+            <legend>Répondre</legend>
+            <div class="form-group">
+                <!--<label for="support">Répondre</label>-->
+                <textarea class="form-control" name="message" rows="3"></textarea>
+            </div>
+            <p class="text-right fix-marg-input">
+                {% for message in list %}
+                    {% if loop.first %}
+                        <input type="hidden" name="user" value="{{ message.data.user }}">
+                    {% endif %}
+                {% endfor %}
+                <input type="submit" name="support" value="Répondre au Ticket" class="btn btn-info btn-xs">                            
+            </p>
+        </fieldset>
+    </form>
     {% endfor %}
 
     <table class="table table-bordered table-striped">
