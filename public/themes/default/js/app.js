@@ -39,5 +39,10 @@ $('.alert-success').delay(4000).hide('slow');
 $('.ticket').hide();
 $('.show-ticket').click( function ()
 {
-    $('#ticket-' + this.id).slideToggle();
+    $('#ticket-' + this.id).fadeIn();
+});
+
+$('.close-ticket').click( function ()
+{
+    $('#ticket-' + this.id).fadeOut();
 });

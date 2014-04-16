@@ -7,8 +7,14 @@
 
     {% for list in ticket_list %}
     <div class="panel panel-default ticket" id="ticket-{{ loop.index }}">
+    {% set id = loop.index %}
         {% for message in list %}
-            <div class="panel-heading">Message de : {{ message.data.user }} le {{ message.data.date }}</div>
+            <div class="panel-heading">
+                Message de : {{ message.data.user }} le {{ message.data.date }}
+                {% if loop.first %}
+                <span class="text-right"><button type="button" id="{{ id }}" class="btn btn-link btn-xs close-ticket">Cacher</button></span>
+                {% endif %}
+            </div>
             <div class="panel-body">{{ message.data.message }}</div>
         {% endfor %}
     </div>
@@ -28,18 +34,18 @@
         <tbody>
             {% for list in ticket_list %}
             <tr>
-                <td><button type="button" class="show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
+                <td><button type="button" class="btn btn-success btn-sm show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
                 {% for info in list %}
                     {% if loop.first %}
                     <td>{{ info.data.user }}</td>
-                    <td>status</td>
+                    <td>######</td>
                     <td>{{ info.data.date }}</td>
                     {% endif %}
                     {% if loop.last %}
                     <td>{{ info.data.date }}</td>
                     {% endif %}
                 {% endfor %}
-                <td><a href="index.php">fermer</a></td>
+                <td><a href="index.php">#####</a></td>
             </tr>
             {% endfor %}
         </tbody>
