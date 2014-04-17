@@ -7,13 +7,22 @@ use app\Lib\Server;
 use app\Lib\Support;
 use app\Lib\UpdateFileIni;
 
-/* REQUEST POST AND GET */
+/* REQUEST GET */
 if ( isset($_GET['logout']) )
 {
     $serveur = new Server($file_user_ini, $userName);
     $serveur->logout();
 }
 
+if ( isset($_GET['admin']))
+{
+    if (empty($GET['user']))
+        new Users('./../conf/users/'.$userName.'/config.ini', $userName );
+    else
+        new Users('./../conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] );
+}
+
+/* REQUEST POST */
 if ( isset($_POST['reboot']) )
 {
     $user = new Users($file_user_ini, $userName);
@@ -97,7 +106,12 @@ echo $twig->render(
 
         // get option
         'updateIniFileLogUser' => @$update_ini_file_log,
-        'urlRedirect' => $user->url_redirect()
+        'urlRedirect' => $user->url_redirect(),
+
+        // get admin
+        'updateIniFileLogOwner' => @$update_ini_file_log_owner,
+        'LogDeleteUser' => @$log_delete_user,
+        'updateOwner' => ''
+
     )
 );
-
