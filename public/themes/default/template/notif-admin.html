@@ -1,9 +1,9 @@
 
 {% if post.delete-userName is defined %}
 
-<div class="alert alert-success">
+<div class="alert alert-info">
     Les fichiers de configuration de l'utilisateur {{ post.delete-userName }} ont été supprimé avec succès.
-    <ul class="text-success">
+    <ul class="text-info">
     {% for LogDeleteFile in LogDeleteUser %}
         <li>{{ LogDeleteFile  }}</li>
     {% endfor %}

@@ -49,7 +49,7 @@
             <tbody>
                 {% for list in ticket_list %}
                 <tr>
-                    <td><button type="button" class="btn btn-success btn-sm show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
+                    <td><button type="button" class="btn btn-default btn-xs show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
                     {% for info in list %}
                         {% if loop.first %}
                         <td>{{ info.data.user }}</td>
@@ -108,7 +108,7 @@
             <tbody>
                 {% for list in ticket_list %}
                 <tr>
-                    <td><button type="button" class="btn btn-success btn-sm show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
+                    <td><button type="button" class="btn btn-default btn-xs show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
                     <td>######</td>
                     {% for info in list %}
                         {% if loop.first %}
