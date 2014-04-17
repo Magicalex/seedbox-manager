@@ -41,23 +41,18 @@ Class Support extends Users {
             $ticket[] = array( 'data' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message));
             $encoded_ticket = json_encode($ticket);
             $log_write_ticket = @file_put_contents('./../conf/users/'.$name.'/support.json', $encoded_ticket.PHP_EOL);
-
-            if ($log_write_ticket === false)
-                return $log_write_ticket;
-            else
-                return $log_write_ticket = true;
         }
         else
         {
-            $ticket = array( array('data' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message)));
+            $ticket = array( 'data' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message));
             $encoded_ticket = json_encode($ticket);
             $log_write_ticket = @file_put_contents('./../conf/users/'.$this->userName.'/support.json', $encoded_ticket.PHP_EOL);
-
-            if ($log_write_ticket === false)
-                return $log_write_ticket;
-            else
-                return $log_write_ticket = true;
         }
+
+        if ($log_write_ticket === false)
+            return $log_write_ticket;
+        else
+            return $log_write_ticket = true;
     }
 
     /*
