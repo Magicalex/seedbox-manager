@@ -9,5 +9,8 @@
             "name": "Magicalex",
             "email": "magicalex14000@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": { "app\\": "app" }
+    }
 }

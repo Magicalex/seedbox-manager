@@ -1,5 +1,7 @@
 <?php
 
+namespace app\Lib;
+
 class Server extends Users
 {
     

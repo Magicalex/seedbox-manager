@@ -1,7 +1,6 @@
 <?php
 
-$folder_scgi = '/'.strtoupper(substr($userName,0,3)).'0';
-$title_seedbox = 'Seedbox '.$userName;
+$title_seedbox = 'Seedbox ' . $userName;
 $passwd = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW']:null;
 
 // setting transdroid
@@ -25,7 +24,7 @@ $tableau_conf_trandroid = array(
         'type' => 'daemon_rtorrent',
         'password' => $passwd,
         'os_type' => 'type_linux',
-        'folder' => $folder_scgi,
+        'folder' => $user->scgi_folder(),
         'username' => $userName,
         'use_auth' => true,
         'name' => $title_seedbox,
