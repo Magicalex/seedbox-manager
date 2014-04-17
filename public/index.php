@@ -111,7 +111,8 @@ echo $twig->render(
         // get admin
         'updateIniFileLogOwner' => @$update_ini_file_log_owner,
         'LogDeleteUser' => @$log_delete_user,
-        'updateOwner' => ''
+        'updateOwner' => '',
+        'GetAllUser' => Users::get_all_users()
 
     )
 );
