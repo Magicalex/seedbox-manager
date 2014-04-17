@@ -18,6 +18,30 @@
         {% include './template/header.html' %}
     </header>
 
+    {% if get.option is defined %}
+
+    <!-- CONTENEUR -->
+    <div class="container marg">
+        <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Réglage de votre utilisateur</h1>
+        {% include './template/notif-option.html' %}
+        <section class="row">
+            {% include './option.html' %}
+        </section>
+    </div>
+
+    {% elseif get.admin is defined and is_owner == true %}
+
+    <!-- CONTENEUR -->
+    <div class="container marg">
+        <h1 class="page-header dashboard"><i class="glyphicon glyphicon-cog"></i> Espace administration</h1>
+        {% include './template/notif-option.html' %}
+        <section class="row">
+            {% include './administration.html' %}
+        </section>
+    </div>
+
+    {% else %}
+
     <!-- CONTENEUR -->
     <div class="container marg">
         <h1 class="page-header dashboard"><i class="glyphicon glyphicon-dashboard"></i> Tableau de bord</h1>
@@ -48,7 +72,9 @@
                 {% include './template/bloc-support.html' %}
             {% endif %}
         </section>
-
     </div>
+
+    {% endif %} {# if $_GET page #}
+
 {% include './template/modal.html' %}
 {% include './template/footer.html' %}

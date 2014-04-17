@@ -66,34 +66,7 @@ $twig = new Twig_Environment($loader, array(
     'cache' => false
 ));
 
-if (isset($_GET['option']))
-{
-    echo $twig->render(
-    'option.html', array(
-        'post' => $_POST,
-        'get' => $_GET,
-        'userName' => $userName,
-        'is_owner' => $user->is_owner(),
-        'userRutorrentActiveUrl' => $user->rutorrentActiveUrl(),
-        'rutorrentUrl' => $user->rutorrentUrl(),
-        'userCakeboxActiveUrl' => $user->cakeboxActiveUrl(),
-        'userCakeboxUrl' => $user->cakeboxUrl(),
-        'updateIniFileLogUser' => @$update_ini_file_log,
-        'userBlocInfo' => $user->blocInfo(),
-        'userBlocFtp' => $user->blocFtp(),
-        'userBlocRtorrent' => $user->blocRtorrent(),
-        'userBlocSupport' => $user->blocSupport(),
-        'urlRedirect' => $user->url_redirect()
-    )
-);
-}
-elseif (isset($_GET['admin']))
-{
-    // code...
-}
-else
-{
-    echo $twig->render(
+echo $twig->render(
     'index.html', array(
         'post' => $_POST,
         'get' => $_GET,
@@ -120,7 +93,11 @@ else
         'read_data_reboot' => $read_data_reboot,
         'userBlocSupport' => $user->blocSupport(),
         'userSupportMail' => $user->supportMail(),
-        'ticket_list' => $support->ReadTicket()
+        'ticket_list' => $support->ReadTicket(),
+
+        // get option
+        'updateIniFileLogUser' => @$update_ini_file_log,
+        'urlRedirect' => $user->url_redirect()
     )
 );
-}
+
