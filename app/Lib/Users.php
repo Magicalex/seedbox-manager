@@ -1,5 +1,7 @@
 <?php
 
+namespace app\Lib;
+
 class Users
 {
     protected $userName;

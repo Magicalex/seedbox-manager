@@ -1,8 +1,11 @@
 <?php
 
-require_once './../vendor/autoload.php';
 require_once './../app/manager.php';
 
+use app\Lib\Users;
+use app\Lib\Server;
+use app\Lib\Support;
+use app\Lib\UpdateFileIni;
 
 /* REQUEST POST AND GET */
 if ( isset($_GET['logout']) )
@@ -47,7 +50,6 @@ if ( isset($_POST['cloture']) && isset($_POST['user']))
     $cloture = $support->cloture($_POST['user']);
 }
 
-
 /* init objet */
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
@@ -64,7 +66,34 @@ $twig = new Twig_Environment($loader, array(
     'cache' => false
 ));
 
-echo $twig->render(
+if (isset($_GET['option']))
+{
+    echo $twig->render(
+    'option.html', array(
+        'post' => $_POST,
+        'get' => $_GET,
+        'userName' => $userName,
+        'is_owner' => $user->is_owner(),
+        'userRutorrentActiveUrl' => $user->rutorrentActiveUrl(),
+        'rutorrentUrl' => $user->rutorrentUrl(),
+        'userCakeboxActiveUrl' => $user->cakeboxActiveUrl(),
+        'userCakeboxUrl' => $user->cakeboxUrl(),
+        'updateIniFileLogUser' => @$update_ini_file_log,
+        'userBlocInfo' => $user->blocInfo(),
+        'userBlocFtp' => $user->blocFtp(),
+        'userBlocRtorrent' => $user->blocRtorrent(),
+        'userBlocSupport' => $user->blocSupport(),
+        'urlRedirect' => $user->url_redirect()
+    )
+);
+}
+elseif (isset($_GET['admin']))
+{
+    // code...
+}
+else
+{
+    echo $twig->render(
     'index.html', array(
         'post' => $_POST,
         'get' => $_GET,
@@ -86,7 +115,7 @@ echo $twig->render(
         'host' => $host,
         'portFtp' => $user->portFtp(),
         'portSftp' => $user->portSftp(),
-        'scgi_folder' => $user->scgi_folder,
+        'scgi_folder' => $user->scgi_folder(),
         'userBlocRtorrent' => $user->blocRtorrent(),
         'read_data_reboot' => $read_data_reboot,
         'userBlocSupport' => $user->blocSupport(),
@@ -94,7 +123,4 @@ echo $twig->render(
         'ticket_list' => $support->ReadTicket()
     )
 );
-
-echo '<pre>';
-print_r($support->ReadTicket());
-echo '</pre>';
+}

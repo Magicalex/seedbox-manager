@@ -1,5 +1,7 @@
 <?php
 
+namespace app\Lib;
+
 Class Support extends Users {
 
     public function ReadTicket()

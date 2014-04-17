@@ -1,5 +1,7 @@
 <?php
 
+namespace app\Lib;
+
 class UpdateFileIni extends Users
 {
     public function update_file_config(array $data_upgrade, $conf_user_folder)

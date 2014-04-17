@@ -1,5 +1,7 @@
 <?php
 
+namespace app\Lib;
+
 class Install
 {
     public static function get_user_php()

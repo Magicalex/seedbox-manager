@@ -5,12 +5,10 @@ if ( isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']) )
 else
     die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>V&eacute;rifiez la configuration de votre serveur web.');
 
+// autoload des class php via composer
+require_once './../vendor/autoload.php';
 
-function chargerClasse($classe) {
-	require_once('../app/lib/'.$classe.'.class.php');
-}
-spl_autoload_register('chargerClasse');
-
+use app\Lib\Install;
 
 /*check config app */
 $install = new Install;
