@@ -10,11 +10,11 @@
     </div>
     <nav class="collapse navbar-collapse phone-menu">
         <ul class="nav navbar-nav">
-            {% if userRutorrentActiveUrl %}
-            <li class="nav-link"><a href="{{ rutorrentUrl }}">Rutorrent</a></li>
+            {% if user.rutorrentActiveUrl %}
+            <li class="nav-link"><a href="{{ user.rutorrentUrl }}">Rutorrent</a></li>
             {% endif %}
-            {% if userCakeboxActiveUrl %}
-            <li class="nav-link"><a href="{{ userCakeboxUrl }}">Cakebox</a></li>
+            {% if user.CakeboxActiveUrl %}
+            <li class="nav-link"><a href="{{ user.cakeboxUrl }}">Cakebox</a></li>
             {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -22,7 +22,7 @@
                 <a href="#" class="dropdown-toggle user icone-seed-manageruser" data-toggle="dropdown">{{ userName }} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="?option"><i class="glyphicon glyphicon-wrench"></i> Paramètres</a></li>
-                    {% if is_owner == true %}
+                    {% if user.is_owner == true %}
                     <li><a href="?admin"><i class="glyphicon glyphicon-cog"></i> Administration</a></li>
                     {% endif %}
                     <li><a class="aboutlink" data-toggle="modal" href="#popupinfo"><i class="glyphicon glyphicon-info-sign"></i> A propos</a></li>

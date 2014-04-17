@@ -27,27 +27,19 @@ Class Support extends Users {
 
     public function sendTicket( $message, $destinataire)
     {
-        if ($this->is_owner === true)
-            $name = $destinataire;
-        else
-            $name = $this->userName;
-
         $date = date("d/m/y \à H\hi");
 
         if (file_exists('./../conf/users/'.$name.'/support.json'))
         {
             $open_ticket = './../conf/users/'.$name.'/support.json';
             $ticket = json_decode(file_get_contents($open_ticket));
-            $ticket[] = array( 'data' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message));
-            $encoded_ticket = json_encode($ticket);
-            $log_write_ticket = @file_put_contents('./../conf/users/'.$name.'/support.json', $encoded_ticket.PHP_EOL);
+            $ticket[] = array( 'data' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message));  
         }
         else
-        {
             $ticket = array( 'data' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message));
-            $encoded_ticket = json_encode($ticket);
-            $log_write_ticket = @file_put_contents('./../conf/users/'.$this->userName.'/support.json', $encoded_ticket.PHP_EOL);
-        }
+
+        $encoded_ticket = json_encode($ticket);
+        $log_write_ticket = @file_put_contents('./../conf/users/'.$destinataire.'/support.json', $encoded_ticket.PHP_EOL);
 
         if ($log_write_ticket === false)
             return $log_write_ticket;
@@ -59,7 +51,6 @@ Class Support extends Users {
         Cette méthode renvoie deux listes des fichiers tickets.
             Une liste pour l'admin.
             OU une liste pour le user.
-
         La liste des fichiers est sous forme d'array.
     */
 
