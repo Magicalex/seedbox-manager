@@ -1,0 +1,121 @@
+
+
+
+{% if get.user is empty and is_owner == true %}
+{% endif %}
+
+<?php 
+
+} if ( $user->is_owner() === true && !empty($_GET['user']) )
+{
+    $update_owner = new Users('./../conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] );
+?>
+
+<article class="col-md-6">
+    <div class="well well-sm">
+        <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Configuration de l'utilisateur : <strong><?php echo $_GET['user']; ?></strong></h4>
+        <div class="trait"></div>
+                    
+        <form method="post" action="?admin" role="form">
+            <fieldset>
+                <legend>Généralité utilisateur</legend>
+                <div class="form-group">
+                    <label for="user_directory">Dossier /home de l'utilisateur</label>
+                    <input type="text" class="form-control" name="user_directory" id="user_directory" value="<?php echo $update_owner->user_directory(); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="user_directory">Dossier scgi de l'utilisateur</label>
+                    <input type="text" class="form-control" name="scgi_folder" id="scgi_folder" value="<?php echo $update_owner->scgi_folder(); ?>">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Barre de navigation</legend>
+                <div class="checkbox">
+                    <input type="checkbox" name="active_rutorrent" value="true" id="active_rutorrent" <?php if ($update_owner->rutorrentActiveUrl() === true) echo 'checked'; ?> ><label for="active_rutorrent">Afficher le lien rutorrent</label>
+                </div>
+                <div class="form-group">
+                    <label for="url_rutorrent">L'url de rutorrent</label>
+                    <input type="url" class="form-control" name="url_rutorrent" id="url_rutorrent" value="<?php echo $update_owner->rutorrentUrl(); ?>">
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="active_cakebox" value="true" id="active_cakebox" <?php if ($update_owner->cakeboxActiveUrl() === true) echo 'checked'; ?> ><label for="active_cakebox">Afficher le lien cakebox</label>
+                </div>
+                <div class="form-group">
+                    <label for="url_cakebox">L'url de cakebox</label>
+                    <input type="url" class="form-control" name="url_cakebox" id="url_cakebox" value="<?php echo $update_owner->cakeboxUrl(); ?>">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Paramètre des serveurs FTP/sFTP</legend>
+                <div class="form-group">
+                    <label for="port_ftp">Port ftp</label>
+                    <input type="number" class="form-control" name="port_ftp" id="port_ftp" value="<?php echo $update_owner->portFtp(); ?>">
+                </div>
+                <div class="form-group">
+                    <label for="port_sftp">Port sftp</label>
+                    <input type="number" class="form-control" name="port_sftp" id="port_sftp" value="<?php echo $update_owner->portSftp(); ?>">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Support</legend>
+                <div class="form-group">
+                    <label for="adresse_mail">Adresse du support</label>
+                    <input type="email" class="form-control" name="adresse_mail" id="adresse_mail" value="<?php echo $update_owner->supportMail(); ?>">
+                </div>
+            </fieldset>
+
+            <p class="text-right fix-marg-input">
+                <input type="hidden" name="user" value="<?php echo $_GET['user']; ?>">
+                <input type="hidden" name="owner_change_config">
+                <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
+            </p>
+        </form>
+    </div>
+</article>
+
+<article class="col-md-6">
+    <div class="well well-sm">
+        <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Administration : gestion utilisateurs</h4>
+        <div class="trait"></div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th><strong>#</strong></th>
+                        <th><strong>Utilisateur</strong></th>
+                        <th><strong>Modifier</strong></th>
+                        <th><strong>Supprimer</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php $i = 0; $num_user = 1; foreach (Users::get_all_users() as $i => $user_name) { ?>
+                    <tr>
+                        <td><?php echo $num_user; ?></td>
+                        <td><?php echo $user_name; ?></td>
+                        <td>
+                            <a href="?option&amp;user=<?php echo $user_name; ?>" class="btn btn-default btn-xs edit-btn-user">
+                                <i class="glyphicon glyphicon-edit"></i> éditer
+                            </a>
+                        </td>
+                        <td>
+                            <?php if ( $userName != $user_name) { ?>
+                            <a data-toggle="modal" class="popup-delete-user btn btn-danger btn-xs" data-user="<?php echo $user_name ?>" href="#delete-user">
+                                <i class="glyphicon glyphicon-trash"></i> supprimer
+                            </a>
+                            <?php } else { ?>
+                            <a class="popup-delete-user btn btn-danger btn-xs disabled">
+                                <i class="glyphicon glyphicon-trash"></i> supprimer
+                            </a>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <?php $num_user++; } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</article>
+    
