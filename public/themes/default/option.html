@@ -1,80 +1,48 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <title>Seedbox Manager</title>
-        <link href="./../components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link type="text/css" rel="stylesheet" href="../themes/default/css/style.css">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1">
-        <!--[if lt IE 9]>
-            <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-            <script type="text/javascript" src="./../components/respond/dest/respond.min.js"></script>
-        <![endif]-->
-    </head>
+<article class="col-md-12" id="conf-simple-user">
+    <div class="well well-sm">
+        <h4 class="titre-head">Configuration de l'interface</h4>
+        <div class="trait"></div>
 
-    <body>
-    
-    <header class="navbar navbar-default navbar-static-top">
-        {% include './template/header.html' %}
-    </header>
+        <form method="post" action="?option" role="form">
+            <div class="col-md-6">
+                <fieldset>
+                    <legend>Les options de la page d'accueil</legend>
+                    <div class="checkbox">
+                        <input type="checkbox" name="active_bloc_info" value="true" id="active_bloc_info" {% if userBlocInfo == true %} checked {% endif %} >
+                        <label for="active_bloc_info">Activer le bloc information utilisateur</label>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" name="active_ftp" value="true" id="active_ftp" {% if userBlocFtp == true %} checked {% endif %} >
+                        <label for="active_ftp">Activer le bloc accès ftp / sftp / transdroid</label>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" name="active_reboot" value="true" id="active_reboot" {% if userBlocRtorrent == true %} checked {% endif %} >
+                        <label for="active_reboot">Activer le bloc gestion de rtorrent</label>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" name="active_support" value="true" id="active_support" {% if userBlocSupport == true %} checked {% endif %} >
+                        <label for="active_support">Activer le bloc support</label>
+                    </div>
+                </fieldset>
+            </div>
 
-    <!-- CONTENEUR -->
-    <div class="container marg">
-        <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Réglage de votre utilisateur</h1>
-
-        {% include './template/notif-option.html' %}
-
-        <section class="row">
-            <article class="col-md-12" id="conf-simple-user">
-                <div class="well well-sm">
-                    <h4 class="titre-head">Configuration de l'interface</h4>
-                    <div class="trait"></div>
-
-                    <form method="post" action="?option" role="form">
-                        <div class="col-md-6">
-                        <fieldset>
-                            <legend>Les options de la page d'accueil</legend>
-                            <div class="checkbox">
-                                <input type="checkbox" name="active_bloc_info" value="true" id="active_bloc_info" {% if userBlocInfo == true %} checked {% endif %} >
-                                <label for="active_bloc_info">Activer le bloc information utilisateur</label>
+            <div class="col-md-6">
+                <fieldset>
+                    <legend>Les options de déconnexion</legend>
+                    <div class="form-group">
+                        <label for="url-deconnexion">Url de redirection à la déconnexion</label>
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <input type="url" name="url_redirect" class="form-control" id="url-deconnexion" value="{{ urlRedirect }}">
                             </div>
-                            <div class="checkbox">
-                                <input type="checkbox" name="active_ftp" value="true" id="active_ftp" {% if userBlocFtp == true %} checked {% endif %} >
-                                <label for="active_ftp">Activer le bloc accès ftp / sftp / transdroid</label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" name="active_reboot" value="true" id="active_reboot" {% if userBlocRtorrent == true %} checked {% endif %} >
-                                <label for="active_reboot">Activer le bloc gestion de rtorrent</label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" name="active_support" value="true" id="active_support" {% if userBlocSupport == true %} checked {% endif %} >
-                                <label for="active_support">Activer le bloc support</label>
-                            </div>
-                        </fieldset>
                         </div>
-
-                        <div class="col-md-6">
-                        <fieldset>
-                            <legend>Les options de déconnexion</legend>
-                            <div class="form-group">
-                                <label for="url-deconnexion">Url de redirection à la déconnexion</label>
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <input type="url" name="url_redirect" class="form-control" id="url-deconnexion" value="{{ urlRedirect }}">
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                        </div>
-                        <p class="text-right fix-marg-input">
-                            <input type="hidden" name="simple_conf_user">
-                            <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
-                        </p>
-                    </form>
-                </div>
-            </article>
-        </section>
-
+                    </div>
+                </fieldset>
+            </div>
+            <p class="text-right fix-marg-input">
+                <input type="hidden" name="simple_conf_user">
+                <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
+            </p>
+        </form>
     </div>
-{% include './template/modal.html' %}
-{% include './template/footer.html' %}
+</article>
