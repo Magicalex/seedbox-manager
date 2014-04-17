@@ -7,20 +7,6 @@ use app\Lib\Server;
 use app\Lib\Support;
 use app\Lib\UpdateFileIni;
 
-/* REQUEST GET */
-if ( isset($_GET['logout']) )
-{
-    $serveur = new Server($file_user_ini, $userName);
-    $serveur->logout();
-}
-
-if ( isset($_GET['admin']))
-{
-    if (empty($GET['user']))
-        new Users('./../conf/users/'.$userName.'/config.ini', $userName );
-    else
-        new Users('./../conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] );
-}
 
 /* REQUEST POST */
 if ( isset($_POST['reboot']) )
@@ -59,6 +45,21 @@ if ( isset($_POST['cloture']) && isset($_POST['user']))
     $cloture = $support->cloture($_POST['user']);
 }
 
+/* REQUEST GET */
+if ( isset($_GET['logout']) )
+{
+    $serveur = new Server($file_user_ini, $userName);
+    $serveur->logout();
+}
+
+if ( isset($_GET['admin']))
+{
+    if (empty($GET['user']))
+        $loader_file_ini_user = new Users('./../conf/users/'.$userName.'/config.ini', $userName );
+    else
+        $loader_file_ini_user = new Users('./../conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] );
+}
+
 /* init objet */
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
@@ -80,39 +81,45 @@ echo $twig->render(
         'post' => $_POST,
         'get' => $_GET,
         'userName' => $userName,
+
+        // init objet
+        'user' => $user,
+        'serveur' => $serveur,
+        'support' => $support,
+
         'is_owner' => $user->is_owner(),
-        'userRutorrentActiveUrl' => $user->rutorrentActiveUrl(),
-        'rutorrentUrl' => $user->rutorrentUrl(),
-        'userCakeboxActiveUrl' => $user->cakeboxActiveUrl(),
-        'userCakeboxUrl' => $user->cakeboxUrl(),
-        'rebootRtorrent' => @$rebootRtorrent,
-        'supportTicketSend' => @$LogSupport,
-        'cloture' => @$cloture,
+
         'userBlocInfo' => $user->blocInfo(),
-        'ipUser' => $_SERVER['REMOTE_ADDR'],
-        'data_disk' => $data_disk,
         'uptime' => Server::getUptime(),
-        'load_server' => $load_server,
-        'userBlocFtp' => $user->blocFtp(),
-        'host' => $host,
         'portFtp' => $user->portFtp(),
         'portSftp' => $user->portSftp(),
-        'scgi_folder' => $user->scgi_folder(),
-        'userBlocRtorrent' => $user->blocRtorrent(),
-        'read_data_reboot' => $read_data_reboot,
         'userBlocSupport' => $user->blocSupport(),
         'userSupportMail' => $user->supportMail(),
         'ticket_list' => $support->ReadTicket(),
+        'scgi_folder' => $user->scgi_folder(),
+        'userBlocRtorrent' => $user->blocRtorrent(),
+        'GetAllUser' => Users::get_all_users(),
+        'urlRedirect' => $user->url_redirect(),
+        'userBlocFtp' => $user->blocFtp(),
+
+
+
+        'rebootRtorrent' => @$rebootRtorrent,
+        'supportTicketSend' => @$LogSupport,
+        'cloture' => @$cloture,
+        'data_disk' => $data_disk,
+        'load_server' => $load_server,
+        'host' => $host,
+        'ipUser' => $_SERVER['REMOTE_ADDR'],
+        'read_data_reboot' => $read_data_reboot,
 
         // get option
         'updateIniFileLogUser' => @$update_ini_file_log,
-        'urlRedirect' => $user->url_redirect(),
+
 
         // get admin
         'updateIniFileLogOwner' => @$update_ini_file_log_owner,
         'LogDeleteUser' => @$log_delete_user,
-        'updateOwner' => '',
-        'GetAllUser' => Users::get_all_users()
-
+        'UpdateOwner' => @$loader_file_ini_user
     )
 );
