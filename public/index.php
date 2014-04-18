@@ -64,7 +64,6 @@ if (isset($_GET['admin']))
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
 $support = new Support($file_user_ini, $userName);
-
 $read_data_reboot = $user->readFileDataReboot('./../conf/users/'.$userName.'/data_reboot.txt');
 
 
