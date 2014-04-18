@@ -10,12 +10,12 @@
 {% if post.reboot is defined and rebootRtorrent.statusReboot == 0 %}
     <div class="alert alert-info">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Log :</strong><br>
-        commande exécuté : ./reboot-rtorrent {{ userName }}<br>
-        status : {{ rebootRtorrent.statusReboot }}.<br>
-        résultat de la commande :<br>
+        <h4>Log :</h4>
+        <strong>commande exécuté:</strong> ./reboot-rtorrent {{ userName }}<br>
+        <strong>status:</strong> {{ rebootRtorrent.statusReboot }}<br>
+        <strong>résultat de la commande:</strong> <br>
         {% for logs in rebootRtorrent.logReboot %}
-            $ {{ logs }}<br>
+            # {{ logs }}<br>
         {% endfor %}
     </div>
 {% endif %}
