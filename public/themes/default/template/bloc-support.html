@@ -3,9 +3,9 @@
     <h4 class="icone-seed-managersupport titre-head">Contacter le Support</h4>
     <div class="trait"></div>
 
-    {% if is_owner == true %}
+    {% if user.is_owner == true %}
 
-    {% for list in ticket_list %} {% set idTicket = loop.index %}
+    {% for list in support.ReadTicket %} {% set idTicket = loop.index %}
     <div class="panel panel-default ticket ticket-{{ loop.index }}">
         {% for message in list %}
             <div class="panel-heading">
@@ -47,7 +47,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for list in ticket_list %}
+                {% for list in support.ReadTicket %}
                 <tr>
                     <td><button type="button" class="btn btn-default btn-xs show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
                     {% for info in list %}
@@ -68,7 +68,7 @@
     </div>
     {% else %} {# else if not_owner #}
     
-    {% for list in ticket_list %} {% set idTicket = loop.index %}
+    {% for list in support.ReadTicket %} {% set idTicket = loop.index %}
     <div class="panel panel-default ticket ticket-{{ loop.index }}">
         {% for message in list %}
             <div class="panel-heading">
@@ -106,7 +106,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for list in ticket_list %}
+                {% for list in support.ReadTicket %}
                 <tr>
                     <td><button type="button" class="btn btn-default btn-xs show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
                     <td>######</td>
@@ -125,11 +125,11 @@
         </table>
     </div>
 
-    {% endif %} {# if is_owner and elseif not owner #}
+    {% endif %} {# if user.is_owner and elseif not owner #}
 
     <p>
         <strong>contact mail :</strong>
-        <a href="mailto:{{ userSupportMail }}" target="_blank">{{ userSupportMail }}</a>
+        <a href="mailto:{{ user.supportMail }}" target="_blank">{{ user.supportMail }}</a>
     </p>
 
     </div>
