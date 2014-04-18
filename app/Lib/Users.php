@@ -130,21 +130,21 @@ class Users
         {
             if ($file_name != '.' && $file_name != '..')
             {
-                $delete_file_log = unlink($path_conf_user.'/'.$file_name);
+                $delete_file_log = @unlink($path_conf_user.'/'.$file_name);
                 if ($delete_file_log === true)
                     $log[] = 'Le fichier '.$file_name.' a été supprimé.';
                 else
-                    $log[] = 'Impossible de supprimer le fichier '.$file_name.'.';
+                    $error[] = 'Impossible de supprimer le fichier '.$file_name.'.';
             }
         }
 
-        $delete_folder_log = rmdir($path_conf_user);
+        $delete_folder_log = @rmdir($path_conf_user);
         if ($delete_folder_log === true)
             $log[] = 'Le dossier '.$path_conf_user.'/ a été supprimé.';
         else
-            $log[] = 'Impossible de supprimer le dossier '.$path_conf_user.'.';
+            $error[] = 'Impossible de supprimer le dossier '.$path_conf_user.'.';
 
-        return $log;
+        return array( 'log' => @$log, 'error' => @$error);
     }
 
     public function url_redirect() { return $this->url_redirect; }
