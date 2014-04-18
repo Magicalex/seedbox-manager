@@ -79,20 +79,17 @@ echo $twig->render(
         'get' => $_GET,
         'host' => $_SERVER['HTTP_HOST'],
         'ipUser' => $_SERVER['REMOTE_ADDR'],
-
         // init objet
         'user' => $user,
         'serveur' => $serveur,
         'support' => $support,
-
+        // var index
         'rebootRtorrent' => @$rebootRtorrent,
         'supportTicketSend' => @$LogSupport,
         'cloture' => @$cloture,
         'read_data_reboot' => $read_data_reboot,
-
         // get option
         'updateIniFileLogUser' => @$update_ini_file_log,
-
         // get admin
         'updateIniFileLogOwner' => @$update_ini_file_log_owner,
         'LogDeleteUser' => @$log_delete_user,
