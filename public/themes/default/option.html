@@ -44,13 +44,11 @@
                 <fieldset>
                     <legend>Les thèmes</legend>
                     <div class="form-group">
-                        <label for="user-theme">choisir un thème</label> <strong class="text-danger">[Non fonctionnel]</strong>
-                        <select class="form-control">
-                            <option>theme 1</option>
-                            <option>theme 2</option>
-                            <option>theme 3</option>
-                            <option>theme 4</option>
-                            <option>theme 5</option>
+                        <label for="user-theme">choisir un thème</label>
+                        <select name="theme" class="form-control">
+                        {% for theme in user.get_all_themes %}
+                            <option value="{{ theme }}" {% if theme == user.theme %}selected{% endif %}>{{ theme }}</option>
+                        {% endfor %}
                         </select>
                     </div>
                 </fieldset>

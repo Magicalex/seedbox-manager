@@ -44,7 +44,7 @@ class Server extends Users
     {
         header('HTTP/1.1 401 Unauthorized');
 
-        usleep(500000); /*sleep(1); */ /* = 1/2 sec ~ 500 ms */
+        usleep(500000); /*sleep(1); */ /* usleep(500000) = 1/2 sec ~ 500 ms */
         echo '<script>document.location.href = \''.$this->url_redirect.'\'</script>';
         exit();
     }

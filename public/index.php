@@ -67,7 +67,7 @@ $support = new Support($file_user_ini, $userName);
 $read_data_reboot = $user->readFileDataReboot('./../conf/users/'.$userName.'/data_reboot.txt');
 
 
-$loader = new Twig_Loader_Filesystem('./themes/default');
+$loader = new Twig_Loader_Filesystem('./themes/' . $user->theme );
 $twig = new Twig_Environment($loader, array(
     'cache' => false
 ));
