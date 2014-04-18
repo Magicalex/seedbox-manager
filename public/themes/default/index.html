@@ -29,7 +29,7 @@
         </section>
     </div>
 
-    {% elseif get.admin is defined and is_owner == true %}
+    {% elseif get.admin is defined and user.is_owner == true %}
 
     <!-- CONTENEUR -->
     <div class="container marg">
@@ -56,19 +56,19 @@
          {% include './template/notif.html' %}
 
         <section class="row">
-            {% if userBlocInfo == true %}
+            {% if user.blocInfo == true %}
                 {% include './template/bloc-info.html' %}
             {% endif %}
 
-            {% if userBlocFtp == true %}
+            {% if user.blocFtp == true %}
                 {% include './template/bloc-ftp.html' %}
             {% endif %}
 
-            {% if userBlocRtorrent == true %}
+            {% if user.blocRtorrent == true %}
                 {% include './template/bloc-rtorrent.html' %}
             {% endif %}
 
-            {% if userBlocSupport == true %}
+            {% if user.blocSupport == true %}
                 {% include './template/bloc-support.html' %}
             {% endif %}
         </section>

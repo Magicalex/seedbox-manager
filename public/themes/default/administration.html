@@ -20,7 +20,7 @@
             <fieldset>
                 <legend>Barre de navigation</legend>
                 <div class="checkbox">
-                    <input type="checkbox" name="active_rutorrent" value="true" id="active_rutorrent" {% if UpdateOwner.rutorrentActiveUrl == true %} checked {% endif %}>
+                    <input type="checkbox" name="active_rutorrent" value="true" id="active_rutorrent" {% if UpdateOwner.rutorrentActiveUrl == true %}checked{% endif %} >
                     <label for="active_rutorrent">Afficher le lien rutorrent</label>
                 </div>
                 <div class="form-group">
@@ -28,7 +28,7 @@
                     <input type="url" class="form-control" name="url_rutorrent" id="url_rutorrent" value="{{ UpdateOwner.rutorrentUrl }}">
                 </div>
                 <div class="checkbox">
-                    <input type="checkbox" name="active_cakebox" value="true" id="active_cakebox" {% if UpdateOwner.cakeboxActiveUrl %} checked {% endif %}>
+                    <input type="checkbox" name="active_cakebox" value="true" id="active_cakebox" {% if UpdateOwner.cakeboxActiveUrl %}checked{% endif %} >
                     <label for="active_cakebox">Afficher le lien cakebox</label>
                 </div>
                 <div class="form-group">
@@ -81,7 +81,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% for user in GetAllUser %}
+                {% for user in user.get_all_users %}
                     <tr>
                         <td>{{ loop.index }}</td>
                         <td>{{ user }}</td>
