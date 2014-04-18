@@ -52,9 +52,9 @@ if ( isset($_GET['logout']) )
     $serveur->logout();
 }
 
-if ( isset($_GET['admin']))
+if (isset($_GET['admin']))
 {
-    if (empty($GET['user']))
+    if (empty($_GET['user']))
         $loader_file_ini_user = new Users('./../conf/users/'.$userName.'/config.ini', $userName );
     else
         $loader_file_ini_user = new Users('./../conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] );
