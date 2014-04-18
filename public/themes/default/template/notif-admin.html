@@ -1,8 +1,9 @@
 
-{% if post.delete-userName is defined %}
+{% if post.deleteUserName is defined %}
 
 <div class="alert alert-info">
-    Les fichiers de configuration de l'utilisateur {{ post.delete-userName }} ont été supprimé avec succès.
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    Les fichiers de configuration de l'utilisateur {{ post.deleteUserName }} ont été supprimé avec succès.
     <ul class="text-info">
     {% for LogDeleteFile in LogDeleteUser %}
         <li>{{ LogDeleteFile  }}</li>
