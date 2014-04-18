@@ -30,7 +30,7 @@ $('#popuptransdroid').popover({
 $(document).on('click', '.popup-delete-user', function ()
 {
     var userName = $(this).data('user');
-    $('#delete-userName').val(userName);
+    $('#deleteUserName').val(userName);
     $('#target-delete-user').html('<i class="glyphicon glyphicon-trash"></i> Suppression de l\'utilisateur : <strong>'+userName+'</strong>');
 });
 

@@ -27,10 +27,10 @@ if ( isset($_POST['owner_change_config']) )
     $update_ini_file_log_owner = $update->update_file_config($_POST, './../conf/users/'.$_POST['user']);
 }
 
-if ( isset($_POST['delete-userName']) )
+if ( isset($_POST['deleteUserName']) )
 {
     $user = new Users($file_user_ini, $userName);
-    $log_delete_user = Users::delete_config_old_user('./../conf/users/'.$_POST['delete-userName']);
+    $log_delete_user = Users::delete_config_old_user('./../conf/users/'.$_POST['deleteUserName']);
 }
 
 if ( isset($_POST['support']) && isset($_POST['message']) )
@@ -78,6 +78,7 @@ $twig = new Twig_Environment($loader, array(
 
 echo $twig->render(
     'index.html', array(
+
         'post' => $_POST,
         'get' => $_GET,
         'userName' => $userName,
