@@ -39,6 +39,7 @@ class Users
         $this->blocSupport        = (bool) $array['support']['active_support'];
         $this->directory          = (string) $array['user']['user_directory'];
         $this->scgi_folder        = (string) $array['user']['scgi_folder'];
+        $this->theme              = (string) $array['user']['theme'];
         $this->rutorrentUrl       = (string) $array['nav']['url_rutorrent'];
         $this->cakeboxUrl         = (string) $array['nav']['url_cakebox'];
         $this->supportMail        = (string) $array['support']['adresse_mail'];
@@ -110,7 +111,7 @@ class Users
     public static function get_all_users()
     {
         $scan = scandir('./../conf/users/');
-        foreach ($scan as $key => $file_name)
+        foreach ($scan as $file_name)
         {
             if ($file_name != '.' && $file_name != '..' && is_dir('./../conf/users/'.$file_name))
                 $all_users[] = $file_name;
@@ -147,6 +148,20 @@ class Users
         return array( 'log' => @$log, 'error' => @$error);
     }
 
+    /* retourne la liste de tous les thèmes */
+
+    public static function get_all_themes()
+    {
+        $scan = scandir('./themes/');
+        foreach ($scan as $folder_name)
+        {
+            if ($folder_name != '.' && $folder_name != '..' && is_dir('./themes/'.$folder_name))
+                $all_themes[] = $folder_name;
+        }
+
+        return $all_themes;
+    }
+
     public function url_redirect() { return $this->url_redirect; }
     public function rutorrentActiveUrl() { return $this->rutorrentActiveUrl; }
     public function rutorrentUrl() { return $this->rutorrentUrl; }
@@ -163,4 +178,5 @@ class Users
     public function is_owner() { return $this->is_owner; }
     public function user_directory() { return $this->directory; }
     public function scgi_folder() { return $this->scgi_folder; }
+    public function theme() { return $this->theme; }
 }
