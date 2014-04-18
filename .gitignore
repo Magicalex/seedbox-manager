@@ -1,11 +1,9 @@
-## fichier
-
+## fichiers
 .htpasswd
 composer.lock
 reboot-rtorrent
 
-## dossier
-
-/public/components
-/conf/users
+## dossiers
+/public/components/
+/conf/users/
 /vendor/
