@@ -79,7 +79,7 @@ class Users
 
     public function rebootRtorrent()
     {
-        exec( $this->currentPath.'./../reboot-rtorrent '.$this->userName.' 2>&1', $log, $status);
+        exec( $this->currentPath.'/../reboot-rtorrent '.$this->userName.' 2>&1', $log, $status);
         $date_updated = date('d/m/y \à H\hi');
         file_put_contents('./../conf/users/'.$this->userName.'/data_reboot.txt', $date_updated);
 
