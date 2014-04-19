@@ -6,14 +6,13 @@ Class Support extends Users {
 
     public function ReadTicket()
     {
-        foreach ( $this->TicketList() as $encoded_ticket )
+        if (!empty($this->TicketList()))
         {
-            $ticket[] = $this->DecodeTicket($encoded_ticket);
-            // indiquer ici si le ticket et fermé
-            // avec cette méthode 
+            foreach ( $this->TicketList() as $encoded_ticket )
+                $ticket[] = $this->DecodeTicket($encoded_ticket);
         }
-        if (empty($ticket))
-            $ticket = 'Aucun ticket';
+        else
+            $ticket = false;
 
         return $ticket;
     }
