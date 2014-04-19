@@ -1,4 +1,5 @@
 <?php
+use app\Lib\Install; 
 $user_name_php = Install::get_user_php();
 $root_path = getcwd();
 ?>
