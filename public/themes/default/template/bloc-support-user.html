@@ -11,7 +11,7 @@
         </p>
     </form>
 {% else %}
-    {% for list in support.ReadTicket %}
+    {% for list in support.ReadTicket|reverse %}
         {% set idTicket = loop.index %}
         <div class="panel panel-default ticket ticket-{{ loop.index }}">
         {% for ticket in list.reply %}
@@ -51,7 +51,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for list in support.ReadTicket %}
+            {% for list in support.ReadTicket|reverse %}
                 <tr>
                     <td><button type="button" class="btn btn-default btn-xs show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
                     <td>
@@ -63,16 +63,16 @@
                     </td>
                     {% for infoDate in list.reply %}
                         {% if loop.first %}
-                            <td>{{ infoDate.data.date }}</td>
+                            <td><small>{{ infoDate.data.date }}</small></td>
                         {% endif %}
                         {% if loop.last %}
-                            <td>{{ infoDate.data.date }}</td>
+                            <td><small>{{ infoDate.data.date }}</small></td>
                         {% endif %}
                     {% endfor %}
                     <td>
                     {% if list.status == 'open' %}
                         <form method="post" action="index.php">
-                            <input type="hidden" name="user" value="" class="btn btn-info">
+                            <input type="hidden" name="user" value="{{ userName }}" class="btn btn-info">
                             <input type="submit" name="cloture" value="Fermer le billet" class="btn btn-info btn-xs">
                         </form>
                     {% else %}
