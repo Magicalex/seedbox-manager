@@ -42,7 +42,7 @@ if ( isset($_POST['support']) && isset($_POST['message']) )
 if ( isset($_POST['cloture']) && isset($_POST['user']))
 {
     $support = new Support($file_user_ini, $userName);
-    $cloture = $support->cloture($_POST['user']);
+    $cloture = $support->ClotureTicket($_POST['user']);
 }
 
 /* REQUEST GET */
