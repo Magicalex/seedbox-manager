@@ -10,14 +10,13 @@ Class Support extends Users {
         {
             foreach ( $this->TicketList() as $encoded_ticket )
             {
-                $reply = $this->DecodeTicket($encoded_ticket);
+                $reply = json_decode(file_get_contents($encoded_ticket), true);
                 $status = $this->EtatTicket($encoded_ticket);
                 $ticket[] = array( 'reply' => $reply, 'status' => $status);
             }
         }
         else
             $ticket = false;
-
         return $ticket;
     }
 
@@ -43,11 +42,8 @@ Class Support extends Users {
 
         $encoded_ticket = json_encode($ticket);
         $log_write_ticket = @file_put_contents('./../conf/users/'.$destinataire.'/support.json', $encoded_ticket.PHP_EOL);
-
-        if ($log_write_ticket === false)
-            return $log_write_ticket;
-        else
-            return $log_write_ticket = true;
+        $result = $log_write_ticket === false ? $log_write_ticket:true;
+        return $result; 
     }
 
     /*
@@ -70,7 +66,7 @@ Class Support extends Users {
 
             //converti un tableau multidimensionnel en un tableau unidimensionnel.
             array_walk_recursive( $files_ticket,
-                function( $a, $b) use (&$all_files_tickets)
+                function($a) use (&$all_files_tickets)
                 {
                     $all_files_tickets[] = $a;
                 });
@@ -85,17 +81,18 @@ Class Support extends Users {
     }
 
     /*
-        Methode cloture :
+        Methode cloture de ticket:
         Cherche tous les fichiers avec l'extension avec le pattern support*.json puis les comptes
         Renomme le fichier support.json (dernier ticket) en support_X.json
     */
 
-    public function cloture($user)
+    public function ClotureTicket($user)
     {
         $scan_ticket = glob('./../conf/users/'.$user.'/support*.json');
         $nb_ticket = count($scan_ticket);
-
-        return rename('./../conf/users/'.$user.'/support.json', './../conf/users/'.$user.'/support_'.$nb_ticket.'.json' );
+        $result = rename('./../conf/users/'.$user.'/support.json',
+                         './../conf/users/'.$user.'/support_'.$nb_ticket.'.json');
+        return $result;
     }
 
     /* Indique si un ticket est fermé ou non */
@@ -104,15 +101,6 @@ Class Support extends Users {
     {
         $status = (bool) preg_match('#support.json#', $file_ticket);
         $result = $status === true ? 'open':'close';
-
         return $result;
-    }
-
-    /* Méthode qui décode un ticket */
-
-    private function DecodeTicket($ticket)
-    {
-        $json = json_decode(file_get_contents($ticket), true);
-        return $json;
     }
 }
