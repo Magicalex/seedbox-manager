@@ -12,11 +12,20 @@ Class Support extends Users {
             {
                 $reply = json_decode(file_get_contents($encoded_ticket), true);
                 $status = $this->EtatTicket($encoded_ticket);
-                $ticket[] = array( 'reply' => $reply, 'status' => $status);
+                $ticket['ticket'][] = array( 'reply' => $reply, 'status' => $status);
+                if ($status == 'open') {
+                    $all_ticket_close = false;
+                }
             }
+
+            if (!isset($all_ticket_close)) {
+                $all_ticket_close = true;
+            }
+            $ticket['allTicketClose'] = $all_ticket_close;
         }
         else
             $ticket = false;
+
         return $ticket;
     }
 
@@ -65,11 +74,9 @@ Class Support extends Users {
             }
 
             //converti un tableau multidimensionnel en un tableau unidimensionnel.
-            array_walk_recursive( $files_ticket,
-                function($a) use (&$all_files_tickets)
-                {
-                    $all_files_tickets[] = $a;
-                });
+            array_walk_recursive( $files_ticket, function($a) use (&$all_files_tickets) {
+                $all_files_tickets[] = $a;
+            });
 
             return $all_files_tickets;
         }
