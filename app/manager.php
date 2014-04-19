@@ -18,7 +18,7 @@ if (file_exists('./../reboot-rtorrent') && Install::check_uid_file('./../reboot-
     $uid_user_php = Install::get_user_php();
     if ( $uid_folder_users != $uid_user_php['num_uid'] )
     {
-        require_once('./themes/default/installation.php');
+        require_once('./install/installation.php');
         exit();
     }
     else
@@ -34,6 +34,6 @@ if (file_exists('./../reboot-rtorrent') && Install::check_uid_file('./../reboot-
 }
 else
 {
-    require_once('./themes/default/installation.php');
+    require_once('./install/installation.php');
     exit();
 }
