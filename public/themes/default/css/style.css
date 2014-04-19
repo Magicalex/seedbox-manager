@@ -114,6 +114,10 @@ ul {
   margin-bottom:10px;
 }
 
+.alert-sm {
+  padding:7px;
+}
+
 @font-face {
   font-family: 'seedmanager';
   src:url('../fonts/seedmanager.eot');

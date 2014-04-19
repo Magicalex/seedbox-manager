@@ -16,7 +16,7 @@
         <div class="panel panel-default ticket ticket-{{ loop.index }}">
         {% for ticket in list.reply %}
             <div class="panel-heading">
-            Message de : {{ ticket.data.user }} le {{ ticket.data.date }}
+            Message de : <em>{{ ticket.data.user }}</em> le <em>{{ ticket.data.date }}</em>
             {% if loop.first %}
                 <span class="text-right">
                     <button type="button" id="{{ idTicket }}" class="btn btn-link btn-xs close-ticket">Cacher</button>
@@ -46,7 +46,7 @@
                     <th>#</th>
                     <th>status</th>
                     <th>créé le</th>
-                    <th>màj</th>
+                    <th>m-à-j</th>
                     <th>fermer</th>
                 </tr>
             </thead>
@@ -58,7 +58,7 @@
                     {% if list.status == 'open' %}
                         <strong class="text-success">Ouvert</strong>
                     {% else %}
-                        <strong class="text-danger">Ouvert</strong>
+                        <strong class="text-danger">Fermé</strong>
                     {% endif %}
                     </td>
                     {% for infoDate in list.reply %}

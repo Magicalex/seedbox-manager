@@ -90,8 +90,17 @@ Class Support extends Users {
     {
         $scan_ticket = glob('./../conf/users/'.$user.'/support*.json');
         $nb_ticket = count($scan_ticket);
-        $result = rename('./../conf/users/'.$user.'/support.json',
-                         './../conf/users/'.$user.'/support_'.$nb_ticket.'.json');
+        $old_file = './../conf/users/'.$user.'/support.json';
+        $new_file = './../conf/users/'.$user.'/support_'.$nb_ticket.'.json';
+        $result = rename($old_file, $new_file);
+
+/*
+        //Note : changer open par close key = status
+        $ticket = json_decode(file_get_contents($new_file), true);
+        $ticket['status'] = 'close';
+        echo '<pre>'; var_dump($ticket); echo '</pre>';
+*/
+
         return $result;
     }
 
