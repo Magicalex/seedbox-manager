@@ -9,7 +9,11 @@ Class Support extends Users {
         if (!empty($this->TicketList()))
         {
             foreach ( $this->TicketList() as $encoded_ticket )
-                $ticket[] = $this->DecodeTicket($encoded_ticket);
+            {
+                $reply = $this->DecodeTicket($encoded_ticket);
+                $status = $this->EtatTicket($encoded_ticket);
+                $ticket[] = array( 'reply' => $reply, 'status' => $status);
+            }
         }
         else
             $ticket = false;
@@ -94,15 +98,17 @@ Class Support extends Users {
         return rename('./../conf/users/'.$user.'/support.json', './../conf/users/'.$user.'/support_'.$nb_ticket.'.json' );
     }
 
-    /* retourne si un ticket est fermé ou non */
+    /* Indique si un ticket est fermé ou non */
 
-    public function EtatTicket($file_ticket)
+    private function EtatTicket($file_ticket)
     {
-        $log = stripos($file_ticket, 'support_');
-        return $log;
+        $status = (bool) preg_match('#support.json#', $file_ticket);
+        $result = $status === true ? 'open':'close';
+
+        return $result;
     }
 
-    /* Méthode qui décode le ticket */
+    /* Méthode qui décode un ticket */
 
     private function DecodeTicket($ticket)
     {
