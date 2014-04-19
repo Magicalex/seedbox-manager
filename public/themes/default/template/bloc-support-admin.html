@@ -1,0 +1,65 @@
+
+{% if support.ReadTicket == false %}
+    <p>Aucun ticket :D</p>
+{% else %}
+    {% for list in support.ReadTicket %}
+        {% set idTicket = loop.index %}
+        <div class="panel panel-default ticket ticket-{{ loop.index }}">
+        {% for message in list %}
+            <div class="panel-heading">
+                Message de : {{ message.data.user }} le {{ message.data.date }}
+                {% if loop.first %}
+                <span class="text-right"><button type="button" id="{{ idTicket }}" class="btn btn-link btn-xs close-ticket">Cacher</button></span>
+                {% endif %}
+            </div>
+            <div class="panel-body">{{ message.data.message|nl2br }}</div>
+        {% endfor %}
+    </div>
+    <form method="post" action="index.php" class="ticket ticket-{{ loop.index }}">
+        <h6 class="page-header reply-ticket-h6"><strong>Répondre</strong></h6>
+            <div class="form-group">
+                <textarea class="form-control" name="message" rows="3"></textarea>
+            </div>
+            <p class="text-right">
+                {% for message in list %}
+                    {% if loop.first %}
+                        <input type="hidden" name="user" value="{{ message.data.user }}">
+                    {% endif %}
+                {% endfor %}
+                <input type="submit" name="support" value="Répondre au Ticket" class="btn btn-info btn-xs">                            
+            </p>
+    </form>
+    {% endfor %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>utilisateur</th>
+                    <th>status</th>
+                    <th>créé le</th>
+                    <th>màj</th>
+                    <th>fermer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in support.ReadTicket %}
+                <tr>
+                    <td><button type="button" class="btn btn-default btn-xs show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
+                    {% for info in list %}
+                        {% if loop.first %}
+                        <td>{{ info.data.user }}</td>
+                        <td>######</td>
+                        <td>{{ info.data.date }}</td>
+                        {% endif %}
+                        {% if loop.last %}
+                        <td>{{ info.data.date }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td><a href="index.php">#####</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
