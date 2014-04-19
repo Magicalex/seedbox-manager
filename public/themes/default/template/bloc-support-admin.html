@@ -3,7 +3,7 @@
     <div class="alert alert-info alert-sm">Aucun ticket :D</div>
 {% else %}
 
-{% for list in support.ReadTicket|reverse %}
+{% for list in support.ReadTicket.ticket %}
     {% set idTicket = loop.index %}
     <div class="panel panel-default ticket ticket-{{ loop.index }}">
     {% for ticket in list.reply %}
@@ -47,7 +47,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for list in support.ReadTicket|reverse %}
+        {% for list in support.ReadTicket.ticket %}
             <tr>
                 <td><button type="button" class="btn btn-default btn-xs show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
                 <td>
@@ -73,7 +73,7 @@
                         <input type="submit" name="cloture" value="Fermer le billet" class="btn btn-info btn-xs">
                     </form>
                 {% else %}
-                    <button class="btn btn-info btn-xs disabled">fermer le billet</button>
+                    <button class="btn btn-info btn-xs disabled">Fermer le billet</button>
                 {% endif %}
                 </td>
             </tr>

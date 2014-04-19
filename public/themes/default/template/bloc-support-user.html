@@ -1,5 +1,5 @@
 
-{% if support.ReadTicket == false %}
+{% if support.ReadTicket == false or support.ReadTicket.allTicketClose == true %}
     <form method="post" action="index.php">
         <h6 class="page-header reply-ticket-h6"><strong>Ouvrir un ticket</strong></h6>
         <div class="form-group">
@@ -10,8 +10,9 @@
             <input type="submit" name="support" value="Envoyer un Ticket" class="btn btn-info btn-xs">                            
         </p>
     </form>
-{% else %}
-    {% for list in support.ReadTicket|reverse %}
+{% endif %}
+{% if support.ReadTicket != false  %}
+    {% for list in support.ReadTicket.ticket %}
         {% set idTicket = loop.index %}
         <div class="panel panel-default ticket ticket-{{ loop.index }}">
         {% for ticket in list.reply %}
@@ -51,14 +52,14 @@
                 </tr>
             </thead>
             <tbody>
-            {% for list in support.ReadTicket|reverse %}
+            {% for list in support.ReadTicket.ticket %}
                 <tr>
                     <td><button type="button" class="btn btn-default btn-xs show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
                     <td>
                     {% if list.status == 'open' %}
-                        <strong class="text-success">Ouvert</strong>
+                        <strong class="text-success"><small>Ouvert</small></strong>
                     {% else %}
-                        <strong class="text-danger">Fermé</strong>
+                        <strong class="text-danger"><small>Fermé</small></strong>
                     {% endif %}
                     </td>
                     {% for infoDate in list.reply %}
@@ -76,7 +77,7 @@
                             <input type="submit" name="cloture" value="Fermer le billet" class="btn btn-info btn-xs">
                         </form>
                     {% else %}
-                        <button class="btn btn-info btn-xs disabled">fermer le billet</button>
+                        <button class="btn btn-info btn-xs disabled">Fermer le billet</button>
                     {% endif %}
                     </td>
                 </tr>
