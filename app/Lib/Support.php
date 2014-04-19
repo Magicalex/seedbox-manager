@@ -36,7 +36,6 @@ Class Support extends Users {
         {
             $open_ticket = './../conf/users/'.$destinataire.'/support.json';
             $ticket = json_decode(file_get_contents($open_ticket), true);
-            echo "<pre>"; var_dump($ticket); echo "</pre>";
             $ticket[] = array( 'data' => array( 'user' => $this->userName, 'date' => $date, 'message' => $message));  
         }
         else

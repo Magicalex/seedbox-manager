@@ -1,0 +1,87 @@
+
+{% if support.ReadTicket == false %}
+    <form method="post" action="index.php">
+        <h6 class="page-header reply-ticket-h6"><strong>Ouvrir un ticket</strong></h6>
+        <div class="form-group">
+            <textarea class="form-control" name="message" rows="3"></textarea>
+        </div>
+        <p class="text-right">
+            <input type="hidden" name="user" value="{{ userName }}">
+            <input type="submit" name="support" value="Envoyer un Ticket" class="btn btn-info btn-xs">                            
+        </p>
+    </form>
+{% else %}
+    {% for list in support.ReadTicket %}
+        {% set idTicket = loop.index %}
+        <div class="panel panel-default ticket ticket-{{ loop.index }}">
+        {% for ticket in list.reply %}
+            <div class="panel-heading">
+            Message de : {{ ticket.data.user }} le {{ ticket.data.date }}
+            {% if loop.first %}
+                <span class="text-right">
+                    <button type="button" id="{{ idTicket }}" class="btn btn-link btn-xs close-ticket">Cacher</button>
+                </span>
+            {% endif %}
+            </div>
+            <div class="panel-body">{{ ticket.data.message|nl2br }}</div>
+        {% endfor %}
+        </div>
+        {% if list.status == 'open' %}
+            <form method="post" action="index.php" class="ticket ticket-{{ loop.index }}">
+                <h6 class="page-header reply-ticket-h6"><strong>Répondre au ticket</strong></h6>
+                <div class="form-group">
+                    <textarea class="form-control" name="message" rows="3"></textarea>
+                </div>
+                <p class="text-right">
+                    <input type="hidden" name="user" value="{{ userName }}">
+                    <input type="submit" name="support" value="Envoyer un Ticket" class="btn btn-info btn-xs">                            
+                </p>
+            </form>
+        {% endif %}
+    {% endfor %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>status</th>
+                    <th>créé le</th>
+                    <th>màj</th>
+                    <th>fermer</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for list in support.ReadTicket %}
+                <tr>
+                    <td><button type="button" class="btn btn-default btn-xs show-ticket" id="{{ loop.index }}">{{ loop.index }}</button></td>
+                    <td>
+                    {% if list.status == 'open' %}
+                        <strong class="text-success">Ouvert</strong>
+                    {% else %}
+                        <strong class="text-danger">Ouvert</strong>
+                    {% endif %}
+                    </td>
+                    {% for infoDate in list.reply %}
+                        {% if loop.first %}
+                            <td>{{ infoDate.data.date }}</td>
+                        {% endif %}
+                        {% if loop.last %}
+                            <td>{{ infoDate.data.date }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td>
+                    {% if list.status == 'open' %}
+                        <form method="post" action="index.php">
+                            <input type="hidden" name="user" value="" class="btn btn-info">
+                            <input type="submit" name="cloture" value="Fermer le billet" class="btn btn-info btn-xs">
+                        </form>
+                    {% else %}
+                        <button class="btn btn-info btn-xs disabled">fermer le billet</button>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
