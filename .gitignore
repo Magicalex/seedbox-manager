@@ -1,9 +1,16 @@
-## fichiers
+## ignore file
 .htpasswd
 composer.lock
 reboot-rtorrent
 
-## dossiers
-/public/components/
-/conf/users/
-/vendor/
+## ignore folder
+public/components/
+conf/users/*
+vendor/
+public/cache/*
+public/themes/*
+
+## do not ignore
+!conf/users/.gitkeep
+!public/cache/.gitkeep
+!public/themes/default/
