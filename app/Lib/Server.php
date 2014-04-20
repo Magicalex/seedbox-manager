@@ -77,15 +77,18 @@ class Server extends Users
 
     public static function CheckUpdate()
     {
-        $url_repository = './..';
-        $local = json_decode(file_get_contents('./../version.json'));
-        $remote = json_decode(file_get_contents($url_repository.'/version.json'));
-
-        if ( $local->version != $remote->version )
-            $new_version = $remote;
+        if (!isset($_COOKIE['seedbox-manager']))
+        {
+            $url_repository = './../version.json';
+            $local = json_decode(file_get_contents('./../version.json'));
+            $remote = json_decode(file_get_contents($url_repository));
+            if ( $local->version != $remote->version )
+                $result = $remote;
+            else
+                $result = false;
+        }
         else
-            $new_version = false;
-
-        return $new_version;
+            $result = false;
+        return $result;
     }
 }
