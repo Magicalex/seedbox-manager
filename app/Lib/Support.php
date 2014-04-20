@@ -99,7 +99,7 @@ Class Support extends Users {
         $nb_ticket = count($scan_ticket);
         $old_file = './../conf/users/'.$user.'/support.json';
         $new_file = './../conf/users/'.$user.'/support_'.$nb_ticket.'.json';
-        $result = rename($old_file, $new_file);
+        $result = @rename($old_file, $new_file);
         return $result;
     }
 

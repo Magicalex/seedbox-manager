@@ -36,7 +36,7 @@ if ( isset($_POST['support']) && isset($_POST['message']) )
 if ( isset($_POST['cloture']) && isset($_POST['user']))
 {
     $support = new Support($file_user_ini, $userName);
-    $cloture = $support->ClotureTicket($_POST['user']);
+    $LogCloture = $support->ClotureTicket($_POST['user']);
 }
 
 /* REQUEST GET */
@@ -67,6 +67,8 @@ $twig = new Twig_Environment($loader, array(
     'cache' => './cache/'
 ));
 
+//$twig->clearCacheFiles(); /* supprime le cache */
+
 echo $twig->render(
     'index.html', array(
         'userName' => $userName,
@@ -81,7 +83,7 @@ echo $twig->render(
         // var index
         'rebootRtorrent' => @$rebootRtorrent,
         'supportTicketSend' => @$LogSupport,
-        'cloture' => @$cloture,
+        'supportTicketClose' => @$LogCloture,
         'read_data_reboot' => $read_data_reboot,
         // get option
         'updateIniFileLogUser' => @$update_ini_file_log,

@@ -21,8 +21,11 @@
 
 {% if post.support is defined and supportTicketSend == true %}
     <div class="alert alert-success">Votre ticket a était envoyé.</div>
-{% elseif post.cloture is defined and cloture == true %}
-    <div class="alert alert-success">Ticket a était fermé.</div>
-{% elseif post.cloture is defined and cloture == false %}
-    <div class="alert alert-info">Erreur de fermeture</div>
+{% elseif post.cloture is defined and supportTicketClose == true %}
+    <div class="alert alert-success">Le ticket a était fermé.</div>
+{% elseif post.cloture is defined and supportTicketClose == false %}
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Impossible de fermer le ticket</strong>, vérifiez votre configuration.
+    </div>
 {% endif %}
