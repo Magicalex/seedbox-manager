@@ -75,16 +75,16 @@ class Server extends Users
         exit;
     }
 
-    public function CheckUpdate()
+    public static function CheckUpdate()
     {
-        $url_repository = '';
+        $url_repository = './..';
         $local = json_decode(file_get_contents('./../version.json'));
         $remote = json_decode(file_get_contents($url_repository.'/version.json'));
 
         if ( $local->version != $remote->version )
             $new_version = $remote;
         else
-            $new_version = 'all is ok';
+            $new_version = false;
 
         return $new_version;
     }
