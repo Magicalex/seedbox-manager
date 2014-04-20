@@ -1,7 +1,7 @@
 <?php
 use app\Lib\Install; 
 $user_name_php = Install::get_user_php();
-$root_path = getcwd();
+$root_path = substr(getcwd(), 0, -7);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -9,12 +9,11 @@ $root_path = getcwd();
         <meta charset="utf-8">
         <title>Installation - Seedbox Manager</title>        
         <link href="./components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link type="text/css" rel="stylesheet" href="./themes/default/css/style.css">
+        <link type="text/css" rel="stylesheet" href="./install/style.css">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!--[if lt IE 9]>
             <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-            <script type="text/javascript" src="./js/respond.min.js"></script>
         <![endif]-->
     </head>
 
@@ -30,7 +29,7 @@ $root_path = getcwd();
                         <code>chown -R <?php echo $user_name_php['name'].':'.$user_name_php['name'].' '.$root_path; ?>/</code>
                         <p>Exécutez le script install.sh pour compiler le programme de reboot en ROOT.</p>
                         <code>cd <?php echo $root_path; ?>/source-reboot/ </code><br>
-                        <code>chmod +x install.sh && ./install.sh</code><br>
+                        <code>chmod +x install.sh &amp;&amp; ./install.sh</code><br>
                     </div>
                 </article>
                 <article class="col-md-12">
