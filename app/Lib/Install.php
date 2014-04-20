@@ -7,7 +7,7 @@ class Install
     public static function get_user_php()
     {
         $uid_user_php = posix_geteuid();
-        $name_user_php = posix_getpwuid ($uid_user_php);
+        $name_user_php = posix_getpwuid($uid_user_php);
 
         return array ( 'name' => $name_user_php['name'],
                        'num_uid' => $uid_user_php );
