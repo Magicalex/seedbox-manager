@@ -7,38 +7,32 @@ use app\Lib\Server;
 use app\Lib\Support;
 use app\Lib\UpdateFileIni;
 
-
 /* REQUEST POST */
 if ( isset($_POST['reboot']) )
 {
     $user = new Users($file_user_ini, $userName);
     $rebootRtorrent = $user->rebootRtorrent();
 }
-
 if ( isset($_POST['simple_conf_user']) )
 {
     $update = new UpdateFileIni($file_user_ini, $userName);
     $update_ini_file_log = $update->update_file_config($_POST, './../conf/users/'.$userName);
 }
-
 if ( isset($_POST['owner_change_config']) )
 {
     $update = new UpdateFileIni('./../conf/users/'.$_POST['user'].'/config.ini', $_POST['user']);
     $update_ini_file_log_owner = $update->update_file_config($_POST, './../conf/users/'.$_POST['user']);
 }
-
 if ( isset($_POST['deleteUserName']) )
 {
     $user = new Users($file_user_ini, $userName);
     $log_delete_user = Users::delete_config_old_user('./../conf/users/'.$_POST['deleteUserName']);
 }
-
 if ( isset($_POST['support']) && isset($_POST['message']) )
 {
     $support = new Support($file_user_ini, $userName);
     $LogSupport = $support->sendTicket( $_POST['message'], $_POST['user']);
 }
-
 if ( isset($_POST['cloture']) && isset($_POST['user']))
 {
     $support = new Support($file_user_ini, $userName);
@@ -51,7 +45,6 @@ if ( isset($_GET['logout']) )
     $serveur = new Server($file_user_ini, $userName);
     $serveur->logout();
 }
-
 if (isset($_GET['admin']))
 {
     if (empty($_GET['user']))
@@ -59,6 +52,8 @@ if (isset($_GET['admin']))
     else
         $loader_file_ini_user = new Users('./../conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] );
 }
+if (isset($_GET['download']))
+    require_once './../app/downloads.php';
 
 /* init objet */
 $user = new Users($file_user_ini, $userName);
@@ -66,10 +61,10 @@ $serveur = new Server($file_user_ini, $userName);
 $support = new Support($file_user_ini, $userName);
 $read_data_reboot = $user->readFileDataReboot('./../conf/users/'.$userName.'/data_reboot.txt');
 
-
+/* init twig */
 $loader = new Twig_Loader_Filesystem('./themes/' . $user->theme );
 $twig = new Twig_Environment($loader, array(
-    'cache' => false
+    'cache' => './cache/'
 ));
 
 echo $twig->render(

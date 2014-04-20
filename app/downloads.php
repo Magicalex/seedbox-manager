@@ -1,6 +1,11 @@
 <?php
 
-$title_seedbox = 'Seedbox ' . $userName;
+use app\Lib\Users;
+use app\Lib\Server;
+
+$title_seedbox = 'seedbox-'.$userName;
+$user = new Users($file_user_ini, $userName);
+$serveur = new Server($file_user_ini, $userName);
 $passwd = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW']:null;
 
 // setting transdroid
@@ -19,7 +24,7 @@ $tableau_conf_trandroid = array(
     'search_num_results' => '25',
     'servers' => array(array(
         'port' => '443',
-        'host' => $host,
+        'host' => $_SERVER['HTTP_HOST'],
         'ssl' => true,
         'type' => 'daemon_rtorrent',
         'password' => $passwd,
@@ -28,7 +33,7 @@ $tableau_conf_trandroid = array(
         'username' => $userName,
         'use_auth' => true,
         'name' => $title_seedbox,
-        'base_ftp_url' => 'ftp://'.$userName.'@'.$host.'/torrents/',
+        'base_ftp_url' => 'ftp://'.$userName.'@'.$_SERVER['HTTP_HOST'].'/torrents/',
         'download_alarm' => true,
         'new_torrent_alarm' => true,
         'ssl_accept_all' => true
@@ -46,7 +51,7 @@ $conf_xml_filezilla = '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'
 '<FileZilla3>'."\n".
     '<Servers>'."\n".
         '<Server>'."\n".
-            '<Host>'.$host.'</Host>'."\n".
+            '<Host>'.$_SERVER['HTTP_HOST'].'</Host>'."\n".
             '<Port>'.$user->portFtp().'</Port>'."\n".
             '<Protocol>0</Protocol>'."\n".
             '<Type>0</Type>'."\n".
@@ -58,14 +63,14 @@ $conf_xml_filezilla = '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'
             '<MaximumMultipleConnections>0</MaximumMultipleConnections>'."\n".
             '<EncodingType>UTF-8</EncodingType>'."\n".
             '<BypassProxy>0</BypassProxy>'."\n".
-            '<Name>'.$title_seedbox.' ftp</Name>'."\n".
+            '<Name>'.$title_seedbox.'-ftp</Name>'."\n".
             '<Comments />'."\n".
             '<LocalDir />'."\n".
             '<RemoteDir />'."\n".
-            '<SyncBrowsing>0</SyncBrowsing>'.$title_seedbox.' ftp&#x0A;'."\n".
+            '<SyncBrowsing>0</SyncBrowsing>'.$title_seedbox.'-ftp&#x0A;'."\n".
         '</Server>'."\n".
         '<Server>'."\n".
-            '<Host>'.$host.'</Host>'."\n".
+            '<Host>'.$_SERVER['HTTP_HOST'].'</Host>'."\n".
             '<Port>'.$user->portSftp().'</Port>'."\n".
             '<Protocol>1</Protocol>'."\n".
             '<Type>0</Type>'."\n".
@@ -77,16 +82,16 @@ $conf_xml_filezilla = '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'
             '<MaximumMultipleConnections>0</MaximumMultipleConnections>'."\n".
             '<EncodingType>Auto</EncodingType>'."\n".
             '<BypassProxy>0</BypassProxy>'."\n".
-            '<Name>'.$title_seedbox.' sftp</Name>'."\n".
+            '<Name>'.$title_seedbox.'-sftp</Name>'."\n".
             '<Comments />'."\n".
             '<LocalDir />'."\n".
             '<RemoteDir />'."\n".
-            '<SyncBrowsing>0</SyncBrowsing>'.$title_seedbox.' sftp&#x0A;'."\n".
+            '<SyncBrowsing>0</SyncBrowsing>'.$title_seedbox.'-sftp&#x0A;'."\n".
         '</Server>'."\n".
     '</Servers>'."\n".
 '</FileZilla3>';
 
-if ( isset($_GET['file']) && $_GET['file'] == 'transdroid' )
+if ( $_GET['file'] == 'transdroid' )
     $serveur->FileDownload('settings.json', $conf_json_trandroid);
-elseif ( isset($_GET['file']) && $_GET['file'] == 'filezilla' )
+elseif ( $_GET['file'] == 'filezilla' )
     $serveur->FileDownload('filezilla.xml', $conf_xml_filezilla);
