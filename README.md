@@ -38,6 +38,7 @@ server {
     server_name _;
 
     charset utf-8;
+    index index.php;
 
     access_log /var/log/nginx/seedbox-manager-access.log combined;
     error_log /var/log/nginx/seedbox-manager-error.log error;
