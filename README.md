@@ -47,7 +47,7 @@ server {
     auth_basic_user_file "/var/www/seedbox-manager/.htpasswd";
 
     location / {
-        root /var/www/manager/public;
+        root /var/www/seedbox-manager/public;
     }
 
     location ~ \.php$ {
