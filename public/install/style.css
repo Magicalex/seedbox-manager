@@ -1,210 +1,39 @@
-/* CODE CSS AJUSTEMENT BOOTSTRAP */
 
 ::-moz-selection {
-  background:#FF3C78;
-  color:white;
+  background: #FF3C78;
+  color: white;
 }
-
 ::selection {
-  background:#FF3C78;
-  color:white;
+  background: #FF3C78;
+  color: white;
 }
-
 body {
-  background:url("../img/background.png");
+  background: url("./../themes/default/img/background.png");
 }
-
 code {
-  border:1px solid #CE534D;
+  padding: 6px;
+  background-color: black;
+  color: white;
+  border-radius: 0;
 }
-
-ul {
-  color:#5A5A5A;
-}
-
 .marg {
-  padding:15px;
-  margin-bottom:50px;
-  background-color: #999; /* fixe ie8 */
-  background-color: rgba(255,255,255,0.2);
+  padding: 15px;
+  margin-bottom: 40px;
+  background-color: white;
 }
-
 .dashboard {
-  margin-top:5px !important;
-  margin-bottom:20px !important;
-  text-shadow:0px 0px 9px white;
+  margin-top: 5px !important;
+  margin-bottom: 20px !important;
+  text-shadow: 0px 0px 9px white;
 }
-
-.user {
-  font-weight:bold;
-}
-
-.fix-progress {
-  border:1px solid #999; /* ie-8 */
-  border:1px solid rgba(0,0,0,0.15);
-}
-
 .titre-head {
-  margin-top:5px;
-  margin-bottom:5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
-
 .trait {
-  background-color:#E5E5E5;
-  border-bottom:1px solid #FFFFFF;
-  height:2px;
-  margin:9px 1px;
-  overflow:hidden;
-}
-
-/* ajustement popup et formulaire */
-.modal-footer form {
-  display:inline-block;
-  margin:0px;
-  margin-left:5px;
-  padding:0px;
-}
-
-.btn-reboot{
-  margin-top:20px;
-}
-
-#logout {
-  color:#B94A48;
-}
-
-.text-defaut-color {
-  color:#5A5A5A;
-}
-
-.textmodaleabout {
-  color:#646464;
-}
-
-#load-info{
-  margin-top:10px;
-  font-weight:bold;
-}
-
-.load-average {
-  font-size:11px;
-}
-
-.aboutlink {
-  color:white;
-}
-
-.aboutlink:hover {
-  color:white;
-}
-
-.glyphicon-refresh {
-  margin-right:7px;
-}
-
-#popupfilezilla, #popuptransdroid {
-  margin-top:4px;
-}
-
-.fix-marg-input {
-  margin-bottom: 0px;
-}
-
-@font-face {
-  font-family: 'seedmanager';
-  src:url('../fonts/seedmanager.eot');
-  src:url('../fonts/seedmanager.eot?#iefix') format('embedded-opentype'),
-      url('../fonts/seedmanager.woff') format('woff'),
-      url('../fonts/seedmanager.ttf') format('truetype'),
-      url('../fonts/seedmanager.svg#seedmanager') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-.icone-seed-managerhome:before,
-.icone-seed-managerlocation:before,
-.icone-seed-managerclock:before,
-.icone-seed-managerdownload:before,
-.icone-seed-managerspinner:before,
-.icone-seed-manageruser:before,
-.icone-seed-managersupport:before,
-.icone-seed-managerstats:before,
-.icone-seed-managerdashboard:before,
-.icone-seed-managerlightning:before,
-.icone-seed-managerswitch:before,
-.icone-seed-managertree:before,
-.icone-seed-managerglobe:before,
-.icone-seed-managerlaptop:before,
-.icone-seed-managerstorage:before,
-.icone-seed-managerbug:before,
-.icone-seed-managerandroid:before,
-.icone-seed-managerfile-zip:before,
-.icone-seed-managerfile-xml:before {
-  font-family:'seedmanager';
-  speak:none;
-  font-weight:normal;
-  font-style:normal;
-  line-height:1;
-  text-transform:none;
-  vertical-align: middle;
-  -webkit-font-smoothing: antialiased;
-  margin-right:8px;
-  margin-left:5px;
-}
-
-.icone-seed-managerhome:before {content: "\61";}
-.icone-seed-managerlocation:before {content: "\62";}
-.icone-seed-managerclock:before {content: "\63";}
-.icone-seed-managerdownload:before {content: "\64";}
-.icone-seed-managerspinner:before {content: "\65";}
-.icone-seed-manageruser:before {content: "\66";}
-.icone-seed-managersupport:before {content: "\67";}
-.icone-seed-managerstats:before {content: "\68";}
-.icone-seed-managerdashboard:before {content: "\69";}
-.icone-seed-managerlightning:before {content: "\6a";}
-.icone-seed-managerswitch:before {content: "\6b";}
-.icone-seed-managertree:before {content: "\6c";}
-.icone-seed-managerglobe:before {content: "\6d";}
-.icone-seed-managerlaptop:before {content: "\6e";font-size:18px;}
-.icone-seed-managerstorage:before {content: "\6f";}
-.icone-seed-managerandroid:before {content: "\71";font-size:18px;}
-.icone-seed-managerfile-zip:before {content: "\72";}
-.icone-seed-managerfile-xml:before {content: "\73";}
-.icone-seed-managerbug:before {content: "\70";}
-
-.icone-seed-managerandroid,
-.icone-seed-managerlaptop,
-.icone-seed-managerstats,
-.icone-seed-managerclock,
-.icone-seed-managerlocation,
-.icone-seed-managerstorage {
-  color:#5A5A5A;
-}
-
-@media (max-width:979px) {
-  .marg {
-    margin-bottom:0px !important;
-  }
-}
-
-/* formulaire owner */
-
-fieldset {
-  border:1px solid #B4B4B4;
-  padding: 0px 10px 0px 10px;
-  margin-bottom: 10px;
-  -webkit-border-radius:5px;
-  -moz-border-radius:5px;
-  -ms-border-radius:5px;
-  border-radius:5px;
-}
-
-legend {
-  color: #5A5A5A;
-  padding-left:7px;
-  padding-right:7px;
-  border-bottom:none;
-  width:auto;
-  margin-bottom:8px;
-  font-size:18px;
+  background-color: #E5E5E5;
+  border-bottom: 1px solid #FFFFFF;
+  height: 2px;
+  margin: 9px 1px;
+  overflow: hidden;
 }

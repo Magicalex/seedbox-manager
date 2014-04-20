@@ -43,7 +43,6 @@ class Server extends Users
     public function logout()
     {
         header('HTTP/1.1 401 Unauthorized');
-
         usleep(500000); /*sleep(1); */ /* usleep(500000) = 1/2 sec ~ 500 ms */
         echo '<script>document.location.href = \''.$this->url_redirect.'\'</script>';
         exit();
@@ -74,5 +73,19 @@ class Server extends Users
         //delete file config (transdroid|filezilla) for security.
         unlink('./conf/users/'.$this->userName.'/'.$file_config_name);
         exit;
+    }
+
+    public function CheckUpdate()
+    {
+        $url_repository = '';
+        $local = json_decode(file_get_contents('./../version.json'));
+        $remote = json_decode(file_get_contents($url_repository.'/version.json'));
+
+        if ( $local->version != $remote->version )
+            $new_version = $remote;
+        else
+            $new_version = 'all is ok';
+
+        return $new_version;
     }
 }
