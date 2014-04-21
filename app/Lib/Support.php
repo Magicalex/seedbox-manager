@@ -11,7 +11,7 @@ Class Support extends Users {
             foreach ( $this->TicketList() as $encoded_ticket )
             {
                 $reply = json_decode(file_get_contents($encoded_ticket), true);
-                $status = $this->EtatTicket($encoded_ticket);
+                $status = self::EtatTicket($encoded_ticket);
                 $ticket['ticket'][] = array( 'reply' => $reply, 'status' => $status);
                 if ($status == 'open') {
                     $all_ticket_close = false;
@@ -74,8 +74,10 @@ Class Support extends Users {
             }
 
             //converti un tableau multidimensionnel en un tableau unidimensionnel.
-            array_walk_recursive( $files_ticket, function($a) use (&$all_files_tickets) {
-                $all_files_tickets[] = $a;
+            // note : le caractère & fait pointer le contenu sur la variable.
+            // note : fonctions anonymes prend comme param function ($value, $key)
+            @array_walk_recursive( $files_ticket, function ($value) use (&$all_files_tickets) {
+                $all_files_tickets[] = $value;
             });
 
             return $all_files_tickets;
@@ -93,7 +95,7 @@ Class Support extends Users {
         Renomme le fichier support.json (dernier ticket) en support_X.json
     */
 
-    public function ClotureTicket($user)
+    public static function ClotureTicket($user)
     {
         $scan_ticket = glob('./../conf/users/'.$user.'/support*.json');
         $nb_ticket = count($scan_ticket);
@@ -105,7 +107,7 @@ Class Support extends Users {
 
     /* Indique si un ticket est fermé ou non */
 
-    private function EtatTicket($file_ticket)
+    private static function EtatTicket($file_ticket)
     {
         $status = (bool) preg_match('#support.json#', $file_ticket);
         $result = $status === true ? 'open':'close';

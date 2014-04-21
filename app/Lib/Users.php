@@ -28,7 +28,7 @@ class Users
         $this->hydrate($setting_user_array);
     }
 
-    public function hydrate(array $array)
+    private function hydrate(array $array)
     {
         $this->cakeboxActiveUrl   = (bool) $array['nav']['active_cakebox'];
         $this->rutorrentActiveUrl = (bool) $array['nav']['active_rutorrent'];
@@ -87,7 +87,7 @@ class Users
                       'statusReboot' => $status );
     }
 
-    public function readFileDataReboot($file)
+    public static function readFileDataReboot($file)
     {
         if (file_exists($file))
         {
