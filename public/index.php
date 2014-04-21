@@ -24,20 +24,14 @@ if ( isset($_POST['owner_change_config']) )
     $update_ini_file_log_owner = $update->update_file_config($_POST, './../conf/users/'.$_POST['user']);
 }
 if ( isset($_POST['deleteUserName']) )
-{
-    $user = new Users($file_user_ini, $userName);
     $log_delete_user = Users::delete_config_old_user('./../conf/users/'.$_POST['deleteUserName']);
-}
 if ( isset($_POST['support']) && isset($_POST['message']) )
 {
     $support = new Support($file_user_ini, $userName);
     $LogSupport = $support->sendTicket( $_POST['message'], $_POST['user']);
 }
 if ( isset($_POST['cloture']) && isset($_POST['user']))
-{
-    $support = new Support($file_user_ini, $userName);
-    $LogCloture = $support->ClotureTicket($_POST['user']);
-}
+    $LogCloture = Support::ClotureTicket($_POST['user']);
 
 /* REQUEST GET */
 if ( isset($_GET['logout']) )
@@ -67,7 +61,11 @@ $twig = new Twig_Environment($loader, array(
     'cache' => './cache/'
 ));
 
-//$twig->clearCacheFiles(); /* supprime le cache */
+if (isset($_POST['purgeCache']))
+{
+    $twig->clearCacheFiles();
+    $ClearCache = true;
+}
 
 echo $twig->render(
     'index.html', array(
@@ -90,6 +88,7 @@ echo $twig->render(
         // get admin
         'updateIniFileLogOwner' => @$update_ini_file_log_owner,
         'LogDeleteUser' => @$log_delete_user,
-        'UpdateOwner' => @$loader_file_ini_user
+        'UpdateOwner' => @$loader_file_ini_user,
+        'ClearCache' => @$ClearCache
     )
 );

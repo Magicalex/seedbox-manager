@@ -21,11 +21,13 @@
 
 {% if post.owner_change_config is defined and updateIniFileLogOwner is empty %}
 <div class="alert alert-success">La configuration de l'utilisateur <strong>{{ post.user }}</strong> a été mise à jour avec succès.</div>
-
 {% elseif post.owner_change_config is defined %}        
-
 <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     Impossible de mettre à jour la configuration de l'utilisateur <strong>{{ post.user }}</strong> !
 </div>
+{% endif %}
+
+{% if ClearCache == true %}
+<div class="alert alert-success">Le cache a été correctement supprimé.</div>
 {% endif %}
