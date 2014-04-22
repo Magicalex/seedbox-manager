@@ -49,5 +49,5 @@ $('.close-ticket').click( function ()
 
 //Génère un cookie qui expire au bout de 2j
 if ( $.cookie('seedbox-manager') == undefined ) {
-    $.cookie('seedbox-manager', 'check-update', { expires: 1 } );
+    $.cookie('seedbox-manager', 'check-update', { expires: 2 } );
 }

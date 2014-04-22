@@ -61,12 +61,7 @@ $twig = new Twig_Environment($loader, array(
     'cache' => './cache/'
 ));
 
-if (isset($_POST['purgeCache']))
-{
-    $twig->clearCacheFiles();
-    $ClearCache = true;
-}
-
+// $twig->clearCacheFiles(); /* supprime le cache (for dev) */
 echo $twig->render(
     'index.html', array(
         'userName' => $userName,
