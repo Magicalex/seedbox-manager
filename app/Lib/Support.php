@@ -6,7 +6,8 @@ Class Support extends Users {
 
     public function ReadTicket()
     {
-        if (!empty($this->TicketList()))
+        $ticketList = $this->TicketList();
+        if (!empty($ticketList))
         {
             foreach ( $this->TicketList() as $encoded_ticket )
             {
