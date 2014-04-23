@@ -51,10 +51,12 @@ class Users
 
     private static function convertFileSize($octets)
     {
-        $types = array('O','Ko','Mo','Go','To');
-        for( $i = 0; $octets >= 1024 && $i < ( count( $types ) -1 ); $octets /= 1024, $i++ );
-
-        return( round($octets, 2).' '.$types[$i] );
+        $unit = array('O','Ko','Mo','Go','To','Po','Eo');
+        for ($i=0; $octets >= 1024; $i++) {
+            $octets = $octets / 1024;
+        }
+        $result = round($octets, 2).' '.$unit[$i];
+        return $result;
     }
 
     public function userdisk()
