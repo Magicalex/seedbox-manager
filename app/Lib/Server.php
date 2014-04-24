@@ -7,21 +7,23 @@ class Server extends Users
     
     public static function getUptime()
     {
-        $fd = fopen('/proc/uptime', 'r');
-        $ar_buf = split(' ', fgets($fd, 4096));
-        fclose($fd);
-        $sys_ticks = trim($ar_buf[0]);
+        $data_uptime = file_get_contents('/proc/uptime');
+        $data_uptime = explode(' ', $data_uptime);
+        $data_uptime = trim($data_uptime[0]);
 
-        $min   = $sys_ticks / 60;
-        $hours = $min / 60;
-        $days  = floor($hours / 24);
-        $hours = floor($hours - ($days * 24));
-        $min   = floor($min - ($days * 60 * 24) - ($hours * 60));
+        $time = array();
+        $time['min'] = $data_uptime / 60;
+        $time['hours'] = $time['min'] / 60;
+        $time['days'] = floor($time['hours'] / 24);
+        $time['hours'] = floor($time['hours'] - $time['days'] * 24);
+        $time['min'] = floor($time['min'] - $time['days'] * 60 * 24 - $time['hours'] * 60);
 
         $result = '';
-        if ($days != 0) $result = $days.' jours et ';
-        if ($hours != 0) $result .= $hours.' h ';
-        $result .= $min.' min';
+        if ($time['days'] != 0)
+            $result = $time['days'] . ' jours et ';
+        if ($time['hours'] != 0)
+            $result .= $time['hours'] . ' h ';
+        $result .= $time['min'] . ' min';
 
         return $result;
     }

@@ -58,10 +58,10 @@ $read_data_reboot = $user->readFileDataReboot('./../conf/users/'.$userName.'/dat
 /* init twig */
 $loader = new Twig_Loader_Filesystem('./themes/' . $user->theme );
 $twig = new Twig_Environment($loader, array(
-    'cache' => './cache/'
+    'cache' => false
 ));
 
-// $twig->clearCacheFiles(); /* supprime le cache (for dev) */
+//$twig->clearCacheFiles(); /* supprime le cache (for dev) */
 echo $twig->render(
     'index.html', array(
         'userName' => $userName,
