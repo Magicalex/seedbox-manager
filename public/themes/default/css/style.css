@@ -144,74 +144,10 @@ legend {
   font-size:18px;
 }
 
-
-@font-face {
-  font-family: 'seedmanager';
-  src:url('../fonts/seedmanager.eot');
-  src:url('../fonts/seedmanager.eot?#iefix') format('embedded-opentype'),
-      url('../fonts/seedmanager.woff') format('woff'),
-      url('../fonts/seedmanager.ttf') format('truetype'),
-      url('../fonts/seedmanager.svg#seedmanager') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-.icone-seed-managerhome:before,
-.icone-seed-managerlocation:before,
-.icone-seed-managerclock:before,
-.icone-seed-managerdownload:before,
-.icone-seed-managerspinner:before,
-.icone-seed-manageruser:before,
-.icone-seed-managersupport:before,
-.icone-seed-managerstats:before,
-.icone-seed-managerdashboard:before,
-.icone-seed-managerlightning:before,
-.icone-seed-managerswitch:before,
-.icone-seed-managertree:before,
-.icone-seed-managerglobe:before,
-.icone-seed-managerlaptop:before,
-.icone-seed-managerstorage:before,
-.icone-seed-managerbug:before,
-.icone-seed-managerandroid:before,
-.icone-seed-managerfile-zip:before,
-.icone-seed-managerfile-xml:before {
-  font-family:'seedmanager';
-  speak:none;
-  font-weight:normal;
-  font-style:normal;
-  line-height:1;
-  text-transform:none;
-  vertical-align: middle;
-  -webkit-font-smoothing: antialiased;
-  margin-right:8px;
-  margin-left:5px;
-}
-
-.icone-seed-managerhome:before {content: "\61";}
-.icone-seed-managerlocation:before {content: "\62";}
-.icone-seed-managerclock:before {content: "\63";}
-.icone-seed-managerdownload:before {content: "\64";}
-.icone-seed-managerspinner:before {content: "\65";}
-.icone-seed-manageruser:before {content: "\66";}
-.icone-seed-managersupport:before {content: "\67";}
-.icone-seed-managerstats:before {content: "\68";}
-.icone-seed-managerdashboard:before {content: "\69";}
-.icone-seed-managerlightning:before {content: "\6a";}
-.icone-seed-managerswitch:before {content: "\6b";}
-.icone-seed-managertree:before {content: "\6c";}
-.icone-seed-managerglobe:before {content: "\6d";}
-.icone-seed-managerlaptop:before {content: "\6e";font-size:18px;}
-.icone-seed-managerstorage:before {content: "\6f";}
-.icone-seed-managerandroid:before {content: "\71";font-size:18px;}
-.icone-seed-managerfile-zip:before {content: "\72";}
-.icone-seed-managerfile-xml:before {content: "\73";}
-.icone-seed-managerbug:before {content: "\70";}
-
-.icone-seed-managerandroid,
-.icone-seed-managerlaptop,
-.icone-seed-managerstats,
-.icone-seed-managerclock,
-.icone-seed-managerlocation,
-.icone-seed-managerstorage {
+.device {
   color:#5A5A5A;
+}
+
+.device .fa-android {
+  font-size:18px;
 }

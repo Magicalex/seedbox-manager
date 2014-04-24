@@ -51,3 +51,7 @@ $('.close-ticket').click( function ()
 if ( $.cookie('seedbox-manager') == undefined ) {
     $.cookie('seedbox-manager', 'check-update', { expires: 2 } );
 }
+
+/* fix bug pagination */
+if ( $('#bloc-ftp').height() < $('#bloc-info').height() )
+    $('#bloc-ftp').height($('#bloc-info').height());
