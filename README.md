@@ -1,6 +1,6 @@
 #Description du seedbox-manager
 
-L'application web seedbox-manager est une interface pour redémarrer une session rtorrent d'un utilisateur unix.
+L'application web seedbox-manager est une interface pour redémarrer une session rtorrent d'un utilisateur unix.  
 On n'y trouve aussi :
 
  * des liens vers rutorrent et cakebox dans la navbar configurable.
@@ -32,7 +32,7 @@ chmod +x install.sh && ./install.sh
 ##Configuration du serveur web
 
 ex : web server nginx
-```
+```nginx
 server {
     listen 80 default_server;
     server_name _;
@@ -59,7 +59,7 @@ server {
 }
 ```
 ex : web server apache2 (v2.4.*)
-```
+```apache
 <VirtualHost _default_:80>
     DocumentRoot /var/www/seedbox-manager/public
 

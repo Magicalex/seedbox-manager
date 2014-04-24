@@ -81,7 +81,7 @@ class Server extends Users
     {
         if (!isset($_COOKIE['seedbox-manager']))
         {
-            $url_repository = './../version.json';
+            $url_repository = 'https://raw.githubusercontent.com/Magicalex/seedbox-manager/master/version.json';
             $local = json_decode(file_get_contents('./../version.json'));
             $remote = json_decode(file_get_contents($url_repository));
             if ( $local->version != $remote->version )
