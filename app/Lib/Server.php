@@ -20,7 +20,7 @@ class Server extends Users
 
         $result = '';
         if ($time['days'] != 0)
-            $result = $time['days'] . ' jours et ';
+            $result = $time['days'] . ' jours ';
         if ($time['hours'] != 0)
             $result .= $time['hours'] . ' h ';
         $result .= $time['min'] . ' min';

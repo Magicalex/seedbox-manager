@@ -53,5 +53,4 @@ if ( $.cookie('seedbox-manager') == undefined ) {
 }
 
 /* fix bug pagination */
-if ( $('#bloc-ftp').height() < $('#bloc-info').height() )
-    $('#bloc-ftp').height($('#bloc-info').height());
+$('#bloc-ftp').height( $('#bloc-info').height() + 2);
