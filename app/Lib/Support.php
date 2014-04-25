@@ -2,8 +2,8 @@
 
 namespace app\Lib;
 
-Class Support extends Users {
-
+Class Support extends Users
+{
     public function ReadTicket()
     {
         $ticketList = $this->TicketList();

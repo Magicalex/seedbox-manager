@@ -20,7 +20,7 @@ if (file_exists('./../reboot-rtorrent')
     if ( $uid_folder_users != $uid_user_php['num_uid'] )
     {
         require_once('./install/installation.php');
-        exit();
+        exit(0);
     }
     else
     {
@@ -36,5 +36,5 @@ if (file_exists('./../reboot-rtorrent')
 else
 {
     require_once('./install/installation.php');
-    exit();
+    exit(0);
 }

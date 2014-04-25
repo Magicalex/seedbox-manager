@@ -44,9 +44,7 @@ class UpdateFileIni extends Users
         );
 
         $log = self::write_ini_file($content, $conf_user_folder.'/config.ini');
-        
-        if (!empty($log))
-            return $log;
+        return $log;
     }
 
     private static function write_ini_file(array $data_array, $file_path)
