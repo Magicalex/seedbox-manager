@@ -4,7 +4,6 @@ namespace app\Lib;
 
 class Server extends Users
 {
-    
     public static function getUptime()
     {
         $data_uptime = file_get_contents('/proc/uptime');
@@ -47,7 +46,7 @@ class Server extends Users
         header('HTTP/1.1 401 Unauthorized');
         usleep(500000); /*sleep(1); */ /* usleep(500000) = 1/2 sec ~ 500 ms */
         echo '<script>document.location.href = \''.$this->url_redirect.'\'</script>';
-        exit();
+        exit(0);
     }
 
     public function FileDownload($file_config_name, $conf_ext_prog)
@@ -74,7 +73,6 @@ class Server extends Users
 
         //delete file config (transdroid|filezilla) for security.
         unlink('./../conf/users/'.$this->userName.'/'.$file_config_name);
-        exit;
     }
 
     public static function CheckUpdate()
