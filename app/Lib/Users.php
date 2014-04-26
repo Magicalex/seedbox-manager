@@ -64,8 +64,11 @@ class Users
         $total_disk = disk_total_space($this->directory);
         $used_disk = $total_disk - disk_free_space($this->directory);
         $percentage_used = round(($used_disk*100)/$total_disk, 2);
+        $free_disk = self::convertFileSize($total_disk - $used_disk);
         $used_disk = self::convertFileSize($used_disk);
         $total_disk = self::convertFileSize($total_disk);
+       
+
         if ( $percentage_used < 85 )
             $progressBarColor = null;
         elseif ( $percentage_used < 95 )
@@ -74,6 +77,7 @@ class Users
             $progressBarColor = 'progress-bar-danger';
 
         return array( 'used_disk' => $used_disk,
+                      'free_disk' => $free_disk,
                       'total_disk' => $total_disk,
                       'percentage_used' => $percentage_used,
                       'progessBarColor' => $progressBarColor );
