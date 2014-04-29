@@ -7,10 +7,7 @@ class Users
     protected $userName;
     protected $url_redirect;
     protected $directory;
-    protected $rutorrentActiveUrl;
-    protected $rutorrentUrl;
-    protected $cakeboxActiveUrl;
-    protected $cakeboxUrl;
+    protected $navbar_links;
     protected $portFtp;
     protected $portSftp;
     protected $blocSupport;
@@ -30,8 +27,7 @@ class Users
 
     private function hydrate(array $array)
     {
-        $this->cakeboxActiveUrl   = (bool) $array['nav']['active_cakebox'];
-        $this->rutorrentActiveUrl = (bool) $array['nav']['active_rutorrent'];
+        $this->navbar_links       = (string) $array['nav']['data_link'];
         $this->blocInfo           = (bool) $array['user']['active_bloc_info'];
         $this->is_owner           = (bool) $array['user']['owner'];
         $this->blocFtp            = (bool) $array['ftp']['active_ftp'];
@@ -40,8 +36,6 @@ class Users
         $this->directory          = (string) $array['user']['user_directory'];
         $this->scgi_folder        = (string) $array['user']['scgi_folder'];
         $this->theme              = (string) $array['user']['theme'];
-        $this->rutorrentUrl       = (string) $array['nav']['url_rutorrent'];
-        $this->cakeboxUrl         = (string) $array['nav']['url_cakebox'];
         $this->supportMail        = (string) $array['support']['adresse_mail'];
         $this->url_redirect       = (string) $array['logout']['url_redirect'];
         $this->portFtp            = (int) $array['ftp']['port_ftp'];
@@ -168,11 +162,46 @@ class Users
         return $all_themes;
     }
 
+    public function get_all_links()
+    {
+        $data_links = $this->navbar_links;
+        $data_links = preg_split("/\n/", $data_links);
+
+        for ($i=0; isset($data_links[$i]); $i++)
+        {
+            $array_link[] = preg_split("/\, /", $data_links[$i]);
+
+            foreach ( $array_link[$i] as $value )
+            {
+                $match_url = (bool) preg_match('#url =#', $value);
+                $match_name = (bool) preg_match('#name =#', $value);
+
+                if ($match_url === true)
+                {
+                    $value = preg_replace('#url =#', '', $value);
+                    $value = trim($value);
+                    $data_url = array( 'url' => $value );
+                }
+
+                if ($match_name === true)
+                {
+                    $value = preg_replace('#name =#', '', $value);
+                    $value = trim($value);
+                    $data_name = array( 'name' => $value );
+                }
+            }
+
+            if ( is_array(@$data_name) && is_array(@$data_url) )
+            {
+                $all_links[] = array_merge( $data_name, $data_url);
+                unset( $data_name, $data_url);
+            }
+        }
+
+        return $all_links;
+    }
+
     public function url_redirect() { return $this->url_redirect; }
-    public function rutorrentActiveUrl() { return $this->rutorrentActiveUrl; }
-    public function rutorrentUrl() { return $this->rutorrentUrl; }
-    public function cakeboxActiveUrl() { return $this->cakeboxActiveUrl; }
-    public function cakeboxUrl() { return $this->cakeboxUrl; }
     public function portFtp() { return $this->portFtp; }
     public function portSftp() { return $this->portSftp; }
     public function blocSupport() { return $this->blocSupport; }

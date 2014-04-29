@@ -10,12 +10,9 @@
     </div>
     <nav class="collapse navbar-collapse phone-menu">
         <ul class="nav navbar-nav">
-            {% if user.rutorrentActiveUrl %}
-            <li class="nav-link"><a href="{{ user.rutorrentUrl }}">Rutorrent</a></li>
-            {% endif %}
-            {% if user.CakeboxActiveUrl %}
-            <li class="nav-link"><a href="{{ user.cakeboxUrl }}">Cakebox</a></li>
-            {% endif %}
+        {% for link in user.get_all_links %}
+            <li class="nav-link"><a href="{{ link.url }}">{{ link.name }}</a></li>
+        {% endfor %}
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
