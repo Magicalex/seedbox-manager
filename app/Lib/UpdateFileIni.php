@@ -16,12 +16,7 @@ class UpdateFileIni extends Users
                 'owner' => $this->is_owner
             ),
             'nav' => array(
-                'active_rutorrent' => !isset($data_upgrade['owner_change_config']) ? $this->rutorrentActiveUrl:
-                                       isset($data_upgrade['active_rutorrent']) ? true:false,
-                'url_rutorrent' => isset($data_upgrade['owner_change_config']) ? $data_upgrade['url_rutorrent']:$this->rutorrentUrl,
-                'active_cakebox' => !isset($data_upgrade['owner_change_config']) ? $this->cakeboxActiveUrl:
-                                     isset($data_upgrade['active_cakebox']) ? true:false,
-                'url_cakebox' => isset($data_upgrade['owner_change_config']) ? $data_upgrade['url_cakebox']:$this->cakeboxUrl
+                'data_link' => isset($data_upgrade['owner_change_config']) ? $data_upgrade['data_link']:$this->navbar_links,
             ),
             'ftp' => array(
                 'active_ftp' => !isset($data_upgrade['simple_conf_user']) ? $this->blocFtp:
