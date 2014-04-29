@@ -144,6 +144,10 @@ legend {
   font-size:18px;
 }
 
+textarea {
+  margin-bottom: 15px;
+}
+
 .device {
   color:#5A5A5A;
 }

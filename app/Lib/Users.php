@@ -202,6 +202,7 @@ class Users
     }
 
     public function url_redirect() { return $this->url_redirect; }
+    public function navbar_links() { return $this->navbar_links; }
     public function portFtp() { return $this->portFtp; }
     public function portSftp() { return $this->portSftp; }
     public function blocSupport() { return $this->blocSupport; }
