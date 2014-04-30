@@ -27,30 +27,48 @@ $('#popuptransdroid').popover({
     }
 });
 
-$(document).on('click', '.popup-delete-user', function ()
+/* Envoie les donnees de supp au modal */
+$('.popup-delete-user').click( function()
 {
     var userName = $(this).data('user');
-    $('#deleteUserName').val(userName);
+    $('#deleteUserName').val(userName); // id input modal delete user add value="userName"
     $('#target-delete-user').html('<i class="glyphicon glyphicon-trash"></i> Suppression de l\'utilisateur : <strong>'+userName+'</strong>');
 });
 
+/* Cache les messages succes au bout de 4 sec */
 $('.alert-success').delay(4000).hide('slow');
 
+/* Cache (au demarrage) et affiche un ticket */
 $('.ticket').hide();
 $('.show-ticket').click( function ()
 {
     $('.ticket-' + this.id).fadeIn();
 });
 
+/* Cache un ticket affiche */
 $('.close-ticket').click( function ()
 {
     $('.ticket-' + this.id).fadeOut();
 });
 
-//Génère un cookie qui expire au bout de 2j
+//Genere un cookie qui expire au bout de 2j
 if ( $.cookie('seedbox-manager') == undefined ) {
     $.cookie('seedbox-manager', 'check-update', { expires: 2 } );
 }
 
 /* fix bug pagination */
 $('#bloc-ftp').height( $('#bloc-info').height() + 2);
+
+/* LOGOUT function */
+$('#logout').click( function()
+{
+    var UrlRedirect = $(this).data('urlredirect');
+    var host = $(this).data('host');
+
+    $.get('http://logout@' + host);
+
+    setTimeout( function()
+    {
+        window.location.href = UrlRedirect;
+    }, 1000);
+});

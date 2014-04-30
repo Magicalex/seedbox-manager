@@ -23,7 +23,11 @@
                     <li><a href="?admin"><i class="glyphicon glyphicon-cog"></i> Administration</a></li>
                     {% endif %}
                     <li><a class="aboutlink" data-toggle="modal" href="#popupinfo"><i class="glyphicon glyphicon-info-sign"></i> A propos</a></li>
-                    <li><a id="logout" data-toggle="modal" href="#popuplogout" title="Se déconnecter"><strong><i class="glyphicon glyphicon-log-out"></i> Déconnexion</strong></a></li>
+                    <li>
+                        <a id="logout" href="#logout" title="Se déconnecter" data-host="{{ host }}" data-urlredirect="{{ serveur.logout_url_redirect }}">
+                            <strong><i class="glyphicon glyphicon-log-out"></i> Déconnexion</strong>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>

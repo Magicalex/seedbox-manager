@@ -41,14 +41,6 @@ class Server extends Users
                       'info_charge' => $info_charge );
     }
 
-    public function logout()
-    {
-        header('HTTP/1.1 401 Unauthorized');
-        usleep(500000); /*sleep(1); */ /* usleep(500000) = 1/2 sec ~ 500 ms */
-        echo '<script>document.location.href = \''.$this->url_redirect.'\'</script>';
-        exit(0);
-    }
-
     public function FileDownload($file_config_name, $conf_ext_prog)
     {
         file_put_contents('./../conf/users/'.$this->userName.'/'.$file_config_name, $conf_ext_prog);
@@ -91,4 +83,6 @@ class Server extends Users
             $result = false;
         return $result;
     }
+
+    public function logout_url_redirect() { return $this->url_redirect; }
 }

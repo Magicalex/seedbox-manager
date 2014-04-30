@@ -41,25 +41,6 @@
     </div>
 </div>
 
-<!-- popup logout -->
-<div class="modal fade" id="popuplogout" tabindex="-1" role="dialog" aria-labelledby="target-logout" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="target-logout"><i class="glyphicon glyphicon-log-out"></i> Déconnexion</h4>
-            </div>
-            <div class="modal-body">
-                <p>&Ecirc;tes-vous sûr de vouloir vous déconnecter du serveur ?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                <a href="?logout" class="btn btn-danger">Déconnexion</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 {% if user.is_owner == true and get.admin is defined %}
 <!-- popup delete user -->
 <div class="modal fade" id="delete-user" tabindex="-1" role="dialog" aria-labelledby="target-delete-user" aria-hidden="true">
