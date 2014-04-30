@@ -34,11 +34,6 @@ if ( isset($_POST['cloture']) && isset($_POST['user']))
     $LogCloture = Support::ClotureTicket($_POST['user']);
 
 /* REQUEST GET */
-if ( isset($_GET['logout']) )
-{
-    $serveur = new Server($file_user_ini, $userName);
-    $serveur->logout();
-}
 if (isset($_GET['admin']))
 {
     if (empty($_GET['user']))
