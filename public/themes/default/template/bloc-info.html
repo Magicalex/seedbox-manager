@@ -9,7 +9,7 @@
         <p><i class="fa fa-hdd-o"></i> <strong>Espace disque</strong></p>
         <p class="text-center text-defaut-color">
             Vous utilisez <strong>{{ user.userdisk.percentage_used }}%</strong>
-            <em>soit {{ user.userdisk.used_disk}} sur {{ user.userdisk.total_disk }} ( {{ user.userdisk.free_disk}} Libre )</em>
+            <em>soit {{ user.userdisk.used_disk}} sur {{ user.userdisk.total_disk }} ( {{ user.userdisk.free_disk }} Libre )</em>
         </p>
         <div class="progress progress-striped fix-progress">
             <div class="progress-bar {{ user.userdisk.progessBarColor }}" role="progressbar" aria-valuenow="{{ user.userdisk.percentage_used }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ user.userdisk.percentage_used }}%;">

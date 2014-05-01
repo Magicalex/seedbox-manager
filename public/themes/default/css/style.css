@@ -155,3 +155,23 @@ textarea {
 .device .fa-android {
   font-size:18px;
 }
+
+#jquery-loader {
+  border: 1px black solid;
+  padding-top: 35px;
+  background-color: white;
+  text-align: center;
+}
+#jquery-loader-background {
+  background-color: rgba(0,0,0,0.6);
+}
+
+#jquery-loader .logout-loader {
+  border: none;
+  padding-top: 35px;
+  opacity: 0.5;
+  background-image: url("./components/jquery-loader-plugin/images/ajax-loader.gif");
+  background-position: center center;
+  background-repeat: no-repeat;
+  text-align: center;
+}

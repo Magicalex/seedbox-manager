@@ -1,27 +1,32 @@
 /* code jquery for mod bootstrap and more */
 
-$('.load-average').tooltip({
+$('.load-average').tooltip(
+{
     placement: 'top',
     trigger: 'hover'
 }).tooltip('hide');
 
-$('#popupfilezilla').popover({
+$('#popupfilezilla').popover(
+{
     html : true,
     trigger : 'hover',
     content : ' &bull; Cliquer sur ce bouton.<br> &bull; Ouvrir filezilla.<br> &bull; Fichier -> Importer les paramètres.<br> &bull; Sélectionner le fichier filezilla.xml.<br> &bull; C\'est terminé !',
     title : 'Configurer filezilla rapidement !',
-    placement : function() {
+    placement : function()
+    {
         var width = $(window).width();
         return width >= 979 ? 'right' : 'top';
     }
 });
 
-$('#popuptransdroid').popover({
+$('#popuptransdroid').popover(
+{
     html : true,
     trigger : 'hover',
     content : "Génère un fichier de configuration pour l'application transdroid.",
     title : 'Configurer transdroid rapidement !',
-    placement : function() {
+    placement : function()
+    {
         var width = $(window).width();
         return width >= 979 ? 'right' : 'top';
     }
@@ -59,10 +64,19 @@ $('#logout').click( function()
 {
     var UrlRedirect = $(this).data('urlredirect');
     var host = $(this).data('host');
-    $.get('http://logout@' + host);
+    $.get('//logout@' + host);
+
+    $.loader(
+    {
+        className: "logout-loader",
+        id: "jquery-loader",
+        content: "Déconnexion...",
+        height: 60,
+        width: 200
+    });
 
     setTimeout( function()
     {
         window.location.href = UrlRedirect;
-    }, 1000);
+    }, 2000);
 });

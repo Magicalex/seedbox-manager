@@ -8,6 +8,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "3.1.x",
-    "components-font-awesome": "4.0.x"
+    "components-font-awesome": "4.0.x",
+    "jquery-loader-plugin": "2.1.x"
   }
 }
