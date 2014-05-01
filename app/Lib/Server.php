@@ -67,10 +67,13 @@ class Server extends Users
         unlink('./../conf/users/'.$this->userName.'/'.$file_config_name);
     }
 
-    public static function CheckUpdate()
+    public function CheckUpdate()
     {
-        if (!isset($_COOKIE['seedbox-manager']))
+        $lifetime_cookie = time() + 3600*24;
+
+        if (!isset($_COOKIE['seedbox-manager']) && $this->is_owner === true)
         {
+            setcookie('seedbox-manager', 'check-update', $lifetime_cookie, '/', null, false, true);
             $url_repository = 'https://raw.githubusercontent.com/Magicalex/seedbox-manager/master/version.json';
             $local = json_decode(file_get_contents('./../version.json'));
             $remote = json_decode(file_get_contents($url_repository));

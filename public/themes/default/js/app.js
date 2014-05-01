@@ -51,11 +51,6 @@ $('.close-ticket').click( function ()
     $('.ticket-' + this.id).fadeOut();
 });
 
-//Genere un cookie qui expire au bout de 2j
-if ( $.cookie('seedbox-manager') == undefined ) {
-    $.cookie('seedbox-manager', 'check-update', { expires: 2 } );
-}
-
 /* fix bug pagination */
 $('#bloc-ftp').height( $('#bloc-info').height() + 2);
 
@@ -64,7 +59,6 @@ $('#logout').click( function()
 {
     var UrlRedirect = $(this).data('urlredirect');
     var host = $(this).data('host');
-
     $.get('http://logout@' + host);
 
     setTimeout( function()

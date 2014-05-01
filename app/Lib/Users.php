@@ -198,7 +198,7 @@ class Users
             }
         }
 
-        return $all_links;
+        return isset($all_links) ? $all_links:null;
     }
 
     public function url_redirect() { return $this->url_redirect; }
