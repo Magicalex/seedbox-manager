@@ -1,10 +1,10 @@
 {
   "name": "seedbox-manager",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "contributors": "Magicalex, Hydrog3n, Backtoback",
   "news": [
-  "Ajout d'un système de ticket",
-  "Ajout d'une notification mise à jour",
-  "Ajout d'un système de thèmes"
+    "Personnalisation des liens dans le menu. (attention il faudra mettre à jour les fichiers de configuration)",
+    "Amélioration de la fonctionnalité déconnexion.",
+    "Suppression de quelques scripts javascript dispensable."
   ] 
 }
