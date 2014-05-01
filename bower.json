@@ -1,6 +1,6 @@
 {
   "name": "seedbox-manager",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "authors": [
     "Magicalex <magicalex14000@gmail.com>"
   ],
@@ -8,8 +8,6 @@
   "private": true,
   "dependencies": {
     "bootstrap": "3.1.x",
-    "respond": "1.4.x",
-    "jquery-cookie": "1.4.x",
     "components-font-awesome": "4.0.x"
   }
 }
