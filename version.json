@@ -5,6 +5,6 @@
   "news": [
     "Personnalisation des liens dans le menu. (attention il faudra mettre à jour les fichiers de configuration)",
     "Amélioration de la fonctionnalité déconnexion.",
-    "Suppression de quelques scripts javascript dispensable."
-  ] 
+    "Suppression des scripts javascript dispensable."
+  ]
 }
