@@ -56,27 +56,23 @@ $('.close-ticket').click( function ()
     $('.ticket-' + this.id).fadeOut();
 });
 
-/* fix bug pagination */
-$('#bloc-ftp').height( $('#bloc-info').height() + 2);
-
-/* LOGOUT function */
+/* function LOGOUT */
 $('#logout').click( function()
 {
     var UrlRedirect = $(this).data('urlredirect');
     var host = $(this).data('host');
     $.get('//logout@' + host);
-
     $.loader(
     {
-        className: "logout-loader",
-        id: "jquery-loader",
-        content: "Déconnexion...",
+        id: 'jquery-loader',
+        className: '',
+        content: '<span>Déconnexion...</span>',
         height: 60,
-        width: 200
+        width: 200,
+        background: {id:'jquery-loader-background'}
     });
-
     setTimeout( function()
     {
         window.location.href = UrlRedirect;
-    }, 2000);
+    }, 1000);
 });

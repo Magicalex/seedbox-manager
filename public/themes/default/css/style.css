@@ -35,7 +35,6 @@ ul {
 }
 
 .fix-progress {
-  border:1px solid #999; /* ie-8 */
   border:1px solid rgba(0,0,0,0.15);
 }
 
@@ -118,12 +117,6 @@ ul {
   padding:7px;
 }
 
-@media (max-width:979px) {
-  .marg {
-    margin-bottom:0px !important;
-  }
-}
-
 fieldset {
   border:1px solid #B4B4B4;
   padding: 0px 10px 0px 10px;
@@ -157,21 +150,23 @@ textarea {
 }
 
 #jquery-loader {
-  border: 1px black solid;
-  padding-top: 35px;
-  background-color: white;
-  text-align: center;
-}
-#jquery-loader-background {
-  background-color: rgba(0,0,0,0.6);
+  position: relative;
+  background-image: url("./../../../components/jquery-loader-plugin/images/ajax-loader.gif");
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
-#jquery-loader .logout-loader {
-  border: none;
-  padding-top: 35px;
-  opacity: 0.5;
-  background-image: url("./components/jquery-loader-plugin/images/ajax-loader.gif");
-  background-position: center center;
-  background-repeat: no-repeat;
+#jquery-loader span {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
   text-align: center;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#jquery-loader-background {
+  background-color: rgba(0,0,0,0.9);
 }
