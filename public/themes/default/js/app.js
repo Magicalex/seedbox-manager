@@ -64,10 +64,10 @@
         var UrlRedirect = $(this).data('urlredirect');
 
         var protocol = window.location.protocol;
-        var hostname = window.location.hostname;
+        var host     = window.location.host;
         var uri      = window.location.pathname;
 
-        $.get( protocol + '//logout@' + hostname + uri);
+        $.get( protocol + '//logout@' + host + uri);
 
         $.loader(
         {
