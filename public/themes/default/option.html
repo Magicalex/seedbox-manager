@@ -8,20 +8,28 @@
                 <fieldset>
                     <legend>Les options de la page d'accueil</legend>
                     <div class="checkbox">
-                        <input type="checkbox" name="active_bloc_info" value="true" id="active_bloc_info" {% if user.blocInfo == true %}checked{% endif %} >
-                        <label for="active_bloc_info">Activer le bloc information utilisateur</label>
+                        <label>
+                            <input type="checkbox" name="active_bloc_info" value="true" id="active_bloc_info" {% if user.blocInfo == true %}checked{% endif %}>
+                            Activer le bloc information utilisateur
+                        </label>
                     </div>
                     <div class="checkbox">
-                        <input type="checkbox" name="active_ftp" value="true" id="active_ftp" {% if user.blocFtp == true %}checked{% endif %} >
-                        <label for="active_ftp">Activer le bloc accès ftp / sftp / transdroid</label>
+                        <label>
+                            <input type="checkbox" name="active_ftp" value="true" id="active_ftp" {% if user.blocFtp == true %}checked{% endif %} >
+                            Activer le bloc accès ftp / sftp / transdroid
+                        </label>
                     </div>
                     <div class="checkbox">
-                        <input type="checkbox" name="active_reboot" value="true" id="active_reboot" {% if user.blocRtorrent == true %}checked{% endif %} >
-                        <label for="active_reboot">Activer le bloc gestion de rtorrent</label>
+                        <label>
+                            <input type="checkbox" name="active_reboot" value="true" id="active_reboot" {% if user.blocRtorrent == true %}checked{% endif %} >
+                            Activer le bloc gestion de rtorrent
+                        </label>
                     </div>
                     <div class="checkbox">
-                        <input type="checkbox" name="active_support" value="true" id="active_support" {% if user.blocSupport == true %}checked{% endif %} >
-                        <label for="active_support">Activer le bloc support</label>
+                        <label>
+                            <input type="checkbox" name="active_support" value="true" id="active_support" {% if user.blocSupport == true %}checked{% endif %} >
+                            Activer le bloc support
+                        </label>
                     </div>
                 </fieldset>
             </div>
