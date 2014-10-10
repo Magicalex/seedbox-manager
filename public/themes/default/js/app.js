@@ -67,7 +67,7 @@
         var host     = window.location.host;
         var uri      = window.location.pathname;
 
-        $.get( protocol + '//logout@' + host + uri);
+        $.get(protocol + '//logout@' + host + uri);
 
         $.loader(
         {
