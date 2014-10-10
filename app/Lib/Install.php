@@ -15,15 +15,26 @@ class Install
 
     public static function check_uid_file($path_file)
     {
-        $uid = fileowner($path_file);
-        return $uid;
+        if ( file_exists($path_file) === false )
+            return false;
+        else
+        {
+            $uid = fileowner($path_file);
+            return $uid;
+        }
     }
 
     public static function getChmod($file, $precision)
     {
-        $precision = $precision * -1;
-        $chmod = substr(sprintf('%o', fileperms($file)), $precision);
-        return $chmod;
+        if ( file_exists($file) === false )
+            return false;
+        else
+        {
+            $precision = $precision * -1;
+            $chmod = substr(sprintf('%o', fileperms($file)), $precision);
+            return $chmod;
+        }
+
     }
 
     public static function create_new_user($userName)

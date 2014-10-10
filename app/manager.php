@@ -11,9 +11,8 @@ require_once './../vendor/autoload.php';
 /*check config app */
 use app\Lib\Install;
 
-if (file_exists('./../reboot-rtorrent')
-    && Install::check_uid_file('./../reboot-rtorrent') == 0
-    && Install::getChmod('./../reboot-rtorrent', 4) == 4755)
+if ( Install::check_uid_file('./../reboot-rtorrent') == 0
+     && Install::getChmod('./../reboot-rtorrent', 4) == 4755 )
 {
     $uid_folder_users = Install::check_uid_file('./../conf/users/');
     $uid_user_php = Install::get_user_php();
