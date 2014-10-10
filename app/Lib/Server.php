@@ -30,6 +30,10 @@ class Server extends Users
     public static function load_average()
     {
         $load_average = sys_getloadavg();
+
+        for ($i=0; isset($load_average[$i]); $i++)
+            $load_average[$i] = round($load_average[$i], 2);
+
         if ($load_average[0] < 5)
             $info_charge = '<em class="text-success">Charge faible, conditions optimales.</em>';
         elseif ($load_average[0] < 10)
