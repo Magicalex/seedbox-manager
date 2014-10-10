@@ -1,10 +1,9 @@
 {
   "name": "seedbox-manager",
-  "version": "2.4.1",
-  "contributors": "Magicalex, Hydrog3n, Backtoback",
+  "version": "2.4.2",
+  "contributors": "Magicalex, Hydrog3n",
   "news": [
-    "Personnalisation des liens dans le menu. (attention il faudra mettre à jour les fichiers de configuration)",
-    "Amélioration de la fonctionnalité déconnexion.",
-    "Suppression des scripts javascript dispensable."
+    "Correction du bug à la déconnexion.",
+    "Mise à jour vers la version 3.2 de bootstrap."
   ]
 }
