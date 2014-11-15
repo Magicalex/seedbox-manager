@@ -1,4 +1,4 @@
-#include "Bib.h"
+#include "suppression.h"
 
 void supprLock (char nickname[])
 {
