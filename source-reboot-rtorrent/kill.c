@@ -1,4 +1,4 @@
-#include "Bib.h"
+#include "kill.h"
 
 void rtorrent_kill (char nickname[])
 {
