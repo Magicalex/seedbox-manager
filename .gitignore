@@ -3,6 +3,7 @@
 composer.lock
 reboot-rtorrent
 *.swp
+*.~
 
 ## ignore folder
 public/components/
