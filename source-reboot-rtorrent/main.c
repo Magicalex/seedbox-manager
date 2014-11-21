@@ -21,10 +21,10 @@ int main (int argc, char* argv[])
     char nickname[50]; //Chaine recevant le pseudo de l'utilisateur
 
     // On vérifie la presénce d'un argument pour éviter l'erreur de segmentation
-    if (argc <= 1){
+    if (argc < 2){
 	    printf("ERREUR : Vous n'avez pas rentré de nom d'utilisateur en paramètre du programme.\n"
 			"Le programme va quitter\n");
-	    exit(0);
+	    return 101;
     }
 
     // setuid pour les droits root
