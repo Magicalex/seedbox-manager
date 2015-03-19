@@ -1,5 +1,5 @@
-#ifndef KILL_H
-#define KILL_H
+#ifndef KILL_RTORRENT_H
+#define KILL_RTORRENT_H
 
 // Librairies
 #include <stdio.h>
@@ -9,5 +9,6 @@
 //Prototypes
 void rtorrent_kill (char nickname[]);
 void screen_kill (char nickname[]);
+void supprLock (char nickname[]);
 
 #endif
