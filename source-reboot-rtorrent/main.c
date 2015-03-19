@@ -21,8 +21,9 @@ int main (int argc, char* argv[])
 
     // On vérifie la présence d'un argument pour éviter l'erreur de segmentation
     if (argc < 2){
-        printf("ERREUR : Vous n'avez pas rentré de nom d'utilisateur en parametre du programme.\n"
-        "Le programme va quitter\n");
+        printf("ERREUR : Vous n'avez pas rentré de nom d'utilisateur en paramètre du programme.\n"
+        "Usage : ./reboot-rtorrent <username>\n"
+        "Le programme va quitter, bye.\n");
         return 101;
     }
 

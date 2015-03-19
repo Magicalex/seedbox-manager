@@ -25,7 +25,7 @@ void screen_kill (char nickname[])
     //Déclarations
     char chaine [100] = {0};
 
-    snprintf(chaine, 100, "su --command='screen -S %s-rtorrent -X quit' %s\n", nickname);
+    snprintf(chaine, 100, "su --command='screen -S %s-rtorrent -X quit' %s\n", nickname, nickname);
     printf("%s", chaine);
     system (chaine);
 }
