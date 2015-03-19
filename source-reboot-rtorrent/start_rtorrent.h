@@ -1,5 +1,5 @@
-#ifndef REBOOT_H
-#define REBOOT_H
+#ifndef START_RTORRENT_H
+#define START_RTORRENT_H
 
 // Librairies
 #include <stdio.h>
@@ -7,6 +7,6 @@
 #include <string.h>
 
 ///Prototypes
-void reboot (char nickname[]);
+void start_rtorrent (char nickname[]);
 
 #endif
