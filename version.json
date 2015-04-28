@@ -1,9 +1,9 @@
 {
   "name": "seedbox-manager",
-  "version": "2.4.2",
-  "contributors": "Magicalex, Hydrog3n",
+  "version": "2.4.3",
+  "contributors": "Magicalex, ex_rat",
   "news": [
-    "Correction du bug à la déconnexion.",
-    "Mise à jour vers la version 3.2 de bootstrap."
+    "Correction de bug du thème spirit of bonobo",
+    "note : vous devez supprimer le thème 'SpiritOfBonobo' si il existe, et garder le thème 'spiritofbonobo'."
   ]
 }
