@@ -1,6 +1,6 @@
 {% if post.reboot is defined and rebootRtorrent.statusReboot == 0 %}
     <div class="alert alert-success">Votre session rtorrent a été redémarrée avec succès.</div>
-{% elseif post.reboot is defined and rebootRtorrent.statusReboot != 0 %}        
+{% elseif post.reboot is defined and rebootRtorrent.statusReboot != 0 %}
     <div class="alert alert-danger">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <strong>Un problème est survenu lors du redémarrage de rtorrent</strong>, vérifiez votre configuration.
