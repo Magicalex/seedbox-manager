@@ -28,23 +28,23 @@ int main (int argc, char* argv[])
     }
 
     // setuid pour les droits root
-    setuid (0);
-    perror ("setuid");
+    setuid(0);
+    perror("setuid");
 
     // Récupération du pseudo de l'utilisateur
-    strcpy (nickname, argv[1]);
+    strcpy(nickname, argv[1]);
 
     // Arret de rtorrent
-    rtorrent_kill (nickname);
+    rtorrent_kill(nickname);
 
     // Arrêt de la session rtorrent screen
-    screen_kill (nickname);
+    screen_kill(nickname);
 
     // Suppression du fichier rtorrent.lock
-    supprLock (nickname);
+    supprLock(nickname);
 
     // Appel de la fonction pour reboot rtorrent
-    start_rtorrent (nickname);
+    start_rtorrent(nickname);
 
     return 0;
 }

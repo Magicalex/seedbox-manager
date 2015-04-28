@@ -61,7 +61,6 @@ class Users
         $free_disk = self::convertFileSize($total_disk - $used_disk);
         $used_disk = self::convertFileSize($used_disk);
         $total_disk = self::convertFileSize($total_disk);
-       
 
         if ( $percentage_used < 85 )
             $progressBarColor = null;

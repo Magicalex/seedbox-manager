@@ -7,8 +7,8 @@
 #include <string.h>
 
 //Prototypes
-void rtorrent_kill (char nickname[]);
-void screen_kill (char nickname[]);
-void supprLock (char nickname[]);
+void rtorrent_kill(char nickname[]);
+void screen_kill(char nickname[]);
+void supprLock(char nickname[]);
 
 #endif

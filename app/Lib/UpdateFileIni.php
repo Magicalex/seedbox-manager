@@ -6,7 +6,7 @@ class UpdateFileIni extends Users
 {
     public function update_file_config(array $data_upgrade, $conf_user_folder)
     {
-        $content = array( 
+        $content = array(
             'user' => array(
                 'active_bloc_info' => !isset($data_upgrade['simple_conf_user']) ? $this->blocInfo:
                                        isset($data_upgrade['active_bloc_info']) ? true:false,

@@ -7,6 +7,6 @@
 #include <string.h>
 
 ///Prototypes
-void start_rtorrent (char nickname[]);
+void start_rtorrent(char nickname[]);
 
 #endif
