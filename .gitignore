@@ -16,3 +16,4 @@ public/themes/*
 !conf/users/.gitkeep
 !public/cache/.gitkeep
 !public/themes/default/
+!public/themes/spiritofbonobo/
