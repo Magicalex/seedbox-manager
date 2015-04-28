@@ -1,0 +1,295 @@
+
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Ubuntu'), url(https://themes.googleusercontent.com/static/fonts/ubuntu/v5/_xyN3apAT_yRRDeqB3sPRg.woff) format('woff');
+}
+
+/* CODE CSS AJUSTEMENT BOOTSTRAP */
+
+::-moz-selection {
+    background: #FF3C78;
+    color: white;
+}
+
+::selection {
+    background: #FF3C78;
+    color: white;
+}
+
+body {
+    background: #3a3a3a;
+}
+
+ul {
+    color: #5A5A5A;
+}
+
+.marg {
+    padding: 15px;
+    margin-bottom: 50px;
+    background-color: white;
+    box-shadow: 0 0 15px 0 white;
+}
+
+.dashboard {
+    margin-top: 5px !important;
+    margin-bottom: 20px !important;
+}
+
+.user {
+    font-weight: bold;
+}
+
+.fix-progress {
+    border: 1px solid rgba(0,0,0,0.15);
+}
+
+.titre-head {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.trait {
+    background-color: #E5E5E5;
+    border-bottom: 1px solid #FFFFFF;
+    height: 2px;
+    margin: 9px 1px;
+    overflow: hidden;
+}
+
+/* ajustement popup et formulaire */
+.modal-footer form {
+    display: inline-block;
+    margin: 0px;
+    margin-left: 5px;
+    padding: 0px;
+}
+
+.btn-reboot{
+    margin-top: 20px;
+}
+
+#logout {
+    color: #B94A48;
+}
+
+.text-defaut-color {
+    color: #5A5A5A;
+}
+
+.textmodaleabout {
+    color: #646464;
+}
+
+#load-info {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.load-average {
+    font-size: 11px;
+}
+
+.aboutlink {
+    color: white;
+}
+
+.aboutlink:hover {
+    color: white;
+}
+
+.glyphicon-refresh {
+    margin-right: 7px;
+}
+
+#popupfilezilla, #popuptransdroid {
+    margin-top: 4px;
+}
+
+.fix-marg-input {
+    margin-bottom: 0px;
+}
+
+.reply-ticket-h6 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.reply-ticket-h6 .form-group {
+    margin-bottom: 10px;
+}
+
+.alert-sm {
+    padding: 7px;
+}
+
+fieldset {
+    border: 1px solid #B4B4B4;
+    padding: 0px 10px 0px 10px;
+    margin-bottom: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+}
+
+legend {
+    color: #5A5A5A;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-bottom: none;
+    width: auto;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+textarea {
+    margin-bottom: 15px;
+}
+
+.device {
+    color: #5A5A5A;
+}
+
+.device .fa-android {
+    font-size: 18px;
+}
+
+#jquery-loader {
+    position: relative;
+    background-image: url("./../../../components/jquery-loader-plugin/images/ajax-loader.gif");
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+
+#jquery-loader span {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#jquery-loader-background {
+    background-color: rgba(0,0,0,0.9);
+}
+
+/* Modif Jed */
+body {
+    font-family: 'Ubuntu';
+    background-image: url('../img/bg.png');
+}
+
+h1 {
+    text-align: center;
+    color: #8bbcfe;
+    font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+    font-size: 60px;
+    font-weight: 400;
+    text-decoration: none;
+    box-shadow: 0 0 5px 0 black;
+    border-radius: 20px;
+    text-shadow: 1px 1px 5px black;
+}
+
+h2 {
+    text-align: center;
+    color: #8bbcfe;
+    font-family: 'Ubuntu';
+    font-size: 24px;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.navbar-default {
+    background-image: -webkit-linear-gradient(top,#fff 0,#f8f8f8 100%);
+    background-image: linear-gradient(to bottom, #3a3a3a 0,grey 200%);
+    background-repeat: repeat-x;
+    box-shadow: 1px 1px 10px black;
+    border-color: #3a3a3a;
+}
+
+.navbar-default .navbar-nav>li>a {
+    font-family: 'Ubuntu';
+    font-size: 22px;
+    color: white;
+    z-index: +156000;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    font-family: 'Ubuntu';
+    color: #8bbcfe;
+    font-size: 22px;
+    z-index: +156000;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+
+}
+
+.navbar-default .navbar-brand {
+    font-family: 'Ubuntu';
+    font-size: 22px;
+    color: #8bbcfe;
+    font-weight: normal;
+    font-style: normal;
+    opacity: 0.9;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #8bbcfe;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #8bbcfe;
+    border-color: #77B3FD;
+    border-radius: 20px;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #77B3FD;
+    border-color: #8bbcfe;
+}
+
+.well-sm {
+    padding: 9px;
+    border-radius: 20px;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    background-color: #2C2C2C;
+    color: #8bbcfe;
+}
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 2px solid #868585;
+    background: #595A5A;
+}
+
+.glyphicon {
+    top: 10px;
+}
+
+.container.marg {
+    background: #616161;
+}
+
+.marg {
+    padding: 15px;
+    margin-bottom: 50px;
+    background-color: white;
+    box-shadow: 0 0 15px 0 black;
+    border-radius: 20px;
+    opacity: 0.9;
+}

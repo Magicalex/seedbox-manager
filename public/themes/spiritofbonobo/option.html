@@ -1,0 +1,75 @@
+<article class="col-md-12" id="conf-simple-user">
+    <div class="well well-sm">
+        <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Configuration de l'interface</h4>
+        <div class="trait"></div>
+
+        <form method="post" action="?option" role="form">
+            <div class="col-md-6">
+                <fieldset>
+                    <legend>Les options de la page d'accueil</legend>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="active_bloc_info" value="true" id="active_bloc_info" {% if user.blocInfo == true %}checked{% endif %}>
+                            Activer le bloc information utilisateur
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="active_ftp" value="true" id="active_ftp" {% if user.blocFtp == true %}checked{% endif %} >
+                            Activer le bloc accès ftp / sftp / transdroid
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="active_reboot" value="true" id="active_reboot" {% if user.blocRtorrent == true %}checked{% endif %} >
+                            Activer le bloc gestion de rtorrent
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="active_support" value="true" id="active_support" {% if user.blocSupport == true %}checked{% endif %} >
+                            Activer le bloc support
+                        </label>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-6">
+                <fieldset>
+                    <legend>Les options de déconnexion</legend>
+                    <div class="form-group">
+                        <label for="url-deconnexion">Url de redirection à la déconnexion</label>
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <input type="url" name="url_redirect" class="form-control" id="url-deconnexion" value="{{ user.url_redirect }}">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-6">
+                <fieldset>
+                    <legend>Les thèmes</legend>
+                    <div class="form-group">
+                        <label for="user-theme">choisir un thème</label>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <select name="theme" class="form-control">
+                                {% for theme in user.get_all_themes %}
+                                    <option value="{{ theme }}" {% if theme == user.theme %}selected{% endif %}>{{ theme }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <p class="text-right fix-marg-input">
+                <input type="hidden" name="simple_conf_user">
+                <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
+            </p>
+        </form>
+    </div>
+</article>

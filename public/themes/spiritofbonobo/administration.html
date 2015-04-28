@@ -1,0 +1,98 @@
+<article class="col-md-6">
+    <div class="well well-sm">
+        <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Configuration de l'utilisateur : <strong>{% if get.user is empty %}{{ userName }}{% else %}{{ get.user }}{% endif %}</strong></h4>
+        <div class="trait"></div>
+                    
+        <form method="post" action="?admin{% if get.user is defined %}&amp;user={{ get.user }}{% endif %}" role="form">
+            <fieldset>
+                <legend>Généralité utilisateur</legend>
+                <div class="form-group">
+                    <label for="user_directory">Dossier /home de l'utilisateur</label>
+                    <input type="text" class="form-control" name="user_directory" id="user_directory" value="{{ UpdateOwner.user_directory }}">
+                </div>
+                <div class="form-group">
+                    <label for="user_directory">Dossier scgi de l'utilisateur</label>
+                    <input type="text" class="form-control" name="scgi_folder" id="scgi_folder" value="{{ UpdateOwner.scgi_folder }}">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Barre de navigation</legend>
+                <label for="data_link" class="text-danger">
+                    <i class="glyphicon glyphicon-warning-sign"></i>
+                    Suivez correctement la syntaxe pour ajouter des liens
+                </label>
+                <textarea class="form-control" rows="3" name="data_link" id="data_link">{{ UpdateOwner.navbar_links }}</textarea>
+            </fieldset>
+
+            <fieldset>
+                <legend>Paramètre des serveurs FTP/sFTP</legend>
+                <div class="form-group">
+                    <label for="port_ftp">Port ftp</label>
+                    <input type="number" class="form-control" name="port_ftp" id="port_ftp" value="{{ UpdateOwner.portFtp }}">
+                </div>
+                <div class="form-group">
+                    <label for="port_sftp">Port sftp</label>
+                    <input type="number" class="form-control" name="port_sftp" id="port_sftp" value="{{ UpdateOwner.portSftp }}">
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Support</legend>
+                <div class="form-group">
+                    <label for="adresse_mail">Adresse du support</label>
+                    <input type="email" class="form-control" name="adresse_mail" id="adresse_mail" value="{{ UpdateOwner.supportMail }}">
+                </div>
+            </fieldset>
+
+            <p class="text-right fix-marg-input">
+                <input type="hidden" name="user" value="{% if get.user is empty %}{{ userName }}{% else %}{{ get.user }}{% endif %}">
+                <input type="hidden" name="owner_change_config">
+                <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
+            </p>
+        </form>
+    </div>
+</article>
+
+<article class="col-md-6">
+    <div class="well well-sm">
+        <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Administration : gestion utilisateurs</h4>
+        <div class="trait"></div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th><strong>#</strong></th>
+                        <th><strong>Utilisateur</strong></th>
+                        <th><strong>Modifier</strong></th>
+                        <th><strong>Supprimer</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in user.get_all_users %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ user }}</td>
+                        <td>
+                            <a href="?admin&amp;user={{ user }}" class="btn btn-default btn-xs edit-btn-user">
+                                <i class="glyphicon glyphicon-edit"></i> éditer
+                            </a>
+                        </td>
+                        <td>
+                        {% if user != userName %}
+                            <a data-toggle="modal" class="popup-delete-user btn btn-danger btn-xs" data-user="{{ user }}" href="#delete-user">
+                                <i class="glyphicon glyphicon-trash"></i> supprimer
+                            </a>
+                        {% else %}
+                            <a class="popup-delete-user btn btn-danger btn-xs disabled">
+                                <i class="glyphicon glyphicon-trash"></i> supprimer
+                            </a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</article>
