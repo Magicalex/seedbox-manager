@@ -104,7 +104,8 @@ ul {
     margin-right: 7px;
 }
 
-#popupfilezilla, #popuptransdroid {
+#popupfilezilla,
+#popuptransdroid {
     margin-top: 4px;
 }
 
@@ -195,6 +196,7 @@ h1 {
     box-shadow: 0 0 5px 0 black;
     border-radius: 20px;
     text-shadow: 1px 1px 5px black;
+    margin-top: 10px;
 }
 
 h2 {
@@ -214,22 +216,18 @@ h2 {
     border-color: #3a3a3a;
 }
 
-.navbar-default .navbar-nav>li>a {
+.navbar-default .navbar-nav > li > a {
     font-family: 'Ubuntu';
     font-size: 22px;
     color: white;
     z-index: +156000;
 }
 
-.navbar-default .navbar-nav>li>a:hover {
+.navbar-default .navbar-nav > li > a:hover {
     font-family: 'Ubuntu';
     color: #8bbcfe;
     font-size: 22px;
     z-index: +156000;
-}
-
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
-
 }
 
 .navbar-default .navbar-brand {
@@ -277,11 +275,7 @@ h2 {
     background: #595A5A;
 }
 
-.glyphicon {
-    top: 10px;
-}
-
-.container.marg {
+.container .marg {
     background: #616161;
 }
 
