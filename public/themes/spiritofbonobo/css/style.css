@@ -1,3 +1,4 @@
+/* CODE CSS THEME SPIRITOFBONOBO */
 
 @font-face {
     font-family: 'Ubuntu';
@@ -5,8 +6,6 @@
     font-weight: 400;
     src: local('Ubuntu'), url(https://themes.googleusercontent.com/static/fonts/ubuntu/v5/_xyN3apAT_yRRDeqB3sPRg.woff) format('woff');
 }
-
-/* CODE CSS AJUSTEMENT BOOTSTRAP */
 
 ::-moz-selection {
     background: #FF3C78;
@@ -31,11 +30,6 @@ ul {
     margin-bottom: 50px;
     background-color: white;
     box-shadow: 0 0 15px 0 white;
-}
-
-.dashboard {
-    margin-top: 5px !important;
-    margin-bottom: 20px !important;
 }
 
 .user {
@@ -69,10 +63,6 @@ ul {
 
 .btn-reboot{
     margin-top: 20px;
-}
-
-#logout {
-    color: #B94A48;
 }
 
 .text-defaut-color {
@@ -186,19 +176,6 @@ body {
     background-image: url('../img/bg.png');
 }
 
-h1 {
-    text-align: center;
-    color: #8bbcfe;
-    font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
-    font-size: 60px;
-    font-weight: 400;
-    text-decoration: none;
-    box-shadow: 0 0 5px 0 black;
-    border-radius: 20px;
-    text-shadow: 1px 1px 5px black;
-    margin-top: 10px;
-}
-
 h2 {
     text-align: center;
     color: #8bbcfe;
@@ -220,7 +197,6 @@ h2 {
     font-family: 'Ubuntu';
     font-size: 22px;
     color: white;
-    z-index: +156000;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
@@ -269,13 +245,21 @@ h2 {
 }
 
 .page-header {
-    padding-bottom: 9px;
-    margin: 40px 0 20px;
-    border-bottom: 2px solid #868585;
     background: #595A5A;
+    text-align: center;
+    color: #8bbcfe;
+    font-size: 60px;
+    font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    box-shadow: 0 0 5px 0 black;
+    text-shadow: 1px 1px 5px black;
+    border: 2px solid #868585;
+    border-radius: 20px;
+    margin: 5px 0 20px;
+    padding: 10px 0;
 }
 
-.container .marg {
+.container.marg {
     background: #616161;
 }
 
@@ -286,4 +270,16 @@ h2 {
     box-shadow: 0 0 15px 0 black;
     border-radius: 20px;
     opacity: 0.9;
+}
+
+.dropdown-menu {
+    background-color: #616161 ;
+}
+
+.dropdown-menu > li > a {
+    color: #fff;
+}
+
+#logout {
+    color: red;
 }
