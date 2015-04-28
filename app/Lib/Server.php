@@ -4,6 +4,8 @@ namespace app\Lib;
 
 class Server extends Users
 {
+    const VERSION = '2.4.3';
+
     public static function getUptime()
     {
         $data_uptime = file_get_contents('/proc/uptime');
@@ -92,4 +94,5 @@ class Server extends Users
     }
 
     public function logout_url_redirect() { return $this->url_redirect; }
+    public function version() { return self::VERSION; }
 }
