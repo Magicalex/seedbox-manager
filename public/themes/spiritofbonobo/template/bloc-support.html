@@ -1,0 +1,22 @@
+<article class="col-md-6">
+    <div class="well well-sm">
+    <h4 class="titre-head"><i class="fa fa-medkit"></i> Contacter le Support</h4>
+    <div class="trait"></div>
+
+    {% if user.is_owner == true %}
+
+        {% include './template/bloc-support-admin.html' %}
+
+    {% else %}
+
+        {% include './template/bloc-support-user.html' %}
+    
+    {% endif %}
+
+    <p>
+        <strong>contact mail :</strong>
+        <a href="mailto:{{ user.supportMail }}" target="_blank">{{ user.supportMail }}</a>
+    </p>
+
+    </div>
+</article>

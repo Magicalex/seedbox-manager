@@ -1,0 +1,14 @@
+<article class="col-md-6">
+    <div class="well well-sm">
+        <h4 class="titre-head"><i class="fa fa-terminal"></i> ./reboot-rtorrent</h4>
+        <div class="trait"></div>
+        <p class="text-center btn-reboot">
+            <a data-toggle="modal" href="#popupreboot" class="btn btn-info btn-lg" style="vertical-align: middle;">
+                <span class="glyphicon glyphicon-refresh"></span>Redémarrer rtorrent
+            </a>
+        </p>
+        {% if read_data_reboot.file_exist %}
+           <small class="text-defaut-color"><em>Dernier redémarrage le {{ read_data_reboot.read_file }}</em></small>
+        {% endif %}
+    </div>
+</article>

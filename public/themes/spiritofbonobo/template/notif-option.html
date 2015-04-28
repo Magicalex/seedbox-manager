@@ -1,0 +1,11 @@
+{% if post.simple_conf_user is defined and updateIniFileLogUser is empty %}
+    <div class="alert alert-success">Vos préférences ont été mises à jour avec succès.</div>
+{% elseif post.simple_conf_user is defined %}
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4>Impossible de mettre à jour votre configuration !</h4>
+        <ul class="text-danger">
+            <li>{{ updateIniFileLogUser }}</li>
+        </ul>
+    </div>
+{% endif %}
