@@ -1,9 +1,11 @@
 {
   "name": "seedbox-manager",
   "version": "2.4.3",
-  "contributors": "Magicalex, ex_rat",
+  "contributors": "Magicalex, ex_rat, MThibault, Micdu70",
   "news": [
-    "Correction de bug du thème spirit of bonobo",
+    "Correction de bugs du thème spirit of bonobo",
+    "Amélioration du programme reboot-rtorrent (merci à MThibault)",
+    "Correction de quelques fautes de Français :$ (merci à Micdu70)",
     "note : vous devez supprimer le thème 'SpiritOfBonobo' si il existe, et garder le thème 'spiritofbonobo'."
   ]
 }
