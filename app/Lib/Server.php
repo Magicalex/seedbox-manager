@@ -77,9 +77,8 @@ class Server extends Users
         if (!isset($_COOKIE['seedbox-manager']) && $this->is_owner === true) {
             setcookie('seedbox-manager', 'check-update', $lifetime_cookie, '/', null, false, true);
             $url_repository = 'https://raw.githubusercontent.com/Magicalex/seedbox-manager/master/version.json';
-            $local = json_decode(file_get_contents('../version.json'));
             $remote = json_decode(file_get_contents($url_repository));
-            if ( $local->version != $remote->version ) {
+            if (self::VERSION !== $remote->version) {
                 $result = $remote;
             } else {
                 $result = false;

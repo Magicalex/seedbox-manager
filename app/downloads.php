@@ -7,7 +7,7 @@ $title_seedbox = 'seedbox-'.$userName;
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
 $passwd = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW']:null;
-$passwd = htmlspecialchars($passwd,ENT_NOQUOTES);
+$passwd = htmlspecialchars($passwd, ENT_NOQUOTES);
 
 // setting transdroid
 $tableau_conf_trandroid = array(
@@ -92,7 +92,8 @@ $conf_xml_filezilla = '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'
     '</Servers>'."\n".
 '</FileZilla3>';
 
-if ( $_GET['file'] == 'transdroid' )
+if ($_GET['file'] == 'transdroid') {
     $serveur->FileDownload('settings.json', $conf_json_trandroid);
-elseif ( $_GET['file'] == 'filezilla' )
+} elseif ($_GET['file'] == 'filezilla') {
     $serveur->FileDownload('filezilla.xml', $conf_xml_filezilla);
+}

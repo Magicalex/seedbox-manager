@@ -35,7 +35,7 @@ class Install
     {
         $log = mkdir('../conf/users/' . $userName, 0755, false);
         if (true === $log) {
-            $log = 'Dossier de confifuration crée avec succès';
+            $log = 'Dossier de configuration crée avec succès';
         }
         if (file_exists('../conf/users/' . $userName)) {
             copy('../conf/config.ini', '../conf/users/' . $userName . '/config.ini');

@@ -7,7 +7,6 @@ use \app\Lib\Support;
 use \app\Lib\Install;
 use \WriteIniFile\WriteIniFile;
 
-
 /* check authentication */
 if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
     $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
@@ -18,11 +17,9 @@ if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
 
 
 /* check install */
-$uid_folder_users = Install::check_uid_file('../conf/users/'); // replace by 1004 during dev #vagrant
-$uid_user_php = Install::get_user_php();
-if ($uid_folder_users != $uid_user_php['num_uid']) {
+if (false === is_writable('../conf/users')) {
     require 'install/installation.php';
-    exit(0);
+    exit(1);
 } elseif (file_exists('../conf/users/' . $userName . '/config.ini')) {
     $file_user_ini = '../conf/users/' . $userName . '/config.ini';
 } else {
@@ -66,7 +63,7 @@ if (isset($_POST['deleteUserName'])) {
     $log_delete_user = Users::delete_config_old_user('../conf/users/' . $_POST['deleteUserName']);
 }
 
-if (isset($_POST['support']) && isset($_POST['message']) ) {
+if (isset($_POST['support']) && isset($_POST['message'])) {
     $support = new Support($file_user_ini, $userName);
     $LogSupport = $support->sendTicket($_POST['message'], $_POST['user']);
 }
