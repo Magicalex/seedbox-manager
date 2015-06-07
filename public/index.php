@@ -8,22 +8,26 @@ use \app\Lib\Install;
 use \app\Lib\UpdateFileIni;
 use \WriteIniFile\WriteIniFile;
 
-if ( isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']) )
+
+/* check authentication */
+if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']))
     $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
 else
     die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>
         V&eacute;rifiez la configuration de votre serveur web.');
 
+
+/* check install */
 $uid_folder_users = Install::check_uid_file('../conf/users/'); // replace by 1004 during dev #vagrant
 $uid_user_php = Install::get_user_php();
 if ($uid_folder_users != $uid_user_php['num_uid']) {
-    require_once('install/installation.php');
+    require 'install/installation.php';
     exit(0);
-} elseif (file_exists('../conf/users/'.$userName.'/config.ini')) {
-    $file_user_ini = '../conf/users/'.$userName.'/config.ini';
+} elseif (file_exists('../conf/users/' . $userName . '/config.ini')) {
+    $file_user_ini = '../conf/users/' . $userName . '/config.ini';
 } else {
     Install::create_new_user($userName);
-    $file_user_ini = '../conf/users/'.$userName.'/config.ini';
+    $file_user_ini = '../conf/users/' . $userName . '/config.ini';
 }
 
 
@@ -56,36 +60,44 @@ if (isset($_POST['config_admin'])) {
 
     $update_ini_file_log_owner = $update->write(); */
 
-    $update = new UpdateFileIni('../conf/users/'.$_POST['user'].'/config.ini', $_POST['user']);
-    $update_ini_file_log_owner = $update->update_file_config($_POST, '../conf/users/'.$_POST['user']);
+    $update = new UpdateFileIni('../conf/users/' . $_POST['user'] . '/config.ini', $_POST['user']);
+    $update_ini_file_log_owner = $update->update_file_config($_POST, '../conf/users/' . $_POST['user']);
 }
 
-if ( isset($_POST['deleteUserName']) )
-    $log_delete_user = Users::delete_config_old_user('../conf/users/'.$_POST['deleteUserName']);
-if ( isset($_POST['support']) && isset($_POST['message']) )
-{
-    $support = new Support($file_user_ini, $userName);
-    $LogSupport = $support->sendTicket( $_POST['message'], $_POST['user']);
+if (isset($_POST['deleteUserName'])) {
+    $log_delete_user = Users::delete_config_old_user('../conf/users/' . $_POST['deleteUserName']);
 }
-if ( isset($_POST['cloture']) && isset($_POST['user']))
+
+if (isset($_POST['support']) && isset($_POST['message']) ) {
+    $support = new Support($file_user_ini, $userName);
+    $LogSupport = $support->sendTicket($_POST['message'], $_POST['user']);
+}
+
+if (isset($_POST['cloture']) && isset($_POST['user'])) {
     $LogCloture = Support::ClotureTicket($_POST['user']);
+}
+
 
 /* REQUEST GET */
-if (isset($_GET['admin']))
-{
-    if (empty($_GET['user']))
-        $loader_file_ini_user = new Users('../conf/users/'.$userName.'/config.ini', $userName );
-    else
-        $loader_file_ini_user = new Users('../conf/users/'.$_GET['user'].'/config.ini', $_GET['user'] );
+if (isset($_GET['admin'])) {
+    if (empty($_GET['user'])) {
+        $loader_file_ini_user = new Users('../conf/users/' . $userName . '/config.ini', $userName);
+    } else {
+        $loader_file_ini_user = new Users('../conf/users/' . $_GET['user'] . '/config.ini', $_GET['user']);
+    }
 }
-if (isset($_GET['download']))
+
+if (isset($_GET['download'])) {
     require '../app/downloads.php';
+}
+
 
 /* init objet */
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
 $support = new Support($file_user_ini, $userName);
-$read_data_reboot = $user->readFileDataReboot('../conf/users/'.$userName.'/data_reboot.txt');
+$read_data_reboot = $user->readFileDataReboot('../conf/users/' . $userName . '/data_reboot.txt');
+
 
 /* init twig */
 $loader = new Twig_Loader_Filesystem('themes/' . $user->theme());
