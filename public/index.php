@@ -14,7 +14,7 @@ else
     die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>
         V&eacute;rifiez la configuration de votre serveur web.');
 
-$uid_folder_users = 1004;//Install::check_uid_file('../conf/users/'); // replace by 1004 during dev #vagrant
+$uid_folder_users = Install::check_uid_file('../conf/users/'); // replace by 1004 during dev #vagrant
 $uid_user_php = Install::get_user_php();
 if ($uid_folder_users != $uid_user_php['num_uid']) {
     require_once('install/installation.php');
