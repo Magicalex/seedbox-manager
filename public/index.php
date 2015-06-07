@@ -5,16 +5,16 @@ use \app\Lib\Users;
 use \app\Lib\Server;
 use \app\Lib\Support;
 use \app\Lib\Install;
-use \app\Lib\UpdateFileIni;
 use \WriteIniFile\WriteIniFile;
 
 
 /* check authentication */
-if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']))
+if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
     $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
-else
+} else {
     die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>
-        V&eacute;rifiez la configuration de votre serveur web.');
+         V&eacute;rifiez la configuration de votre serveur web.');
+}
 
 
 /* check install */
@@ -51,17 +51,15 @@ if (isset($_POST['conf_user'])) {
 }
 
 if (isset($_POST['config_admin'])) {
-    /* $post = $_POST;
+    $post = $_POST;
     $update = new WriteIniFile('../conf/users/' . $post['user'] . '/config.ini');
-
-    echo "<pre>";
-    var_dump($post);
-    echo "</pre>";
-
-    $update_ini_file_log_owner = $update->write(); */
-
-    $update = new UpdateFileIni('../conf/users/' . $_POST['user'] . '/config.ini', $_POST['user']);
-    $update_ini_file_log_owner = $update->update_file_config($_POST, '../conf/users/' . $_POST['user']);
+    $update->update([
+        'user' => ['user_directory' => $post['user_directory'], 'scgi_folder' => $post['scgi_folder']],
+        'nav' => ['data_link' => $post['data_link']],
+        'ftp' => ['port_ftp' => $post['port_ftp'], 'port_sftp' => $post['port_sftp']],
+        'support' => ['adresse_mail' => $post['adresse_mail']]
+    ]);
+    $update_ini_file_log_owner = $update->write();
 }
 
 if (isset($_POST['deleteUserName'])) {

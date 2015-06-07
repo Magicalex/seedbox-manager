@@ -19,9 +19,9 @@
 </div>
 {% endif %}
 
-{% if post.owner_change_config is defined and updateIniFileLogOwner is empty %}
+{% if post.config_admin is defined and updateIniFileLogOwner == true %}
 <div class="alert alert-success">La configuration de l'utilisateur <strong>{{ post.user }}</strong> a été mise à jour avec succès.</div>
-{% elseif post.owner_change_config is defined %}
+{% elseif post.owner_change_config is defined and updateIniFileLogOwner == false %}
 <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     Impossible de mettre à jour la configuration de l'utilisateur <strong>{{ post.user }}</strong> !
