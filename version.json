@@ -1,11 +1,10 @@
 {
   "name": "seedbox-manager",
-  "version": "2.4.3",
-  "contributors": "Magicalex, ex_rat, MThibault, Micdu70",
+  "version": "2.4.4",
+  "contributors": "Magicalex, Micdu70",
   "news": [
-    "Correction de bugs du thème spirit of bonobo",
-    "Amélioration du programme reboot-rtorrent (merci à MThibault)",
-    "Correction de quelques fautes de Français :$ (merci à Micdu70)",
-    "note : vous devez supprimer le thème 'SpiritOfBonobo' si il existe, et garder le thème 'spiritofbonobo'."
+    "Remaniement du code",
+    "Suppression de la class UpdateFileIni et ajout de la librairie Magicalex/write-ini-file",
+    "Correction d'un bug à la généartion du fichier xml filezilla (merci à Micdu70)"
   ]
 }

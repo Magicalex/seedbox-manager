@@ -1,5 +1,4 @@
 <?php
-
 namespace app\Lib;
 
 class Users

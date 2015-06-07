@@ -18,7 +18,7 @@ if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
 
 
 /* check install */
-$uid_folder_users = Install::check_uid_file('../conf/users/'); // replace by 1004 during dev #vagrant
+$uid_folder_users = 1004; //Install::check_uid_file('../conf/users/'); // replace by 1004 during dev #vagrant
 $uid_user_php = Install::get_user_php();
 if ($uid_folder_users != $uid_user_php['num_uid']) {
     require 'install/installation.php';
