@@ -6,7 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=5.4.0",
-        "twig/twig": "1.*"
+        "twig/twig": "1.*",
+        "magicalex/write-ini-file": "1.*"
     },
     "authors": [
         {

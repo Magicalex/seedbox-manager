@@ -4,8 +4,9 @@ require '../vendor/autoload.php';
 use \app\Lib\Users;
 use \app\Lib\Server;
 use \app\Lib\Support;
-use \app\Lib\UpdateFileIni;
 use \app\Lib\Install;
+use \app\Lib\UpdateFileIni;
+use \WriteIniFile\WriteIniFile;
 
 if ( isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER']) )
     $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
@@ -13,7 +14,7 @@ else
     die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>
         V&eacute;rifiez la configuration de votre serveur web.');
 
-$uid_folder_users = Install::check_uid_file('../conf/users/'); // replace by 1004 during dev #vagrant
+$uid_folder_users = 1004;//Install::check_uid_file('../conf/users/'); // replace by 1004 during dev #vagrant
 $uid_user_php = Install::get_user_php();
 if ($uid_folder_users != $uid_user_php['num_uid']) {
     require_once('install/installation.php');
@@ -27,21 +28,38 @@ if ($uid_folder_users != $uid_user_php['num_uid']) {
 
 
 /* REQUEST POST */
-if ( isset($_POST['reboot']) )
-{
+if (isset($_POST['reboot'])) {
     $user = new Users($file_user_ini, $userName);
     $rebootRtorrent = $user->rebootRtorrent();
 }
-if ( isset($_POST['simple_conf_user']) )
-{
-    $update = new UpdateFileIni($file_user_ini, $userName);
-    $update_ini_file_log = $update->update_file_config($_POST, '../conf/users/'.$userName);
+
+if (isset($_POST['conf_user'])) {
+    $post = $_POST;
+    $update = new WriteIniFile($file_user_ini);
+    $update->update([
+        'user' => ['active_bloc_info' => @$post['active_bloc_info'], 'theme' => $post['theme']],
+        'ftp' => ['active_ftp' => @$post['active_ftp']],
+        'rtorrent' => ['active_reboot' => @$post['active_reboot']],
+        'support' => ['active_support' => @$post['active_support']],
+        'logout' => ['url_redirect' => $post['url_redirect']]
+    ]);
+    $update_ini_file_log = $update->write();
 }
-if ( isset($_POST['owner_change_config']) )
-{
+
+if (isset($_POST['config_admin'])) {
+    /* $post = $_POST;
+    $update = new WriteIniFile('../conf/users/' . $post['user'] . '/config.ini');
+
+    echo "<pre>";
+    var_dump($post);
+    echo "</pre>";
+
+    $update_ini_file_log_owner = $update->write(); */
+
     $update = new UpdateFileIni('../conf/users/'.$_POST['user'].'/config.ini', $_POST['user']);
     $update_ini_file_log_owner = $update->update_file_config($_POST, '../conf/users/'.$_POST['user']);
 }
+
 if ( isset($_POST['deleteUserName']) )
     $log_delete_user = Users::delete_config_old_user('../conf/users/'.$_POST['deleteUserName']);
 if ( isset($_POST['support']) && isset($_POST['message']) )
