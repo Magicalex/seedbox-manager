@@ -62,11 +62,14 @@ class Support extends Users
                     $files_ticket[] = glob('../conf/users/'.$user.'/support*.json');
                 }
             }
-
+            if (empty($files_ticket)) {
+                $files_ticket = [];
+            }
             //converti un tableau multidimensionnel en un tableau unidimensionnel.
-            // note : le caractère & fait pointer le contenu sur la variable.
+            // note : le caractère & fait pointer le contenu sur la variable, pour conserver les data
             // note : fonctions anonymes prend comme param function ($value, $key)
-            @array_walk_recursive($files_ticket, function ($value) use (&$all_files_tickets) {
+            $all_files_tickets = [];
+            $bool = array_walk_recursive($files_ticket, function ($value) use (&$all_files_tickets) {
                 $all_files_tickets[] = $value;
             });
 
