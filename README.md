@@ -1,7 +1,7 @@
 #Description du seedbox-manager
 
 L'application web seedbox-manager est une interface pour redémarrer une session rtorrent d'un utilisateur unix.  
-On n'y trouve aussi :
+On y trouve aussi :
 
  * des liens vers rutorrent et cakebox dans la navbar configurable.
  * un rappel des ids ftp et sftp de l'utilisateur.
