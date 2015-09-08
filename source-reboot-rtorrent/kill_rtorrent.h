@@ -1,14 +1,12 @@
 #ifndef KILL_RTORRENT_H
 #define KILL_RTORRENT_H
 
-// Librairies
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-//Prototypes
-void rtorrent_kill(char nickname[]);
+// Prototypes
 void screen_kill(char nickname[]);
-void supprLock(char nickname[]);
+void remove_lock_file(char nickname[]);
 
 #endif

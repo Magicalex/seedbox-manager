@@ -1,17 +1,11 @@
-///Librairies
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
 
-///Librairies Perso
+// Librairies Perso
 #include "start_rtorrent.h"
 #include "kill_rtorrent.h"
-
-/* Mise en place des droits d'accès root:
-chown root:root nom_du_fichier
-chmod +s nom_du_fichier
-*/
 
 int main (int argc, char* argv[])
 {
@@ -34,14 +28,11 @@ int main (int argc, char* argv[])
     // Récupération du pseudo de l'utilisateur
     strcpy(nickname, argv[1]);
 
-    // Arret de rtorrent
-    rtorrent_kill(nickname);
-
     // Arrêt de la session rtorrent screen
     screen_kill(nickname);
 
     // Suppression du fichier rtorrent.lock
-    supprLock(nickname);
+    remove_lock_file(nickname);
 
     // Appel de la fonction pour reboot rtorrent
     start_rtorrent(nickname);
