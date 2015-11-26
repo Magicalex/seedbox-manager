@@ -69,6 +69,8 @@ class Server extends Users
 
         //delete file config (transdroid|filezilla) for security.
         unlink('../conf/users/' . $this->userName . '/' . $file_config_name);
+
+        exit;
     }
 
     public function CheckUpdate()
