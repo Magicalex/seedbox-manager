@@ -7,7 +7,6 @@
 #include "start_rtorrent.h"
 #include "kill_rtorrent.h"
 #include "start_irssi.h"
-#include "kill_irssi.h"
 
 int main (int argc, char* argv[])
 {
