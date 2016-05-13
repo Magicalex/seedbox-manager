@@ -6,6 +6,8 @@
 // Librairies Perso
 #include "start_rtorrent.h"
 #include "kill_rtorrent.h"
+#include "start_irssi.h"
+#include "kill_irssi.h"
 
 int main (int argc, char* argv[])
 {
@@ -26,7 +28,7 @@ int main (int argc, char* argv[])
     perror("setuid");
 
     // Récupération du pseudo de l'utilisateur
-    strcpy(nickname, argv[1]);
+    strncpy(nickname, argv[1], 50);
 
     // Arrêt de la session rtorrent screen
     screen_kill(nickname);
