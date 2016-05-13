@@ -28,7 +28,7 @@ int main (int argc, char* argv[])
     perror("setuid");
 
     // Récupération du pseudo de l'utilisateur
-    strncpy(nickname, argv[1], 50);
+    strncpy(nickname, argv[1], sizeof(nickname));
 
     // Arrêt de la session rtorrent screen
     screen_kill(nickname);
