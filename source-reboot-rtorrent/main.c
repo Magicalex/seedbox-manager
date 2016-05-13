@@ -12,7 +12,7 @@ int main (int argc, char* argv[])
 {
     // Déclarations
     // Chaine recevant le pseudo de l'utilisateur
-    char nickname[50];
+    char nickname[20];
 
     // On vérifie la présence d'un argument pour éviter l'erreur de segmentation
     if (argc < 2){
