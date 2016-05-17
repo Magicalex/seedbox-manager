@@ -40,7 +40,7 @@ int main (int argc, char* argv[])
 
     // Appel de la fonction pour lancer irssi si demander
     // Usage : ./reboot-rtorrent <username> irssi
-    if (argc <= 3 && strcmp(argv[2], "irssi") == 0) {
+    if (argc > 2 && strcmp(argv[2], "irssi") == 0) {
 	    start_irssi (nickname);
     }
 
