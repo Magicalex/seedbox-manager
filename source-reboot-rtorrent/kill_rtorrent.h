@@ -6,7 +6,7 @@
 #include <string.h>
 
 // Prototypes
-void screen_kill(char nickname[]);
+void screen_rtorrent_kill(char nickname[]);
 void remove_lock_file(char nickname[]);
 
 #endif

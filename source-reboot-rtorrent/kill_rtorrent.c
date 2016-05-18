@@ -10,7 +10,7 @@ void remove_lock_file(char nickname[])
     system(chaine);
 }
 
-void screen_kill(char nickname[])
+void screen_rtorrent_kill(char nickname[])
 {
     // Déclarations
     char chaine[100] = {0};
