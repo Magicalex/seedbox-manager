@@ -1,11 +1,12 @@
 <?php
+
 require '../vendor/autoload.php';
 
 use \app\Lib\Users;
 use \app\Lib\Server;
 use \app\Lib\Support;
 use \app\Lib\Install;
-use \WriteIniFile\WriteIniFile;
+use \WriteiniFile\WriteiniFile;
 
 /* check authentication */
 if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
@@ -14,7 +15,6 @@ if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
     die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>
          V&eacute;rifiez la configuration de votre serveur web.');
 }
-
 
 /* check install */
 if (false === is_writable('../conf/users')) {
@@ -27,11 +27,11 @@ if (false === is_writable('../conf/users')) {
     $file_user_ini = '../conf/users/' . $userName . '/config.ini';
 }
 
-
 /* REQUEST POST */
 if (isset($_POST['reboot'])) {
+    $option = (isset($_POST['irssi'])) ? true:false;
     $user = new Users($file_user_ini, $userName);
-    $rebootRtorrent = $user->rebootRtorrent();
+    $rebootRtorrent = $user->rebootRtorrent($option);
 }
 
 if (isset($_POST['conf_user'])) {
@@ -72,7 +72,6 @@ if (isset($_POST['cloture']) && isset($_POST['user'])) {
     $LogCloture = Support::ClotureTicket($_POST['user']);
 }
 
-
 /* REQUEST GET */
 if (isset($_GET['admin'])) {
     if (empty($_GET['user'])) {
@@ -86,13 +85,11 @@ if (isset($_GET['download'])) {
     require '../app/downloads.php';
 }
 
-
 /* init objet */
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
 $support = new Support($file_user_ini, $userName);
 $read_data_reboot = $user->readFileDataReboot('../conf/users/' . $userName . '/data_reboot.txt');
-
 
 /* init twig */
 $loader = new Twig_Loader_Filesystem('themes/' . $user->theme());

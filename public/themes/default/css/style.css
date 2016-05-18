@@ -162,3 +162,12 @@ textarea {
 #jquery-loader-background {
   background-color: rgba(0,0,0,0.9);
 }
+
+.modal-body label {
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.modal-body label input {
+  margin-right: 2px;
+}

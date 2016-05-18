@@ -78,12 +78,18 @@ class Users
         ];
     }
 
-    public function rebootRtorrent()
+    public function rebootRtorrent($irssi = false)
     {
-        exec($this->currentPath . '/../reboot-rtorrent ' . $this->userName . ' 2>&1', $log, $status);
+        if ($irssi === true) {
+            $command = "{$this->currentPath}/../reboot-rtorrent {$this->userName} irssi 2>&1";
+        } else {
+            $command = "{$this->currentPath}/../reboot-rtorrent {$this->userName} 2>&1";
+        }
+        exec($command, $log, $status);
         $date_updated = date('d/m/y \à H\hi');
-        file_put_contents('../conf/users/' . $this->userName . '/data_reboot.txt', $date_updated);
+        file_put_contents("../conf/users/{$this->userName}/data_reboot.txt", $date_updated);
         return [
+            'command' => $command,
             'logReboot' => $log,
             'statusReboot' => $status
         ];
