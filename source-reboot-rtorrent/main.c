@@ -7,6 +7,7 @@
 #include "start_rtorrent.h"
 #include "kill_rtorrent.h"
 #include "start_irssi.h"
+#include "kill_irssi.h"
 
 int main (int argc, char* argv[])
 {
@@ -30,7 +31,7 @@ int main (int argc, char* argv[])
     strncpy(nickname, argv[1], sizeof(nickname));
 
     // Arrêt de la session rtorrent screen
-    screen_kill(nickname);
+    screen_rtorrent_kill(nickname);
 
     // Suppression du fichier rtorrent.lock
     remove_lock_file(nickname);
@@ -41,6 +42,7 @@ int main (int argc, char* argv[])
     // Appel de la fonction pour lancer irssi si demander
     // Usage : ./reboot-rtorrent <username> irssi
     if (argc > 2 && strcmp(argv[2], "irssi") == 0) {
+	    screen_irssi_kill (nickname);
 	    start_irssi (nickname);
     }
 
