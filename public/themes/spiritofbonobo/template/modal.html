@@ -2,20 +2,21 @@
 <div class="modal fade" id="popupreboot" tabindex="-1" role="dialog" aria-labelledby="target-rtorrent" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="target-rtorrent">Avertissement</h4>
-            </div>
-            <div class="modal-body">
-                <p>&Ecirc;tes-vous sûr de vouloir redémarrer votre session rtorrent ?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                <form action="index.php" method="post">
+            <form action="index.php" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="target-rtorrent">Avertissement</h4>
+                </div>
+                <div class="modal-body">
+                    <p>&Ecirc;tes-vous sûr de vouloir redémarrer votre session rtorrent ?</p>
+                    <label><input type="checkbox" name="irssi"> Redémarrer irssi avec rtorrent</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                     <input type="hidden" name="reboot">
                     <input type="submit" value="Redémarrer" class="btn btn-info">
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

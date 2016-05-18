@@ -1,10 +1,10 @@
 {
   "name": "seedbox-manager",
-  "version": "2.4.4",
-  "contributors": "Magicalex, Micdu70",
+  "version": "2.5.0",
+  "contributors": "Magicalex, Micdu70, MThibault, Hydrog3n, Ex_rat",
   "news": [
-    "Remaniement du code",
-    "Suppression de la class UpdateFileIni et ajout de la librairie Magicalex/write-ini-file",
-    "Correction d'un bug à la généartion du fichier xml filezilla (merci à Micdu70)"
+    "Support de irssi pour le redémarrage",
+    "Bug fix au téléchargement d'un fichier (merci à Micdu70)",
+    "Autre changement mineur",
   ]
 }

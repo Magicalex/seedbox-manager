@@ -3,7 +3,7 @@ namespace app\Lib;
 
 class Server extends Users
 {
-    const VERSION = '2.4.4';
+    const VERSION = '2.5.0';
 
     public static function getUptime()
     {
