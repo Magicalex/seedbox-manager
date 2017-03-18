@@ -15,7 +15,7 @@
     <body>
 
     <header class="navbar navbar-default navbar-static-top">
-        {% include './template/header.html' %}
+        {% include './template/header.twig.php' %}
     </header>
 
     {% if get.option is defined %}
@@ -23,9 +23,9 @@
     <!-- CONTENEUR -->
     <div class="container marg">
         <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Réglage de votre utilisateur</h1>
-        {% include './template/notif-option.html' %}
+        {% include './template/notif-option.twig.php' %}
         <section class="row">
-            {% include './option.html' %}
+            {% include './option.twig.php' %}
         </section>
     </div>
 
@@ -34,9 +34,9 @@
     <!-- CONTENEUR -->
     <div class="container marg">
         <h1 class="page-header dashboard"><i class="glyphicon glyphicon-cog"></i> Espace administration</h1>
-        {% include './template/notif-admin.html' %}
+        {% include './template/notif-admin.twig.php' %}
         <section class="row">
-            {% include './administration.html' %}
+            {% include './administration.twig.php' %}
         </section>
     </div>
 
@@ -53,24 +53,20 @@
             </div>
         </noscript>
 
-         {% include './template/notif-index.html' %}
+         {% include './template/notif-index.twig.php' %}
 
         <section class="row">
             {% if user.blocInfo == true %}
-                {% include './template/bloc-info.html' %}
+                {% include './template/bloc-info.twig.php' %}
             {% endif %}
 
             {% if user.blocFtp == true %}
-                {% include './template/bloc-ftp.html' %}
+                {% include './template/bloc-ftp.twig.php' %}
             {% endif %}
         </section>
         <section class="row">
             {% if user.blocRtorrent == true %}
-                {% include './template/bloc-rtorrent.html' %}
-            {% endif %}
-
-            {% if user.blocSupport == true %}
-                {% include './template/bloc-support.html' %}
+                {% include './template/bloc-rtorrent.twig.php' %}
             {% endif %}
         </section>
 
@@ -78,5 +74,5 @@
 
     {% endif %} {# if $_GET page #}
 
-{% include './template/modal.html' %}
-{% include './template/footer.html' %}
+{% include './template/modal.twig.php' %}
+{% include './template/footer.twig.php' %}

@@ -11,7 +11,7 @@
 }
 
 body {
-  background:url("../img/background.png");
+  background: url("../img/background.png");
 }
 
 ul {
@@ -143,7 +143,7 @@ textarea {
 
 #jquery-loader {
   position: relative;
-  background-image: url("./../../../components/jquery-loader-plugin/images/ajax-loader.gif");
+  background-image: url("https://raw.githubusercontent.com/mimiz/jquery-loader-plugin/master/images/ajax-loader.gif");
   background-position: center top;
   background-repeat: no-repeat;
 }

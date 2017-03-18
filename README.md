@@ -92,3 +92,9 @@ nano /var/www/manager/conf/users/{utilisateur}/config.ini
 puis modifier à la ligne ## (owner = no par owner = yes)
 
 Après avoir récupéré les droits administrateurs vous pouvez configurer tous les utilisateurs.
+
+## developement
+
+```
+php -S 127.0.0.1:9000
+```

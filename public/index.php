@@ -2,15 +2,18 @@
 
 require '../vendor/autoload.php';
 
-use \app\Lib\Users;
-use \app\Lib\Server;
-use \app\Lib\Support;
-use \app\Lib\Install;
-use \WriteiniFile\WriteiniFile;
+use app\Lib\Users;
+use app\Lib\Server;
+use app\Lib\Install;
+use WriteiniFile\WriteiniFile;
+
+$dev = true;
 
 /* check authentication */
 if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
     $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
+} elseif ($dev) {
+    $userName = 'usertest';
 } else {
     die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>
          V&eacute;rifiez la configuration de votre serveur web.');
@@ -29,7 +32,7 @@ if (false === is_writable('../conf/users')) {
 
 /* REQUEST POST */
 if (isset($_POST['reboot'])) {
-    $option = (isset($_POST['irssi'])) ? true:false;
+    $option = (isset($_POST['irssi'])) ? true : false;
     $user = new Users($file_user_ini, $userName);
     $rebootRtorrent = $user->rebootRtorrent($option);
 }
@@ -63,15 +66,6 @@ if (isset($_POST['deleteUserName'])) {
     $log_delete_user = Users::delete_config_old_user('../conf/users/' . $_POST['deleteUserName']);
 }
 
-if (isset($_POST['support']) && isset($_POST['message'])) {
-    $support = new Support($file_user_ini, $userName);
-    $LogSupport = $support->sendTicket($_POST['message'], $_POST['user']);
-}
-
-if (isset($_POST['cloture']) && isset($_POST['user'])) {
-    $LogCloture = Support::ClotureTicket($_POST['user']);
-}
-
 /* REQUEST GET */
 if (isset($_GET['admin'])) {
     if (empty($_GET['user'])) {
@@ -88,14 +82,13 @@ if (isset($_GET['download'])) {
 /* init objet */
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
-$support = new Support($file_user_ini, $userName);
 $read_data_reboot = $user->readFileDataReboot('../conf/users/' . $userName . '/data_reboot.txt');
 
 /* init twig */
-$loader = new Twig_Loader_Filesystem('themes/' . $user->theme());
+$loader = new Twig_Loader_Filesystem('../themes/' . $user->theme());
 $twig = new Twig_Environment($loader);
 echo $twig->render(
-    'index.html', array(
+    'index.twig.php', array(
         'userName' => $userName,
         'post' => $_POST,
         'get' => $_GET,
@@ -104,7 +97,6 @@ echo $twig->render(
         // init objet
         'user' => $user,
         'serveur' => $serveur,
-        'support' => $support,
         // var index
         'rebootRtorrent' => @$rebootRtorrent,
         'supportTicketSend' => @$LogSupport,

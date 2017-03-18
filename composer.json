@@ -5,17 +5,19 @@
     "license": "GPL-3.0",
     "type": "project",
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.6.0",
         "twig/twig": "1.*",
         "magicalex/write-ini-file": "1.2.*"
     },
     "authors": [
         {
             "name": "Magicalex",
-            "email": "magicalex14000@gmail.com"
+            "email": "magicalex@mondedie.fr"
         }
     ],
     "autoload": {
-        "psr-4": { "app\\": "app" }
+        "psr-4": {
+            "app\\": "app"
+        }
     }
 }

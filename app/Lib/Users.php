@@ -155,9 +155,9 @@ class Users
     /* retourne la liste de tous les thèmes */
     public static function get_all_themes()
     {
-        $scan = scandir('themes');
+        $scan = scandir('../themes');
         foreach ($scan as $folder_name) {
-            if ($folder_name != '.' && $folder_name != '..' && is_dir('themes/'.$folder_name)) {
+            if ($folder_name != '.' && $folder_name != '..' && is_dir('../themes/'.$folder_name)) {
                 $all_themes[] = $folder_name;
             }
         }
