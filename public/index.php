@@ -2,35 +2,32 @@
 
 require '../vendor/autoload.php';
 
-use app\Lib\Users;
-use app\Lib\Server;
-use app\Lib\Install;
+// Instantiate the app
+$settings = require __DIR__.'/../src/settings.php';
+
+$app = new \Slim\App($settings);
+
+require __DIR__.'/../src/dependencies.php';
+
+require __DIR__.'/../src/middleware.php';
+
+require __DIR__.'/../src/routes.php';
+
+// Run app
+$app->run();
+
+/*
+use Seedbox\Users;
+use Seedbox\Server;
+use Seedbox\Install;
 use WriteiniFile\WriteiniFile;
 
-$dev = true;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\MessageSelector;
+use Symfony\Component\Translation\Loader\YamlFileLoader;
+use Symfony\Component\Yaml\Yaml;
 
-/* check authentication */
-if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
-    $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
-} elseif ($dev) {
-    $userName = 'usertest';
-} else {
-    die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>
-         V&eacute;rifiez la configuration de votre serveur web.');
-}
-
-/* check install */
-if (false === is_writable('../conf/users')) {
-    require 'install/installation.php';
-    exit(1);
-} elseif (file_exists('../conf/users/' . $userName . '/config.ini')) {
-    $file_user_ini = '../conf/users/' . $userName . '/config.ini';
-} else {
-    Install::create_new_user($userName);
-    $file_user_ini = '../conf/users/' . $userName . '/config.ini';
-}
-
-/* REQUEST POST */
+// REQUEST POST
 if (isset($_POST['reboot'])) {
     $option = (isset($_POST['irssi'])) ? true : false;
     $user = new Users($file_user_ini, $userName);
@@ -66,7 +63,7 @@ if (isset($_POST['deleteUserName'])) {
     $log_delete_user = Users::delete_config_old_user('../conf/users/' . $_POST['deleteUserName']);
 }
 
-/* REQUEST GET */
+// REQUEST GET
 if (isset($_GET['admin'])) {
     if (empty($_GET['user'])) {
         $loader_file_ini_user = new Users('../conf/users/' . $userName . '/config.ini', $userName);
@@ -79,35 +76,14 @@ if (isset($_GET['download'])) {
     require '../app/downloads.php';
 }
 
-/* init objet */
-$user = new Users($file_user_ini, $userName);
-$serveur = new Server($file_user_ini, $userName);
-$read_data_reboot = $user->readFileDataReboot('../conf/users/' . $userName . '/data_reboot.txt');
 
-/* init twig */
-$loader = new Twig_Loader_Filesystem('../themes/' . $user->theme());
-$twig = new Twig_Environment($loader);
-echo $twig->render(
-    'index.twig.php', array(
-        'userName' => $userName,
-        'post' => $_POST,
-        'get' => $_GET,
-        'host' => $_SERVER['HTTP_HOST'],
-        'ipUser' => $_SERVER['REMOTE_ADDR'],
-        // init objet
-        'user' => $user,
-        'serveur' => $serveur,
-        // var index
-        'rebootRtorrent' => @$rebootRtorrent,
-        'supportTicketSend' => @$LogSupport,
-        'supportTicketClose' => @$LogCloture,
-        'read_data_reboot' => $read_data_reboot,
-        // get option
-        'updateIniFileLogUser' => @$update_ini_file_log,
-        // get admin
-        'updateIniFileLogOwner' => @$update_ini_file_log_owner,
-        'LogDeleteUser' => @$log_delete_user,
-        'UpdateOwner' => @$loader_file_ini_user,
-        'ClearCache' => @$ClearCache
-    )
-);
+
+// init translation
+$lang = 'fr';
+$translator = new Translator($lang, new MessageSelector());
+$translator->addLoader('yaml', new YamlFileLoader());
+$translator->addResource('yaml', '../locale/core.fr.yml', 'fr');
+
+
+
+*/

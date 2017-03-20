@@ -1,5 +1,6 @@
 <?php
-namespace app\Lib;
+
+namespace Seedbox;
 
 class Install
 {

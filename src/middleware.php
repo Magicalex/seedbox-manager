@@ -1,0 +1,25 @@
+<?php
+// Application middleware
+
+$dev = true;
+
+// check authentication
+if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
+    $userName = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
+} elseif ($dev) {
+    $userName = 'usertest';
+} else {
+    die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>
+         V&eacute;rifiez la configuration de votre serveur web.');
+}
+
+// check install
+if (false === is_writable(__DIR__.'/../conf/users')) {
+    require __DIR__.'/../public/install/installation.php';
+    exit(1);
+} elseif (file_exists(__DIR__.'/../conf/users/'.$userName.'/config.ini')) {
+    $file_user_ini =  __DIR__.'/../conf/users/'.$userName.'/config.ini';
+} else {
+    Install::create_new_user($userName);
+    $file_user_ini =  __DIR__.'/../conf/users/'.$userName.'/config.ini';
+}

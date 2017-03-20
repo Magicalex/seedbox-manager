@@ -1,7 +1,7 @@
 <?php
 
-use app\Lib\Users;
-use app\Lib\Server;
+use Seedbox\Users;
+use Seedbox\Server;
 
 $title_seedbox = 'seedbox-'.$userName;
 $user = new Users($file_user_ini, $userName);

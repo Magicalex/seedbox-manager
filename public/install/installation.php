@@ -1,4 +1,6 @@
-<?php use app\Lib\Install;
+<?php
+
+use Seedbox\Install;
 
 $user_name_php = Install::get_user_php();
 $root_path = substr(getcwd(), 0, -7);
@@ -7,12 +9,9 @@ $root_path = substr(getcwd(), 0, -7);
     <head>
         <meta charset="utf-8">
         <title>Installation - Seedbox Manager</title>
-        <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link type="text/css" rel="stylesheet" href="install/style.css">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1">
-        <!--[if lt IE 9]>
-            <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
     </head>
 
     <body>

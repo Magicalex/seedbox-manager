@@ -7,7 +7,11 @@
     "require": {
         "php": ">=5.6.0",
         "twig/twig": "1.*",
-        "magicalex/write-ini-file": "1.2.*"
+        "magicalex/write-ini-file": "1.2.*",
+        "symfony/translation": "^3.2",
+        "symfony/yaml": "^3.2",
+        "slim/slim": "^3.8",
+        "slim/twig-view": "^2.2"
     },
     "authors": [
         {
@@ -17,7 +21,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "app\\": "app"
+            "Seedbox\\": "src/seedbox"
         }
     }
 }

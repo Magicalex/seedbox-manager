@@ -1,13 +1,16 @@
 <?php
-namespace app\Lib;
+
+namespace Seedbox;
 
 class Server extends Users
 {
-    const VERSION = '2.5.0';
+    const VERSION = '3.0.0';
 
     public static function getUptime()
     {
-        $data_uptime = file_get_contents('/proc/uptime');
+
+
+        $data_uptime = @file_get_contents('/proc/uptime');
         $data_uptime = explode(' ', $data_uptime);
         $data_uptime = trim($data_uptime[0]);
 
