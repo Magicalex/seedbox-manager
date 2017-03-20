@@ -11,7 +11,8 @@
         "symfony/translation": "^3.2",
         "symfony/yaml": "^3.2",
         "slim/slim": "^3.8",
-        "slim/twig-view": "^2.2"
+        "slim/twig-view": "^2.2",
+        "slim/flash": "^0.2.0"
     },
     "authors": [
         {

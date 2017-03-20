@@ -2,7 +2,7 @@
 <div class="modal fade" id="popupreboot" tabindex="-1" role="dialog" aria-labelledby="target-rtorrent" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="index.php" method="post">
+            <form action="/reboot-rtorrent" method="post">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="target-rtorrent">Avertissement</h4>
@@ -13,7 +13,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                    <input type="hidden" name="reboot">
+                    <input type="hidden" name="reboot" value="true">
                     <input type="submit" value="Redémarrer" class="btn btn-info">
                 </div>
             </form>

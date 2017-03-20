@@ -1,0 +1,131 @@
+{% extends "layout.twig.html" %}
+
+{% block content %}
+
+    <h1 class="page-header dashboard"><i class="glyphicon glyphicon-dashboard"></i> Tableau de bord</h1>
+
+    {% if messages.reboot-rtorrent %}
+        {% for reboot_rtorrent in messages.reboot-rtorrent %}
+            {% for reboot_rtorrent in loop.index0 %}
+                {{ reboot_rtorrent.command }}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    {% if reboot_rtorrent.statusReboot == 0 %}
+        <div class="alert alert-success">Votre session rtorrent a été redémarrée avec succès.</div>
+    {% elseif reboot_rtorrent.statusReboot != 0 %}
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Un problème est survenu lors du redémarrage de rtorrent</strong>, vérifiez votre configuration.
+        </div>
+    {% endif %}
+
+    {% if messages.reboot-rtorrent is defined and rebootRtorrent.statusReboot == 0 %}
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4>Log :</h4>
+            <strong>commande exécutée : </strong> {{ rebootRtorrent.command }}<br>
+            <strong>statut :</strong> {{ rebootRtorrent.statusReboot }}<br>
+            <strong>résultat de la commande :</strong> <br>
+            {% for logs in rebootRtorrent.logReboot %}
+                # {{ logs }}<br>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if serveur.CheckUpdate != false %}
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4>Nouvelle version disponible ! (v{{ serveur.CheckUpdate.version }})</h4>
+            <ul>{% for new in serveur.CheckUpdate.news %}<li class="text-info">{{ new }}</li>{% endfor %}</ul>
+            <small style="display:block;margin-top:5px;">Participants: {{ serveur.CheckUpdate.contributors }}</small>
+        </div>
+    {% endif %}
+
+    <section class="row">
+        {% if user.blocInfo == true %}
+            <article class="col-md-6" id ="bloc-info">
+                <div class="well well-sm">
+                    <h4 class="titre-head"><i class="fa fa-home"></i> Information compte utilisateur</h4>
+                    <div class="trait"></div>
+                    <p><i class="fa fa-map-marker"></i> <strong>Votre adresse Ip</strong></p>
+                    <ul>
+                        <li><strong class="text-success">{{ ipUser }}</strong></li>
+                    </ul>
+                    <p><i class="fa fa-hdd-o"></i> <strong>Espace disque</strong></p>
+                    <p class="text-center text-defaut-color">
+                        Vous utilisez <strong>{{ user.userdisk.percentage_used }}%</strong>
+                        <em>soit {{ user.userdisk.used_disk}} sur {{ user.userdisk.total_disk }} ( {{ user.userdisk.free_disk }} Libre )</em>
+                    </p>
+                    <div class="progress progress-striped fix-progress">
+                        <div class="progress-bar {{ user.userdisk.progessBarColor }}" role="progressbar" aria-valuenow="{{ user.userdisk.percentage_used }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ user.userdisk.percentage_used }}%;">
+                            <span class="sr-only">{{ user.userdisk.percentage_used }}% Complete</span>
+                        </div>
+                    </div>
+
+                    <p><i class="fa fa-clock-o"></i> <strong>Uptime serveur</strong></p>
+                    <ul>
+                        <li><strong class="text-success">{{ serveur.getUptime }}</strong></li>
+                    </ul>
+
+                    <p><i class="glyphicon glyphicon-stats"></i> <strong>Charge serveur</strong></p>
+                    <ul>
+                        <li style="cursor:default;">
+                            <span class="text-defaut-color">load average : </span>
+                            <span data-original-title="Charge moyenne depuis 1 min" class="label label-primary load-average">{{ serveur.load_average.load_average.0 }}</span>
+                            <span data-original-title="Charge moyenne depuis 5 min" class="label label-primary load-average">{{ serveur.load_average.load_average.1 }}</span>
+                            <span data-original-title="Charge moyenne depuis 15 min" class="label label-primary load-average">{{ serveur.load_average.load_average.2 }}</span>
+                        </li>
+                        <li id="load-info">{{ serveur.load_average.info_charge|raw }}</li>
+                    </ul>
+                </div>
+            </article>
+        {% endif %}
+        {% if user.blocFtp == true %}
+            <article class="col-md-6" id="bloc-ftp">
+                <div class="well well-sm">
+                    <h4 class="titre-head"><i class="fa fa-link"></i> Les accès ftp - sftp - transdroid</h4>
+                    <div class="trait"></div>
+
+                    <h5 class="device"><i class="fa fa-desktop"></i> <strong>Serveur FTP et sFTP</strong></h5>
+                    <ul>
+                        <li>Adresse (s)FTP : <em>(s)ftp://{{ host }}</em></li>
+                        <li>User (s)FTP : <em>{{ userName }}</em></li>
+                        <li>Port FTP : <em>{{ user.portFtp }}</em></li>
+                        <li>Port sFTP : <em>{{ user.portSftp }}</em></li>
+                        <li><a class="btn btn-info btn-xs" href="http://filezilla.fr/"><i class="glyphicon glyphicon-download-alt"></i> Télécharger filezilla</a></li>
+                        <li><a id="popupfilezilla" class="btn btn-info btn-xs" data-toggle="popover" href="?download&amp;file=filezilla"><i class="fa fa-files-o"></i> Fichier de configuration</a></li>
+                    </ul>
+
+                    <h5 class="device"><i class="fa fa-android"></i> <strong>Application Transdroid</strong></h5>
+                    <ul>
+                        <li>Dossier SCGI : <em><strong>{{ user.scgi_folder }}</strong></em></li>
+                        <li>Adresse http : <em>http://{{ host }}</em></li>
+                        <li>User transdroid : <em>{{ userName }}</em></li>
+                        <li><a class="btn btn-info btn-xs" href="http://transdroid.org/latest"><i class="glyphicon glyphicon-download-alt"></i> Télécharger Transdroid</a></li>
+                        <li><a id="popuptransdroid" class="btn btn-info btn-xs" data-toggle="popover" href="?download&amp;file=transdroid"><i class="fa fa-files-o"></i> Fichier de configuration</a></li>
+                    </ul>
+                </div>
+            </article>
+        {% endif %}
+    </section>
+    <section class="row">
+        {% if user.blocRtorrent == true %}
+            <article class="col-md-6">
+                <div class="well well-sm">
+                    <h4 class="titre-head"><i class="fa fa-terminal"></i> Redémarrage de rtorrent</h4>
+                    <div class="trait"></div>
+                    <p class="text-center btn-reboot">
+                        <a data-toggle="modal" href="#popupreboot" class="btn btn-info btn-lg" style="vertical-align: middle;">
+                            <span class="glyphicon glyphicon-refresh"></span>Redémarrer rtorrent
+                        </a>
+                    </p>
+                    {% if read_data_reboot.file_exist %}
+                       <small class="text-defaut-color"><em>Dernier redémarrage le {{ read_data_reboot.read_file }}</em></small>
+                    {% endif %}
+                </div>
+            </article>
+        {% endif %}
+    </section>
+{% endblock %}
