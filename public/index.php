@@ -25,24 +25,6 @@ use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\Yaml\Yaml;
 
 // REQUEST POST
-if (isset($_POST['reboot'])) {
-    $option = (isset($_POST['irssi'])) ? true : false;
-    $user = new Users($file_user_ini, $userName);
-    $rebootRtorrent = $user->rebootRtorrent($option);
-}
-
-if (isset($_POST['conf_user'])) {
-    $post = $_POST;
-    $update = new WriteIniFile($file_user_ini);
-    $update->update([
-        'user' => ['active_bloc_info' => @$post['active_bloc_info'], 'theme' => $post['theme']],
-        'ftp' => ['active_ftp' => @$post['active_ftp']],
-        'rtorrent' => ['active_reboot' => @$post['active_reboot']],
-        'support' => ['active_support' => @$post['active_support']],
-        'logout' => ['url_redirect' => $post['url_redirect']]
-    ]);
-    $update_ini_file_log = $update->write();
-}
 
 if (isset($_POST['config_admin'])) {
     $post = $_POST;
@@ -58,15 +40,6 @@ if (isset($_POST['config_admin'])) {
 
 if (isset($_POST['deleteUserName'])) {
     $log_delete_user = Users::delete_config_old_user('../conf/users/' . $_POST['deleteUserName']);
-}
-
-// REQUEST GET
-if (isset($_GET['admin'])) {
-    if (empty($_GET['user'])) {
-        $loader_file_ini_user = new Users('../conf/users/' . $userName . '/config.ini', $userName);
-    } else {
-        $loader_file_ini_user = new Users('../conf/users/' . $_GET['user'] . '/config.ini', $_GET['user']);
-    }
 }
 
 if (isset($_GET['download'])) {

@@ -1,79 +1,92 @@
-{% extends "layout.twig.html" %}
+{% extends 'layout.twig.html' %}
 
 {% block content %}
-    <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Réglage de votre utilisateur</h1>
-    {% include './template/notif-option.twig.php' %}
-    <section class="row">
-        <article class="col-md-12" id="conf-simple-user">
-            <div class="well well-sm">
-                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Configuration de l'interface</h4>
-                <div class="trait"></div>
-                <form method="post" action="?option" role="form">
-                    <div class="col-md-6">
-                        <fieldset>
-                            <legend>Les options de la page d'accueil</legend>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="active_bloc_info" value="1" id="active_bloc_info" {% if user.blocInfo == true %}checked{% endif %}>
-                                    Activer le bloc information utilisateur
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="active_ftp" value="1" id="active_ftp" {% if user.blocFtp == true %}checked{% endif %} >
-                                    Activer le bloc accès ftp / sftp / transdroid
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="active_reboot" value="1" id="active_reboot" {% if user.blocRtorrent == true %}checked{% endif %} >
-                                    Activer le bloc gestion de rtorrent
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="active_support" value="1" id="active_support" {% if user.blocSupport == true %}checked{% endif %} >
-                                    Activer le bloc support
-                                </label>
-                            </div>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                        <fieldset>
-                            <legend>Les options de déconnexion</legend>
-                            <div class="form-group">
-                                <label for="url-deconnexion">Url de redirection à la déconnexion</label>
-                                <div class="row">
-                                    <div class="col-lg-7">
-                                        <input type="url" name="url_redirect" class="form-control" id="url-deconnexion" value="{{ user.url_redirect }}">
-                                    </div>
+<h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Réglage de votre utilisateur</h1>
+
+
+{% if post.conf_user is defined and updateIniFileLogUser == true %}
+    <div class="alert alert-success">Vos préférences ont été mises à jour avec succès.</div>
+{% elseif post.conf_user is defined and updateIniFileLogUser == false %}
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4>Impossible de mettre à jour votre configuration !</h4>
+        <ul class="text-danger">
+            <li>Vérifiez si vous avez les droits d'écriture</li>
+        </ul>
+    </div>
+{% endif %}
+
+<section class="row">
+    <article class="col-md-12" id="conf-simple-user">
+        <div class="well well-sm">
+            <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Configuration de l'interface</h4>
+            <div class="trait"></div>
+            <form method="post" action="/settings/update" role="form">
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Les options de la page d'accueil</legend>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="active_bloc_info" value="1" id="active_bloc_info" {% if user.blocInfo == true %}checked{% endif %}>
+                                Activer le bloc information utilisateur
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="active_ftp" value="1" id="active_ftp" {% if user.blocFtp == true %}checked{% endif %} >
+                                Activer le bloc accès ftp / sftp / transdroid
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="active_reboot" value="1" id="active_reboot" {% if user.blocRtorrent == true %}checked{% endif %} >
+                                Activer le bloc gestion de rtorrent
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="active_support" value="1" id="active_support" {% if user.blocSupport == true %}checked{% endif %} >
+                                Activer le bloc support
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Les options de déconnexion</legend>
+                        <div class="form-group">
+                            <label for="url-deconnexion">Url de redirection à la déconnexion</label>
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <input type="url" name="url_redirect" class="form-control" id="url-deconnexion" value="{{ user.url_redirect }}">
                                 </div>
                             </div>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                        <fieldset>
-                            <legend>Les thèmes</legend>
-                            <div class="form-group">
-                                <label for="user-theme">choisir un thème</label>
-                                <div class="row">
-                                    <div class="col-lg-5">
-                                        <select name="theme" class="form-control">
-                                        {% for theme in user.get_all_themes %}
-                                            <option value="{{ theme }}" {% if theme == user.theme %}selected{% endif %}>{{ theme }}</option>
-                                        {% endfor %}
-                                        </select>
-                                    </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Les thèmes</legend>
+                        <div class="form-group">
+                            <label for="user-theme">choisir un thème</label>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <select name="theme" class="form-control">
+                                    {% for theme in user.get_all_themes %}
+                                        <option value="{{ theme }}" {% if theme == user.theme %}selected{% endif %}>{{ theme }}</option>
+                                    {% endfor %}
+                                    </select>
                                 </div>
                             </div>
-                        </fieldset>
-                    </div>
-                    <p class="text-right fix-marg-input">
-                        <input type="hidden" name="conf_user">
-                        <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
-                    </p>
-                </form>
-            </div>
-        </article>
-    </section>
+                        </div>
+                    </fieldset>
+                </div>
+                <p class="text-right fix-marg-input">
+                    <input type="hidden" name="conf_user">
+                    <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
+                </p>
+            </form>
+        </div>
+    </article>
+</section>
 {% endblock %}
