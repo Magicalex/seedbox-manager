@@ -22,7 +22,7 @@
                 <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> {{ 'core.settings.setting_interface'|trans }}</h4>
                 <div class="trait"></div>
                 <form method="post" action="/settings/update" role="form">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <fieldset>
                             <legend>{{ 'core.settings.option_homepage'|trans }}</legend>
                             <div class="checkbox">
@@ -45,7 +45,7 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <fieldset>
                             <legend>{{ 'core.settings.option_logout'|trans }}</legend>
                             <div class="form-group">
@@ -58,7 +58,7 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <fieldset>
                             <legend>{{ 'core.settings.themes'|trans }}</legend>
                             <div class="form-group">
@@ -68,6 +68,23 @@
                                         <select name="theme" class="form-control">
                                         {% for theme in user.get_all_themes %}
                                             <option value="{{ theme }}" {% if theme == user.theme %}selected{% endif %}>{{ theme }}</option>
+                                        {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                        <fieldset>
+                            <legend>{{ 'core.settings.language'|trans }}</legend>
+                            <div class="form-group">
+                                <label for="user-theme">{{ 'core.settings.choose_language'|trans }}</label>
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <select name="language" class="form-control">
+                                        {% for language in user.get_all_languages %}
+                                            <option value="{{ language }}" {% if language == user.language %}selected{% endif %}>{{ language }}</option>
                                         {% endfor %}
                                         </select>
                                     </div>

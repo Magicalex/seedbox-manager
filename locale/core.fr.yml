@@ -6,7 +6,7 @@ core:
       Pour pouvoir utiliser cette interface l'activation de javascript est nécessaire.
     modal:
       about_us: A propos
-      author: Application web par Backtoback &amp; Magicalex &amp; hydrog3n
+      author: Application web par MThibault, Micdu70, Magicalex et Hydrog3n
       contact_us: "Contacter les développeurs sur github : <a href=\"https://github.com/Magicalex/seedbox-manager/issues\" target=\"_blank\">https://github.com/Magicalex/seedbox-manager</a>"
       version: Version
       close: Fermer
@@ -77,7 +77,7 @@ core:
     success_update: Vos préférences ont été mises à jour avec succès.
     impossible_to_update: Impossible de mettre à jour votre configuration !
     check_rights: Vérifiez si vous avez les droits d'écriture
-    settings_interface: Configuration de l'interface
+    setting_interface: Configuration de l'interface
     option_homepage: Les options de la page d'accueil
     enable_info_user: Activer les informations utilisateur
     enable_access_ftp: "Activer les information d'accès ftp / sftp / transdroid"
@@ -86,6 +86,8 @@ core:
     url_to_redirect: Url de redirection à la déconnexion
     themes: Les thèmes
     choose_theme: choisir un thème
+    language: Langue par défaut
+    choose_language: choisir une langue
     save: Enregistrer
     # ok
 

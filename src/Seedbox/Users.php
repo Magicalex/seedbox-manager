@@ -16,6 +16,7 @@ class Users
     protected $blocRtorrent;
     protected $blocFtp;
     protected $is_owner;
+    protected $language;
 
     public function __construct($file_ini, $user)
     {
@@ -26,19 +27,20 @@ class Users
 
     private function hydrate(array $array)
     {
-        $this->navbar_links       = (string) $array['nav']['data_link'];
-        $this->blocInfo           = (bool) $array['user']['active_bloc_info'];
-        $this->is_owner           = (bool) $array['user']['owner'];
-        $this->blocFtp            = (bool) $array['ftp']['active_ftp'];
-        $this->blocRtorrent       = (bool) $array['rtorrent']['active_reboot'];
-        $this->directory          = (string) $array['user']['user_directory'];
-        $this->scgi_folder        = (string) $array['user']['scgi_folder'];
-        $this->theme              = (string) $array['user']['theme'];
-        $this->supportMail        = (string) $array['support']['adresse_mail'];
-        $this->url_redirect       = (string) $array['logout']['url_redirect'];
-        $this->portFtp            = (int) $array['ftp']['port_ftp'];
-        $this->portSftp           = (int) $array['ftp']['port_sftp'];
-        $this->currentPath        = getcwd();
+        $this->navbar_links = (string) $array['nav']['data_link'];
+        $this->blocInfo     = (bool) $array['user']['active_bloc_info'];
+        $this->is_owner     = (bool) $array['user']['owner'];
+        $this->blocFtp      = (bool) $array['ftp']['active_ftp'];
+        $this->blocRtorrent = (bool) $array['rtorrent']['active_reboot'];
+        $this->directory    = (string) $array['user']['user_directory'];
+        $this->scgi_folder  = (string) $array['user']['scgi_folder'];
+        $this->theme        = (string) $array['user']['theme'];
+        $this->language     = (string) $array['user']['language'];
+        $this->supportMail  = (string) $array['support']['adresse_mail'];
+        $this->url_redirect = (string) $array['logout']['url_redirect'];
+        $this->portFtp      = (int) $array['ftp']['port_ftp'];
+        $this->portSftp     = (int) $array['ftp']['port_sftp'];
+        $this->currentPath  = getcwd();
     }
 
     private static function convertFileSize($octets)
@@ -154,13 +156,25 @@ class Users
     /* retourne la liste de tous les thèmes */
     public static function get_all_themes()
     {
-        $scan = scandir('../themes');
+        $scan = scandir(__DIR__.'/../../themes');
         foreach ($scan as $folder_name) {
-            if ($folder_name != '.' && $folder_name != '..' && is_dir('../themes/'.$folder_name)) {
+            if ($folder_name != '.' && $folder_name != '..' && is_dir(__DIR__."/../../themes/{$folder_name}")) {
                 $all_themes[] = $folder_name;
             }
         }
         return $all_themes;
+    }
+
+    public static function get_all_languages()
+    {
+        $scan = scandir(__DIR__.'/../../locale');
+        foreach ($scan as $file_name) {
+            if ($file_name != '.' && $file_name != '..' && is_file(__DIR__."/../../locale/{$file_name}")) {
+                $var = explode('.', $file_name);
+                $languages[] = $var[1];
+            }
+        }
+        return $languages;
     }
 
     public function get_all_links()
@@ -265,5 +279,10 @@ class Users
     public function theme()
     {
         return $this->theme;
+    }
+
+    public function language()
+    {
+        return $this->language;
     }
 }

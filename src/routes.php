@@ -91,7 +91,8 @@ $app->post('/settings/update', function ($request, $response) use ($file_user_in
     $update->update([
         'user' => [
             'active_bloc_info' => isset($param['active_bloc_info']) ? true : false,
-            'theme' => $param['theme']
+            'theme' => $param['theme'],
+            'language' => $param['language']
         ],
         'ftp' => [
             'active_ftp' => isset($param['active_ftp']) ? true : false

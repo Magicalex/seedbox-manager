@@ -8,9 +8,10 @@ use \Symfony\Component\Translation\MessageSelector;
 use \Symfony\Component\Translation\Loader\YamlFileLoader;
 use \Symfony\Bridge\Twig\Extension\TranslationExtension;
 
-$translator = new Translator('fr', new MessageSelector());
+$translator = new Translator($lang, new MessageSelector());
 $translator->addLoader('yaml', new YamlFileLoader());
 $translator->addResource('yaml', __DIR__.'/../locale/core.fr.yml', 'fr');
+$translator->addResource('yaml', __DIR__.'/../locale/core.en.yml', 'en');
 
 $container = $app->getContainer();
 
