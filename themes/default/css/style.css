@@ -85,11 +85,15 @@ button[data-dismiss="modal"] {
 
 #load-info{
   margin-top: 10px;
-  font-weight: bold;
+}
+
+.uptime {
+  margin-top: 8px;
 }
 
 .load-average {
   font-size: 11px;
+  cursor: default;
 }
 
 .glyphicon-refresh {

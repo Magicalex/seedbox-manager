@@ -18,12 +18,12 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle user" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {{ user.name }} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="/settings"><i class="glyphicon glyphicon-wrench"></i> Paramètres</a></li>
-                    {% if user.is_owner == true %}<li><a href="/admin"><i class="glyphicon glyphicon-cog"></i> Administration</a></li>{% endif %}
-                    <li><a class="aboutlink" data-toggle="modal" href="#popupinfo"><i class="glyphicon glyphicon-info-sign"></i> A propos</a></li>
+                    <li><a href="/settings"><i class="glyphicon glyphicon-wrench"></i> {{ 'core.header.settings'|trans }}</a></li>
+                    {% if user.is_owner == true %}<li><a href="/admin"><i class="glyphicon glyphicon-cog"></i> {{ 'core.header.administration'|trans }}</a></li>{% endif %}
+                    <li><a class="aboutlink" data-toggle="modal" href="#popupinfo"><i class="glyphicon glyphicon-info-sign"></i> {{ 'core.header.about_us'|trans }}</a></li>
                     <li>
                         <a id="logout" href="#logout" title="Se déconnecter" data-urlredirect="{{ server.logout_url_redirect }}">
-                            <strong><i class="glyphicon glyphicon-log-out"></i> Déconnexion</strong>
+                            <strong><i class="glyphicon glyphicon-log-out"></i> {{ 'core.header.logout'|trans }}</strong>
                         </a>
                     </li>
                 </ul>

@@ -1,12 +1,12 @@
 {% extends 'layout.twig.html' %}
 
 {% block content %}
-    <h1 class="page-header dashboard"><i class="glyphicon glyphicon-dashboard"></i> Tableau de bord</h1>
+    <h1 class="page-header dashboard"><i class="glyphicon glyphicon-dashboard"></i> {{ 'core.index.dashboard'|trans }}</h1>
     {% set notification_rtorrent = notifications.rtorrent.0 %}
     {% if notification_rtorrent.statusReboot is defined and notification_rtorrent.statusReboot == 0 %}
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        Votre session rtorrent a été redémarrée avec succès.
+        {{ 'core.index.succes_reboot_rtorrent'|trans }}
     </div>
     {% elseif notification_rtorrent.statusReboot is defined and notification_rtorrent.statusReboot != 0 %}
     <div class="alert alert-danger">
@@ -62,13 +62,13 @@
                 </ul>
                 <p><i class="glyphicon glyphicon-stats"></i> <strong>Charge serveur</strong></p>
                 <ul>
-                    <li style="cursor:default;">
+                    <li class="uptime">
                         <span class="text-defaut-color">load average : </span>
                         <span data-original-title="Charge moyenne depuis 1 min" class="label label-primary load-average">{{ server.load_average.load_average.0 }}</span>
                         <span data-original-title="Charge moyenne depuis 5 min" class="label label-primary load-average">{{ server.load_average.load_average.1 }}</span>
                         <span data-original-title="Charge moyenne depuis 15 min" class="label label-primary load-average">{{ server.load_average.load_average.2 }}</span>
                     </li>
-                    <li id="load-info">{{ server.load_average.info_charge|raw }}</li>
+                    <li class="uptime"><strong>{{ server.load_average.info_charge|raw }}</strong></li>
                 </ul>
             </div>
         </article>

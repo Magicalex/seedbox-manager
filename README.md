@@ -14,7 +14,7 @@ seedbox-manager is web app for manage your seedbox.
 
 *note : root privilege is required*
 
-```
+```bash
 cd /var/www
 git clone https://github.com/Magicalex/seedbox-manager.git
 chown -R www-data:www-data seedbox-manager
@@ -61,7 +61,7 @@ This will automatically generate configuration files for the current user. `./se
 
 To obtain the admin rights :
 ```bash
-nano /var/www/manager/conf/users/{utilisateur}/config.ini
+vi /var/www/seedbox-manager/conf/users/{utilisateur}/config.ini
 ```
 and replace (owner = no by owner = yes)
 

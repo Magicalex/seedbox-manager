@@ -1,0 +1,16 @@
+core:
+  header:
+    logout: Déconnexion
+    about_us: A propos
+    administration: Administration
+    settings: Paramètres
+
+
+
+
+  index:
+    dashboard: Tableau de bord
+    succes_reboot_rtorrent: Votre session rtorrent a été redémarrée avec succès.
+
+
+  admin:

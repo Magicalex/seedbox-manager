@@ -1,25 +1,9 @@
 <?php
-// Routes
 
 use WriteiniFile\WriteiniFile;
 
-/*
-use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\MessageSelector;
-use Symfony\Component\Translation\Loader\YamlFileLoader;
-use Symfony\Component\Yaml\Yaml;
-*/
-
 $user = new \Seedbox\Seedbox\Users($file_user_ini, $username);
 $server = new \Seedbox\Seedbox\Server($file_user_ini, $username);
-
-/*
-// init translation
-$lang = 'fr';
-$translator = new Translator($lang, new MessageSelector());
-$translator->addLoader('yaml', new YamlFileLoader());
-$translator->addResource('yaml', '../locale/core.fr.yml', 'fr');
-*/
 
 // request GET
 $app->get('/', function ($request, $response) use ($user, $server) {
@@ -80,12 +64,10 @@ $app->get('/admin/{username}', function ($request, $response, $args) use ($user)
 $app->get('/download/{file}', function ($request, $response, $args) use ($user) {
 
     $file = $args['file'];
-
     //if (isset($_GET['download'])) {
     //    require '../app/downloads.php';
     //}
-
-    return;
+    //return;
 });
 
 // request POST
