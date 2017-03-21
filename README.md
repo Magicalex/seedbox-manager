@@ -1,37 +1,32 @@
-#Description du seedbox-manager
+# Description of seedbox-manager
 
-L'application web seedbox-manager est une interface pour redémarrer une session rtorrent d'un utilisateur unix.  
-On y trouve aussi :
+seedbox-manager is web app for manage your seedbox.
 
- * des liens vers rutorrent et cakebox dans la navbar configurable.
- * un rappel des ids ftp et sftp de l'utilisateur.
- * un module de support avec ticket désactivable.
- * des statistiques serveurs (load average, uptime).
- * des informations utilisateurs (espace disque, adresse ip visiteur).
- * un outil pour générer des fichiers de configuration filezilla et transdroid.
- * Un espace administrateur pour gérer facilement la configuration de vos utilisateurs
- * Une page paramètre pour désactiver les blocs que vous n'utilisez pas.
+ * reboot of rtorrent
+ * custom links in navbar.
+ * statistic server (load average, uptime).
+ * download file config of filezilla et transdroid.
+ * admin area
 
 **Auteur :** Backtoback (c) & Magicalex (php) & hydrog3n (php).  
 
-#Installation
+## Installation
 
-note : pour installer l'interface il faut les droits root ou avoir la possiblité d'utiliser sudo.
+*note : root privilege is required*
 
 ```
 cd /var/www
 git clone https://github.com/Magicalex/seedbox-manager.git
-chown -R www-data:www-data ./seedbox-manager/
-cd ./seedbox-manager/
+chown -R www-data:www-data seedbox-manager
+cd seedbox-manager
 composer install
-bower install --allow-root
-cd ./source-reboot-rtorrent/
+cd source-reboot-rtorrent
 chmod +x install.sh && ./install.sh
 ```
 
-##Configuration du serveur web
+## Configuration
 
-ex : web server nginx
+*example : web server nginx*
 ```nginx
 server {
     listen 80 default_server;
@@ -58,40 +53,17 @@ server {
     }
 }
 ```
-ex : web server apache2 (v2.4.*)
-```apache
-<VirtualHost _default_:80>
-    DocumentRoot /var/www/seedbox-manager/public
 
-        <Directory /var/www/seedbox-manager/public/>
-            Options Indexes FollowSymLinks
-            AllowOverride None
-            Require all denied
+## First connection
 
-            AuthType Basic
-            AuthName "seedbox"
-            AuthUserFile "/var/www/seedbox-manager/.htpasswd"
-            Require valid-user
-        </Directory>
+Connect you to the interface with your rutorrent id.
+This will automatically generate configuration files for the current user. `./seedbox-manager/conf/users/{utilisateur}/config.ini`
 
-</VirtualHost>
-
-```
-
-##Première connexion
-
-Se connecter à l'interface avec ses identifiants rutorrent.  
-Cela va générer automatiquement des fichiers de configuration pour l'utilisateur dans le dossier ./seedbox-manager/conf/users/{utilisateur}/config.ini
-
-note : à chaque fois qu'un nouvel utilisateur se connecte ses fichiers de configuration sont automatiquement généré à partir du fichier ./conf/config.ini
-
-pour obtenir les droits administrateurs :
-```
+To obtain the admin rights :
+```bash
 nano /var/www/manager/conf/users/{utilisateur}/config.ini
 ```
-puis modifier à la ligne ## (owner = no par owner = yes)
-
-Après avoir récupéré les droits administrateurs vous pouvez configurer tous les utilisateurs.
+and replace (owner = no by owner = yes)
 
 ## developement
 
