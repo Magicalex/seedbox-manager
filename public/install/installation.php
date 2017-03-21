@@ -1,6 +1,6 @@
 <?php
 
-use Seedbox\Install;
+use \Seedbox\Install;
 
 $user_name_php = Install::get_user_php();
 $root_path = substr(getcwd(), 0, -7);

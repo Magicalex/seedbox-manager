@@ -1,8 +1,7 @@
 <?php
-// Application middleware
 
-use \Seedbox\Seedbox\Install;
-use \Seedbox\Seedbox\Users;
+use \Seedbox\Install;
+use \Seedbox\Users;
 
 $dev = false;
 
