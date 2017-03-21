@@ -1,16 +1,79 @@
 core:
+  layout:
+    information: Information
+    enable_javascript: |
+      Javascript n'est pas activé ou quelque chose empêche sa bonne exécution sur votre navigateur web.<br>
+      Pour pouvoir utiliser cette interface l'activation de javascript est nécessaire.
+    modal:
+      about_us: A propos
+      author: Application web par Backtoback &amp; Magicalex &amp; hydrog3n
+      contact_us: "Contacter les développeurs sur github : <a href=\"https://github.com/Magicalex/seedbox-manager/issues\" target=\"_blank\">https://github.com/Magicalex/seedbox-manager</a>"
+      version: Version
+      close: Fermer
+      # ok
+
   header:
     logout: Déconnexion
     about_us: A propos
     administration: Administration
     settings: Paramètres
+    # ok
 
   index:
     dashboard: Tableau de bord
     succes_reboot_rtorrent: Votre session rtorrent a été redémarrée avec succès.
     error_reboot_rtorrent: |
-      <strong>Un problème est survenu lors du redémarrage de rtorrent</strong><br>
-      Il faut vérifier que <code>reboot-rtorrent</code> est correctement compilé<br>
+      <h4>Un problème est survenu lors du redémarrage de rtorrent</h4>
+      <p>Il faut vérifier que <code>reboot-rtorrent</code> est correctement compilé</p>
       <small>note : pour recompiler, veuillez utiliser le script install.sh</small>
+    log: Log
+    command_exec: commande exécutée
+    status: statut
+    result_command: résultat de la commande
+    new_version: Nouvelle version disponible !
+    participants: Participants
+
+    title_info_user: Information du compte utilisateur
+    ip_adress: Votre adresse ip
+    disk_space: Espace disque
+    we_use: Vous utilisez
+    equivalent: soit
+    on: sur
+    free: libre
+    complete: Complete
+    uptime_server: Uptime serveur
+    load_average: Charge serveur
+    load_average_1: Charge moyenne depuis 1 min
+    load_average_5: Charge moyenne depuis 5 min
+    load_average_15: Charge moyenne depuis 15 min
+
+    title_access: Les accès ftp - sftp - transdroid
+    server_ftp: Serveur FTP et sFTP
+    adress_ftp: Adresse (s)FTP
+    user_ftp: Utiilisateur (s)FTP
+    port_ftp: Port FTP
+    port_sftp: Port sFTP
+    download_filezilla: Télécharger filezilla
+    configuration_file: Fichier de configuration
+    app_transdroid: Application Transdroid
+    folder_scgi: Dossier SCGI
+    http_adress: Adresse http
+    user_transdroid: Utilisateur transdroid
+    download_transdroid: Télécharger Transdroid
+
+    restart_rtorrent: Redémarrer rtorrent
+    last_restart: Dernier redémarrage le
+
+    modal:
+      warning: Avertissement
+      do_you_want_restart: "&Ecirc;tes-vous sûr de vouloir redémarrer votre session rtorrent ?"
+      restart_with_irssi: Redémarrer irssi avec rtorrent
+      cancel: Annuler
+      restart: Redémarrer
+      # ok
+
+  settings:
+    setting_your_user: Réglage de votre utilisateur
+
 
   admin:

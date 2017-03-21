@@ -2,26 +2,25 @@
 
 {% block content %}
     <h1 class="page-header dashboard"><i class="glyphicon glyphicon-dashboard"></i> {{ 'core.index.dashboard'|trans }}</h1>
-    {% set notification_rtorrent = notifications.rtorrent.0 %}
-    {% if notification_rtorrent.statusReboot is defined and notification_rtorrent.statusReboot == 0 %}
+    {% if notifications.rtorrent.0.statusReboot is defined and notifications.rtorrent.0.statusReboot == 0 %}
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         {{ 'core.index.succes_reboot_rtorrent'|trans }}
     </div>
-    {% elseif notification_rtorrent.statusReboot is defined and notification_rtorrent.statusReboot != 0 %}
+    {% elseif notifications.rtorrent is defined or notifications.rtorrent.0.statusReboot != 0 %}
     <div class="alert alert-danger">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{ 'core.index.error_reboot_rtorrent'|trans }}
+        {{ 'core.index.error_reboot_rtorrent'|trans|raw }}
     </div>
     {% endif %}
-    {% if notification_rtorrent.statusReboot is defined and notification_rtorrent.statusReboot == 0 %}
+    {% if notifications.rtorrent.0.statusReboot is defined and notifications.rtorrent.0.statusReboot == 0 %}
     <div class="alert alert-info">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4>Log :</h4>
-        <strong>commande exécutée : </strong> {{ notification_rtorrent.command }}<br>
-        <strong>statut :</strong> {{ notification_rtorrent.statusReboot }}<br>
-        <strong>résultat de la commande :</strong> <br>
-        {% for logs in notification_rtorrent.logReboot %}
+        <h4>{{ 'core.index.log'|trans }}</h4>
+        <strong>{{ 'core.index.command_exec'|trans }} :</strong> {{ notifications.rtorrent.0.command }}<br>
+        <strong>{{ 'core.index.status'|trans }} :</strong> {{ notifications.rtorrent.0.statusReboot }}<br>
+        <strong>{{ 'core.index.result_command'|trans }} :</strong> <br>
+        {% for logs in notifications.rtorrent.0.logReboot %}
             # {{ logs }}<br>
         {% endfor %}
     </div>
@@ -29,42 +28,41 @@
     {% if server.CheckUpdate != false %}
     <div class="alert alert-info">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4>Nouvelle version disponible ! (v{{ server.CheckUpdate.version }})</h4>
+        <h4>{{ 'core.index.new_version'|trans }} (v{{ server.CheckUpdate.version }})</h4>
         <ul>{% for new in server.CheckUpdate.news %}<li class="text-info">{{ new }}</li>{% endfor %}</ul>
-        <small style="display:block;margin-top:5px;">Participants: {{ server.CheckUpdate.contributors }}</small>
+        <small style="display:block;margin-top:5px;">{{ 'core.index.participants'|trans }}: {{ server.CheckUpdate.contributors }}</small>
     </div>
     {% endif %}
     <section class="row">
         {% if user.blocInfo == true %}
         <article class="col-md-6" id ="bloc-info">
             <div class="well well-sm">
-                <h4 class="titre-head"><i class="fa fa-home"></i> Information compte utilisateur</h4>
+                <h4 class="titre-head"><i class="fa fa-home"></i> {{ 'core.index.title_info_user'|trans }}</h4>
                 <div class="trait"></div>
-                <p><i class="fa fa-map-marker"></i> <strong>Votre adresse Ip</strong></p>
+                <p><i class="fa fa-map-marker"></i> <strong>{{ 'core.index.ip_adress'|trans }}</strong></p>
                 <ul>
                     <li><strong class="text-success">{{ ipUser }}</strong></li>
                 </ul>
-                <p><i class="fa fa-hdd-o"></i> <strong>Espace disque</strong></p>
+                <p><i class="fa fa-hdd-o"></i> <strong>{{ 'core.index.disk_space'|trans }}</strong></p>
                 <p class="text-center text-defaut-color">
-                    Vous utilisez <strong>{{ user.userdisk.percentage_used }}%</strong>
-                    <em> soit {{ user.userdisk.used_disk }} sur {{ user.userdisk.total_disk }} ({{ user.userdisk.free_disk }} Libre)</em>
+                    {{ 'core.index.participants.we_use'|trans }} <strong>{{ user.userdisk.percentage_used }}%</strong>
+                    <em> {{ 'core.index.equivalent'|trans }} {{ user.userdisk.used_disk }} {{ 'core.index.on'|trans }} {{ user.userdisk.total_disk }} ({{ user.userdisk.free_disk }} {{ user.userdisk.free }})</em>
                 </p>
                 <div class="progress progress-striped fix-progress">
                     <div class="progress-bar {{ user.userdisk.progessBarColor }}" role="progressbar" aria-valuenow="{{ user.userdisk.percentage_used }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ user.userdisk.percentage_used }}%;">
-                        <span class="sr-only">{{ user.userdisk.percentage_used }}% Complete</span>
+                        <span class="sr-only">{{ user.userdisk.percentage_used }}% {{ 'core.index.complete'|trans }}</span>
                     </div>
                 </div>
-                <p><i class="fa fa-clock-o"></i> <strong>Uptime serveur</strong></p>
+                <p><i class="fa fa-clock-o"></i> <strong>{{ 'core.index.uptime_server'|trans }}</strong></p>
                 <ul>
                     <li><strong class="text-success">{{ server.getUptime }}</strong></li>
                 </ul>
-                <p><i class="glyphicon glyphicon-stats"></i> <strong>Charge serveur</strong></p>
+                <p><i class="glyphicon glyphicon-stats"></i> <strong>{{ 'core.index.load_average'|trans }}</strong></p>
                 <ul>
                     <li class="uptime">
-                        <span class="text-defaut-color">load average : </span>
-                        <span data-original-title="Charge moyenne depuis 1 min" class="label label-primary load-average">{{ server.load_average.load_average.0 }}</span>
-                        <span data-original-title="Charge moyenne depuis 5 min" class="label label-primary load-average">{{ server.load_average.load_average.1 }}</span>
-                        <span data-original-title="Charge moyenne depuis 15 min" class="label label-primary load-average">{{ server.load_average.load_average.2 }}</span>
+                        <span data-original-title="{{ 'core.index.load_average_1'|trans }}" class="label label-primary load-average">{{ server.load_average.load_average.0 }}</span>
+                        <span data-original-title="{{ 'core.index.load_average_5'|trans }}" class="label label-primary load-average">{{ server.load_average.load_average.1 }}</span>
+                        <span data-original-title="{{ 'core.index.load_average_15'|trans }}" class="label label-primary load-average">{{ server.load_average.load_average.2 }}</span>
                     </li>
                     <li class="uptime"><strong>{{ server.load_average.info_charge|raw }}</strong></li>
                 </ul>
@@ -74,24 +72,24 @@
         {% if user.blocFtp == true %}
         <article class="col-md-6" id="bloc-ftp">
             <div class="well well-sm">
-                <h4 class="titre-head"><i class="fa fa-link"></i> Les accès ftp - sftp - transdroid</h4>
+                <h4 class="titre-head"><i class="fa fa-link"></i> {{ 'core.index.title_access'|trans }}</h4>
                 <div class="trait"></div>
-                <h5 class="device"><i class="fa fa-desktop"></i> <strong>Serveur FTP et sFTP</strong></h5>
+                <h5 class="device"><i class="fa fa-desktop"></i> <strong>{{ 'core.index.server_ftp'|trans }}</strong></h5>
                 <ul>
-                    <li>Adresse (s)FTP : <em>(s)ftp://{{ host }}</em></li>
-                    <li>User (s)FTP : <em>{{ user.name }}</em></li>
-                    <li>Port FTP : <em>{{ user.portFtp }}</em></li>
-                    <li>Port sFTP : <em>{{ user.portSftp }}</em></li>
-                    <li><a class="btn btn-info btn-xs" href="https://filezilla.fr/" target="_blank"><i class="glyphicon glyphicon-download-alt"></i> Télécharger filezilla</a></li>
-                    <li><a id="popupfilezilla" class="btn btn-info btn-xs" data-toggle="popover" href="/download/filezilla"><i class="fa fa-files-o"></i> Fichier de configuration</a></li>
+                    <li>{{ 'core.index.adress_ftp'|trans }} : <em>(s)ftp://{{ host }}</em></li>
+                    <li>{{ 'core.index.user_ftp'|trans }} : <em>{{ user.name }}</em></li>
+                    <li>{{ 'core.index.port_ftp'|trans }} : <em>{{ user.portFtp }}</em></li>
+                    <li>{{ 'core.index.port_sftp'|trans }} : <em>{{ user.portSftp }}</em></li>
+                    <li><a class="btn btn-info btn-xs" href="https://filezilla.fr/" target="_blank"><i class="glyphicon glyphicon-download-alt"></i> {{ 'core.index.download_filezilla'|trans }}</a></li>
+                    <li><a id="popupfilezilla" class="btn btn-info btn-xs" data-toggle="popover" href="/download/filezilla"><i class="fa fa-files-o"></i> {{ 'core.index.configuration_file'|trans }}</a></li>
                 </ul>
-                <h5 class="device"><i class="fa fa-android"></i> <strong>Application Transdroid</strong></h5>
+                <h5 class="device"><i class="fa fa-android"></i> <strong>{{ 'core.index.app_transdroid'|trans }}</strong></h5>
                 <ul>
-                    <li>Dossier SCGI : <em><strong>{{ user.scgi_folder }}</strong></em></li>
-                    <li>Adresse http : <em>http://{{ host }}</em></li>
-                    <li>User transdroid : <em>{{ user.name }}</em></li>
-                    <li><a class="btn btn-info btn-xs" href="http://transdroid.org/latest"><i class="glyphicon glyphicon-download-alt"></i> Télécharger Transdroid</a></li>
-                    <li><a id="popuptransdroid" class="btn btn-info btn-xs" data-toggle="popover" href="/download/transdroid"><i class="fa fa-files-o"></i> Fichier de configuration</a></li>
+                    <li>{{ 'core.index.folder_scgi'|trans }} : <em><strong>{{ user.scgi_folder }}</strong></em></li>
+                    <li>{{ 'core.index.http_adress'|trans }} : <em>http://{{ host }}</em></li>
+                    <li>{{ 'core.index.user_transdroid'|trans }} : <em>{{ user.name }}</em></li>
+                    <li><a class="btn btn-info btn-xs" href="http://transdroid.org/latest"><i class="glyphicon glyphicon-download-alt"></i> {{ 'core.index.download_transdroid'|trans }}</a></li>
+                    <li><a id="popuptransdroid" class="btn btn-info btn-xs" data-toggle="popover" href="/download/transdroid"><i class="fa fa-files-o"></i> {{ 'core.index.configuration_file'|trans }}</a></li>
                 </ul>
             </div>
         </article>
@@ -101,15 +99,15 @@
     {% if user.blocRtorrent == true %}
     <article class="col-md-6">
         <div class="well well-sm">
-            <h4 class="titre-head"><i class="fa fa-terminal"></i> Redémarrage de rtorrent</h4>
+            <h4 class="titre-head"><i class="fa fa-terminal"></i> {{ 'core.index.restart_rtorrent'|trans }}</h4>
             <div class="trait"></div>
             <p class="text-center btn-reboot">
                 <a data-toggle="modal" href="#popupreboot" class="btn btn-info btn-lg" style="vertical-align: middle;">
-                    <span class="glyphicon glyphicon-refresh"></span>Redémarrer rtorrent
+                    <span class="glyphicon glyphicon-refresh"></span>{{ 'core.index.restart_rtorrent'|trans }}
                 </a>
             </p>
             {% if read_data_reboot.file_exist %}
-            <small class="text-defaut-color"><em>Dernier redémarrage le {{ read_data_reboot.read_file }}</em></small>
+            <small class="text-defaut-color"><em>{{ 'core.index.last_restart'|trans }} {{ read_data_reboot.read_file }}</em></small>
             {% endif %}
         </div>
     </article>
@@ -124,16 +122,16 @@
             <form action="/reboot-rtorrent" method="post">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="target-rtorrent">Avertissement</h4>
+                    <h4 class="modal-title" id="target-rtorrent">{{ 'core.index.modal.warning'|trans }}</h4>
                 </div>
                 <div class="modal-body">
-                    <p>&Ecirc;tes-vous sûr de vouloir redémarrer votre session rtorrent ?</p>
-                    <label><input type="checkbox" name="irssi"> Redémarrer irssi avec rtorrent</label>
+                    <p>{{ 'core.index.modal.do_you_want_restart'|trans|raw }}</p>
+                    <label><input type="checkbox" name="irssi"> {{ 'core.index.modal.restart_with_irssi'|trans }}</label>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'core.index.modal.cancel'|trans }}</button>
                     <input type="hidden" name="reboot" value="true">
-                    <input type="submit" value="Redémarrer" class="btn btn-info">
+                    <input type="submit" value="{{ 'core.index.modal.restart'|trans }}" class="btn btn-info">
                 </div>
             </form>
         </div>

@@ -1,7 +1,7 @@
 {% extends 'layout.twig.html' %}
 
 {% block content %}
-    <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Réglage de votre utilisateur</h1>
+    <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> {{ 'core.settings.setting_your_user'|trans }}</h1>
     {% if notifications.update_ini_file is defined and notifications.update_ini_file.0 == true %}
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

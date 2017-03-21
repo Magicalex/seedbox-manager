@@ -15,9 +15,8 @@
         <div class="container marg">
             <noscript>
                 <div class="alert alert-info">
-                    <h4>Information</h4>
-                    Javascript n'est pas activé ou quelque chose empêche sa bonne exécution sur votre navigateur web.<br>
-                    Pour pouvoir utiliser cette interface l'activation de javascript est nécessaire.
+                    <h4>{{ 'core.layout.information'|trans }}</h4>
+                    {{ 'core.layout.enable_javascript'|trans }}
                 </div>
             </noscript>
             {% block content %}{% endblock %}
@@ -27,15 +26,15 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="target-about-us">A propos</h4>
+                        <h4 class="modal-title" id="target-about-us">{{ 'core.layout.modal.about_us'|trans }}</h4>
                     </div>
                     <div class="modal-body">
-                        <p class="textmodaleabout">Application web par Backtoback &amp; Magicalex &amp; hydrog3n</p>
-                        <p class="textmodaleabout">Contacter les développeurs sur github : <a href="https://github.com/Magicalex/seedbox-manager/issues" target="_blank">https://github.com/seedbox-manager</a></p>
-                        <p class="textmodaleabout"><strong>Version {{ server.version }}</strong></p>
+                        <p class="textmodaleabout">{{ 'core.layout.modal.author'|trans|raw }}</p>
+                        <p class="textmodaleabout">{{ 'core.layout.modal.contact_us'|trans|raw }}</p>
+                        <p class="textmodaleabout"><strong>{{ 'core.layout.modal.version'|trans }} {{ server.version }}</strong></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'core.layout.modal.close'|trans }}</button>
                     </div>
                 </div>
             </div>
