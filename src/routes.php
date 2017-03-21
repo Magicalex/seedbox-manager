@@ -14,7 +14,6 @@ $app->get('/', function ($request, $response) use ($user, $server) {
     $notifications = $this->flash->getMessages();
 
     return $this->view->render($response, 'index.twig.html', [
-        'username' => $user->name(),
         'host' => $_SERVER['HTTP_HOST'],
         'ipUser' => $_SERVER['REMOTE_ADDR'],
         'user' => $user,
@@ -29,7 +28,6 @@ $app->get('/settings', function ($request, $response) use ($user, $server) {
     $notifications = $this->flash->getMessages();
 
     return $this->view->render($response, 'settings.twig.html', [
-        'username' => $user->name(),
         'user' => $user,
         'server' => $server,
         'notifications' => $notifications
@@ -38,10 +36,13 @@ $app->get('/settings', function ($request, $response) use ($user, $server) {
 
 $app->get('/admin', function ($request, $response) use ($user, $server) {
 
+    $notifications = $this->flash->getMessages();
+
     return $this->view->render($response, 'admin.twig.html', [
-        'username' => $user->name(),
         'user' => $user,
-        'server' => $server
+        'member' => $user,
+        'server' => $server,
+        'notifications' => $notifications
     ]);
 })->add($isAdmin);
 
@@ -53,13 +54,9 @@ $app->get('/admin/{username}', function ($request, $response, $args) use ($user)
 
     $notifications = $this->flash->getMessages();
 
-    echo "<pre>";
-    print_r($notifications);
-    echo "</pre>";
-
     return $this->view->render($response, 'admin.twig.html', [
-        'username' => $user->name(),
-        'user' => $member,
+        'user' => $user,
+        'member' => $member,
         'server' => $server,
         'notifications' => $notifications
     ]);
@@ -80,7 +77,7 @@ $app->post('/reboot-rtorrent', function ($request, $response) use ($user) {
 $app->post('/settings/update', function ($request, $response) use ($file_user_ini) {
 
     $param = $request->getParsedBody();
-    $update = new WriteIniFile($file_user_ini);
+    $update = new WriteiniFile($file_user_ini);
     $update->update([
         'user' => [
             'active_bloc_info' => isset($param['active_bloc_info']) ? true : false,
@@ -97,6 +94,7 @@ $app->post('/settings/update', function ($request, $response) use ($file_user_in
         ]
     ]);
     $logs = $update->write();
+
     $this->flash->addMessage('update_ini_file', $logs);
 
     return $response->withStatus(302)->withHeader('Location', '/settings');
@@ -107,7 +105,7 @@ $app->post('/admin/update/{username}', function ($request, $response, $args) {
     $param = $request->getParsedBody();
     $username = $args['username'];
 
-    $update = new WriteIniFile(__DIR__."/../conf/users/{$username}/config.ini");
+    $update = new WriteiniFile(__DIR__."/../conf/users/{$username}/config.ini");
     $update->update([
         'user' => [
             'user_directory' => $param['user_directory'],
@@ -135,9 +133,10 @@ $app->post('/admin/delete', function ($request, $response) {
     $param = $request->getParsedBody();
     $username = $param['deleteUserName'];
 
-    $logs = Users::delete_config_old_user(__DIR__."/../conf/users/{$username}");
+    $logs = \Seedbox\Seedbox\Users::delete_config_old_user(__DIR__."/../conf/users/{$username}");
 
     $this->flash->addMessage('admin_delete_user', $logs);
+    $this->flash->addMessage('admin_delete_user', $username);
 
     return $response->withStatus(302)->withHeader('Location', '/admin');
 })->add($isAdmin);

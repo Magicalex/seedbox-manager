@@ -2,10 +2,7 @@
 
 {% block content %}
     <h1 class="page-header dashboard"><i class="glyphicon glyphicon-cog"></i> Espace administration</h1>
-    {{ notifications.admin_update_ini.0 }}
-
-    {% set notification_admin_update_ini = notifications.admin_update_ini.0 %}
-    {% if notifications.admin_update_ini is defined and notification_update_ini_file == true %}
+    {% if notifications.admin_update_ini is defined and notifications.admin_update_ini.0 == true %}
     <div class="alert alert-success">La configuration de l'utilisateur <strong>{{ user.name }}</strong> a été mise à jour avec succès.</div>
     {% elseif notifications.admin_update_ini is defined and notification_update_ini_file == false %}
     <div class="alert alert-danger">
@@ -14,22 +11,22 @@
     </div>
     {% endif %}
 
-    {% if post.deleteUserName is defined and LogDeleteUser.error is empty %}
+    {% if notifications.admin_delete_user is defined and notifications.admin_delete_user.0.error is empty %}
     <div class="alert alert-success">
-        <h4>Les fichiers de configuration de l'utilisateur <strong>{{ post.deleteUserName }}</strong> ont été supprimé avec succès.</h4>
+        <h4>Les fichiers de configuration de l'utilisateur <strong>{{ notifications.admin_delete_user.1 }}</strong> ont été supprimé avec succès.</h4>
         <ul class="text-success">
-        {% for LogDeleteFile in LogDeleteUser.log %}
-            <li>{{ LogDeleteFile }}</li>
+        {% for log in notifications.admin_delete_user.0.log %}
+            <li>{{ log }}</li>
         {% endfor %}
         </ul>
     </div>
-    {% elseif post.deleteUserName %}
+    {% elseif notifications.admin_delete_user is defined and notifications.admin_delete_user.0.error is not empty %}
     <div class="alert alert-danger">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4>Impossible de supprimer l'utilisateur <strong>{{ post.deleteUserName }}</strong>.</h4>
+        <h4>Impossible de supprimer l'utilisateur <strong>{{ notifications.admin_delete_user.1 }}</strong>.</h4>
         <ul class="text-danger">
-        {% for LogDeleteFile in LogDeleteUser.error %}
-            <li>{{ LogDeleteFile }}</li>
+        {% for log in notifications.admin_delete_user.0.error %}
+            <li>{{ log }}</li>
         {% endfor %}
         </ul>
     </div>
@@ -38,18 +35,18 @@
     <section class="row">
         <article class="col-md-6">
             <div class="well well-sm">
-                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Configuration de l'utilisateur : <strong>{{ user.name }}</strong></h4>
+                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Configuration de l'utilisateur : <strong>{{ member.name }}</strong></h4>
                 <div class="trait"></div>
-                <form method="post" action="/admin/update/{{ user.name }}" role="form">
+                <form method="post" action="/admin/update/{{ member.name }}" role="form">
                     <fieldset>
                         <legend>Généralité utilisateur</legend>
                         <div class="form-group">
                             <label for="user_directory">Dossier /home de l'utilisateur</label>
-                            <input type="text" class="form-control" name="user_directory" id="user_directory" value="{{ user.user_directory }}">
+                            <input type="text" class="form-control" name="user_directory" id="user_directory" value="{{ member.user_directory }}">
                         </div>
                         <div class="form-group">
                             <label for="user_directory">Dossier scgi de l'utilisateur</label>
-                            <input type="text" class="form-control" name="scgi_folder" id="scgi_folder" value="{{ user.scgi_folder }}">
+                            <input type="text" class="form-control" name="scgi_folder" id="scgi_folder" value="{{ member.scgi_folder }}">
                         </div>
                     </fieldset>
                     <fieldset>
@@ -58,28 +55,28 @@
                             <i class="glyphicon glyphicon-warning-sign"></i>
                             Suivez correctement la syntaxe pour ajouter des liens
                         </label>
-                        <textarea class="form-control" rows="3" name="data_link" id="data_link">{{ user.navbar_links }}</textarea>
+                        <textarea class="form-control" rows="3" name="data_link" id="data_link">{{ member.navbar_links }}</textarea>
                     </fieldset>
                     <fieldset>
                         <legend>Paramètre des serveurs FTP/sFTP</legend>
                         <div class="form-group">
                             <label for="port_ftp">Port ftp</label>
-                            <input type="number" class="form-control" name="port_ftp" id="port_ftp" value="{{ user.portFtp }}">
+                            <input type="number" class="form-control" name="port_ftp" id="port_ftp" value="{{ member.portFtp }}">
                         </div>
                         <div class="form-group">
                             <label for="port_sftp">Port sftp</label>
-                            <input type="number" class="form-control" name="port_sftp" id="port_sftp" value="{{ user.portSftp }}">
+                            <input type="number" class="form-control" name="port_sftp" id="port_sftp" value="{{ member.portSftp }}">
                         </div>
                     </fieldset>
                     <fieldset>
                         <legend>Support</legend>
                         <div class="form-group">
                             <label for="adresse_mail">Adresse du support</label>
-                            <input type="email" class="form-control" name="adresse_mail" id="adresse_mail" value="{{ user.supportMail }}">
+                            <input type="email" class="form-control" name="adresse_mail" id="adresse_mail" value="{{ member.supportMail }}">
                         </div>
                     </fieldset>
                     <p class="text-right fix-marg-input">
-                        <input type="hidden" name="user" value="{{ user.name }}">
+                        <input type="hidden" name="user" value="{{ member.name }}">
                         <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
                     </p>
                 </form>
@@ -100,18 +97,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                        {% for user in user.get_all_users %}
+                        {% for users in user.get_all_users %}
                         <tr>
                             <td>{{ loop.index }}</td>
-                            <td>{{ user }}</td>
+                            <td>{{ users }}</td>
                             <td>
-                                <a href="/admin/{{ user }}" class="btn btn-default btn-xs edit-btn-user">
+                                <a href="/admin/{{ users }}" class="btn btn-default btn-xs edit-btn-user">
                                     <i class="glyphicon glyphicon-edit"></i> éditer
                                 </a>
                             </td>
                             <td>
-                            {% if user != username %}
-                            <a data-toggle="modal" class="popup-delete-user btn btn-danger btn-xs" data-user="{{ user }}" href="#delete-user">
+                            {% if users != user.name %}
+                            <a data-toggle="modal" class="popup-delete-user btn btn-danger btn-xs" data-user="{{ users }}" href="#delete-user">
                                 <i class="glyphicon glyphicon-trash"></i> supprimer
                             </a>
                             {% else %}

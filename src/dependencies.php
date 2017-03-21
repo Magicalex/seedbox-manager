@@ -5,7 +5,7 @@ $container = $app->getContainer();
 
 // Register component on container
 $container['view'] = function ($container) {
-    $view = new \Slim\Views\Twig(__DIR__.'/../themes/default', [
+    $view = new \Slim\Views\Twig(__DIR__."/../view", [
         //'cache' => '../cache'
     ]);
     // Instantiate and add Slim specific extension

@@ -1,6 +1,0 @@
-<script type="text/javascript" src="./components/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="./components/jquery-loader-plugin/min/jquery.loader.min.js"></script>
-<script type="text/javascript" src="./components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./themes/{{ user.theme }}/js/app.js"></script>
-</body>
-</html>

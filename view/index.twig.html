@@ -83,7 +83,7 @@
                 <h5 class="device"><i class="fa fa-desktop"></i> <strong>Serveur FTP et sFTP</strong></h5>
                 <ul>
                     <li>Adresse (s)FTP : <em>(s)ftp://{{ host }}</em></li>
-                    <li>User (s)FTP : <em>{{ username }}</em></li>
+                    <li>User (s)FTP : <em>{{ user.name }}</em></li>
                     <li>Port FTP : <em>{{ user.portFtp }}</em></li>
                     <li>Port sFTP : <em>{{ user.portSftp }}</em></li>
                     <li><a class="btn btn-info btn-xs" href="http://filezilla.fr/"><i class="glyphicon glyphicon-download-alt"></i> Télécharger filezilla</a></li>
@@ -93,7 +93,7 @@
                 <ul>
                     <li>Dossier SCGI : <em><strong>{{ user.scgi_folder }}</strong></em></li>
                     <li>Adresse http : <em>http://{{ host }}</em></li>
-                    <li>User transdroid : <em>{{ username }}</em></li>
+                    <li>User transdroid : <em>{{ user.name }}</em></li>
                     <li><a class="btn btn-info btn-xs" href="http://transdroid.org/latest"><i class="glyphicon glyphicon-download-alt"></i> Télécharger Transdroid</a></li>
                     <li><a id="popuptransdroid" class="btn btn-info btn-xs" data-toggle="popover" href="?download&amp;file=transdroid"><i class="fa fa-files-o"></i> Fichier de configuration</a></li>
                 </ul>

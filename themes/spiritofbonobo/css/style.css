@@ -1,28 +1,43 @@
 /* CODE CSS THEME SPIRITOFBONOBO */
 
+/* CODE CSS THEME DEFAULT */
+
 ::-moz-selection {
-  background: #FF3C78;
-  color: white;
+  background: #ff3c78;
+  color: #fff;
 }
 
 ::selection {
-  background: #FF3C78;
-  color: white;
+  background: #ff3c78;
+  color: #fff;
 }
 
 body {
-  background: #3a3a3a;
+  background: url("../img/background.png");
 }
 
 ul {
-  color: #5A5A5A;
+  color: #5a5a5a;
 }
 
 .marg {
   padding: 15px;
   margin-bottom: 50px;
-  background-color: white;
-  box-shadow: 0 0 15px 0 white;
+  background-color: #fff;
+  box-shadow: 0 0 15px 0 #fff;
+}
+
+.fa, .glyphicon, .label {
+  margin-right: 4px;
+}
+
+button[data-dismiss="modal"] {
+  margin-right: 4px;
+}
+
+.dashboard {
+  margin-top: 5px !important;
+  margin-bottom: 20px !important;
 }
 
 .user {
@@ -30,7 +45,7 @@ ul {
 }
 
 .fix-progress {
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,.15);
 }
 
 .titre-head {
@@ -39,8 +54,8 @@ ul {
 }
 
 .trait {
-  background-color: #E5E5E5;
-  border-bottom: 1px solid #FFFFFF;
+  background-color: #e5e5e5;
+  border-bottom: 1px solid #fff;
   height: 2px;
   margin: 9px 1px;
   overflow: hidden;
@@ -49,24 +64,28 @@ ul {
 /* ajustement popup et formulaire */
 .modal-footer form {
   display: inline-block;
-  margin: 0px;
+  margin: 0;
   margin-left: 5px;
-  padding: 0px;
+  padding: 0;
 }
 
 .btn-reboot{
   margin-top: 20px;
 }
 
+#logout {
+  color: #b94a48;
+}
+
 .text-defaut-color {
-  color: #5A5A5A;
+  color: #5a5a5a;
 }
 
 .textmodaleabout {
   color: #646464;
 }
 
-#load-info {
+#load-info{
   margin-top: 10px;
   font-weight: bold;
 }
@@ -75,29 +94,20 @@ ul {
   font-size: 11px;
 }
 
-.aboutlink {
-  color: white;
-}
-
-.aboutlink:hover {
-  color: white;
-}
-
 .glyphicon-refresh {
   margin-right: 7px;
 }
 
-#popupfilezilla,
-#popuptransdroid {
+#popupfilezilla, #popuptransdroid {
   margin-top: 4px;
 }
 
 .fix-marg-input {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .reply-ticket-h6 {
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom: 10px;
 }
 
@@ -110,17 +120,14 @@ ul {
 }
 
 fieldset {
-  border: 1px solid #B4B4B4;
-  padding: 0px 10px 0px 10px;
+  border: 1px solid #b4b4b4;
+  padding: 0 10px 0 10px;
   margin-bottom: 10px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
   border-radius: 5px;
 }
 
 legend {
-  color: #5A5A5A;
+  color: #5a5a5a;
   padding-left: 7px;
   padding-right: 7px;
   border-bottom: none;
@@ -134,7 +141,7 @@ textarea {
 }
 
 .device {
-  color: #5A5A5A;
+  color: #5a5a5a;
 }
 
 .device .fa-android {
@@ -143,7 +150,7 @@ textarea {
 
 #jquery-loader {
   position: relative;
-  background-image: url("./../../../components/jquery-loader-plugin/images/ajax-loader.gif");
+  background-image: url("https://raw.githubusercontent.com/mimiz/jquery-loader-plugin/master/images/ajax-loader.gif");
   background-position: center top;
   background-repeat: no-repeat;
 }
@@ -154,13 +161,22 @@ textarea {
   display: block;
   width: 100%;
   text-align: center;
-  color: white;
+  color: #fff;
   font-size: 16px;
   font-weight: bold;
 }
 
 #jquery-loader-background {
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0,0,0,.9);
+}
+
+.modal-body label {
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.modal-body label input {
+  margin-right: 2px;
 }
 
 /* Modif Jed */

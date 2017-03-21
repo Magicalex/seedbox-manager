@@ -1,6 +1,6 @@
 {
   "name": "seedbox-manager",
-  "version": "3.0.0",
+  "version": "2.5.0",
   "contributors": "Magicalex",
   "news": [
     "Suppression du bloc support",

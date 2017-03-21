@@ -1,0 +1,13 @@
+{
+  "name": "seedbox-manager",
+  "version": "2.5.0",
+  "private": true,
+  "dependencies": {
+  },
+  "devDependencies": {
+    "gulp": "3.9.*",
+    "gulp-bower": "0.0.*",
+    "gulp-clean-css": "3.0.*",
+    "gulp-concat": "2.6.*"
+  }
+}

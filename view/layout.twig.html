@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <title>Seedbox Manager</title>
-        <link type="text/css" rel="stylesheet" href="/css/default-app.min.css">
+        <link type="text/css" rel="stylesheet" href="/css/{{ user.theme }}.css">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1">
     </head>
     <body>
@@ -41,7 +41,7 @@
             </div>
         </div>
         {% block modal %}{% endblock %}
-    <script type="text/javascript" src="/js/default-app.min.js"></script>
+    <script type="text/javascript" src="/js/app.min.js"></script>
     </body>
 </html>
 {% endspaceless %}
