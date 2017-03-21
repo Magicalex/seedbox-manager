@@ -1,12 +1,5 @@
 /* CODE CSS THEME SPIRITOFBONOBO */
 
-@font-face {
-  font-family: 'Ubuntu';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Ubuntu'), url(https://themes.googleusercontent.com/static/fonts/ubuntu/v5/_xyN3apAT_yRRDeqB3sPRg.woff) format('woff');
-}
-
 ::-moz-selection {
   background: #FF3C78;
   color: white;
@@ -171,9 +164,17 @@ textarea {
 }
 
 /* Modif Jed */
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu'), url(https://themes.googleusercontent.com/static/fonts/ubuntu/v5/_xyN3apAT_yRRDeqB3sPRg.woff) format('woff');
+}
+
 body {
   font-family: 'Ubuntu';
-  background-image: url('../img/bg.png');
+  background-image: url("../img/bg.png");
 }
 
 h2 {
@@ -186,17 +187,17 @@ h2 {
 }
 
 .navbar-default {
-  background-image: -webkit-linear-gradient(top,#fff 0,#f8f8f8 100%);
-  background-image: linear-gradient(to bottom, #3a3a3a 0,grey 200%);
+  background-image: -webkit-linear-gradient(top,#fff 0, #f8f8f8 100%);
+  background-image: linear-gradient(to bottom, #3a3a3a 0, grey 200%);
   background-repeat: repeat-x;
-  box-shadow: 1px 1px 10px black;
+  box-shadow: 1px 1px 10px #000;
   border-color: #3a3a3a;
 }
 
 .navbar-default .navbar-nav > li > a {
   font-family: 'Ubuntu';
   font-size: 22px;
-  color: white;
+  color: #fff;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
@@ -212,7 +213,7 @@ h2 {
   color: #8bbcfe;
   font-weight: normal;
   font-style: normal;
-  opacity: 0.9;
+  opacity: .9;
 }
 
 .navbar-default .navbar-brand:hover {
@@ -222,13 +223,13 @@ h2 {
 .btn-info {
   color: #fff;
   background-color: #8bbcfe;
-  border-color: #77B3FD;
+  border-color: #77b3fd;
   border-radius: 20px;
 }
 
 .btn-info:hover {
   color: #fff;
-  background-color: #77B3FD;
+  background-color: #77b3fd;
   border-color: #8bbcfe;
 }
 
@@ -240,19 +241,19 @@ h2 {
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  background-color: #2C2C2C;
+  background-color: #2c2c2c;
   color: #8bbcfe;
 }
 
 .page-header {
-  background: #595A5A;
+  background: #595a5a;
   text-align: center;
   color: #8bbcfe;
   font-size: 60px;
   font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
   text-decoration: none;
-  box-shadow: 0 0 5px 0 black;
-  text-shadow: 1px 1px 5px black;
+  box-shadow: 0 0 5px 0 #000;
+  text-shadow: 1px 1px 5px #000;
   border: 2px solid #868585;
   border-radius: 20px;
   margin: 5px 0 20px;
@@ -266,14 +267,14 @@ h2 {
 .marg {
   padding: 15px;
   margin-bottom: 50px;
-  background-color: white;
-  box-shadow: 0 0 15px 0 black;
+  background-color: #fff;
+  box-shadow: 0 0 15px 0 #000;
   border-radius: 20px;
-  opacity: 0.9;
+  opacity: .9;
 }
 
 .dropdown-menu {
-  background-color: #616161 ;
+  background-color: #616161;
 }
 
 .dropdown-menu > li > a {

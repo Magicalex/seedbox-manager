@@ -1,4 +1,4 @@
-{% extends "layout.twig.html" %}
+{% extends 'layout.twig.html' %}
 
 {% block content %}
     <h1 class="page-header dashboard"><i class="glyphicon glyphicon-dashboard"></i> Tableau de bord</h1>
@@ -30,12 +30,12 @@
     </div>
     {% endif %}
 
-    {% if serveur.CheckUpdate != false %}
+    {% if server.CheckUpdate != false %}
     <div class="alert alert-info">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4>Nouvelle version disponible ! (v{{ serveur.CheckUpdate.version }})</h4>
-        <ul>{% for new in serveur.CheckUpdate.news %}<li class="text-info">{{ new }}</li>{% endfor %}</ul>
-        <small style="display:block;margin-top:5px;">Participants: {{ serveur.CheckUpdate.contributors }}</small>
+        <h4>Nouvelle version disponible ! (v{{ server.CheckUpdate.version }})</h4>
+        <ul>{% for new in server.CheckUpdate.news %}<li class="text-info">{{ new }}</li>{% endfor %}</ul>
+        <small style="display:block;margin-top:5px;">Participants: {{ server.CheckUpdate.contributors }}</small>
     </div>
     {% endif %}
     <section class="row">
@@ -51,7 +51,7 @@
                 <p><i class="fa fa-hdd-o"></i> <strong>Espace disque</strong></p>
                 <p class="text-center text-defaut-color">
                     Vous utilisez <strong>{{ user.userdisk.percentage_used }}%</strong>
-                    <em>soit {{ user.userdisk.used_disk}} sur {{ user.userdisk.total_disk }} ( {{ user.userdisk.free_disk }} Libre )</em>
+                    <em> soit {{ user.userdisk.used_disk }} sur {{ user.userdisk.total_disk }} ({{ user.userdisk.free_disk }} Libre)</em>
                 </p>
                 <div class="progress progress-striped fix-progress">
                     <div class="progress-bar {{ user.userdisk.progessBarColor }}" role="progressbar" aria-valuenow="{{ user.userdisk.percentage_used }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ user.userdisk.percentage_used }}%;">
@@ -60,17 +60,17 @@
                 </div>
                 <p><i class="fa fa-clock-o"></i> <strong>Uptime serveur</strong></p>
                 <ul>
-                    <li><strong class="text-success">{{ serveur.getUptime }}</strong></li>
+                    <li><strong class="text-success">{{ server.getUptime }}</strong></li>
                 </ul>
                 <p><i class="glyphicon glyphicon-stats"></i> <strong>Charge serveur</strong></p>
                 <ul>
                     <li style="cursor:default;">
                         <span class="text-defaut-color">load average : </span>
-                        <span data-original-title="Charge moyenne depuis 1 min" class="label label-primary load-average">{{ serveur.load_average.load_average.0 }}</span>
-                        <span data-original-title="Charge moyenne depuis 5 min" class="label label-primary load-average">{{ serveur.load_average.load_average.1 }}</span>
-                        <span data-original-title="Charge moyenne depuis 15 min" class="label label-primary load-average">{{ serveur.load_average.load_average.2 }}</span>
+                        <span data-original-title="Charge moyenne depuis 1 min" class="label label-primary load-average">{{ server.load_average.load_average.0 }}</span>
+                        <span data-original-title="Charge moyenne depuis 5 min" class="label label-primary load-average">{{ server.load_average.load_average.1 }}</span>
+                        <span data-original-title="Charge moyenne depuis 15 min" class="label label-primary load-average">{{ server.load_average.load_average.2 }}</span>
                     </li>
-                    <li id="load-info">{{ serveur.load_average.info_charge|raw }}</li>
+                    <li id="load-info">{{ server.load_average.info_charge|raw }}</li>
                 </ul>
             </div>
         </article>
@@ -83,7 +83,7 @@
                 <h5 class="device"><i class="fa fa-desktop"></i> <strong>Serveur FTP et sFTP</strong></h5>
                 <ul>
                     <li>Adresse (s)FTP : <em>(s)ftp://{{ host }}</em></li>
-                    <li>User (s)FTP : <em>{{ userName }}</em></li>
+                    <li>User (s)FTP : <em>{{ username }}</em></li>
                     <li>Port FTP : <em>{{ user.portFtp }}</em></li>
                     <li>Port sFTP : <em>{{ user.portSftp }}</em></li>
                     <li><a class="btn btn-info btn-xs" href="http://filezilla.fr/"><i class="glyphicon glyphicon-download-alt"></i> Télécharger filezilla</a></li>
@@ -93,7 +93,7 @@
                 <ul>
                     <li>Dossier SCGI : <em><strong>{{ user.scgi_folder }}</strong></em></li>
                     <li>Adresse http : <em>http://{{ host }}</em></li>
-                    <li>User transdroid : <em>{{ userName }}</em></li>
+                    <li>User transdroid : <em>{{ username }}</em></li>
                     <li><a class="btn btn-info btn-xs" href="http://transdroid.org/latest"><i class="glyphicon glyphicon-download-alt"></i> Télécharger Transdroid</a></li>
                     <li><a id="popuptransdroid" class="btn btn-info btn-xs" data-toggle="popover" href="?download&amp;file=transdroid"><i class="fa fa-files-o"></i> Fichier de configuration</a></li>
                 </ul>
@@ -102,21 +102,45 @@
         {% endif %}
     </section>
     <section class="row">
-        {% if user.blocRtorrent == true %}
-        <article class="col-md-6">
-            <div class="well well-sm">
-                <h4 class="titre-head"><i class="fa fa-terminal"></i> Redémarrage de rtorrent</h4>
-                <div class="trait"></div>
-                <p class="text-center btn-reboot">
-                    <a data-toggle="modal" href="#popupreboot" class="btn btn-info btn-lg" style="vertical-align: middle;">
-                        <span class="glyphicon glyphicon-refresh"></span>Redémarrer rtorrent
-                    </a>
-                </p>
-                {% if read_data_reboot.file_exist %}
-                <small class="text-defaut-color"><em>Dernier redémarrage le {{ read_data_reboot.read_file }}</em></small>
-                {% endif %}
-            </div>
-        </article>
-        {% endif %}
+    {% if user.blocRtorrent == true %}
+    <article class="col-md-6">
+        <div class="well well-sm">
+            <h4 class="titre-head"><i class="fa fa-terminal"></i> Redémarrage de rtorrent</h4>
+            <div class="trait"></div>
+            <p class="text-center btn-reboot">
+                <a data-toggle="modal" href="#popupreboot" class="btn btn-info btn-lg" style="vertical-align: middle;">
+                    <span class="glyphicon glyphicon-refresh"></span>Redémarrer rtorrent
+                </a>
+            </p>
+            {% if read_data_reboot.file_exist %}
+            <small class="text-defaut-color"><em>Dernier redémarrage le {{ read_data_reboot.read_file }}</em></small>
+            {% endif %}
+        </div>
+    </article>
+    {% endif %}
     </section>
+{% endblock %}
+
+{% block modal %}
+<div class="modal fade" id="popupreboot" tabindex="-1" role="dialog" aria-labelledby="target-rtorrent" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/reboot-rtorrent" method="post">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="target-rtorrent">Avertissement</h4>
+                </div>
+                <div class="modal-body">
+                    <p>&Ecirc;tes-vous sûr de vouloir redémarrer votre session rtorrent ?</p>
+                    <label><input type="checkbox" name="irssi"> Redémarrer irssi avec rtorrent</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    <input type="hidden" name="reboot" value="true">
+                    <input type="submit" value="Redémarrer" class="btn btn-info">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,96 +1,143 @@
 <?php
 // Routes
 
-use Seedbox\Users;
-use Seedbox\Server;
 use WriteiniFile\WriteiniFile;
 
-// request get
-$app->get('/', function ($request, $response) use ($file_user_ini, $userName) {
+$user = new \Seedbox\Seedbox\Users($file_user_ini, $username);
+$server = new \Seedbox\Seedbox\Server($file_user_ini, $username);
 
-    $user = new Users($file_user_ini, $userName);
-    $serveur = new Server($file_user_ini, $userName);
-    $read_data_reboot = $user->readFileDataReboot(__DIR__.'/../conf/users/'.$userName.'/data_reboot.txt');
+// request GET
+$app->get('/', function ($request, $response) use ($user, $server) {
+
+    $read_data_reboot = $user->readFileDataReboot(__DIR__."/../conf/users/{$user->name()}/data_reboot.txt");
 
     $notifications = $this->flash->getMessages();
 
     return $this->view->render($response, 'index.twig.html', [
-        'userName' => $userName,
+        'username' => $user->name(),
         'host' => $_SERVER['HTTP_HOST'],
         'ipUser' => $_SERVER['REMOTE_ADDR'],
         'user' => $user,
-        'serveur' => $serveur,
+        'server' => $server,
         'read_data_reboot' => $read_data_reboot,
         'notifications' => $notifications
-
-        /*
-        // get admin
-        'updateIniFileLogOwner' => @$update_ini_file_log_owner,
-        'LogDeleteUser' => @$log_delete_user,
-        'UpdateOwner' => @$loader_file_ini_user,
-        'ClearCache' => @$ClearCache
-        */
     ]);
 });
 
-$app->get('/settings', function ($request, $response) use ($file_user_ini, $userName) {
-    $user = new Users($file_user_ini, $userName);
-    $serveur = new Server($file_user_ini, $userName);
+$app->get('/settings', function ($request, $response) use ($user, $server) {
 
     $notifications = $this->flash->getMessages();
 
     return $this->view->render($response, 'settings.twig.html', [
-        'userName' => $userName,
+        'username' => $user->name(),
         'user' => $user,
+        'server' => $server,
         'notifications' => $notifications
     ]);
 });
 
-$app->get('/admin', function ($request, $response) use ($file_user_ini, $userName) {
-    $param = $request->getParsedBody();
-    $user = new Users($file_user_ini, $userName);
-    $serveur = new Server($file_user_ini, $userName);
+$app->get('/admin', function ($request, $response) use ($user, $server) {
 
     return $this->view->render($response, 'admin.twig.html', [
-        'userName' => $userName,
-        'name' => $userName,
+        'username' => $user->name(),
         'user' => $user,
-        'server' => $serveur,
-
-        //'updateIniFileLogOwner' => @$update_ini_file_log_owner,
-        //'LogDeleteUser' => @$log_delete_user
+        'server' => $server
     ]);
 })->add($isAdmin);
 
-// request post
-$app->post('/reboot-rtorrent', function ($request, $response) use ($file_user_ini, $userName) {
+$app->get('/admin/{username}', function ($request, $response, $args) use ($user) {
+
+    $username = $args['username'];
+    $member = new \Seedbox\Seedbox\Users(__DIR__."/../conf/users/{$username}/config.ini", $username);
+    $server = new \Seedbox\Seedbox\Server(__DIR__."/../conf/users/{$username}/config.ini", $username);
+
+    $notifications = $this->flash->getMessages();
+
+    echo "<pre>";
+    print_r($notifications);
+    echo "</pre>";
+
+    return $this->view->render($response, 'admin.twig.html', [
+        'username' => $user->name(),
+        'user' => $member,
+        'server' => $server,
+        'notifications' => $notifications
+    ]);
+})->add($isAdmin);
+
+// request POST
+$app->post('/reboot-rtorrent', function ($request, $response) use ($user) {
+
     $param = $request->getParsedBody();
     $option = (isset($param['irssi'])) ? true : false;
-    $user = new Users($file_user_ini, $userName);
+
     $reboot_rtorrent = $user->rebootRtorrent($option);
     $this->flash->addMessage('rtorrent', $reboot_rtorrent);
 
     return $response->withStatus(302)->withHeader('Location', '/');
 });
 
-$app->post('/settings/update', function ($request, $response) use ($file_user_ini, $userName) {
+$app->post('/settings/update', function ($request, $response) use ($file_user_ini) {
+
     $param = $request->getParsedBody();
+    $update = new WriteIniFile($file_user_ini);
+    $update->update([
+        'user' => [
+            'active_bloc_info' => isset($param['active_bloc_info']) ? true : false,
+            'theme' => $param['theme']
+        ],
+        'ftp' => [
+            'active_ftp' => isset($param['active_ftp']) ? true : false
+        ],
+        'rtorrent' => [
+            'active_reboot' => isset($param['active_reboot']) ? true : false
+        ],
+        'logout' => [
+            'url_redirect' => $param['url_redirect']
+        ]
+    ]);
+    $logs = $update->write();
+    $this->flash->addMessage('update_ini_file', $logs);
 
-    if (isset($param['conf_user'])) {
-        $update = new WriteIniFile($file_user_ini);
-        $update->update([
-            'user' => ['active_bloc_info' => $param['active_bloc_info'], 'theme' => $param['theme']],
-            'ftp' => ['active_ftp' => $param['active_ftp']],
-            'rtorrent' => ['active_reboot' => $param['active_reboot']],
-            'support' => ['active_support' => $param['active_support']],
-            'logout' => ['url_redirect' => $param['url_redirect']]
-        ]);
-        $update_ini_file_log = $update->write();
-    }
-
-    $var = $this->flash->addMessage('update_ini_file', $update_ini_file_log);
-
-    print_r($var);
-
-    //return $response->withStatus(302)->withHeader('Location', '/settings');
+    return $response->withStatus(302)->withHeader('Location', '/settings');
 });
+
+$app->post('/admin/update/{username}', function ($request, $response, $args) {
+
+    $param = $request->getParsedBody();
+    $username = $args['username'];
+
+    $update = new WriteIniFile(__DIR__."/../conf/users/{$username}/config.ini");
+    $update->update([
+        'user' => [
+            'user_directory' => $param['user_directory'],
+            'scgi_folder' => $param['scgi_folder']
+        ],
+        'nav' => [
+            'data_link' => $param['data_link']
+        ],
+        'ftp' => [
+            'port_ftp' => $param['port_ftp'],
+            'port_sftp' => $param['port_sftp']
+        ],
+        'support' => [
+            'adresse_mail' => $param['adresse_mail']
+        ]
+    ]);
+    $logs = $update->write();
+
+    $this->flash->addMessage('admin_update_ini', $logs);
+
+    return $response->withStatus(302)->withHeader('Location', "/admin/{$username}");
+})->add($isAdmin);
+
+$app->post('/admin/delete', function ($request, $response) {
+    $param = $request->getParsedBody();
+    $username = $param['deleteUserName'];
+
+    $logs = Users::delete_config_old_user(__DIR__."/../conf/users/{$username}");
+
+    $this->flash->addMessage('admin_delete_user', $logs);
+
+    return $response->withStatus(302)->withHeader('Location', '/admin');
+})->add($isAdmin);

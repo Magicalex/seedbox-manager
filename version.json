@@ -1,10 +1,9 @@
 {
   "name": "seedbox-manager",
-  "version": "2.5.0",
-  "contributors": "Magicalex, Micdu70, MThibault, Hydrog3n, Ex_rat",
+  "version": "3.0.0",
+  "contributors": "Magicalex",
   "news": [
-    "Support de irssi pour le redémarrage",
-    "Bug fix au téléchargement d'un fichier (merci à Micdu70)",
-    "Autre changement mineur"
+    "Suppression du bloc support",
+    "Remaniement du code de zéro, passage à slim framework"
   ]
 }

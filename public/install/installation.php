@@ -4,6 +4,7 @@ use Seedbox\Install;
 
 $user_name_php = Install::get_user_php();
 $root_path = substr(getcwd(), 0, -7);
+
 ?><!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -13,7 +14,6 @@ $root_path = substr(getcwd(), 0, -7);
         <link type="text/css" rel="stylesheet" href="install/style.css">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1">
     </head>
-
     <body>
         <div  class="container marg" style="margin-top:50px">
             <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Guide d'installation</h1>

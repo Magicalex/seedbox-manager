@@ -1,6 +1,6 @@
 <?php
 
-namespace Seedbox;
+namespace Seedbox\Seedbox;
 
 class Server extends Users
 {

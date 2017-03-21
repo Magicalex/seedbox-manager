@@ -1,16 +1,15 @@
 <?php
 
-namespace Seedbox;
+namespace Seedbox\Seedbox;
 
 class Users
 {
-    protected $userName;
+    protected $username;
     protected $url_redirect;
     protected $directory;
     protected $navbar_links;
     protected $portFtp;
     protected $portSftp;
-    protected $blocSupport;
     protected $supportMail;
     protected $currentPath;
     protected $blocInfo;
@@ -21,7 +20,7 @@ class Users
     public function __construct($file_ini, $user)
     {
         $setting_user_array = parse_ini_file($file_ini, true);
-        $this->userName = $user;
+        $this->username = $user;
         $this->hydrate($setting_user_array);
     }
 
@@ -32,7 +31,6 @@ class Users
         $this->is_owner           = (bool) $array['user']['owner'];
         $this->blocFtp            = (bool) $array['ftp']['active_ftp'];
         $this->blocRtorrent       = (bool) $array['rtorrent']['active_reboot'];
-        $this->blocSupport        = (bool) $array['support']['active_support'];
         $this->directory          = (string) $array['user']['user_directory'];
         $this->scgi_folder        = (string) $array['user']['scgi_folder'];
         $this->theme              = (string) $array['user']['theme'];
@@ -82,13 +80,13 @@ class Users
     public function rebootRtorrent($irssi = false)
     {
         if ($irssi === true) {
-            $command = "{$this->currentPath}/../reboot-rtorrent {$this->userName} irssi 2>&1";
+            $command = "{$this->currentPath}/../reboot-rtorrent {$this->username} irssi 2>&1";
         } else {
-            $command = "{$this->currentPath}/../reboot-rtorrent {$this->userName} 2>&1";
+            $command = "{$this->currentPath}/../reboot-rtorrent {$this->username} 2>&1";
         }
         exec($command, $log, $status);
         $date_updated = date('d/m/y \à H\hi');
-        file_put_contents("../conf/users/{$this->userName}/data_reboot.txt", $date_updated);
+        file_put_contents("../conf/users/{$this->username}/data_reboot.txt", $date_updated);
         return [
             'command' => $command,
             'logReboot' => $log,
@@ -199,6 +197,11 @@ class Users
         return isset($all_links) ? $all_links:null;
     }
 
+    public function name()
+    {
+        return $this->username;
+    }
+
     public function url_redirect()
     {
         return $this->url_redirect;
@@ -217,11 +220,6 @@ class Users
     public function portSftp()
     {
         return $this->portSftp;
-    }
-
-    public function blocSupport()
-    {
-        return $this->blocSupport;
     }
 
     public function supportMail()
