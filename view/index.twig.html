@@ -45,8 +45,8 @@
                 </ul>
                 <p><i class="fa fa-hdd-o"></i> <strong>{{ 'core.index.disk_space'|trans }}</strong></p>
                 <p class="text-center text-defaut-color">
-                    {{ 'core.index.participants.we_use'|trans }} <strong>{{ user.userdisk.percentage_used }}%</strong>
-                    <em> {{ 'core.index.equivalent'|trans }} {{ user.userdisk.used_disk }} {{ 'core.index.on'|trans }} {{ user.userdisk.total_disk }} ({{ user.userdisk.free_disk }} {{ user.userdisk.free }})</em>
+                    {{ 'core.index.we_use'|trans }} <strong>{{ user.userdisk.percentage_used }}%</strong>
+                    <em> {{ 'core.index.equivalent'|trans }} {{ user.userdisk.used_disk }} {{ 'core.index.on'|trans }} {{ user.userdisk.total_disk }} ({{ user.userdisk.free_disk }} {{ 'core.index.free'|trans }})</em>
                 </p>
                 <div class="progress progress-striped fix-progress">
                     <div class="progress-bar {{ user.userdisk.progessBarColor }}" role="progressbar" aria-valuenow="{{ user.userdisk.percentage_used }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ user.userdisk.percentage_used }}%;">

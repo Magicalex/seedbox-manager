@@ -5,51 +5,51 @@
     {% if notifications.update_ini_file is defined and notifications.update_ini_file.0 == true %}
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        Vos préférences ont été mises à jour avec succès.
+        {{ 'core.settings.success_update'|trans }}
     </div>
     {% elseif notifications.update_ini_file is defined and notification_update_ini_file == false %}
     <div class="alert alert-danger">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4>Impossible de mettre à jour votre configuration !</h4>
+        <h4>{{ 'core.settings.impossible_to_update'|trans }}</h4>
         <ul class="text-danger">
-            <li>Vérifiez si vous avez les droits d'écriture</li>
+            <li>{{ 'core.settings.check_rights'|trans }}</li>
         </ul>
     </div>
     {% endif %}
     <section class="row">
         <article class="col-md-12" id="conf-simple-user">
             <div class="well well-sm">
-                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> Configuration de l'interface</h4>
+                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> {{ 'core.settings.setting_interface'|trans }}</h4>
                 <div class="trait"></div>
                 <form method="post" action="/settings/update" role="form">
                     <div class="col-md-6">
                         <fieldset>
-                            <legend>Les options de la page d'accueil</legend>
+                            <legend>{{ 'core.settings.option_homepage'|trans }}</legend>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="active_bloc_info" value="1" id="active_bloc_info" {% if user.blocInfo == true %}checked{% endif %}>
-                                    Activer le bloc information utilisateur
+                                    {{ 'core.settings.enable_info_user'|trans }}
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="active_ftp" value="1" id="active_ftp" {% if user.blocFtp == true %}checked{% endif %} >
-                                    Activer le bloc accès ftp / sftp / transdroid
+                                    {{ 'core.settings.enable_access_ftp'|trans }}
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="active_reboot" value="1" id="active_reboot" {% if user.blocRtorrent == true %}checked{% endif %} >
-                                    Activer le bloc gestion de rtorrent
+                                    {{ 'core.settings.enable_reboot_rtorrent'|trans }}
                                 </label>
                             </div>
                         </fieldset>
                     </div>
                     <div class="col-md-6">
                         <fieldset>
-                            <legend>Les options de déconnexion</legend>
+                            <legend>{{ 'core.settings.option_logout'|trans }}</legend>
                             <div class="form-group">
-                                <label for="url-deconnexion">Url de redirection à la déconnexion</label>
+                                <label for="url-deconnexion">{{ 'core.settings.url_to_redirect'|trans }}</label>
                                 <div class="row">
                                     <div class="col-lg-7">
                                         <input type="url" name="url_redirect" class="form-control" id="url-deconnexion" value="{{ user.url_redirect }}">
@@ -60,9 +60,9 @@
                     </div>
                     <div class="col-md-6">
                         <fieldset>
-                            <legend>Les thèmes</legend>
+                            <legend>{{ 'core.settings.themes'|trans }}</legend>
                             <div class="form-group">
-                                <label for="user-theme">choisir un thème</label>
+                                <label for="user-theme">{{ 'core.settings.choose_theme'|trans }}</label>
                                 <div class="row">
                                     <div class="col-lg-5">
                                         <select name="theme" class="form-control">
@@ -76,7 +76,7 @@
                         </fieldset>
                     </div>
                     <p class="text-right fix-marg-input">
-                        <input type="submit" name="submit" value="Enregistrer" class="btn btn-info">
+                        <input type="submit" name="submit" value="{{ 'core.settings.save'|trans }}" class="btn btn-info">
                     </p>
                 </form>
             </div>
