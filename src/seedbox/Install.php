@@ -1,6 +1,6 @@
 <?php
 
-namespace Seedbox\Seedbox;
+namespace Seedbox;
 
 class Install
 {

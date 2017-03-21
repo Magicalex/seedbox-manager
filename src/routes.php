@@ -2,8 +2,8 @@
 
 use WriteiniFile\WriteiniFile;
 
-$user = new \Seedbox\Seedbox\Users($file_user_ini, $username);
-$server = new \Seedbox\Seedbox\Server($file_user_ini, $username);
+$user = new \Seedbox\Users($file_user_ini, $username);
+$server = new \Seedbox\Server($file_user_ini, $username);
 
 // request GET
 $app->get('/', function ($request, $response) use ($user, $server) {
@@ -48,8 +48,8 @@ $app->get('/admin', function ($request, $response) use ($user, $server) {
 $app->get('/admin/{username}', function ($request, $response, $args) use ($user) {
 
     $username = $args['username'];
-    $member = new \Seedbox\Seedbox\Users(__DIR__."/../conf/users/{$username}/config.ini", $username);
-    $server = new \Seedbox\Seedbox\Server(__DIR__."/../conf/users/{$username}/config.ini", $username);
+    $member = new \Seedbox\Users(__DIR__."/../conf/users/{$username}/config.ini", $username);
+    $server = new \Seedbox\Server(__DIR__."/../conf/users/{$username}/config.ini", $username);
 
     $notifications = $this->flash->getMessages();
 
@@ -141,7 +141,7 @@ $app->post('/admin/delete', function ($request, $response) {
     $param = $request->getParsedBody();
     $username = $param['deleteUserName'];
 
-    $logs = \Seedbox\Seedbox\Users::delete_config_old_user(__DIR__."/../conf/users/{$username}");
+    $logs = \Seedbox\Users::delete_config_old_user(__DIR__."/../conf/users/{$username}");
 
     $this->flash->addMessage('admin_delete_user', $logs);
     $this->flash->addMessage('admin_delete_user', $username);

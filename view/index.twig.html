@@ -11,9 +11,7 @@
     {% elseif notification_rtorrent.statusReboot is defined and notification_rtorrent.statusReboot != 0 %}
     <div class="alert alert-danger">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Un problème est survenu lors du redémarrage de rtorrent</strong><br>
-        Il faut vérifier que <code>reboot-rtorrent</code> est correctement compilé<br>
-        <small>note : pour recompiler, veuillez utiliser le script install.sh</small>
+        {{ 'core.index.error_reboot_rtorrent'|trans }}
     </div>
     {% endif %}
     {% if notification_rtorrent.statusReboot is defined and notification_rtorrent.statusReboot == 0 %}

@@ -5,12 +5,12 @@ core:
     administration: Administration
     settings: Paramètres
 
-
-
-
   index:
     dashboard: Tableau de bord
     succes_reboot_rtorrent: Votre session rtorrent a été redémarrée avec succès.
-
+    error_reboot_rtorrent: |
+      <strong>Un problème est survenu lors du redémarrage de rtorrent</strong><br>
+      Il faut vérifier que <code>reboot-rtorrent</code> est correctement compilé<br>
+      <small>note : pour recompiler, veuillez utiliser le script install.sh</small>
 
   admin:
