@@ -48,7 +48,7 @@ core:
 
     title_access: ftp / sftp / transdroid - Access
     server_ftp: FTP and SFTP Server
-    adress_ftp: Address (S)FTP
+    address_ftp: Address (S)FTP
     user_ftp: User (S)FTP
     port_ftp: FTP port
     port_sftp: SFTP port
@@ -89,36 +89,36 @@ core:
     save: Save
 
   admin:
-    administration_area: Espace administration
-    success_update: Les paramètres de l'utilisateur <strong>{username}</strong> a été mise à jour avec succès.
-    impossible_to_update: Impossible de mettre à jour la configuration de l'utilisateur <strong>{username}</strong> !
+    administration_area: Administration area
+    success_update: The setting of user <strong>{username}</strong> have been successfully updated.
+    impossible_to_update: Unable to update user setting <strong>{username}</strong> !
     success_delete_user: Les données de l'utilisateur <strong>{username}</strong> ont été supprimé avec succès.
-    error_delete_user: Impossible de supprimer l'utilisateur <strong>{username}</strong>.
+    error_delete_user: Unable to delete user <strong>{username}</strong> !
 
-    list_user: Liste des utilisateurs
-    user: utilisateur
-    edit: éditer
-    delete: supprimer
+    list_user: Users list
+    user: user
+    edit: edit
+    delete: delete
 
-    setting_member: Paramètres de l'utilisateur
-    legend_setting_user: Paramètres utilisateur
-    home_directory: Dossier home de l'utilisateur
-    folder_scgi: Dossier scgi de l'utilisateur
-    legend_navbar: Barre de navigation
-    follow_rules: Suivez correctement la syntaxe pour ajouter des liens
-    legend_setting_server: Paramètres des serveurs FTP/sFTP
-    port_ftp: Port FTP
-    port_sftp: Port sFTP
+    setting_member: User settings
+    legend_setting_user: User setting
+    home_directory: User home folder
+    folder_scgi: User scgi folder
+    legend_navbar: Navbar
+    follow_rules: Follow the syntax correctly to add links
+    legend_setting_server: SFTP FTP server settings
+    port_ftp: FTP port
+    port_sftp: SFTP port
     legend_support: Support
-    adress_mail : Adresse email
-    save: Enregistrer
+    address_mail : E-mail address
+    save: Save
 
     modal:
-      delete_user: Suppression de l'utilisateur
+      delete_user: Deleting the user
       body: |
         <p>&Ecirc;tes-vous sûr de vouloir supprimer la configuration de cette utilisateur ?</p>
         <p>Cette action est réversible.<br>Dès que votre utilisateur va se connecter les fichiers de configuration seront généré automatiquement (avec une configuration par défaut).</p>
-      cancel: Annuler
-      delete: Supprimer
+      cancel: Cancel
+      delete: Delete
 
   lang: en

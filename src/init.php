@@ -2,13 +2,9 @@
 
 use \Seedbox\Install;
 
-$dev = true;
-
 // check authentication
 if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
-    $username = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER']:$_SERVER['PHP_AUTH_USER'];
-} elseif ($dev) {
-    $username = 'usertest';
+    $username = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER'] : $_SERVER['PHP_AUTH_USER'];
 } else {
     die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>
          V&eacute;rifiez la configuration de votre serveur web.');

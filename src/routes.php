@@ -104,6 +104,7 @@ $app->post('/settings/update', function ($request, $response) use ($file_user_in
             'url_redirect' => $param['url_redirect']
         ]
     ]);
+
     $logs = $update->write();
 
     $this->flash->addMessage('update_ini_file', $logs);
@@ -133,9 +134,10 @@ $app->post('/admin/update/{username}', function ($request, $response, $args) {
             'adresse_mail' => $param['adresse_mail']
         ]
     ]);
+
     $logs = $update->write();
 
-    $this->flash->addMessage('admin_update_ini', false);
+    $this->flash->addMessage('admin_update_ini', $logs);
 
     return $response->withStatus(302)->withHeader('Location', "/admin/{$username}");
 })->add($isAdmin);
