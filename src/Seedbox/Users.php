@@ -82,13 +82,14 @@ class Users
     public function rebootRtorrent($irssi = false)
     {
         if ($irssi === true) {
-            $command = "{$this->currentPath}/../reboot-rtorrent {$this->username} irssi 2>&1";
+            $command = __DIR__."/../../reboot-rtorrent {$this->username} irssi 2>&1";
         } else {
-            $command = "{$this->currentPath}/../reboot-rtorrent {$this->username} 2>&1";
+            $command = __DIR__."/../../reboot-rtorrent {$this->username} 2>&1";
         }
+
         exec($command, $log, $status);
-        $date_updated = date('d/m/y \à H\hi');
-        file_put_contents("../conf/users/{$this->username}/data_reboot.txt", $date_updated);
+        file_put_contents(__DIR__."/../../conf/users/{$this->username}/data_reboot.txt", time());
+
         return [
             'command' => $command,
             'logReboot' => $log,
@@ -117,9 +118,9 @@ class Users
     */
     public static function get_all_users()
     {
-        $scan = scandir('../conf/users/');
+        $scan = scandir(__DIR__.'/../../conf/users/');
         foreach ($scan as $file_name) {
-            if ($file_name != '.' && $file_name != '..' && is_dir('../conf/users/'.$file_name)) {
+            if ($file_name != '.' && $file_name != '..' && is_dir(__DIR__."/../../conf/users/{$file_name}")) {
                 $all_users[] = $file_name;
             }
         }
@@ -153,7 +154,6 @@ class Users
         return ['log' => @$log, 'error' => @$error];
     }
 
-    /* retourne la liste de tous les thèmes */
     public static function get_all_themes()
     {
         $scan = scandir(__DIR__.'/../../themes');
@@ -208,7 +208,7 @@ class Users
             }
         }
 
-        return isset($all_links) ? $all_links:null;
+        return isset($all_links) ? $all_links : null;
     }
 
     public function name()

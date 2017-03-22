@@ -4,28 +4,6 @@
     trigger: 'hover'
   }).tooltip('hide');
 
-  $('#popupfilezilla').popover({
-    html: true,
-    trigger: 'hover',
-    content: ' &bull; Cliquer sur ce bouton.<br> &bull; Ouvrir filezilla.<br> &bull; Fichier -> Importer les paramètres.<br> &bull; Sélectionner le fichier filezilla.xml.<br> &bull; C\'est terminé !',
-    title: 'Configurer filezilla rapidement !',
-    placement: function () {
-      var width = $(window).width();
-      return width >= 979 ? 'right' : 'top';
-    }
-  });
-
-  $('#popuptransdroid').popover({
-    html: true,
-    trigger: 'hover',
-    content: "Génère un fichier de configuration pour l'application transdroid.",
-    title: 'Configurer transdroid rapidement !',
-    placement: function () {
-      var width = $(window).width();
-      return width >= 979 ? 'right' : 'top';
-    }
-  });
-
   /* Envoie les donnees de supp au modal */
   $('.popup-delete-user').click(function () {
     var userName = $(this).data('user');

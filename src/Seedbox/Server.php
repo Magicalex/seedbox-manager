@@ -38,14 +38,8 @@ class Server extends Users
         for ($i=0; isset($load_average[$i]); $i++) {
             $load_average[$i] = round($load_average[$i], 2);
         }
-        if ($load_average[0] < 5) {
-            $info_charge = '<em class="text-success">Charge faible, conditions optimales.</em>';
-        } elseif ($load_average[0] < 10) {
-            $info_charge = '<em class="text-warning">Charge élévée, risque de ralentissement sur le serveur.</em>';
-        } else {
-            $info_charge = '<em class="text-danger">Charge très élévée, risque de gros ralentissement sur le serveur.</em>';
-        }
-        return ['load_average' => $load_average, 'info_charge' => $info_charge];
+
+        return $load_average;
     }
 
     public function FileDownload($file_config_name, $conf_ext_prog)

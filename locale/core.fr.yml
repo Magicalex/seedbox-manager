@@ -35,25 +35,28 @@ core:
     title_info_user: Information du compte utilisateur
     ip_address: Votre adresse ip
     disk_space: Espace disque
-    we_use: Vous utilisez
+    you_use: Vous utilisez
     equivalent: soit
     on: sur
     free: libre
-    complete: Complete
+    complete: Complète
     uptime_server: Temps de disponibilité du serveur
     load_average: Charge serveur
     load_average_1: Charge moyenne depuis 1 min
     load_average_5: Charge moyenne depuis 5 min
     load_average_15: Charge moyenne depuis 15 min
+    info_load_good: Charge faible, conditions optimales
+    info_load_warning: Charge élévée, risque de ralentissement sur le serveur
+    info_load_danger: Charge très élévée, risque de gros ralentissement sur le serveur
 
-    title_access: Les accès ftp - sftp - transdroid
-    server_ftp: Serveur FTP et sFTP
+    title_access: Les accès FTP - SFTP - Transdroid
+    server_ftp: Serveur FTP et SFTP
     address_ftp: Adresse (s)FTP
     user_ftp: Utilisateur (s)FTP
     port_ftp: Port FTP
     port_sftp: Port sFTP
     download_filezilla: Télécharger filezilla
-    configuration_file: Fichier de configuration
+    configuration_file: Importer le fichier de configuration
     app_transdroid: Application Transdroid
     folder_scgi: Dossier SCGI
     http_address: Adresse HTTP
@@ -81,7 +84,7 @@ core:
     enable_access_ftp: "Activer les information d'accès ftp / sftp / transdroid"
     enable_reboot_rtorrent: Activer le redémarrage rtorrent
     option_logout: Option de déconnexion
-    url_to_redirect: url de redirection [pendant la déconnexion]
+    url_to_redirect: url de redirection (pendant la déconnexion)
     themes: Thèmes par defaut
     choose_theme: choisir un thème
     language: Langue par défaut
@@ -122,3 +125,4 @@ core:
       delete: Supprimer
 
   lang: fr
+  date: "d/m/y à H\\hi"

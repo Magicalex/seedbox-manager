@@ -60,11 +60,21 @@
                 <p><i class="glyphicon glyphicon-stats"></i> <strong>{{ 'core.index.load_average'|trans }}</strong></p>
                 <ul>
                     <li class="uptime">
-                        <span data-original-title="{{ 'core.index.load_average_1'|trans }}" class="label label-primary load-average">{{ server.load_average.load_average.0 }}</span>
-                        <span data-original-title="{{ 'core.index.load_average_5'|trans }}" class="label label-primary load-average">{{ server.load_average.load_average.1 }}</span>
-                        <span data-original-title="{{ 'core.index.load_average_15'|trans }}" class="label label-primary load-average">{{ server.load_average.load_average.2 }}</span>
+                        <span data-original-title="{{ 'core.index.load_average_1'|trans }}" class="label label-primary load-average">{{ server.load_average.0 }}</span>
+                        <span data-original-title="{{ 'core.index.load_average_5'|trans }}" class="label label-primary load-average">{{ server.load_average.1 }}</span>
+                        <span data-original-title="{{ 'core.index.load_average_15'|trans }}" class="label label-primary load-average">{{ server.load_average.2 }}</span>
                     </li>
-                    <li class="uptime"><strong>{{ server.load_average.info_charge|raw }}</strong></li>
+                    <li class="uptime">
+                        <strong>
+                        {% if server.load_average.0 < 5 %}
+                        <em class="text-success">{{ 'core.index.info_load_good'|trans }}</em>
+                        {% elseif server.load_average.0 < 10 %}
+                        <em class="text-warning">{{ 'core.index.info_load_warning'|trans }}</em>
+                        {% else %}
+                        <em class="text-danger">{{ 'core.index.info_load_danger'|trans }}</em>
+                        {% endif %}
+                        </strong>
+                    </li>
                 </ul>
             </div>
         </article>
@@ -107,7 +117,7 @@
                 </a>
             </p>
             {% if read_data_reboot.file_exist %}
-            <small class="text-defaut-color"><em>{{ 'core.index.last_restart'|trans }} {{ read_data_reboot.read_file }}</em></small>
+            <small class="text-defaut-color"><em>{{ 'core.index.last_restart'|trans }} {{ read_data_reboot.read_file|date('core.date'|trans) }}</em></small>
             {% endif %}
         </div>
     </article>

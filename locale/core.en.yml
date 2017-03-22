@@ -45,15 +45,18 @@ core:
     load_average_1: Load average since 1 min
     load_average_5: Load average since 5 min
     load_average_15: Load average since 15 min
+    info_load_good: Low load, optimum conditions
+    info_load_warning: High load, risk of slowing down on the server
+    info_load_danger: Very high load, risk of slowing down on the server
 
-    title_access: ftp / sftp / transdroid - Access
+    title_access: FTP / SFTP / Transdroid - Access
     server_ftp: FTP and SFTP Server
     address_ftp: Address (S)FTP
     user_ftp: User (S)FTP
     port_ftp: FTP port
     port_sftp: SFTP port
     download_filezilla: Download filezilla
-    configuration_file: Configuration file
+    configuration_file: Import configuration file
     app_transdroid: Transdroid Application
     folder_scgi: SCGI folder
     http_address: HTTP Address
@@ -122,3 +125,4 @@ core:
       delete: Delete
 
   lang: en
+  date: "d/m/y \\a\\t h:i a"
