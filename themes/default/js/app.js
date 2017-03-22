@@ -1,4 +1,4 @@
-(function($){
+(function ($) {
   $('.load-average').tooltip({
     placement: 'top',
     trigger: 'hover'
@@ -30,7 +30,7 @@
   $('.popup-delete-user').click(function () {
     var userName = $(this).data('user');
     $('#deleteUserName').val(userName); // id input modal delete user add value="userName"
-    $('#target-delete-user').html('<i class="glyphicon glyphicon-trash"></i> Suppression de l\'utilisateur : <strong>'+userName+'</strong>');
+    $('#target-delete-user').html(userName);
   });
 
   /* function LOGOUT */

@@ -1,92 +1,124 @@
 core:
+
   layout:
     information: Information
     enable_javascript: |
-      Javascript n'est pas activé ou quelque chose empêche sa bonne exécution sur votre navigateur web.<br>
-      Pour pouvoir utiliser cette interface l'activation de javascript est nécessaire.
+      Javascript isn't enabled or something stops it from running properly on your web browser.<br>
+      To be able to use this interface, the activation of javascript is necessary.
     modal:
-      about_us: A propos
-      author: Application web par Backtoback &amp; Magicalex &amp; hydrog3n
-      contact_us: "Contacter les développeurs sur github : <a href=\"https://github.com/Magicalex/seedbox-manager/issues\" target=\"_blank\">https://github.com/Magicalex/seedbox-manager</a>"
+      about_us: About us
+      author: Web apps by MThibault, Micdu70, Magicalex and Hydrog3n
+      contact_us: "Contact developers on github : <a href=\"https://github.com/Magicalex/seedbox-manager/issues\" target=\"_blank\">https://github.com/Magicalex/seedbox-manager</a>"
       version: Version
-      close: Fermer
-      # ok
+      close: Close
 
   header:
-    logout: Déconnexion
-    about_us: A propos
+    logout: Log Out
+    about_us: About us
     administration: Administration
-    settings: Paramètres
-    # ok
+    settings: Settings
 
   index:
-    dashboard: Tableau de bord
-    succes_reboot_rtorrent: Votre session rtorrent a été redémarrée avec succès.
+    dashboard: Dashboard
+    succes_reboot_rtorrent: Your rtorrent session has been successfully started.
     error_reboot_rtorrent: |
-      <h4>Un problème est survenu lors du redémarrage de rtorrent</h4>
-      <p>Il faut vérifier que <code>reboot-rtorrent</code> est correctement compilé</p>
-      <small>note : pour recompiler, veuillez utiliser le script install.sh</small>
+      <h4>A problem occurred while restarting rtorrent</h4>
+      <p>Check that the <code>reboot-rtorrent</code> is correctly compiled</p>
+      <small>note: to recompile, please use the install.sh script</small>
     log: Log
-    command_exec: commande exécutée
-    status: statut
-    result_command: résultat de la commande
-    new_version: Nouvelle version disponible !
+    command_exec: Command executed
+    status: status
+    result_command: result of the command
+    new_version: New version available !
     participants: Participants
 
-    title_info_user: Information du compte utilisateur
-    ip_adress: Votre adresse ip
-    disk_space: Espace disque
-    we_use: Vous utilisez
-    equivalent: soit
-    on: sur
-    free: libre
+    title_info_user: User account information
+    ip_address: Your ip address
+    disk_space: Disk space
+    you_use: You use
+    equivalent: It is the equivalent of
+    on: on
+    free: free
     complete: Complete
-    uptime_server: Temps de disponibilité du serveur
-    load_average: Charge serveur
-    load_average_1: Charge moyenne depuis 1 min
-    load_average_5: Charge moyenne depuis 5 min
-    load_average_15: Charge moyenne depuis 15 min
+    uptime_server: Server uptime
+    load_average: Server load
+    load_average_1: Load average since 1 min
+    load_average_5: Load average since 5 min
+    load_average_15: Load average since 15 min
 
-    title_access: Les accès ftp - sftp - transdroid
-    server_ftp: Serveur FTP et sFTP
-    adress_ftp: Adresse (s)FTP
-    user_ftp: Utiilisateur (s)FTP
-    port_ftp: Port FTP
-    port_sftp: Port sFTP
-    download_filezilla: Télécharger filezilla
-    configuration_file: Fichier de configuration
-    app_transdroid: Application Transdroid
-    folder_scgi: Dossier SCGI
-    http_adress: Adresse http
-    user_transdroid: Utilisateur transdroid
-    download_transdroid: Télécharger Transdroid
+    title_access: ftp / sftp / transdroid - Access
+    server_ftp: FTP and SFTP Server
+    adress_ftp: Address (S)FTP
+    user_ftp: User (S)FTP
+    port_ftp: FTP port
+    port_sftp: SFTP port
+    download_filezilla: Download filezilla
+    configuration_file: Configuration file
+    app_transdroid: Transdroid Application
+    folder_scgi: SCGI folder
+    http_address: HTTP Address
+    user_transdroid: User transdroid
+    download_transdroid: Download Transdroid
 
-    restart_rtorrent: Redémarrer rtorrent
-    last_restart: Dernier redémarrage le
+    restart_rtorrent: Restart rtorrent
+    last_restart: Last restart on
 
     modal:
-      warning: Avertissement
-      do_you_want_restart: "&Ecirc;tes-vous sûr de vouloir redémarrer votre session rtorrent ?"
-      restart_with_irssi: Redémarrer irssi avec rtorrent
-      cancel: Annuler
-      restart: Redémarrer
-      # ok
+      warning: Warning
+      do_you_want_restart: Do you want to restart your rtorrent session ?
+      restart_with_irssi: Restart irssi with rtorrent
+      cancel: Cancel
+      restart: Restart
 
   settings:
-    setting_your_user: Réglage de votre utilisateur
-    success_update: Vos préférences ont été mises à jour avec succès.
-    impossible_to_update: Impossible de mettre à jour votre configuration !
-    check_rights: Vérifiez si vous avez les droits d'écriture
-    settings_interface: Configuration de l'interface
-    option_homepage: Les options de la page d'accueil
-    enable_info_user: Activer les informations utilisateur
-    enable_access_ftp: "Activer les information d'accès ftp / sftp / transdroid"
-    enable_reboot_rtorrent: Activer le redémarrage rtorrent
-    option_logout: Les options de déconnexion
-    url_to_redirect: Url de redirection à la déconnexion
-    themes: Les thèmes
-    choose_theme: choisir un thème
-    save: Enregistrer
-    # ok
+    setting_your_user: User setting
+    success_update: Your preferences have been updated successfully.
+    impossible_to_update: Unable to update your setting !
+    check_rights: Check if you have write permission.
+    setting_interface: Interface Settings
+    option_homepage: Home page options
+    enable_info_user: Enable user information
+    enable_access_ftp: Enable FTP, SFTP, Transdroid access information
+    enable_reboot_rtorrent: Enable restarting rtorrent
+    option_logout: Log out option
+    url_to_redirect: Url redirection (during log out)
+    themes: Default themes
+    choose_theme: choose a theme
+    language: Default language
+    choose_language: choose a language
+    save: Save
 
   admin:
+    administration_area: Espace administration
+    success_update: Les paramètres de l'utilisateur <strong>{username}</strong> a été mise à jour avec succès.
+    impossible_to_update: Impossible de mettre à jour la configuration de l'utilisateur <strong>{username}</strong> !
+    success_delete_user: Les données de l'utilisateur <strong>{username}</strong> ont été supprimé avec succès.
+    error_delete_user: Impossible de supprimer l'utilisateur <strong>{username}</strong>.
+
+    list_user: Liste des utilisateurs
+    user: utilisateur
+    edit: éditer
+    delete: supprimer
+
+    setting_member: Paramètres de l'utilisateur
+    legend_setting_user: Paramètres utilisateur
+    home_directory: Dossier home de l'utilisateur
+    folder_scgi: Dossier scgi de l'utilisateur
+    legend_navbar: Barre de navigation
+    follow_rules: Suivez correctement la syntaxe pour ajouter des liens
+    legend_setting_server: Paramètres des serveurs FTP/sFTP
+    port_ftp: Port FTP
+    port_sftp: Port sFTP
+    legend_support: Support
+    adress_mail : Adresse email
+    save: Enregistrer
+
+    modal:
+      delete_user: Suppression de l'utilisateur
+      body: |
+        <p>&Ecirc;tes-vous sûr de vouloir supprimer la configuration de cette utilisateur ?</p>
+        <p>Cette action est réversible.<br>Dès que votre utilisateur va se connecter les fichiers de configuration seront généré automatiquement (avec une configuration par défaut).</p>
+      cancel: Annuler
+      delete: Supprimer
+
+  lang: en

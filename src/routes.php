@@ -135,7 +135,7 @@ $app->post('/admin/update/{username}', function ($request, $response, $args) {
     ]);
     $logs = $update->write();
 
-    $this->flash->addMessage('admin_update_ini', $logs);
+    $this->flash->addMessage('admin_update_ini', false);
 
     return $response->withStatus(302)->withHeader('Location', "/admin/{$username}");
 })->add($isAdmin);

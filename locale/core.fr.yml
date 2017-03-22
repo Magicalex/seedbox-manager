@@ -1,4 +1,5 @@
 core:
+
   layout:
     information: Information
     enable_javascript: |
@@ -10,18 +11,16 @@ core:
       contact_us: "Contacter les développeurs sur github : <a href=\"https://github.com/Magicalex/seedbox-manager/issues\" target=\"_blank\">https://github.com/Magicalex/seedbox-manager</a>"
       version: Version
       close: Fermer
-      # ok
 
   header:
     logout: Déconnexion
     about_us: A propos
     administration: Administration
     settings: Paramètres
-    # ok
 
   index:
     dashboard: Tableau de bord
-    succes_reboot_rtorrent: Votre session rtorrent a été redémarrée avec succès.
+    succes_reboot_rtorrent: Votre session rtorrent a été redémarré avec succès.
     error_reboot_rtorrent: |
       <h4>Un problème est survenu lors du redémarrage de rtorrent</h4>
       <p>Il faut vérifier que <code>reboot-rtorrent</code> est correctement compilé</p>
@@ -34,7 +33,7 @@ core:
     participants: Participants
 
     title_info_user: Information du compte utilisateur
-    ip_adress: Votre adresse ip
+    ip_address: Votre adresse ip
     disk_space: Espace disque
     we_use: Vous utilisez
     equivalent: soit
@@ -49,15 +48,15 @@ core:
 
     title_access: Les accès ftp - sftp - transdroid
     server_ftp: Serveur FTP et sFTP
-    adress_ftp: Adresse (s)FTP
-    user_ftp: Utiilisateur (s)FTP
+    address_ftp: Adresse (s)FTP
+    user_ftp: Utilisateur (s)FTP
     port_ftp: Port FTP
     port_sftp: Port sFTP
     download_filezilla: Télécharger filezilla
     configuration_file: Fichier de configuration
     app_transdroid: Application Transdroid
     folder_scgi: Dossier SCGI
-    http_adress: Adresse http
+    http_address: Adresse HTTP
     user_transdroid: Utilisateur transdroid
     download_transdroid: Télécharger Transdroid
 
@@ -70,25 +69,56 @@ core:
       restart_with_irssi: Redémarrer irssi avec rtorrent
       cancel: Annuler
       restart: Redémarrer
-      # ok
 
   settings:
-    setting_your_user: Réglage de votre utilisateur
+    setting_your_user: Paramètre utilisateur
     success_update: Vos préférences ont été mises à jour avec succès.
     impossible_to_update: Impossible de mettre à jour votre configuration !
-    check_rights: Vérifiez si vous avez les droits d'écriture
-    setting_interface: Configuration de l'interface
-    option_homepage: Les options de la page d'accueil
+    check_rights: Vérifiez si vous avez les droits d'écriture.
+    setting_interface: Paramètres de l'interface
+    option_homepage: Options de la page d'accueil
     enable_info_user: Activer les informations utilisateur
     enable_access_ftp: "Activer les information d'accès ftp / sftp / transdroid"
     enable_reboot_rtorrent: Activer le redémarrage rtorrent
-    option_logout: Les options de déconnexion
-    url_to_redirect: Url de redirection à la déconnexion
-    themes: Les thèmes
+    option_logout: Option de déconnexion
+    url_to_redirect: url de redirection [pendant la déconnexion]
+    themes: Thèmes par defaut
     choose_theme: choisir un thème
     language: Langue par défaut
     choose_language: choisir une langue
     save: Enregistrer
-    # ok
 
   admin:
+    administration_area: Espace administration
+    success_update: Les paramètres de l'utilisateur <strong>{username}</strong> a été mise à jour avec succès.
+    impossible_to_update: Impossible de mettre à jour la configuration de l'utilisateur <strong>{username}</strong> !
+    success_delete_user: Les données de l'utilisateur <strong>{username}</strong> ont été supprimé avec succès.
+    error_delete_user: Impossible de supprimer l'utilisateur <strong>{username}</strong>.
+
+    list_user: Liste des utilisateurs
+    user: utilisateur
+    edit: éditer
+    delete: supprimer
+
+    setting_member: Paramètres de l'utilisateur
+    legend_setting_user: Paramètres utilisateur
+    home_directory: Dossier home de l'utilisateur
+    folder_scgi: Dossier scgi de l'utilisateur
+    legend_navbar: Barre de navigation
+    follow_rules: Suivez correctement la syntaxe pour ajouter des liens
+    legend_setting_server: Paramètres des serveurs FTP/sFTP
+    port_ftp: Port FTP
+    port_sftp: Port sFTP
+    legend_support: Support
+    address_mail : Adresse email
+    save: Enregistrer
+
+    modal:
+      delete_user: Suppression de l'utilisateur
+      body: |
+        <p>&Ecirc;tes-vous sûr de vouloir supprimer la configuration de cette utilisateur ?</p>
+        <p>Cette action est réversible.<br>Dès que votre utilisateur va se connecter les fichiers de configuration seront généré automatiquement (avec une configuration par défaut).</p>
+      cancel: Annuler
+      delete: Supprimer
+
+  lang: fr

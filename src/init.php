@@ -2,7 +2,7 @@
 
 use \Seedbox\Install;
 
-$dev = false;
+$dev = true;
 
 // check authentication
 if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {

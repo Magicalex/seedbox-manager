@@ -39,13 +39,13 @@
             <div class="well well-sm">
                 <h4 class="titre-head"><i class="fa fa-home"></i> {{ 'core.index.title_info_user'|trans }}</h4>
                 <div class="trait"></div>
-                <p><i class="fa fa-map-marker"></i> <strong>{{ 'core.index.ip_adress'|trans }}</strong></p>
+                <p><i class="fa fa-map-marker"></i> <strong>{{ 'core.index.ip_address'|trans }}</strong></p>
                 <ul>
                     <li><strong class="text-success">{{ ipUser }}</strong></li>
                 </ul>
                 <p><i class="fa fa-hdd-o"></i> <strong>{{ 'core.index.disk_space'|trans }}</strong></p>
                 <p class="text-center text-defaut-color">
-                    {{ 'core.index.we_use'|trans }} <strong>{{ user.userdisk.percentage_used }}%</strong>
+                    {{ 'core.index.you_use'|trans }} <strong>{{ user.userdisk.percentage_used }}%</strong>
                     <em> {{ 'core.index.equivalent'|trans }} {{ user.userdisk.used_disk }} {{ 'core.index.on'|trans }} {{ user.userdisk.total_disk }} ({{ user.userdisk.free_disk }} {{ 'core.index.free'|trans }})</em>
                 </p>
                 <div class="progress progress-striped fix-progress">
@@ -76,7 +76,7 @@
                 <div class="trait"></div>
                 <h5 class="device"><i class="fa fa-desktop"></i> <strong>{{ 'core.index.server_ftp'|trans }}</strong></h5>
                 <ul>
-                    <li>{{ 'core.index.adress_ftp'|trans }} : <em>(s)ftp://{{ host }}</em></li>
+                    <li>{{ 'core.index.address_ftp'|trans }} : <em>(s)ftp://{{ host }}</em></li>
                     <li>{{ 'core.index.user_ftp'|trans }} : <em>{{ user.name }}</em></li>
                     <li>{{ 'core.index.port_ftp'|trans }} : <em>{{ user.portFtp }}</em></li>
                     <li>{{ 'core.index.port_sftp'|trans }} : <em>{{ user.portSftp }}</em></li>
@@ -86,7 +86,7 @@
                 <h5 class="device"><i class="fa fa-android"></i> <strong>{{ 'core.index.app_transdroid'|trans }}</strong></h5>
                 <ul>
                     <li>{{ 'core.index.folder_scgi'|trans }} : <em><strong>{{ user.scgi_folder }}</strong></em></li>
-                    <li>{{ 'core.index.http_adress'|trans }} : <em>http://{{ host }}</em></li>
+                    <li>{{ 'core.index.http_address'|trans }} : <em>http://{{ host }}</em></li>
                     <li>{{ 'core.index.user_transdroid'|trans }} : <em>{{ user.name }}</em></li>
                     <li><a class="btn btn-info btn-xs" href="http://transdroid.org/latest"><i class="glyphicon glyphicon-download-alt"></i> {{ 'core.index.download_transdroid'|trans }}</a></li>
                     <li><a id="popuptransdroid" class="btn btn-info btn-xs" data-toggle="popover" href="/download/transdroid"><i class="fa fa-files-o"></i> {{ 'core.index.configuration_file'|trans }}</a></li>
