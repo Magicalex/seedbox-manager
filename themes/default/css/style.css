@@ -22,7 +22,7 @@ ul {
   padding: 15px;
   margin-bottom: 50px;
   background-color: #fff;
-  box-shadow: 0 0 15px 0 #fff;
+  border-radius: 2px;
 }
 
 .fa, .glyphicon, .label {
@@ -81,6 +81,10 @@ button[data-dismiss="modal"] {
 
 .textmodaleabout {
   color: #646464;
+}
+
+.progress-bar {
+  min-width: 2em;
 }
 
 #load-info{
