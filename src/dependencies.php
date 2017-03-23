@@ -31,6 +31,8 @@ $container['flash'] = function () {
 $container['translate'] = function () {
     $translator = new Translator('fr', new MessageSelector());
     $translator->addLoader('yaml', new YamlFileLoader());
+
+    // add loader (parse directory)
     $translator->addResource('yaml', __DIR__.'/../locale/core.fr.yml', 'fr');
     $translator->addResource('yaml', __DIR__.'/../locale/core.en.yml', 'en');
 
@@ -41,6 +43,7 @@ $container['\App\Controller\HomeController'] = function ($container) {
     $view = $container->get('view');
     $flash = $container->get('flash');
     $translator = $container->get('translate');
+
     return new \App\Controller\HomeController($view, $flash, $translator);
 };
 
@@ -48,10 +51,12 @@ $container['\App\Controller\AdminController'] = function ($container) {
     $view = $container->get('view');
     $flash = $container->get('flash');
     $translator = $container->get('translate');
+
     return new \App\Controller\AdminController($view, $flash, $translator);
 };
 
 $container['\App\Controller\InstallController'] = function ($container) {
     $view = $container->get('view');
+
     return new \App\Controller\InstallController($view);
 };

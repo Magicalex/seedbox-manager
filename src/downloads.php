@@ -1,5 +1,5 @@
 <?php
-
+/*
 use \Seedbox\Users;
 use \Seedbox\Server;
 
@@ -97,3 +97,5 @@ if ($_GET['file'] == 'transdroid') {
 } elseif ($_GET['file'] == 'filezilla') {
     $serveur->FileDownload('filezilla.xml', $conf_xml_filezilla);
 }
+
+*/

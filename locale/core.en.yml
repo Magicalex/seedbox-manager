@@ -34,11 +34,15 @@ core:
     title_info_user: User account information
     ip_address: Your ip address
     disk_space: Disk space
-    you_use: You use
-    equivalent: It is the equivalent of
-    on: on
-    free: free
-    complete: Complete
+    used: Used:
+    available: Available:
+    total: Total:
+    octet: B
+    kilo_octet: KB
+    mega_octet: MB
+    giga_octet: GB
+    tera_octet: TB
+    peta_octet: PB
     uptime_server: Server uptime
     days: days
     hours: h
@@ -93,9 +97,9 @@ core:
   admin:
     administration_area: Administration area
     success_update: The setting of user <strong>{username}</strong> have been successfully updated
-    impossible_to_update: Unable to update user setting <strong>{username}</strong> !
-    success_delete_user: Les données de l'utilisateur <strong>{username}</strong> ont été supprimé avec succès
-    error_delete_user: Unable to delete user <strong>{username}</strong> !
+    unable_to_update: Unable to update user setting <strong>{username}</strong> !
+    success_delete_user: The user <strong>{username}</strong> has been removed from Seedbox-Manager
+    error_delete_user: Unable to delete user <strong>{username}</strong>
     list_user: Users list
     user: user
     edit: edit

@@ -8,7 +8,7 @@ use \App\Seedbox\Utils;
 use \Slim\Views\Twig;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
-use \Slim\Flash\Messages;
+use \Slim\Flash\Messages as Flash;
 use \WriteiniFile\WriteiniFile;
 use \Symfony\Component\Translation\Translator;
 
@@ -21,7 +21,7 @@ class AdminController
     protected $user;
     protected $server;
 
-    public function __construct(Twig $view, Messages $flash, Translator $translator)
+    public function __construct(Twig $view, Flash $flash, Translator $translator)
     {
         $this->view = $view;
         $this->flash = $flash;

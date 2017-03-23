@@ -3,31 +3,21 @@
 {% block content %}
 <h1 class="page-header dashboard"><i class="glyphicon glyphicon-cog"></i> {{ 'core.admin.administration_area'|trans }}</h1>
 {% if notifications.admin_update_ini is defined and notifications.admin_update_ini.0 == true %}
-<div class="alert alert-success">{{ 'core.admin.success_update'|trans({'{username}': user.name })|raw }}</div>
+<div class="alert alert-success">{{ 'core.admin.success_update'|trans({'{username}': member.name })|raw }}</div>
 {% elseif notifications.admin_update_ini is defined and notification_update_ini_file == false %}
 <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{ 'core.admin.impossible_to_update'|trans({'{username}': user.name })|raw }}
+    {{ 'core.admin.unable_to_update'|trans({'{username}': member.name })|raw }}
 </div>
 {% endif %}
-{% if notifications.admin_delete_user is defined and notifications.admin_delete_user.0.error is empty %}
+{% if notifications.admin_delete_user is defined and notifications.admin_delete_user.0 == true %}
 <div class="alert alert-success">
-    <h4>{{ 'core.admin.success_delete_user'|trans({'{username}': notifications.admin_delete_user.1 })|raw }}</h4>
-    <ul class="text-success">
-    {% for log in notifications.admin_delete_user.0.log %}
-        <li>{{ log }}</li>
-    {% endfor %}
-    </ul>
+    {{ 'core.admin.success_delete_user'|trans({'{username}': notifications.admin_delete_user.1 })|raw }}
 </div>
-{% elseif notifications.admin_delete_user is defined and notifications.admin_delete_user.0.error is not empty %}
+{% elseif notifications.admin_delete_user is defined and notifications.admin_delete_user.0 == false %}
 <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <h4>{{ 'core.admin.error_delete_user'|trans({'{username}': notifications.admin_delete_user.1 })|raw }}</h4>
-    <ul class="text-danger">
-    {% for log in notifications.admin_delete_user.0.error %}
-        <li>{{ log }}</li>
-    {% endfor %}
-    </ul>
+    {{ 'core.admin.error_delete_user'|trans({'{username}': notifications.admin_delete_user.1 })|raw }}
 </div>
 {% endif %}
 <section class="row">
@@ -101,18 +91,18 @@
                     <legend>{{ 'core.admin.legend_setting_server'|trans }}</legend>
                     <div class="form-group">
                         <label for="port_ftp">{{ 'core.admin.port_ftp'|trans }}</label>
-                        <input type="number" class="form-control" name="port_ftp" id="port_ftp" value="{{ member.portFtp }}">
+                        <input type="number" class="form-control" name="port_ftp" id="port_ftp" value="{{ member.port_ftp }}">
                     </div>
                     <div class="form-group">
                         <label for="port_sftp">{{ 'core.admin.port_sftp'|trans }}</label>
-                        <input type="number" class="form-control" name="port_sftp" id="port_sftp" value="{{ member.portSftp }}">
+                        <input type="number" class="form-control" name="port_sftp" id="port_sftp" value="{{ member.port_sftp }}">
                     </div>
                 </fieldset>
                 <fieldset>
                     <legend>{{ 'core.admin.legend_support'|trans }}</legend>
                     <div class="form-group">
                         <label for="adresse_mail">{{ 'core.admin.address_mail'|trans }}</label>
-                        <input type="email" class="form-control" name="adresse_mail" id="adresse_mail" value="{{ member.supportMail }}">
+                        <input type="email" class="form-control" name="adresse_mail" id="adresse_mail" value="{{ member.support_mail }}">
                     </div>
                 </fieldset>
                 <p class="text-right fix-marg-input">

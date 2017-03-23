@@ -27,19 +27,19 @@
                         <legend>{{ 'core.settings.option_homepage'|trans }}</legend>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="active_bloc_info" value="1" id="active_bloc_info" {% if user.blocInfo == true %}checked{% endif %}>
+                                <input type="checkbox" name="active_bloc_info" value="1" id="active_bloc_info" {% if user.bloc_info == true %}checked{% endif %}>
                                 {{ 'core.settings.enable_info_user'|trans }}
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="active_ftp" value="1" id="active_ftp" {% if user.blocFtp == true %}checked{% endif %} >
+                                <input type="checkbox" name="active_ftp" value="1" id="active_ftp" {% if user.bloc_ftp == true %}checked{% endif %} >
                                 {{ 'core.settings.enable_access_ftp'|trans }}
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="active_reboot" value="1" id="active_reboot" {% if user.blocRtorrent == true %}checked{% endif %} >
+                                <input type="checkbox" name="active_reboot" value="1" id="active_reboot" {% if user.bloc_rtorrent == true %}checked{% endif %} >
                                 {{ 'core.settings.enable_reboot_rtorrent'|trans }}
                             </label>
                         </div>

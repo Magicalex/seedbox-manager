@@ -67,7 +67,7 @@ class Server extends Users
     public function CheckUpdate()
     {
         $lifetime_cookie = time() + 3600*24;
-        if (!isset($_COOKIE['seedbox-manager']) && $this->is_admin === true) {
+        if (! isset($_COOKIE['seedbox-manager']) && $this->is_admin === true) {
             setcookie('seedbox-manager', 'check-update', $lifetime_cookie, '/', null, false, true);
             $url_repository = 'https://raw.githubusercontent.com/Magicalex/seedbox-manager/master/version.json';
             $remote = json_decode(file_get_contents($url_repository));

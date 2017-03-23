@@ -46,37 +46,38 @@ class Users
 
     private static function convertFileSize($octets)
     {
-        $unit = array('O','Ko','Mo','Go','To','Po','Eo');
-        for ($i=0; $octets >= 1024; $i++) {
+        $unit = [
+            'octet',
+            'kilo_octet',
+            'mega_octet',
+            'giga_octet',
+            'tera_octet',
+            'peta_octet'
+        ];
+        for ($i = 0; $octets >= 1024; $i++) {
             $octets = $octets / 1024;
         }
-        $result = round($octets, 2).' '.$unit[$i];
-        return $result;
+
+        return [
+            'octets' => round($octets, 2),
+            'unit' => $unit[$i]
+        ];
     }
 
     public function userdisk()
     {
         $total_disk = disk_total_space($this->directory);
         $used_disk = $total_disk - disk_free_space($this->directory);
-        $percentage_used = round(($used_disk*100)/$total_disk, 2);
+        $percentage_used = round(($used_disk * 100) / $total_disk, 2);
         $free_disk = self::convertFileSize($total_disk - $used_disk);
         $used_disk = self::convertFileSize($used_disk);
         $total_disk = self::convertFileSize($total_disk);
-
-        if ($percentage_used < 85) {
-            $progressBarColor = null;
-        } elseif ($percentage_used < 95) {
-            $progressBarColor = 'progress-bar-warning';
-        } elseif ($percentage_used >= 95) {
-            $progressBarColor = 'progress-bar-danger';
-        }
 
         return [
             'used_disk' => $used_disk,
             'free_disk' => $free_disk,
             'total_disk' => $total_disk,
-            'percentage_used' => $percentage_used,
-            'progessBarColor' => $progressBarColor
+            'percentage_used' => $percentage_used
         ];
     }
 
@@ -122,6 +123,7 @@ class Users
                 $all_users[] = $file_name;
             }
         }
+
         return $all_users;
     }
 
@@ -131,22 +133,18 @@ class Users
         foreach ($scan as $file_name) {
             if ($file_name != '.' && $file_name != '..') {
                 $delete_file_log = @unlink($path_conf_user.'/'.$file_name);
-                if ($delete_file_log === true) {
-                    $log[] = 'Le fichier '.$file_name.' a été supprimé.';
-                } else {
-                    $error[] = 'Impossible de supprimer le fichier '.$file_name.'.';
+                if ($delete_file_log === false) {
+                    return false;
                 }
             }
         }
 
         $delete_folder_log = @rmdir($path_conf_user);
-        if ($delete_folder_log === true) {
-            $log[] = 'Le dossier '.$path_conf_user.'/ a été supprimé.';
-        } else {
-            $error[] = 'Impossible de supprimer le dossier '.$path_conf_user.'.';
+        if ($delete_folder_log === false) {
+            return false;
         }
 
-        return ['log' => @$log, 'error' => @$error];
+        return true;
     }
 
     public static function get_all_themes()
@@ -157,6 +155,7 @@ class Users
                 $all_themes[] = $folder_name;
             }
         }
+
         return $all_themes;
     }
 
@@ -169,6 +168,7 @@ class Users
                 $languages[] = $var[1];
             }
         }
+
         return $languages;
     }
 
@@ -177,7 +177,7 @@ class Users
         $data_links = $this->navbar_links;
         $data_links = preg_split("/\n/", $data_links);
 
-        for ($i=0; isset($data_links[$i]); $i++) {
+        for ($i = 0; isset($data_links[$i]); $i++) {
             $array_link[] = preg_split("/\, /", $data_links[$i]);
 
             foreach ($array_link[$i] as $value) {
@@ -221,37 +221,37 @@ class Users
         return $this->navbar_links;
     }
 
-    public function portFtp()
+    public function port_ftp()
     {
         return $this->portFtp;
     }
 
-    public function portSftp()
+    public function port_sftp()
     {
         return $this->portSftp;
     }
 
-    public function supportMail()
+    public function support_mail()
     {
         return $this->supportMail;
     }
 
-    public function currentPath()
+    public function current_path()
     {
         return $this->currentPath;
     }
 
-    public function blocInfo()
+    public function bloc_info()
     {
         return $this->blocInfo;
     }
 
-    public function blocFtp()
+    public function bloc_ftp()
     {
         return $this->blocFtp;
     }
 
-    public function blocRtorrent()
+    public function bloc_rtorrent()
     {
         return $this->blocRtorrent;
     }

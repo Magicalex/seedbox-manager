@@ -34,7 +34,7 @@
 </div>
 {% endif %}
 <section class="row">
-    {% if user.blocInfo == true %}
+    {% if user.bloc_info == true %}
     <article class="col-md-6" id ="bloc-info">
         <div class="well well-sm">
             <h4 class="titre-head"><i class="fa fa-home"></i> {{ 'core.index.title_info_user'|trans }}</h4>
@@ -45,12 +45,14 @@
             </ul>
             <p><i class="fa fa-hdd-o"></i> <strong>{{ 'core.index.disk_space'|trans }}</strong></p>
             <p class="text-center text-defaut-color">
-                {{ 'core.index.you_use'|trans }} <strong>{{ user.userdisk.percentage_used }}%</strong>
-                <em> {{ 'core.index.equivalent'|trans }} {{ user.userdisk.used_disk }} {{ 'core.index.on'|trans }} {{ user.userdisk.total_disk }} ({{ user.userdisk.free_disk }} {{ 'core.index.free'|trans }})</em>
+                <p><em>{{ 'core.index.used'|trans }} {{ user.userdisk.used_disk.octets }} {{ 'core.index.%s'|format(user.userdisk.used_disk.unit)|trans }}</em></p>
+                <p><em>{{ 'core.index.available'|trans }} {{ user.userdisk.free_disk.octets }} {{ 'core.index.%s'|format(user.userdisk.free_disk.unit)|trans }}</em></p>
+                <p><em>{{ 'core.index.total'|trans }} {{ user.userdisk.total_disk.octets }} {{ 'core.index.%s'|format(user.userdisk.total_disk.unit)|trans }}</em></p>
             </p>
             <div class="progress progress-striped fix-progress">
-                <div class="progress-bar {{ user.userdisk.progessBarColor }}" role="progressbar" aria-valuenow="{{ user.userdisk.percentage_used }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ user.userdisk.percentage_used }}%;">
-                    <span class="sr-only">{{ user.userdisk.percentage_used }}% {{ 'core.index.complete'|trans }}</span>
+                {% if user.userdisk.percentage_used < 95 and user.userdisk.percentage_used >= 85 %}{% set color = 'progress-bar-warning' %}{% elseif user.userdisk.percentage_used >= 95 %}{% set color = 'progress-bar-danger' %}{% endif %}
+                <div class="progress-bar {{ color }}" role="progressbar" aria-valuenow="{{ user.userdisk.percentage_used }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ user.userdisk.percentage_used }}%;">
+                    {{ user.userdisk.percentage_used }}%
                 </div>
             </div>
             <p><i class="fa fa-clock-o"></i> <strong>{{ 'core.index.uptime_server'|trans }}</strong></p>
@@ -85,7 +87,7 @@
         </div>
     </article>
     {% endif %}
-    {% if user.blocFtp == true %}
+    {% if user.bloc_ftp == true %}
     <article class="col-md-6" id="bloc-ftp">
         <div class="well well-sm">
             <h4 class="titre-head"><i class="fa fa-link"></i> {{ 'core.index.title_access'|trans }}</h4>
@@ -112,7 +114,7 @@
     {% endif %}
 </section>
 <section class="row">
-{% if user.blocRtorrent == true %}
+{% if user.bloc_rtorrent == true %}
 <article class="col-md-6">
     <div class="well well-sm">
         <h4 class="titre-head"><i class="fa fa-terminal"></i> {{ 'core.index.restart_rtorrent'|trans }}</h4>

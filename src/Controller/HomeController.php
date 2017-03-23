@@ -8,7 +8,7 @@ use \App\Seedbox\Utils;
 use \Slim\Views\Twig;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
-use \Slim\Flash\Messages;
+use \Slim\Flash\Messages as Flash;
 use \WriteiniFile\WriteiniFile;
 use \Symfony\Component\Translation\Translator;
 
@@ -16,13 +16,12 @@ class HomeController
 {
     protected $view;
     protected $flash;
-
     protected $username;
     protected $fileini;
     protected $user;
     protected $server;
 
-    public function __construct(Twig $view, Messages $flash, Translator $translator)
+    public function __construct(Twig $view, Flash $flash, Translator $translator)
     {
         $this->view = $view;
         $this->flash = $flash;
@@ -40,6 +39,8 @@ class HomeController
         $read_data_reboot = $this->user->readFileDataReboot(__DIR__."/../../conf/users/{$this->user->name()}/data_reboot.txt");
         $server = $request->getServerParams();
         $host = $this->checkhttps($server);
+
+        $message = $this->flash->getMessages();
 
         return $this->view->render($response, 'index.twig.html', [
             'host' => $host,
