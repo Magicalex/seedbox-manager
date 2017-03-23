@@ -2,8 +2,8 @@
 
 namespace App\Middleware;
 
-use \Psr\Http\Message\ServerRequestInterface;
-use \Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Auth
 {
@@ -14,6 +14,7 @@ class Auth
 
         if ($auth === false) {
             $response->getBody()->write('Error authentication');
+
             return $response->withStatus(401);
         }
 
@@ -28,5 +29,4 @@ class Auth
 
         return isset($auth) ? true : false;
     }
-
 }

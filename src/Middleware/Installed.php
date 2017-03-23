@@ -2,10 +2,10 @@
 
 namespace App\Middleware;
 
-use \App\Seedbox\Install;
-use \App\Seedbox\Utils;
-use \Psr\Http\Message\ServerRequestInterface;
-use \Psr\Http\Message\ResponseInterface;
+use App\Seedbox\Install;
+use App\Seedbox\Utils;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Installed
 {

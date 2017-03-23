@@ -2,9 +2,9 @@
 
 namespace App\DownloadController;
 
-use \Slim\Http\Stream;
-use \Psr\Http\Message\ServerRequestInterface;
-use \Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Http\Stream;
 
 class DownloadController
 {
@@ -21,7 +21,7 @@ class DownloadController
             ->withHeader('Content-Type', 'application/download')
             ->withHeader('Content-Description', 'File Transfer')
             ->withHeader('Content-Transfer-Encoding', 'binary')
-            ->withHeader('Content-Disposition', 'attachment; filename="' . basename($file) . '"')
+            ->withHeader('Content-Disposition', 'attachment; filename="'.basename($file).'"')
             ->withHeader('Expires', '0')
             ->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0')
             ->withHeader('Pragma', 'public')

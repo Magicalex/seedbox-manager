@@ -1,12 +1,12 @@
 <?php
 
-use \Slim\Views\Twig;
-use \Slim\Views\TwigExtension;
-use \Slim\Flash\Messages;
-use \Symfony\Component\Translation\Translator;
-use \Symfony\Component\Translation\MessageSelector;
-use \Symfony\Component\Translation\Loader\YamlFileLoader;
-use \Symfony\Bridge\Twig\Extension\TranslationExtension;
+use Slim\Flash\Messages;
+use Slim\Views\Twig;
+use Slim\Views\TwigExtension;
+use Symfony\Bridge\Twig\Extension\TranslationExtension;
+use Symfony\Component\Translation\Loader\YamlFileLoader;
+use Symfony\Component\Translation\MessageSelector;
+use Symfony\Component\Translation\Translator;
 
 $container = $app->getContainer();
 

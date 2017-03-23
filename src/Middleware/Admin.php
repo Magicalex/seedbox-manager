@@ -2,10 +2,10 @@
 
 namespace App\Middleware;
 
-use \App\Seedbox\Users;
-use \App\Seedbox\Utils;
-use \Psr\Http\Message\ServerRequestInterface;
-use \Psr\Http\Message\ResponseInterface;
+use App\Seedbox\Users;
+use App\Seedbox\Utils;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Admin
 {
@@ -15,7 +15,7 @@ class Admin
         $file_user_ini = Utils::getFileini($username);
         $user = new Users($file_user_ini, $username);
 
-        if ($user->is_admin() === false){
+        if ($user->is_admin() === false) {
             return $response->withStatus(403);
         }
 

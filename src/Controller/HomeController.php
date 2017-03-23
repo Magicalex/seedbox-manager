@@ -2,15 +2,15 @@
 
 namespace App\Controller;
 
-use \App\Seedbox\Users;
-use \App\Seedbox\Server;
-use \App\Seedbox\Utils;
-use \Slim\Views\Twig;
-use \Psr\Http\Message\ServerRequestInterface;
-use \Psr\Http\Message\ResponseInterface;
-use \Slim\Flash\Messages as Flash;
-use \WriteiniFile\WriteiniFile;
-use \Symfony\Component\Translation\Translator;
+use App\Seedbox\Server;
+use App\Seedbox\Users;
+use App\Seedbox\Utils;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Flash\Messages as Flash;
+use Slim\Views\Twig;
+use Symfony\Component\Translation\Translator;
+use WriteiniFile\WriteiniFile;
 
 class HomeController
 {
@@ -43,20 +43,20 @@ class HomeController
         $message = $this->flash->getMessages();
 
         return $this->view->render($response, 'index.twig.html', [
-            'host' => $host,
-            'ipUser' => $server['REMOTE_ADDR'],
-            'user' => $this->user,
-            'server' => $this->server,
+            'host'             => $host,
+            'ipUser'           => $server['REMOTE_ADDR'],
+            'user'             => $this->user,
+            'server'           => $this->server,
             'read_data_reboot' => $read_data_reboot,
-            'notifications' => $this->flash->getMessages()
+            'notifications'    => $this->flash->getMessages()
         ]);
     }
 
     public function settings(ServerRequestInterface $request, ResponseInterface $response)
     {
         return $this->view->render($response, 'settings.twig.html', [
-            'user' => $this->user,
-            'server' => $this->server,
+            'user'          => $this->user,
+            'server'        => $this->server,
             'notifications' => $this->flash->getMessages()
         ]);
     }
@@ -79,8 +79,8 @@ class HomeController
         $update->update([
             'user' => [
                 'active_bloc_info' => isset($param['active_bloc_info']) ? true : false,
-                'theme' => $param['theme'],
-                'language' => $param['language']
+                'theme'            => $param['theme'],
+                'language'         => $param['language']
             ],
             'ftp' => [
                 'active_ftp' => isset($param['active_ftp']) ? true : false

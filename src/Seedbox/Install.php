@@ -8,6 +8,7 @@ class Install
     {
         $uid_user_php = posix_geteuid();
         $name_user_php = posix_getpwuid($uid_user_php);
+
         return ['name' => $name_user_php['name'], 'num_uid' => $uid_user_php];
     }
 
@@ -17,6 +18,7 @@ class Install
             return false;
         } else {
             $uid = fileowner($path_file);
+
             return $uid;
         }
     }
@@ -28,6 +30,7 @@ class Install
         } else {
             $precision = $precision * -1;
             $chmod = substr(sprintf('%o', fileperms($file)), $precision);
+
             return $chmod;
         }
     }

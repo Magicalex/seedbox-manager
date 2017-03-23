@@ -29,19 +29,19 @@ class Users
     private function hydrate(array $array)
     {
         $this->navbar_links = (string) $array['nav']['data_link'];
-        $this->blocInfo     = (bool) $array['user']['active_bloc_info'];
-        $this->is_admin     = (bool) $array['user']['admin'];
-        $this->blocFtp      = (bool) $array['ftp']['active_ftp'];
+        $this->blocInfo = (bool) $array['user']['active_bloc_info'];
+        $this->is_admin = (bool) $array['user']['admin'];
+        $this->blocFtp = (bool) $array['ftp']['active_ftp'];
         $this->blocRtorrent = (bool) $array['rtorrent']['active_reboot'];
-        $this->directory    = (string) $array['user']['user_directory'];
-        $this->scgi_folder  = (string) $array['user']['scgi_folder'];
-        $this->theme        = (string) $array['user']['theme'];
-        $this->language     = (string) $array['user']['language'];
-        $this->supportMail  = (string) $array['support']['adresse_mail'];
+        $this->directory = (string) $array['user']['user_directory'];
+        $this->scgi_folder = (string) $array['user']['scgi_folder'];
+        $this->theme = (string) $array['user']['theme'];
+        $this->language = (string) $array['user']['language'];
+        $this->supportMail = (string) $array['support']['adresse_mail'];
         $this->url_redirect = (string) $array['logout']['url_redirect'];
-        $this->portFtp      = (int) $array['ftp']['port_ftp'];
-        $this->portSftp     = (int) $array['ftp']['port_sftp'];
-        $this->currentPath  = getcwd();
+        $this->portFtp = (int) $array['ftp']['port_ftp'];
+        $this->portSftp = (int) $array['ftp']['port_sftp'];
+        $this->currentPath = getcwd();
     }
 
     private static function convertFileSize($octets)
@@ -187,13 +187,13 @@ class Users
                 if ($match_url === true) {
                     $value = preg_replace('#url =#', '', $value);
                     $value = trim($value);
-                    $data_url = array( 'url' => $value );
+                    $data_url = ['url' => $value];
                 }
 
                 if ($match_name === true) {
                     $value = preg_replace('#name =#', '', $value);
                     $value = trim($value);
-                    $data_name = array( 'name' => $value );
+                    $data_name = ['name' => $value];
                 }
             }
 

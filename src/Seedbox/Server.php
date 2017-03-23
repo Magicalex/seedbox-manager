@@ -20,8 +20,8 @@ class Server extends Users
         $time['min'] = floor($time['min'] - $time['days'] * 60 * 24 - $time['hours'] * 60);
 
         return [
-            'days' => $time['days'],
-            'hours'  => $time['hours'],
+            'days'    => $time['days'],
+            'hours'   => $time['hours'],
             'minutes' => $time['min']
         ];
     }
@@ -29,7 +29,7 @@ class Server extends Users
     public static function load_average()
     {
         $load_average = sys_getloadavg();
-        for ($i=0; isset($load_average[$i]); $i++) {
+        for ($i = 0; isset($load_average[$i]); $i++) {
             $load_average[$i] = round($load_average[$i], 2);
         }
 
@@ -38,8 +38,8 @@ class Server extends Users
 
     public function CheckUpdate()
     {
-        $lifetime_cookie = time() + 3600*24;
-        if (! isset($_COOKIE['seedbox-manager']) && $this->is_admin === true) {
+        $lifetime_cookie = time() + 3600 * 24;
+        if (!isset($_COOKIE['seedbox-manager']) && $this->is_admin === true) {
             setcookie('seedbox-manager', 'check-update', $lifetime_cookie, '/', null, false, true);
             $url_repository = 'https://raw.githubusercontent.com/Magicalex/seedbox-manager/master/version.json';
             $remote = json_decode(file_get_contents($url_repository));

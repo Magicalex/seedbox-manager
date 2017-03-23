@@ -17,8 +17,6 @@ class Download extends Users
     protected function getConfig()
     {
         $this->username = Utils::getCurrentUser();
-
-
     }
 
 
