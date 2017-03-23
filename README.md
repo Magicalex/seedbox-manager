@@ -27,6 +27,7 @@ chmod +x install.sh && ./install.sh
 ## Configuration
 
 *example : web server nginx*
+
 ```nginx
 server {
     listen 80 default_server;
@@ -67,7 +68,8 @@ and replace (owner = no by owner = yes)
 
 ## developement
 
-```
+```bash
 echo "127.0.0.1 sbm.dev" >> /etc/hosts
-php -S sbm.dev:8080 public/index.php
+cd seedbox-manager/public
+php -S sbm.dev:8080
 ```

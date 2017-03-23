@@ -22,11 +22,11 @@ class Auth
 
     protected function auth($server)
     {
-        if ( (isset($server['REMOTE_USER'])) || (isset($server['PHP_AUTH_USER'])) ) {
+        if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
             $auth = true;
         }
 
-        return (isset($auth)) ? true : false;
+        return isset($auth) ? true : false;
     }
 
 }
