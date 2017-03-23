@@ -45,9 +45,9 @@
             </ul>
             <p><i class="fa fa-hdd-o"></i> <strong>{{ 'core.index.disk_space'|trans }}</strong></p>
             <p class="text-center text-defaut-color">
-                <p><em>{{ 'core.index.used'|trans }} {{ user.userdisk.used_disk.octets }} {{ 'core.index.%s'|format(user.userdisk.used_disk.unit)|trans }}</em></p>
-                <p><em>{{ 'core.index.available'|trans }} {{ user.userdisk.free_disk.octets }} {{ 'core.index.%s'|format(user.userdisk.free_disk.unit)|trans }}</em></p>
-                <p><em>{{ 'core.index.total'|trans }} {{ user.userdisk.total_disk.octets }} {{ 'core.index.%s'|format(user.userdisk.total_disk.unit)|trans }}</em></p>
+                <em>{{ 'core.index.used'|trans }} <strong>{{ user.userdisk.used_disk.octets }} {{ 'core.index.%s'|format(user.userdisk.used_disk.unit)|trans }}</strong></em>,
+                <em>{{ 'core.index.available'|trans }} <strong>{{ user.userdisk.free_disk.octets }} {{ 'core.index.%s'|format(user.userdisk.free_disk.unit)|trans }}</strong></em>,
+                <em>{{ 'core.index.total'|trans }} <strong>{{ user.userdisk.total_disk.octets }} {{ 'core.index.%s'|format(user.userdisk.total_disk.unit)|trans }}</strong></em>
             </p>
             <div class="progress progress-striped fix-progress">
                 {% if user.userdisk.percentage_used < 95 and user.userdisk.percentage_used >= 85 %}{% set color = 'progress-bar-warning' %}{% elseif user.userdisk.percentage_used >= 95 %}{% set color = 'progress-bar-danger' %}{% endif %}

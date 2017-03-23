@@ -1,5 +1,5 @@
 <?php
-/*
+
 use \Seedbox\Users;
 use \Seedbox\Server;
 
@@ -10,12 +10,12 @@ $passwd = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW']:null;
 $passwd = htmlspecialchars($passwd, ENT_NOQUOTES);
 
 // setting transdroid
-$tableau_conf_trandroid = array(
+$tableau_conf_trandroid = [
     'ui_swipe_labels' => false,
     'alarm_vibrate' => false,
     'alarm_enabled' => false,
     'alarm_check_rss_feeds' => false,
-    'websites' => array(),
+    'websites' => [],
     'ui_refresh_interval' => '60',
     'ui_hide_refresh' => false,
     'search_sort_by' => 'sort_seeders',
@@ -23,7 +23,7 @@ $tableau_conf_trandroid = array(
     'ui_enable_ads' => true,
     'ui_only_show_transferring' => false,
     'search_num_results' => '25',
-    'servers' => array(array(
+    'servers' => [[
         'port' => '443',
         'host' => $_SERVER['HTTP_HOST'],
         'ssl' => true,
@@ -38,12 +38,11 @@ $tableau_conf_trandroid = array(
         'download_alarm' => true,
         'new_torrent_alarm' => true,
         'ssl_accept_all' => true
-        )),
-
+    ]],
     'alarm_interval' => '600000',
-    'rssfeeds' => array(),
+    'rssfeeds' => [],
     'ui_ask_before_remove' => true
-);
+];
 
 $conf_json_trandroid = json_encode($tableau_conf_trandroid);
 
@@ -97,5 +96,3 @@ if ($_GET['file'] == 'transdroid') {
 } elseif ($_GET['file'] == 'filezilla') {
     $serveur->FileDownload('filezilla.xml', $conf_xml_filezilla);
 }
-
-*/

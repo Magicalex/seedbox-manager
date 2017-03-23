@@ -2,7 +2,6 @@
 
 namespace App\Middleware;
 
-use \App\Seedbox\Utils;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
 
@@ -11,16 +10,23 @@ class Auth
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $next)
     {
         $server = $request->getServerParams();
+        $auth = self::auth($server);
 
-        $server['PHP_AUTH_USER'] = Utils::getCurrentUser();
-        unset($server['REMOTE_USER']);
-
-        if (isset($server['REMOTE_USER'])) {
-            $response->getBody()->write('There is no authentication');
+        if ($auth === false) {
+            $response->getBody()->write('Error authentication');
             return $response->withStatus(401);
         }
 
         return $next($request, $response);
+    }
+
+    protected function auth($server)
+    {
+        if ( (isset($server['REMOTE_USER'])) || (isset($server['PHP_AUTH_USER'])) ) {
+            $auth = true;
+        }
+
+        return (isset($auth)) ? true : false;
     }
 
 }

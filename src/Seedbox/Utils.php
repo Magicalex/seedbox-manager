@@ -10,7 +10,7 @@ class Utils
             return isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : $_SERVER['REMOTE_USER'];
         }
 
-        //return 'user';
+        return 'user';
     }
 
     public static function getFileini($username)
