@@ -10,6 +10,7 @@ use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
 use \Slim\Flash\Messages;
 use \WriteiniFile\WriteiniFile;
+use \Symfony\Component\Translation\Translator;
 
 class AdminController
 {
@@ -20,7 +21,7 @@ class AdminController
     protected $user;
     protected $server;
 
-    public function __construct(Twig $view, Messages $flash)
+    public function __construct(Twig $view, Messages $flash, Translator $translator)
     {
         $this->view = $view;
         $this->flash = $flash;
@@ -29,6 +30,8 @@ class AdminController
         $this->fileini = Utils::getFileini($this->username);
         $this->user = new Users($this->fileini, $this->username);
         $this->server = new Server($this->fileini, $this->username);
+
+        $translator->setLocale($this->user->language());
     }
 
     public function index(ServerRequestInterface $request, ResponseInterface $response)

@@ -31,7 +31,6 @@ core:
     result_command: result of the command
     new_version: New version available !
     participants: Participants
-
     title_info_user: User account information
     ip_address: Your ip address
     disk_space: Disk space
@@ -41,6 +40,9 @@ core:
     free: free
     complete: Complete
     uptime_server: Server uptime
+    days: days
+    hours: h
+    minutes: min
     load_average: Server load
     load_average_1: Load average since 1 min
     load_average_5: Load average since 5 min
@@ -48,7 +50,6 @@ core:
     info_load_good: Low load, optimum conditions
     info_load_warning: High load, risk of slowing down on the server
     info_load_danger: Very high load, risk of slowing down on the server
-
     title_access: FTP / SFTP / Transdroid - Access
     server_ftp: FTP and SFTP Server
     address_ftp: Address (S)FTP
@@ -62,10 +63,8 @@ core:
     http_address: HTTP Address
     user_transdroid: User transdroid
     download_transdroid: Download Transdroid
-
     restart_rtorrent: Restart rtorrent
     last_restart: Last restart on
-
     modal:
       warning: Warning
       do_you_want_restart: Do you want to restart your rtorrent session ?
@@ -97,12 +96,10 @@ core:
     impossible_to_update: Unable to update user setting <strong>{username}</strong> !
     success_delete_user: Les données de l'utilisateur <strong>{username}</strong> ont été supprimé avec succès
     error_delete_user: Unable to delete user <strong>{username}</strong> !
-
     list_user: Users list
     user: user
     edit: edit
     delete: delete
-
     setting_member: User settings
     legend_setting_user: User setting
     home_directory: User home folder
@@ -115,7 +112,6 @@ core:
     legend_support: Support
     address_mail : E-mail address
     save: Save
-
     modal:
       delete_user: Deleting the user
       body: |

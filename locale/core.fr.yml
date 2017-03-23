@@ -31,7 +31,6 @@ core:
     result_command: résultat de la commande
     new_version: Nouvelle version disponible !
     participants: Participants
-
     title_info_user: Information du compte utilisateur
     ip_address: Votre adresse ip
     disk_space: Espace disque
@@ -41,6 +40,9 @@ core:
     free: libre
     complete: Complète
     uptime_server: Temps de disponibilité du serveur
+    days: jours
+    hours: h
+    minutes: min
     load_average: Charge serveur
     load_average_1: Charge moyenne depuis 1 min
     load_average_5: Charge moyenne depuis 5 min
@@ -48,7 +50,6 @@ core:
     info_load_good: Charge faible, conditions optimales
     info_load_warning: Charge élévée, risque de ralentissement sur le serveur
     info_load_danger: Charge très élévée, risque de gros ralentissement sur le serveur
-
     title_access: Les accès FTP - SFTP - Transdroid
     server_ftp: Serveur FTP et SFTP
     address_ftp: Adresse (s)FTP
@@ -62,10 +63,8 @@ core:
     http_address: Adresse HTTP
     user_transdroid: Utilisateur transdroid
     download_transdroid: Télécharger Transdroid
-
     restart_rtorrent: Redémarrer rtorrent
     last_restart: Dernier redémarrage le
-
     modal:
       warning: Avertissement
       do_you_want_restart: "&Ecirc;tes-vous sûr de vouloir redémarrer votre session rtorrent ?"
@@ -97,12 +96,10 @@ core:
     impossible_to_update: Impossible de mettre à jour la configuration de l'utilisateur <strong>{username}</strong> !
     success_delete_user: Les données de l'utilisateur <strong>{username}</strong> ont été supprimé avec succès.
     error_delete_user: Impossible de supprimer l'utilisateur <strong>{username}</strong>.
-
     list_user: Liste des utilisateurs
     user: utilisateur
     edit: éditer
     delete: supprimer
-
     setting_member: Paramètres de l'utilisateur
     legend_setting_user: Paramètres utilisateur
     home_directory: Dossier home de l'utilisateur
@@ -115,7 +112,6 @@ core:
     legend_support: Support
     address_mail : Adresse email
     save: Enregistrer
-
     modal:
       delete_user: Suppression de l'utilisateur
       body: |

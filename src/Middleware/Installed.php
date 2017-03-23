@@ -17,6 +17,8 @@ class Installed
             return $response->withStatus(302)->withHeader('Location', '/install');
         } elseif (false === file_exists(__DIR__."/../../conf/users/{$username}/config.ini")) {
             Install::create_new_user($username);
+        } elseif (false === file_exists(__DIR__."/../../conf/users/{$username}/config.ini")) {
+
         }
 
         return $next($request, $response);

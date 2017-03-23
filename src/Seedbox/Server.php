@@ -19,16 +19,11 @@ class Server extends Users
         $time['hours'] = floor($time['hours'] - $time['days'] * 24);
         $time['min'] = floor($time['min'] - $time['days'] * 60 * 24 - $time['hours'] * 60);
 
-        $result = '';
-
-        if ($time['days'] != 0) {
-            $result = $time['days'] . ' jours ';
-        }
-        if ($time['hours'] != 0) {
-            $result .= $time['hours'] . ' h ';
-        }
-        $result .= $time['min'] . ' min';
-        return $result;
+        return [
+            'days' => $time['days'],
+            'hours'  => $time['hours'],
+            'minutes' => $time['min']
+        ];
     }
 
     public static function load_average()
