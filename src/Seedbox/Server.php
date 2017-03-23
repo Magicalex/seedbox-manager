@@ -1,6 +1,6 @@
 <?php
 
-namespace Seedbox;
+namespace App\Seedbox;
 
 class Server extends Users
 {
@@ -8,8 +8,6 @@ class Server extends Users
 
     public static function getUptime()
     {
-
-
         $data_uptime = @file_get_contents('/proc/uptime');
         $data_uptime = explode(' ', $data_uptime);
         $data_uptime = trim($data_uptime[0]);
@@ -22,6 +20,7 @@ class Server extends Users
         $time['min'] = floor($time['min'] - $time['days'] * 60 * 24 - $time['hours'] * 60);
 
         $result = '';
+
         if ($time['days'] != 0) {
             $result = $time['days'] . ' jours ';
         }
@@ -73,7 +72,7 @@ class Server extends Users
     public function CheckUpdate()
     {
         $lifetime_cookie = time() + 3600*24;
-        if (!isset($_COOKIE['seedbox-manager']) && $this->is_owner === true) {
+        if (!isset($_COOKIE['seedbox-manager']) && $this->is_admin === true) {
             setcookie('seedbox-manager', 'check-update', $lifetime_cookie, '/', null, false, true);
             $url_repository = 'https://raw.githubusercontent.com/Magicalex/seedbox-manager/master/version.json';
             $remote = json_decode(file_get_contents($url_repository));

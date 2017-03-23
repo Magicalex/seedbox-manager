@@ -3,8 +3,8 @@ core:
   layout:
     information: Information
     enable_javascript: |
-      Javascript isn't enabled or something stops it from running properly on your web browser.<br>
-      To be able to use this interface, the activation of javascript is necessary.
+      Javascript isn't enabled or something stops it from running properly on your web browser<br>
+      To be able to use this interface, the activation of javascript is necessary
     modal:
       about_us: About us
       author: Web apps by MThibault, Micdu70, Magicalex and Hydrog3n
@@ -20,7 +20,7 @@ core:
 
   index:
     dashboard: Dashboard
-    succes_reboot_rtorrent: Your rtorrent session has been successfully started.
+    succes_reboot_rtorrent: Your rtorrent session has been successfully started
     error_reboot_rtorrent: |
       <h4>A problem occurred while restarting rtorrent</h4>
       <p>Check that the <code>reboot-rtorrent</code> is correctly compiled</p>
@@ -75,9 +75,9 @@ core:
 
   settings:
     setting_your_user: User setting
-    success_update: Your preferences have been updated successfully.
+    success_update: Your preferences have been updated successfully
     impossible_to_update: Unable to update your setting !
-    check_rights: Check if you have write permission.
+    check_rights: Check if you have write permission
     setting_interface: Interface Settings
     option_homepage: Home page options
     enable_info_user: Enable user information
@@ -93,9 +93,9 @@ core:
 
   admin:
     administration_area: Administration area
-    success_update: The setting of user <strong>{username}</strong> have been successfully updated.
+    success_update: The setting of user <strong>{username}</strong> have been successfully updated
     impossible_to_update: Unable to update user setting <strong>{username}</strong> !
-    success_delete_user: Les données de l'utilisateur <strong>{username}</strong> ont été supprimé avec succès.
+    success_delete_user: Les données de l'utilisateur <strong>{username}</strong> ont été supprimé avec succès
     error_delete_user: Unable to delete user <strong>{username}</strong> !
 
     list_user: Users list
@@ -120,7 +120,7 @@ core:
       delete_user: Deleting the user
       body: |
         <p>&Ecirc;tes-vous sûr de vouloir supprimer la configuration de cette utilisateur ?</p>
-        <p>Cette action est réversible.<br>Dès que votre utilisateur va se connecter les fichiers de configuration seront généré automatiquement (avec une configuration par défaut).</p>
+        <p>Cette action est réversible.<br>Dès que votre utilisateur va se connecter les fichiers de configuration seront généré automatiquement (avec une configuration par défaut)</p>
       cancel: Cancel
       delete: Delete
 

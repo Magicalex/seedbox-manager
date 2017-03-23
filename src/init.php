@@ -1,15 +1,9 @@
 <?php
 
-use \Seedbox\Install;
+//use \App\Seedbox\Install;
 
-// check authentication
-if (isset($_SERVER['REMOTE_USER']) || isset($_SERVER['PHP_AUTH_USER'])) {
-    $username = isset($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER'] : $_SERVER['PHP_AUTH_USER'];
-} else {
-    die('Le script n\'est pas prot&eacute;g&eacute; par une authentification.<br>
-        V&eacute;rifiez la configuration de votre serveur web.');
-}
 
+/*
 // check install
 if (false === is_writable(__DIR__.'/../conf/users')) {
     require __DIR__.'/../public/install/installation.php';
@@ -21,6 +15,9 @@ if (false === is_writable(__DIR__.'/../conf/users')) {
     $file_user_ini = __DIR__."/../conf/users/{$username}/config.ini";
 }
 
+*/
+
+
 // check language
-$lang = parse_ini_file($file_user_ini, true);
-$lang = $lang['user']['language'];
+//$lang = parse_ini_file($file_user_ini, true);
+//$lang = $lang['user']['language'];

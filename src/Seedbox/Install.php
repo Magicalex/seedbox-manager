@@ -1,6 +1,6 @@
 <?php
 
-namespace Seedbox;
+namespace App\Seedbox;
 
 class Install
 {
@@ -34,13 +34,12 @@ class Install
 
     public static function create_new_user($username)
     {
-        $log = mkdir('../conf/users/' . $username, 0755, false);
-        if (true === $log) {
-            $log = 'Dossier de configuration crée avec succès';
+        $result = mkdir(__DIR__."/../../conf/users/{$username}", 0755, false);
+
+        if (file_exists(__DIR__."/../../conf/users/{$username}")) {
+            copy(__DIR__.'/../../conf/config.ini', __DIR__."/../../conf/users/{$username}/config.ini");
         }
-        if (file_exists('../conf/users/' . $username)) {
-            copy('../conf/config.ini', '../conf/users/' . $username . '/config.ini');
-        }
-        return $log;
+
+        return $result;
     }
 }

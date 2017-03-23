@@ -1,130 +1,128 @@
 {% extends 'layout.twig.html' %}
 
 {% block content %}
-    <h1 class="page-header dashboard"><i class="glyphicon glyphicon-cog"></i> {{ 'core.admin.administration_area'|trans }}</h1>
-    {% if notifications.admin_update_ini is defined and notifications.admin_update_ini.0 == true %}
-    <div class="alert alert-success">{{ 'core.admin.success_update'|trans({'{username}': user.name })|raw }}</div>
-    {% elseif notifications.admin_update_ini is defined and notification_update_ini_file == false %}
-    <div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{ 'core.admin.impossible_to_update'|trans({'{username}': user.name })|raw }}
-    </div>
-    {% endif %}
-
-    {% if notifications.admin_delete_user is defined and notifications.admin_delete_user.0.error is empty %}
-    <div class="alert alert-success">
-        <h4>{{ 'core.admin.success_delete_user'|trans({'{username}': notifications.admin_delete_user.1 })|raw }}</h4>
-        <ul class="text-success">
-        {% for log in notifications.admin_delete_user.0.log %}
-            <li>{{ log }}</li>
-        {% endfor %}
-        </ul>
-    </div>
-    {% elseif notifications.admin_delete_user is defined and notifications.admin_delete_user.0.error is not empty %}
-    <div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4>{{ 'core.admin.error_delete_user'|trans({'{username}': notifications.admin_delete_user.1 })|raw }}</h4>
-        <ul class="text-danger">
-        {% for log in notifications.admin_delete_user.0.error %}
-            <li>{{ log }}</li>
-        {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
-
-    <section class="row">
-        <article class="col-md-12">
-            <div class="well well-sm">
-                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> {{ 'core.admin.list_user'|trans }}</h4>
-                <div class="trait"></div>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th><strong>#</strong></th>
-                                <th><strong>{{ 'core.admin.user'|trans|capitalize }}</strong></th>
-                                <th><strong>{{ 'core.admin.edit'|trans|capitalize }}</strong></th>
-                                <th><strong>{{ 'core.admin.delete'|trans|capitalize }}</strong></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for users in user.get_all_users %}
+<h1 class="page-header dashboard"><i class="glyphicon glyphicon-cog"></i> {{ 'core.admin.administration_area'|trans }}</h1>
+{% if notifications.admin_update_ini is defined and notifications.admin_update_ini.0 == true %}
+<div class="alert alert-success">{{ 'core.admin.success_update'|trans({'{username}': user.name })|raw }}</div>
+{% elseif notifications.admin_update_ini is defined and notification_update_ini_file == false %}
+<div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{ 'core.admin.impossible_to_update'|trans({'{username}': user.name })|raw }}
+</div>
+{% endif %}
+{% if notifications.admin_delete_user is defined and notifications.admin_delete_user.0.error is empty %}
+<div class="alert alert-success">
+    <h4>{{ 'core.admin.success_delete_user'|trans({'{username}': notifications.admin_delete_user.1 })|raw }}</h4>
+    <ul class="text-success">
+    {% for log in notifications.admin_delete_user.0.log %}
+        <li>{{ log }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% elseif notifications.admin_delete_user is defined and notifications.admin_delete_user.0.error is not empty %}
+<div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4>{{ 'core.admin.error_delete_user'|trans({'{username}': notifications.admin_delete_user.1 })|raw }}</h4>
+    <ul class="text-danger">
+    {% for log in notifications.admin_delete_user.0.error %}
+        <li>{{ log }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endif %}
+<section class="row">
+    <article class="col-md-12">
+        <div class="well well-sm">
+            <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> {{ 'core.admin.list_user'|trans }}</h4>
+            <div class="trait"></div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
                         <tr>
-                            <td>{{ loop.index }}</td>
-                            <td>{{ users }}</td>
-                            <td>
-                                <a href="/admin/{{ users }}" class="btn btn-default btn-xs edit-btn-user">
-                                    <i class="glyphicon glyphicon-edit"></i> {{ 'core.admin.edit'|trans }}
-                                </a>
-                            </td>
-                            <td>
-                            {% if users != user.name %}
-                            <a data-toggle="modal" class="popup-delete-user btn btn-danger btn-xs" data-user="{{ users }}" href="#delete-user">
-                                <i class="glyphicon glyphicon-trash"></i> {{ 'core.admin.delete'|trans }}
-                            </a>
-                            {% else %}
-                            <a class="popup-delete-user btn btn-danger btn-xs disabled">
-                                <i class="glyphicon glyphicon-trash"></i> {{ 'core.admin.delete'|trans }}
-                            </a>
-                            {% endif %}
-                            </td>
+                            <th><strong>#</strong></th>
+                            <th><strong>{{ 'core.admin.user'|trans|capitalize }}</strong></th>
+                            <th><strong>{{ 'core.admin.edit'|trans|capitalize }}</strong></th>
+                            <th><strong>{{ 'core.admin.delete'|trans|capitalize }}</strong></th>
                         </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                    </thead>
+                    <tbody>
+                    {% for users in user.get_all_users %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ users }}</td>
+                        <td>
+                            <a href="/admin/{{ users }}" class="btn btn-default btn-xs edit-btn-user">
+                                <i class="glyphicon glyphicon-edit"></i> {{ 'core.admin.edit'|trans }}
+                            </a>
+                        </td>
+                        <td>
+                        {% if users != user.name %}
+                        <a data-toggle="modal" class="popup-delete-user btn btn-danger btn-xs" data-user="{{ users }}" href="#delete-user">
+                            <i class="glyphicon glyphicon-trash"></i> {{ 'core.admin.delete'|trans }}
+                        </a>
+                        {% else %}
+                        <a class="popup-delete-user btn btn-danger btn-xs disabled">
+                            <i class="glyphicon glyphicon-trash"></i> {{ 'core.admin.delete'|trans }}
+                        </a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
-        </article>
-        <article class="col-md-12">
-            <div class="well well-sm">
-                <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> {{ 'core.admin.setting_member'|trans }} <strong>{{ member.name }}</strong></h4>
-                <div class="trait"></div>
-                <form method="post" action="/admin/update/{{ member.name }}" role="form">
-                    <fieldset>
-                        <legend>{{ 'core.admin.legend_setting_user'|trans }}</legend>
-                        <div class="form-group">
-                            <label for="user_directory">{{ 'core.admin.home_directory'|trans }}</label>
-                            <input type="text" class="form-control" name="user_directory" id="user_directory" value="{{ member.user_directory }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="user_directory">{{ 'core.admin.folder_scgi'|trans }}</label>
-                            <input type="text" class="form-control" name="scgi_folder" id="scgi_folder" value="{{ member.scgi_folder }}">
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>{{ 'core.admin.legend_navbar'|trans }}</legend>
-                        <label for="data_link" class="text-danger">
-                            <i class="glyphicon glyphicon-warning-sign"></i>
-                            {{ 'core.admin.follow_rules'|trans }}
-                        </label>
-                        <textarea class="form-control" rows="3" name="data_link" id="data_link">{{ member.navbar_links }}</textarea>
-                    </fieldset>
-                    <fieldset>
-                        <legend>{{ 'core.admin.legend_setting_server'|trans }}</legend>
-                        <div class="form-group">
-                            <label for="port_ftp">{{ 'core.admin.port_ftp'|trans }}</label>
-                            <input type="number" class="form-control" name="port_ftp" id="port_ftp" value="{{ member.portFtp }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="port_sftp">{{ 'core.admin.port_sftp'|trans }}</label>
-                            <input type="number" class="form-control" name="port_sftp" id="port_sftp" value="{{ member.portSftp }}">
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>{{ 'core.admin.legend_support'|trans }}</legend>
-                        <div class="form-group">
-                            <label for="adresse_mail">{{ 'core.admin.address_mail'|trans }}</label>
-                            <input type="email" class="form-control" name="adresse_mail" id="adresse_mail" value="{{ member.supportMail }}">
-                        </div>
-                    </fieldset>
-                    <p class="text-right fix-marg-input">
-                        <input type="hidden" name="user" value="{{ member.name }}">
-                        <input type="submit" name="submit" value="{{ 'core.admin.save'|trans }}" class="btn btn-info">
-                    </p>
-                </form>
-            </div>
-        </article>
-    </section>
+        </div>
+    </article>
+    <article class="col-md-12">
+        <div class="well well-sm">
+            <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> {{ 'core.admin.setting_member'|trans }} <strong>{{ member.name }}</strong></h4>
+            <div class="trait"></div>
+            <form method="post" action="/admin/update/{{ member.name }}" role="form">
+                <fieldset>
+                    <legend>{{ 'core.admin.legend_setting_user'|trans }}</legend>
+                    <div class="form-group">
+                        <label for="user_directory">{{ 'core.admin.home_directory'|trans }}</label>
+                        <input type="text" class="form-control" name="user_directory" id="user_directory" value="{{ member.user_directory }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="user_directory">{{ 'core.admin.folder_scgi'|trans }}</label>
+                        <input type="text" class="form-control" name="scgi_folder" id="scgi_folder" value="{{ member.scgi_folder }}">
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>{{ 'core.admin.legend_navbar'|trans }}</legend>
+                    <label for="data_link" class="text-danger">
+                        <i class="glyphicon glyphicon-warning-sign"></i>
+                        {{ 'core.admin.follow_rules'|trans }}
+                    </label>
+                    <textarea class="form-control" rows="3" name="data_link" id="data_link">{{ member.navbar_links }}</textarea>
+                </fieldset>
+                <fieldset>
+                    <legend>{{ 'core.admin.legend_setting_server'|trans }}</legend>
+                    <div class="form-group">
+                        <label for="port_ftp">{{ 'core.admin.port_ftp'|trans }}</label>
+                        <input type="number" class="form-control" name="port_ftp" id="port_ftp" value="{{ member.portFtp }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="port_sftp">{{ 'core.admin.port_sftp'|trans }}</label>
+                        <input type="number" class="form-control" name="port_sftp" id="port_sftp" value="{{ member.portSftp }}">
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>{{ 'core.admin.legend_support'|trans }}</legend>
+                    <div class="form-group">
+                        <label for="adresse_mail">{{ 'core.admin.address_mail'|trans }}</label>
+                        <input type="email" class="form-control" name="adresse_mail" id="adresse_mail" value="{{ member.supportMail }}">
+                    </div>
+                </fieldset>
+                <p class="text-right fix-marg-input">
+                    <input type="hidden" name="user" value="{{ member.name }}">
+                    <input type="submit" name="submit" value="{{ 'core.admin.save'|trans }}" class="btn btn-info">
+                </p>
+            </form>
+        </div>
+    </article>
+</section>
 {% endblock %}
 
 {% block modal %}

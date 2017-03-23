@@ -1,6 +1,6 @@
 <?php
 
-namespace Seedbox;
+namespace App\Seedbox;
 
 class Users
 {
@@ -15,8 +15,9 @@ class Users
     protected $blocInfo;
     protected $blocRtorrent;
     protected $blocFtp;
-    protected $is_owner;
+    protected $is_admin;
     protected $language;
+    protected $param;
 
     public function __construct($file_ini, $user)
     {
@@ -29,7 +30,7 @@ class Users
     {
         $this->navbar_links = (string) $array['nav']['data_link'];
         $this->blocInfo     = (bool) $array['user']['active_bloc_info'];
-        $this->is_owner     = (bool) $array['user']['owner'];
+        $this->is_admin     = (bool) $array['user']['admin'];
         $this->blocFtp      = (bool) $array['ftp']['active_ftp'];
         $this->blocRtorrent = (bool) $array['rtorrent']['active_reboot'];
         $this->directory    = (string) $array['user']['user_directory'];
@@ -113,9 +114,6 @@ class Users
         ];
     }
 
-    /*
-        Retourne la liste de tous les users.
-    */
     public static function get_all_users()
     {
         $scan = scandir(__DIR__.'/../../conf/users/');
@@ -127,9 +125,6 @@ class Users
         return $all_users;
     }
 
-    /*
-        Méthode pour supprimer le dossier et ses fichiers du user voulu par l'admin.
-    */
     public static function delete_config_old_user($path_conf_user)
     {
         $scan = scandir($path_conf_user);
@@ -261,9 +256,9 @@ class Users
         return $this->blocRtorrent;
     }
 
-    public function is_owner()
+    public function is_admin()
     {
-        return $this->is_owner;
+        return $this->is_admin;
     }
 
     public function user_directory()

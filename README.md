@@ -68,5 +68,6 @@ and replace (owner = no by owner = yes)
 ## developement
 
 ```
-php -S 127.0.0.1:9000
+echo "127.0.0.1 sbm.dev" >> /etc/hosts
+php -S sbm.dev:8080 public/index.php
 ```
