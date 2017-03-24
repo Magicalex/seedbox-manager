@@ -1,9 +1,11 @@
 {
   "name": "seedbox-manager",
   "version": "2.5.0",
-  "contributors": "Magicalex",
+  "contributors": "magicalex",
   "news": [
-    "Suppression du bloc support",
-    "Remaniement du code de zéro, passage à slim framework"
+    "Suppression du système de support",
+    "Réécriture complète du code (passage à slim framework 3)",
+    "Traduction de l'interface (fr et en)",
+    "Mise à jour bootstrap 3 et jquery 3"
   ]
 }
