@@ -2,33 +2,34 @@
 
 namespace App\Controller;
 
+use App\Seedbox\Download;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Http\Stream;
-use App\Seedbox\Download;
 
 class DownloadController
 {
     public function download(ServerRequestInterface $request, ResponseInterface $response, $args)
     {
-        if ($args['file']) {
-        }
+        //if ($args['file']) {
+        //}
 
         $file = __DIR__.'/../../conf/config.ini';
-        $fh = fopen($file, 'rb');
 
-        $stream = new Stream($fh); // create a stream instance for the response body
+        //$stream = new Stream(fopen($file, 'r')); // create a stream instance for the response body
 
-        $response->withHeader('Content-Type', 'application/force-download')
-            ->withHeader('Content-Type', 'application/octet-stream')
-            ->withHeader('Content-Type', 'application/download')
+        $response->withHeader('Content-Type', 'application/octet-stream')
             ->withHeader('Content-Description', 'File Transfer')
             ->withHeader('Content-Transfer-Encoding', 'binary')
             ->withHeader('Content-Disposition', 'attachment; filename="'.basename($file).'"')
             ->withHeader('Expires', '0')
             ->withHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0')
             ->withHeader('Pragma', 'public')
-            ->withBody($stream);
+            ->withHeader('Content-Length', filesize($file));
+
+        ob_clean();
+        flush();
+        readfile($file);
 
         return $response;
     }

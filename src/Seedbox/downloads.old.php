@@ -1,12 +1,12 @@
 <?php
 
-use \Seedbox\Users;
 use \Seedbox\Server;
+use \Seedbox\Users;
 
 $title_seedbox = 'seedbox-'.$userName;
 $user = new Users($file_user_ini, $userName);
 $serveur = new Server($file_user_ini, $userName);
-$passwd = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW']:null;
+$passwd = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : null;
 $passwd = htmlspecialchars($passwd, ENT_NOQUOTES);
 
 // setting transdroid

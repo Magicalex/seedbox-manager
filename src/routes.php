@@ -13,7 +13,7 @@ $app->group('/', function () {
     $this->post('settings/update', '\App\Controller\HomeController:update');
     $this->post('admin/update/{username}', '\App\Controller\AdminController:update')->add(new isAdmin());
     $this->post('admin/delete', '\App\Controller\AdminController:delete')->add(new isAdmin());
-})->add(new checkInstall())->add(new isAuth());
+})->add(new checkInstall());//->add(new isAuth());
 
 $app->get('/install', '\App\Controller\InstallController:index');
-$app->get('download/{file}', '\App\Controller\DownloadController:download');
+$app->get('/download', '\App\Controller\DownloadController:download');

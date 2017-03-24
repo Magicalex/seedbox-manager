@@ -34,7 +34,7 @@
                                 <li><a href="mailto:{{ user.support_mail }}"><i class="glyphicon glyphicon-envelope"></i> support</a></li>
                                 <li><a class="aboutlink" data-toggle="modal" href="#popupinfo"><i class="glyphicon glyphicon-info-sign"></i> {{ 'core.header.about_us'|trans }}</a></li>
                                 <li>
-                                    <a id="logout" href="#logout" title="Se déconnecter" data-urlredirect="{{ server.logout_url_redirect }}">
+                                    <a id="logout" href="#logout" title="{{ 'core.header.logout'|trans }}" data-logouturl="{{ server.logout_url_redirect }}" data-logoutmessage="{{ 'core.header.logout_message'|trans({'{url}': server.logout_url_redirect }) }}">
                                         <strong><i class="glyphicon glyphicon-log-out"></i> {{ 'core.header.logout'|trans }}</strong>
                                     </a>
                                 </li>

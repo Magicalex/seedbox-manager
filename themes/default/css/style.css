@@ -159,6 +159,9 @@ textarea {
   background-image: url("https://raw.githubusercontent.com/mimiz/jquery-loader-plugin/master/images/ajax-loader.gif");
   background-position: center top;
   background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  width: 300px !important;
 }
 
 #jquery-loader span {
@@ -168,8 +171,7 @@ textarea {
   width: 100%;
   text-align: center;
   color: #fff;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 13px;
 }
 
 #jquery-loader-background {

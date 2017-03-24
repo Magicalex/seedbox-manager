@@ -14,6 +14,7 @@ core:
 
   header:
     logout: Déconnexion
+    logout_message: Redirection vers {url}
     about_us: A propos
     administration: Administration
     settings: Paramètres

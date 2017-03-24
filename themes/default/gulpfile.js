@@ -11,7 +11,7 @@ var uglify = require('gulp-uglify');
 // ----------------------------
 var files = {
   js: [
-    'bower_components/jquery/dist/jquery.slim.min.js',
+    'bower_components/jquery/dist/jquery.min.js',
     'bower_components/bootstrap/dist/js/bootstrap.min.js',
     'bower_components/jquery-loader-plugin/min/jquery.loader.min.js',
     'js/app.js'

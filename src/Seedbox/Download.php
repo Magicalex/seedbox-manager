@@ -2,8 +2,6 @@
 
 namespace App\Seedbox;
 
-use App\Seedbox\Users;
-
 class Download
 {
     public static function filezilla(Users $user, $server)

@@ -1,34 +1,51 @@
+"use strict";
+
 (function ($) {
+
   $('.load-average').tooltip({
     placement: 'top',
     trigger: 'hover'
   }).tooltip('hide');
 
-  /* Envoie les donnees de supp au modal */
   $('.popup-delete-user').click(function () {
-    var userName = $(this).data('user');
-    $('#deleteUserName').val(userName); // id input modal delete user add value="userName"
-    $('#target-delete-user').html(userName);
+    var username = $(this).data('user');
+    $('#deleteUserName').val(username); // id input modal delete user add value="username"
+    $('#target-delete-user').html(username);
   });
 
-  /* function LOGOUT */
   $('#logout').click(function () {
-    var UrlRedirect = $(this).data('urlredirect');
+    var logout_url = $(this).data('logouturl');
+    var logout_message = $(this).data('logoutmessage');
     var protocol = window.location.protocol;
     var host = window.location.host;
     var uri = window.location.pathname;
 
-    $.get(protocol + '//logout@' + host + uri);
+    var url = protocol + '//' + host + uri;
+
+    console.log(url);
+
+    $.ajax({
+      xhrFields: {
+        withCredentials: true
+      },
+      headers: {
+        'Authorization': 'Basic ' + btoa('logout:logout')
+      },
+      url: url
+    });
+
     $.loader({
       id: 'jquery-loader',
       className: '',
-      content: '<span>Déconnexion...</span>',
+      content: '<span>'+logout_message+'</span>',
       height: 60,
       width: 200,
       background: {id:'jquery-loader-background'}
     });
+
     setTimeout(function () {
-      window.location.href = UrlRedirect;
-    }, 1000);
+      window.location.href = logout_url;
+    }, 2000);
   });
+
 })(jQuery);
