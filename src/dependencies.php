@@ -1,12 +1,12 @@
 <?php
 
-use Slim\Flash\Messages;
-use Slim\Views\Twig;
-use Slim\Views\TwigExtension;
-use Symfony\Bridge\Twig\Extension\TranslationExtension;
-use Symfony\Component\Translation\Loader\YamlFileLoader;
-use Symfony\Component\Translation\MessageSelector;
-use Symfony\Component\Translation\Translator;
+use \Slim\Flash\Messages;
+use \Slim\Views\Twig;
+use \Slim\Views\TwigExtension;
+use \Symfony\Bridge\Twig\Extension\TranslationExtension;
+use \Symfony\Component\Translation\Loader\YamlFileLoader;
+use \Symfony\Component\Translation\MessageSelector;
+use \Symfony\Component\Translation\Translator;
 
 $container = $app->getContainer();
 
@@ -62,5 +62,5 @@ $container['\App\Controller\InstallController'] = function ($container) {
 };
 
 $container['\App\Controller\DownloadController'] = function () {
-    return new \App\Controller\InstallController();
+    return new \App\Controller\DownloadController();
 };

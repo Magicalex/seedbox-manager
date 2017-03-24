@@ -1,19 +1,22 @@
 <?php
 
-namespace App\DownloadController;
+namespace App\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Http\Stream;
+use App\Seedbox\Download;
 
 class DownloadController
 {
     public function download(ServerRequestInterface $request, ResponseInterface $response, $args)
     {
-        $file = $args['file'];
+        if ($args['file']) {
+        }
 
-        $file = '/path/to';
+        $file = __DIR__.'/../../conf/config.ini';
         $fh = fopen($file, 'rb');
+
         $stream = new Stream($fh); // create a stream instance for the response body
 
         $response->withHeader('Content-Type', 'application/force-download')
@@ -34,9 +37,13 @@ class DownloadController
 // $downlad = function ($file_config_name, $conf_ext_prog) {
 //
 //     file_put_contents('../conf/users/' . $this->userName . '/' . $file_config_name, $conf_ext_prog);
+//     set_time_limit(0);
 //
+//     $path_file_name = '../conf/users/' . $this->userName . '/' . $file_config_name;
+//     $file_name = $file_config_name;
 //     $file_size = filesize($path_file_name);
 //
+//     ini_set('zlib.output_compression', 0);
 //     header('Content-Description: File Transfer');
 //     header('Content-Type: application/octet-stream');
 //     header('Content-Disposition: attachment; filename="' . $file_name . '"');
@@ -44,10 +51,11 @@ class DownloadController
 //     header('Expires: 0');
 //     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 //     header('Pragma: public');
-//     header('Content-Length: ' . filesize($path_file_name));
-//
+//     header('Content-Length: ' . $file_size);
+//     ob_clean();
+//     flush();
+//     readfile($path_file_name);
 //     //delete file config (transdroid|filezilla) for security.
 //     unlink('../conf/users/' . $this->userName . '/' . $file_config_name);
-//
 //     exit;
 // }

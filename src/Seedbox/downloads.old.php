@@ -44,7 +44,7 @@ $tableau_conf_trandroid = [
     'ui_ask_before_remove' => true
 ];
 
-$conf_json_trandroid = json_encode($tableau_conf_trandroid);
+$conf_json_trandroid = json_encode($tableau_conf_trandroid, JSON_PRETTY_PRINT);
 
 // setting filezilla
 $conf_xml_filezilla = '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".

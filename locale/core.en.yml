@@ -44,7 +44,7 @@ core:
     tera_octet: TB
     peta_octet: PB
     uptime_server: Server uptime
-    days: days
+    days: days and
     hours: h
     minutes: min
     load_average: Server load

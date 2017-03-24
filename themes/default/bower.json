@@ -1,8 +1,8 @@
 {
   "name": "seedbox-manager",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "authors": [
-    "Magicalex <magicalex14000@gmail.com>"
+    "Magicalex <magicalex@mondedie.fr>"
   ],
   "description": "Web app for manage your seedbox",
   "private": true,

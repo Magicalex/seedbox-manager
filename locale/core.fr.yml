@@ -44,7 +44,7 @@ core:
     tera_octet: To
     peta_octet: Po
     uptime_server: Temps de disponibilité du serveur
-    days: jours
+    days: jours et
     hours: h
     minutes: min
     load_average: Charge serveur
