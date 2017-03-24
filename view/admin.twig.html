@@ -3,7 +3,10 @@
 {% block content %}
 <h1 class="page-header dashboard"><i class="glyphicon glyphicon-cog"></i> {{ 'core.admin.administration_area'|trans }}</h1>
 {% if notifications.admin_update_ini is defined and notifications.admin_update_ini.0 == true %}
-<div class="alert alert-success">{{ 'core.admin.success_update'|trans({'{username}': member.name })|raw }}</div>
+<div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{ 'core.admin.success_update'|trans({'{username}': member.name })|raw }}
+</div>
 {% elseif notifications.admin_update_ini is defined and notification_update_ini_file == false %}
 <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -12,6 +15,7 @@
 {% endif %}
 {% if notifications.admin_delete_user is defined and notifications.admin_delete_user.0 == true %}
 <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     {{ 'core.admin.success_delete_user'|trans({'{username}': notifications.admin_delete_user.1 })|raw }}
 </div>
 {% elseif notifications.admin_delete_user is defined and notifications.admin_delete_user.0 == false %}

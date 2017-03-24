@@ -1,5 +1,7 @@
 # Description of seedbox-manager
 
+[![StyleCI](https://styleci.io/repos/18575839/shield?branch=master)](https://styleci.io/repos/18575839)
+
 seedbox-manager is web app for manage your seedbox.
 
  * reboot of rtorrent
@@ -7,8 +9,6 @@ seedbox-manager is web app for manage your seedbox.
  * statistic server (load average, uptime).
  * download file config of filezilla et transdroid.
  * admin area
-
-**Auteur :** Backtoback (c) & Magicalex (php) & hydrog3n (php).  
 
 ## Installation
 
@@ -64,7 +64,7 @@ To obtain the admin rights :
 ```bash
 vi /var/www/seedbox-manager/conf/users/{utilisateur}/config.ini
 ```
-and replace (owner = no by owner = yes)
+and replace `owner = no` by `owner = yes`
 
 ## developement
 

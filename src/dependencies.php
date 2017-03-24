@@ -12,7 +12,7 @@ $container = $app->getContainer();
 
 $container['view'] = function ($container) {
     $view = new Twig(__DIR__.'/../view', [
-        //'cache' => '../cache' // à réactiver
+        'cache' => '../cache'
     ]);
 
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
