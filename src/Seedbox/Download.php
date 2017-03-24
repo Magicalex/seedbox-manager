@@ -2,11 +2,10 @@
 
 namespace App\Seedbox;
 
-use \App\Seedbox\Utils;
+use App\Seedbox\Utils;
 
 class Download extends Users
 {
-
     protected $username;
     // $title_seedbox = 'seedbox-'.$userName;
     // $user = new Users($file_user_ini, $userName);
@@ -18,7 +17,6 @@ class Download extends Users
     {
         $this->username = Utils::getCurrentUser();
     }
-
 
     public static function filezilla($pwd)
     {

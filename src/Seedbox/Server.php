@@ -51,6 +51,7 @@ class Server extends Users
         } else {
             $result = false;
         }
+
         return $result;
     }
 
