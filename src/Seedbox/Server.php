@@ -20,8 +20,8 @@ class Server extends Users
         $time['min'] = floor($time['min'] - $time['days'] * 60 * 24 - $time['hours'] * 60);
 
         return [
-            'days'    => $time['days'],
-            'hours'   => $time['hours'],
+            'days' => $time['days'],
+            'hours' => $time['hours'],
             'minutes' => $time['min']
         ];
     }

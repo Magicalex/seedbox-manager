@@ -37,9 +37,9 @@ class AdminController
     public function index(ServerRequestInterface $request, ResponseInterface $response)
     {
         return $this->view->render($response, 'admin.twig.html', [
-            'user'          => $this->user,
-            'member'        => $this->user,
-            'server'        => $this->server,
+            'user' => $this->user,
+            'member' => $this->user,
+            'server' => $this->server,
             'notifications' => $this->flash->getMessages()
         ]);
     }
@@ -51,9 +51,9 @@ class AdminController
         $server = new Server(__DIR__."/../../conf/users/{$username}/config.ini", $username);
 
         return $this->view->render($response, 'admin.twig.html', [
-            'user'          => $this->user,
-            'member'        => $member,
-            'server'        => $server,
+            'user' => $this->user,
+            'member' => $member,
+            'server' => $server,
             'notifications' => $this->flash->getMessages()
         ]);
     }
@@ -66,13 +66,13 @@ class AdminController
         $update->update([
             'user' => [
                 'user_directory' => $param['user_directory'],
-                'scgi_folder'    => $param['scgi_folder']
+                'scgi_folder' => $param['scgi_folder']
             ],
             'nav' => [
                 'data_link' => $param['data_link']
             ],
             'ftp' => [
-                'port_ftp'  => $param['port_ftp'],
+                'port_ftp' => $param['port_ftp'],
                 'port_sftp' => $param['port_sftp']
             ],
             'support' => [

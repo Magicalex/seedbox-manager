@@ -2,9 +2,7 @@
 
 namespace App\Seedbox;
 
-use App\Seedbox\Utils;
-
-class Download extends Users
+class Download
 {
     protected $username;
     // $title_seedbox = 'seedbox-'.$userName;

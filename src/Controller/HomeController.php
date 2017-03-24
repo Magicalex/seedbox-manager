@@ -40,23 +40,21 @@ class HomeController
         $server = $request->getServerParams();
         $host = $this->checkhttps($server);
 
-        $message = $this->flash->getMessages();
-
         return $this->view->render($response, 'index.twig.html', [
-            'host'             => $host,
-            'ipUser'           => $server['REMOTE_ADDR'],
-            'user'             => $this->user,
-            'server'           => $this->server,
+            'host' => $host,
+            'ipUser' => $server['REMOTE_ADDR'],
+            'user' => $this->user,
+            'server' => $this->server,
             'read_data_reboot' => $read_data_reboot,
-            'notifications'    => $this->flash->getMessages()
+            'notifications' => $this->flash->getMessages()
         ]);
     }
 
     public function settings(ServerRequestInterface $request, ResponseInterface $response)
     {
         return $this->view->render($response, 'settings.twig.html', [
-            'user'          => $this->user,
-            'server'        => $this->server,
+            'user' => $this->user,
+            'server' => $this->server,
             'notifications' => $this->flash->getMessages()
         ]);
     }
@@ -65,7 +63,6 @@ class HomeController
     {
         $param = $request->getParsedBody();
         $option = (isset($param['irssi'])) ? true : false;
-
         $reboot_rtorrent = $this->user->rebootRtorrent($option);
         $this->flash->addMessage('rtorrent', $reboot_rtorrent);
 
@@ -79,8 +76,8 @@ class HomeController
         $update->update([
             'user' => [
                 'active_bloc_info' => isset($param['active_bloc_info']) ? true : false,
-                'theme'            => $param['theme'],
-                'language'         => $param['language']
+                'theme' => $param['theme'],
+                'language' => $param['language']
             ],
             'ftp' => [
                 'active_ftp' => isset($param['active_ftp']) ? true : false

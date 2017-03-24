@@ -25,8 +25,8 @@ class InstallController
         $root_path = substr(getcwd(), 0, -7);
 
         return $this->view->render($response, 'install.twig.html', [
-            'username'  => $this->username,
-            'user_php'  => $user_name_php,
+            'username' => $this->username,
+            'user_php' => $user_name_php,
             'root_path' => $root_path
         ]);
     }
