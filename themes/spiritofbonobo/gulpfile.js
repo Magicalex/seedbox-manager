@@ -12,14 +12,13 @@ var files = {
 
   css: [
     'bower_components/bootstrap/dist/css/bootstrap.min.css',
-    'bower_components/components-font-awesome/css/font-awesome.min.css',
+    'bower_components/font-awsome/css/font-awesome.min.css',
     'bower_components/jquery-loader-plugin/min/jquery.loader.min.css',
     'css/style.css'
   ],
 
   fonts: [
-    'bower_components/components-font-awesome/fonts/*',
-    'bower_components/bootstrap/fonts/*'
+    'bower_components/font-awsome/fonts/*'
   ],
 
   images: [
@@ -50,19 +49,19 @@ gulp.task('bower', function() {
 
 gulp.task('fonts', function() {
   return gulp.src(files.fonts)
-    .pipe(gulp.dest('../../public/fonts'));
+    .pipe(gulp.dest('../../assets/fonts'));
 });
 
 gulp.task('img', function() {
   return gulp.src(files.images)
-    .pipe(gulp.dest('../../public/img'));
+    .pipe(gulp.dest('../../assets/img'));
 });
 
 gulp.task('css', ['bower'],function() {
   return gulp.src(files.css)
     .pipe(cssmin(option.cssmin))
     .pipe(concat('spiritofbonobo.css'))
-    .pipe(gulp.dest('../../public/css'));
+    .pipe(gulp.dest('../../assets'));
 });
 
 gulp.task('watch', ['default'], function() {

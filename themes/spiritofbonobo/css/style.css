@@ -1,6 +1,12 @@
 /* CODE CSS THEME SPIRITOFBONOBO */
 
-/* CODE CSS THEME DEFAULT */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../assets/fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('../assets/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../assets/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../assets/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../assets/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../assets/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 ::-moz-selection {
   background: #ff3c78;
@@ -13,7 +19,7 @@
 }
 
 body {
-  background: url("../img/background.png");
+  background: url('../assets/img/bg.png');
 }
 
 ul {
@@ -94,6 +100,10 @@ button[data-dismiss="modal"] {
   font-size: 11px;
 }
 
+.uptime {
+  margin-top: 10px;
+}
+
 .glyphicon-refresh {
   margin-right: 7px;
 }
@@ -149,20 +159,12 @@ textarea {
 }
 
 #jquery-loader {
-  position: relative;
-  background-image: url("https://raw.githubusercontent.com/mimiz/jquery-loader-plugin/master/images/ajax-loader.gif");
-  background-position: center top;
-  background-repeat: no-repeat;
-  border: none;
   background-color: transparent;
-  width: 300px !important;
+  border: none;
+  width: 250px !important;
 }
 
-#jquery-loader span {
-  position: absolute;
-  bottom: 0;
-  display: block;
-  width: 100%;
+#jquery-loader p {
   text-align: center;
   color: #fff;
   font-size: 13px;
@@ -187,12 +189,11 @@ textarea {
   font-family: 'Ubuntu';
   font-style: normal;
   font-weight: 400;
-  src: local('Ubuntu'), url(https://themes.googleusercontent.com/static/fonts/ubuntu/v5/_xyN3apAT_yRRDeqB3sPRg.woff) format('woff');
+  src: local('Ubuntu'), url('https://themes.googleusercontent.com/static/fonts/ubuntu/v5/_xyN3apAT_yRRDeqB3sPRg.woff') format('woff');
 }
 
 body {
   font-family: 'Ubuntu';
-  background-image: url("../img/bg.png");
 }
 
 h2 {
@@ -205,7 +206,6 @@ h2 {
 }
 
 .navbar-default {
-  background-image: -webkit-linear-gradient(top,#fff 0, #f8f8f8 100%);
   background-image: linear-gradient(to bottom, #3a3a3a 0, grey 200%);
   background-repeat: repeat-x;
   box-shadow: 1px 1px 10px #000;

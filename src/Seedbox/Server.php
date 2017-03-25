@@ -2,9 +2,14 @@
 
 namespace App\Seedbox;
 
-class Server extends Users
+class Server
 {
     const VERSION = '3.0.0';
+
+    public static function version()
+    {
+        return self::VERSION;
+    }
 
     public static function getUptime()
     {
@@ -36,32 +41,18 @@ class Server extends Users
         return $load_average;
     }
 
-    public function CheckUpdate()
+    public static function CheckUpdate()
     {
         $lifetime_cookie = time() + 3600 * 24;
-        if (!isset($_COOKIE['seedbox-manager']) && $this->is_admin === true) {
+        if (!isset($_COOKIE['seedbox-manager'])) {
             setcookie('seedbox-manager', 'check-update', $lifetime_cookie, '/', null, false, true);
             $url_repository = 'https://raw.githubusercontent.com/Magicalex/seedbox-manager/master/version.json';
             $remote = json_decode(file_get_contents($url_repository));
             if (self::VERSION !== $remote->version) {
-                $result = $remote;
-            } else {
-                $result = false;
+                return $remote;
             }
-        } else {
-            $result = false;
         }
 
-        return $result;
-    }
-
-    public function logout_url_redirect()
-    {
-        return $this->url_redirect;
-    }
-
-    public function version()
-    {
-        return self::VERSION;
+        return false;
     }
 }

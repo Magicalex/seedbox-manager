@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class Auth
 {
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, $next)
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
         $server = $request->getServerParams();
         $auth = self::auth($server);

@@ -1,5 +1,13 @@
 /* CODE CSS THEME DEFAULT */
 
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../assets/fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('../assets/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../assets/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../assets/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../assets/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../assets/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 ::-moz-selection {
   background: #ff3c78;
   color: #fff;
@@ -11,7 +19,7 @@
 }
 
 body {
-  background: url("../img/background.png");
+  background: url('../assets/img/background.png');
 }
 
 ul {
@@ -155,20 +163,12 @@ textarea {
 }
 
 #jquery-loader {
-  position: relative;
-  background-image: url("https://raw.githubusercontent.com/mimiz/jquery-loader-plugin/master/images/ajax-loader.gif");
-  background-position: center top;
-  background-repeat: no-repeat;
-  border: none;
   background-color: transparent;
-  width: 300px !important;
+  border: none;
+  width: 250px !important;
 }
 
-#jquery-loader span {
-  position: absolute;
-  bottom: 0;
-  display: block;
-  width: 100%;
+#jquery-loader p {
   text-align: center;
   color: #fff;
   font-size: 13px;

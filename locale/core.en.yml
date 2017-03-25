@@ -18,6 +18,7 @@ core:
     about_us: About us
     administration: Administration
     settings: Settings
+    support: Support
 
   index:
     dashboard: Dashboard

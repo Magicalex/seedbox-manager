@@ -12,7 +12,7 @@ $container = $app->getContainer();
 
 $container['view'] = function ($container) {
     $view = new Twig(__DIR__.'/../view', [
-        'cache' => '../cache'
+        //'cache' => __DIR__.'/../cache'
     ]);
 
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
@@ -43,16 +43,18 @@ $container['\App\Controller\HomeController'] = function ($container) {
     $view = $container->get('view');
     $flash = $container->get('flash');
     $translator = $container->get('translate');
+    $router = $container->get('router');
 
-    return new \App\Controller\HomeController($view, $flash, $translator);
+    return new \App\Controller\HomeController($view, $flash, $translator, $router);
 };
 
 $container['\App\Controller\AdminController'] = function ($container) {
     $view = $container->get('view');
     $flash = $container->get('flash');
     $translator = $container->get('translate');
+    $router = $container->get('router');
 
-    return new \App\Controller\AdminController($view, $flash, $translator);
+    return new \App\Controller\AdminController($view, $flash, $translator, $router);
 };
 
 $container['\App\Controller\InstallController'] = function ($container) {
@@ -64,3 +66,7 @@ $container['\App\Controller\InstallController'] = function ($container) {
 $container['\App\Controller\DownloadController'] = function () {
     return new \App\Controller\DownloadController();
 };
+
+// $container['User'] = function () {
+//     return new Users('', 'username');
+// };

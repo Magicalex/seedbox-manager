@@ -22,7 +22,7 @@ class InstallController
     public function index(ServerRequestInterface $request, ResponseInterface $response)
     {
         $user_name_php = Install::get_user_php();
-        $root_path = substr(getcwd(), 0, -7);
+        $root_path = getcwd();
 
         return $this->view->render($response, 'install.twig.html', [
             'username' => $this->username,

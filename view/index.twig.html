@@ -1,7 +1,7 @@
 {% extends 'layout.twig.html' %}
 
 {% block content %}
-<h1 class="page-header dashboard"><i class="glyphicon glyphicon-dashboard"></i> {{ 'core.index.dashboard'|trans }}</h1>
+<h1 class="page-header dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i> {{ 'core.index.dashboard'|trans }}</h1>
 {% if notifications.rtorrent.0.statusReboot is defined and notifications.rtorrent.0.statusReboot == 0 %}
 <div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -25,7 +25,7 @@
     {% endfor %}
 </div>
 {% endif %}
-{% if server.CheckUpdate != false %}
+{% if server.CheckUpdate != false and user.isAdmin == true %}
 <div class="alert alert-info">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <h4>{{ 'core.index.new_version'|trans }} (v{{ server.CheckUpdate.version }})</h4>
@@ -34,16 +34,16 @@
 </div>
 {% endif %}
 <section class="row">
-    {% if user.bloc_info == true %}
+    {% if user.enableInfo == true %}
     <article class="col-md-6" id ="bloc-info">
         <div class="well well-sm">
             <h4 class="titre-head"><i class="fa fa-home"></i> {{ 'core.index.title_info_user'|trans }}</h4>
             <div class="trait"></div>
-            <p><i class="fa fa-map-marker"></i> <strong>{{ 'core.index.ip_address'|trans }}</strong></p>
+            <p><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>{{ 'core.index.ip_address'|trans }}</strong></p>
             <ul>
                 <li><strong class="text-success">{{ ipUser }}</strong></li>
             </ul>
-            <p><i class="fa fa-hdd-o"></i> <strong>{{ 'core.index.disk_space'|trans }}</strong></p>
+            <p><i class="fa fa-hdd-o" aria-hidden="true"></i> <strong>{{ 'core.index.disk_space'|trans }}</strong></p>
             <p class="text-center text-defaut-color">
                 <em>{{ 'core.index.used'|trans }} <strong>{{ user.userdisk.used_disk.octets }} {{ 'core.index.%s'|format(user.userdisk.used_disk.unit)|trans }}</strong></em>,
                 <em>{{ 'core.index.available'|trans }} <strong>{{ user.userdisk.free_disk.octets }} {{ 'core.index.%s'|format(user.userdisk.free_disk.unit)|trans }}</strong></em>,
@@ -55,7 +55,7 @@
                     {{ user.userdisk.percentage_used }}%
                 </div>
             </div>
-            <p><i class="fa fa-clock-o"></i> <strong>{{ 'core.index.uptime_server'|trans }}</strong></p>
+            <p><i class="fa fa-clock-o" aria-hidden="true"></i> <strong>{{ 'core.index.uptime_server'|trans }}</strong></p>
             <ul>
                 <li>
                     <strong class="text-success">
@@ -65,7 +65,7 @@
                     </strong>
                 </li>
             </ul>
-            <p><i class="glyphicon glyphicon-stats"></i> <strong>{{ 'core.index.load_average'|trans }}</strong></p>
+            <p><i class="fa fa-tasks" aria-hidden="true"></i> <strong>{{ 'core.index.load_average'|trans }}</strong></p>
             <ul>
                 <li class="uptime">
                     <span data-original-title="{{ 'core.index.load_average_1'|trans }}" class="label label-primary load-average">{{ server.load_average.0 }}</span>
@@ -87,7 +87,7 @@
         </div>
     </article>
     {% endif %}
-    {% if user.bloc_ftp == true %}
+    {% if user.enableFtp == true %}
     <article class="col-md-6" id="bloc-ftp">
         <div class="well well-sm">
             <h4 class="titre-head"><i class="fa fa-link"></i> {{ 'core.index.title_access'|trans }}</h4>
@@ -98,30 +98,30 @@
                 <li>{{ 'core.index.user_ftp'|trans }} : <em>{{ user.name }}</em></li>
                 <li>{{ 'core.index.port_ftp'|trans }} : <em>{{ user.portFtp }}</em></li>
                 <li>{{ 'core.index.port_sftp'|trans }} : <em>{{ user.portSftp }}</em></li>
-                <li><a class="btn btn-info btn-xs" href="https://filezilla.fr/" target="_blank"><i class="glyphicon glyphicon-download-alt"></i> {{ 'core.index.download_filezilla'|trans }}</a></li>
-                <li><a id="popupfilezilla" class="btn btn-info btn-xs" data-toggle="popover" href="/download/filezilla"><i class="fa fa-files-o"></i> {{ 'core.index.configuration_file'|trans }}</a></li>
+                <li><a class="btn btn-info btn-xs" href="https://filezilla.fr/" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> {{ 'core.index.download_filezilla'|trans }}</a></li>
+                <li><a id="popupfilezilla" class="btn btn-info btn-xs" data-toggle="popover" href="{{ path_for('download', {'file': 'filezilla'}) }}"><i class="fa fa-files-o"></i> {{ 'core.index.configuration_file'|trans }}</a></li>
             </ul>
             <h5 class="device"><i class="fa fa-android"></i> <strong>{{ 'core.index.app_transdroid'|trans }}</strong></h5>
             <ul>
                 <li>{{ 'core.index.folder_scgi'|trans }} : <em><strong>{{ user.scgi_folder }}</strong></em></li>
-                <li>{{ 'core.index.http_address'|trans }} : <em>http://{{ host }}</em></li>
+                <li>{{ 'core.index.http_address'|trans }} : <em>{{ host }}</em></li>
                 <li>{{ 'core.index.user_transdroid'|trans }} : <em>{{ user.name }}</em></li>
-                <li><a class="btn btn-info btn-xs" href="http://transdroid.org/latest"><i class="glyphicon glyphicon-download-alt"></i> {{ 'core.index.download_transdroid'|trans }}</a></li>
-                <li><a id="popuptransdroid" class="btn btn-info btn-xs" data-toggle="popover" href="/download/transdroid"><i class="fa fa-files-o"></i> {{ 'core.index.configuration_file'|trans }}</a></li>
+                <li><a class="btn btn-info btn-xs" href="http://transdroid.org/latest"><i class="fa fa-download" aria-hidden="true"></i> {{ 'core.index.download_transdroid'|trans }}</a></li>
+                <li><a id="popuptransdroid" class="btn btn-info btn-xs" data-toggle="popover" href="{{ path_for('download', {'file': 'transdroid'}) }}"><i class="fa fa-files-o"></i> {{ 'core.index.configuration_file'|trans }}</a></li>
             </ul>
         </div>
     </article>
     {% endif %}
 </section>
 <section class="row">
-{% if user.bloc_rtorrent == true %}
+{% if user.enableRtorrent == true %}
 <article class="col-md-6">
     <div class="well well-sm">
-        <h4 class="titre-head"><i class="fa fa-terminal"></i> {{ 'core.index.restart_rtorrent'|trans }}</h4>
+        <h4 class="titre-head"><i class="fa fa-terminal" aria-hidden="true"></i> {{ 'core.index.restart_rtorrent'|trans }}</h4>
         <div class="trait"></div>
         <p class="text-center btn-reboot">
             <a data-toggle="modal" href="#popupreboot" class="btn btn-info btn-lg" style="vertical-align: middle;">
-                <span class="glyphicon glyphicon-refresh"></span>{{ 'core.index.restart_rtorrent'|trans }}
+                <i class="fa fa-refresh" aria-hidden="true"></i> {{ 'core.index.restart_rtorrent'|trans }}
             </a>
         </p>
         {% if read_data_reboot.file_exist %}
@@ -137,7 +137,7 @@
 <div class="modal fade" id="popupreboot" tabindex="-1" role="dialog" aria-labelledby="target-rtorrent" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="/reboot-rtorrent" method="post">
+            <form action="{{ path_for('reboot') }}" method="post">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="target-rtorrent">{{ 'core.index.modal.warning'|trans }}</h4>

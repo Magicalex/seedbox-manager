@@ -4,16 +4,18 @@ use \App\Middleware\Admin as isAdmin;
 use \App\Middleware\Auth as isAuth;
 use \App\Middleware\Installed as checkInstall;
 
-$app->group('/', function () {
-    $this->get('', '\App\Controller\HomeController:index');
-    $this->get('settings', '\App\Controller\HomeController:settings');
-    $this->get('admin', '\App\Controller\AdminController:index')->add(new isAdmin());
-    $this->get('admin/{username:[a-z]+}', '\App\Controller\AdminController:user')->add(new isAdmin());
-    $this->get('download/{file:[a-z]+}', '\App\Controller\DownloadController:download');
-    $this->post('reboot-rtorrent', '\App\Controller\HomeController:reboot');
-    $this->post('settings/update', '\App\Controller\HomeController:update');
-    $this->post('admin/update/{username:[a-z]+}', '\App\Controller\AdminController:update')->add(new isAdmin());
-    $this->post('admin/delete', '\App\Controller\AdminController:delete')->add(new isAdmin());
-})->add(new checkInstall())->add(new isAuth());
+//$app->add(new isAuth());
 
-$app->get('/install', '\App\Controller\InstallController:index');
+$app->group('/', function () {
+    $this->get('', '\App\Controller\HomeController:index')->setName('home');
+    $this->get('settings', '\App\Controller\HomeController:settings')->setName('setting');
+    $this->get('admin', '\App\Controller\AdminController:index')->add(new isAdmin())->setname('admin');
+    $this->get('admin/{username:[a-z]+}', '\App\Controller\AdminController:user')->add(new isAdmin())->setname('adminProfil');
+    $this->get('download/{file:[a-z]+}', '\App\Controller\DownloadController:download')->setName('download');
+    $this->post('reboot', '\App\Controller\HomeController:reboot')->setName('reboot');
+    $this->post('settings/update', '\App\Controller\HomeController:update')->setName('updateSettingUser');
+    $this->post('admin/update/{username:[a-z]+}', '\App\Controller\AdminController:update')->add(new isAdmin())->setName('updateAdminUser');
+    $this->post('admin/delete', '\App\Controller\AdminController:delete')->add(new isAdmin())->setName('updateDeleteUser');
+})->add(new checkInstall($container->get('router')));
+
+$app->get('/install', '\App\Controller\InstallController:index')->setName('install');

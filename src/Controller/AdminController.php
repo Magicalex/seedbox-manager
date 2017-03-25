@@ -19,19 +19,19 @@ class AdminController
     protected $username;
     protected $fileini;
     protected $user;
-    protected $server;
+    protected $router;
 
-    public function __construct(Twig $view, Flash $flash, Translator $translator)
+    public function __construct(Twig $view, Flash $flash, Translator $translator, $router)
     {
         $this->view = $view;
         $this->flash = $flash;
+        $this->router = $router;
 
         $this->username = Utils::getCurrentUser();
         $this->fileini = Utils::getFileini($this->username);
         $this->user = new Users($this->fileini, $this->username);
-        $this->server = new Server($this->fileini, $this->username);
 
-        $translator->setLocale($this->user->language());
+        $translator->setLocale($this->user->language);
     }
 
     public function index(ServerRequestInterface $request, ResponseInterface $response)
@@ -39,7 +39,7 @@ class AdminController
         return $this->view->render($response, 'admin.twig.html', [
             'user' => $this->user,
             'member' => $this->user,
-            'server' => $this->server,
+            'all_users' => Utils::get_all_users(),
             'notifications' => $this->flash->getMessages()
         ]);
     }
@@ -48,12 +48,11 @@ class AdminController
     {
         $username = $args['username'];
         $member = new Users(__DIR__."/../../conf/users/{$username}/config.ini", $username);
-        $server = new Server(__DIR__."/../../conf/users/{$username}/config.ini", $username);
 
         return $this->view->render($response, 'admin.twig.html', [
             'user' => $this->user,
             'member' => $member,
-            'server' => $server,
+            'all_users' => Utils::get_all_users(),
             'notifications' => $this->flash->getMessages()
         ]);
     }
@@ -83,17 +82,18 @@ class AdminController
         $logs = $update->write();
         $this->flash->addMessage('admin_update_ini', $logs);
 
-        return $response->withStatus(302)->withHeader('Location', "/admin/{$username}");
+        return $response->withStatus(302)->withHeader('Location', $this->router->pathFor('adminProfil', ['username' => $username]));
+
     }
 
     public function delete(ServerRequestInterface $request, ResponseInterface $response)
     {
         $username = $request->getParsedBody()['deleteUserName'];
-        $logs = Users::delete_config_old_user(__DIR__."/../../conf/users/{$username}");
+        $logs = Utils::delete_config_old_user(__DIR__."/../../conf/users/{$username}");
 
         $this->flash->addMessage('admin_delete_user', $logs);
         $this->flash->addMessage('admin_delete_user', $username);
 
-        return $response->withStatus(302)->withHeader('Location', '/admin');
+        return $response->withStatus(302)->withHeader('Location', $this->router->pathFor('admin'));
     }
 }

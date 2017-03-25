@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <title>Seedbox Manager</title>
-        <link type="text/css" rel="stylesheet" href="/css/{{ user.theme }}.css">
+        <link type="text/css" rel="stylesheet" href="{{ path_for('home') }}assets/{{ user.theme }}.css">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1">
     </head>
     <body>
@@ -17,7 +17,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Seedbox Manager</a>
+                    <a class="navbar-brand" href="{{ path_for('home') }}">Seedbox Manager</a>
                 </div>
                 <nav class="collapse navbar-collapse phone-menu">
                     <ul class="nav navbar-nav">
@@ -27,15 +27,15 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle user" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> {{ user.name }} <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle user" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i> {{ user.username }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/settings"><i class="glyphicon glyphicon-wrench"></i> {{ 'core.header.settings'|trans }}</a></li>
-                                {% if user.is_admin == true %}<li><a href="/admin"><i class="glyphicon glyphicon-cog"></i> {{ 'core.header.administration'|trans }}</a></li>{% endif %}
-                                <li><a href="mailto:{{ user.support_mail }}"><i class="glyphicon glyphicon-envelope"></i> support</a></li>
-                                <li><a class="aboutlink" data-toggle="modal" href="#popupinfo"><i class="glyphicon glyphicon-info-sign"></i> {{ 'core.header.about_us'|trans }}</a></li>
+                                <li><a href="{{ path_for('setting') }}"><i class="fa fa-sliders" aria-hidden="true"></i> {{ 'core.header.settings'|trans }}</a></li>
+                                {% if user.isAdmin == true %}<li><a href="{{ path_for('admin') }}"><i class="fa fa-lock" aria-hidden="true"></i> {{ 'core.header.administration'|trans }}</a></li>{% endif %}
+                                <li><a href="mailto:{{ user.supportMail }}"><i class="fa fa-envelope" aria-hidden="true"></i> {{ 'core.header.support'|trans }}</a></li>
+                                <li><a class="aboutlink" data-toggle="modal" href="#popupinfo"><i class="fa fa-info-circle" aria-hidden="true"></i> {{ 'core.header.about_us'|trans }}</a></li>
                                 <li>
-                                    <a id="logout" href="#logout" title="{{ 'core.header.logout'|trans }}" data-logouturl="{{ server.logout_url_redirect }}" data-logoutmessage="{{ 'core.header.logout_message'|trans({'{url}': server.logout_url_redirect }) }}">
-                                        <strong><i class="glyphicon glyphicon-log-out"></i> {{ 'core.header.logout'|trans }}</strong>
+                                    <a id="logout" href="#logout" title="{{ 'core.header.logout'|trans }}" data-logouturl="{{ user.logoutUrl }}" data-logoutmessage="{{ 'core.header.logout_message'|trans({'{url}': user.logoutUrl }) }}">
+                                        <strong><i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'core.header.logout'|trans }}</strong>
                                     </a>
                                 </li>
                             </ul>
@@ -72,7 +72,7 @@
             </div>
         </div>
         {% block modal %}{% endblock %}
-    <script type="text/javascript" src="/js/app.min.js"></script>
+    <script type="text/javascript" src="{{ path_for('home') }}assets/app.min.js"></script>
     </body>
 </html>
 {% endspaceless %}

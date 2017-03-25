@@ -20,23 +20,25 @@ class HomeController
     protected $fileini;
     protected $user;
     protected $server;
+    protected $router;
 
-    public function __construct(Twig $view, Flash $flash, Translator $translator)
+    public function __construct(Twig $view, Flash $flash, Translator $translator, $router)
     {
         $this->view = $view;
         $this->flash = $flash;
+        $this->router = $router;
 
         $this->username = Utils::getCurrentUser();
         $this->fileini = Utils::getFileini($this->username);
         $this->user = new Users($this->fileini, $this->username);
-        $this->server = new Server($this->fileini, $this->username);
+        $this->server = new Server();
 
-        $translator->setLocale($this->user->language());
+        $translator->setLocale($this->user->language);
     }
 
     public function index(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $read_data_reboot = $this->user->readFileDataReboot(__DIR__."/../../conf/users/{$this->user->name()}/data_reboot.txt");
+        $read_data_reboot = Utils::readFileDataReboot(__DIR__."/../../conf/users/{$this->user->username}/data_reboot.txt");
         $server = $request->getServerParams();
         $host = $this->checkhttps($server);
 
@@ -55,6 +57,8 @@ class HomeController
         return $this->view->render($response, 'settings.twig.html', [
             'user' => $this->user,
             'server' => $this->server,
+            'all_themes' => Utils::get_all_themes(),
+            'all_languages' => Utils::get_all_languages(),
             'notifications' => $this->flash->getMessages()
         ]);
     }
@@ -62,11 +66,11 @@ class HomeController
     public function reboot(ServerRequestInterface $request, ResponseInterface $response)
     {
         $param = $request->getParsedBody();
-        $option = (isset($param['irssi'])) ? true : false;
+        $option = isset($param['irssi']) ? true : false;
         $reboot_rtorrent = $this->user->rebootRtorrent($option);
         $this->flash->addMessage('rtorrent', $reboot_rtorrent);
 
-        return $response->withStatus(302)->withHeader('Location', '/');
+        return $response->withStatus(302)->withHeader('Location', $this->router->pathFor('home'));
     }
 
     public function update(ServerRequestInterface $request, ResponseInterface $response)
@@ -93,15 +97,14 @@ class HomeController
         $logs = $update->write();
         $this->flash->addMessage('update_ini_file', $logs);
 
-        return $response->withStatus(302)->withHeader('Location', '/settings');
+        return $response->withStatus(302)->withHeader('Location', $this->router->pathFor('setting'));
     }
 
     protected function checkhttps($param)
     {
         $host = $param['HTTP_HOST'];
-
-        if ($param['HTTP_HOST'] == 'on') {
-            $host = "https://{$param['HTTP_HOST']}";
+        if (isset($param['HTTPS'])) {
+            $host = "https://{$host}";
         }
 
         return $host;

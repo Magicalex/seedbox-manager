@@ -1,7 +1,7 @@
 {% extends 'layout.twig.html' %}
 
 {% block content %}
-<h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> {{ 'core.settings.setting_your_user'|trans }}</h1>
+<h1 class="page-header dashboard"><i class="fa fa-sliders" aria-hidden="true"></i> {{ 'core.settings.setting_your_user'|trans }}</h1>
 {% if notifications.update_ini_file is defined and notifications.update_ini_file.0 == true %}
 <div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -19,27 +19,27 @@
 <section class="row">
     <article class="col-md-12" id="conf-simple-user">
         <div class="well well-sm">
-            <h4 class="titre-head"><i class="glyphicon glyphicon-th-list"></i> {{ 'core.settings.setting_interface'|trans }}</h4>
+            <h4 class="titre-head"><i class="fa fa-bars" aria-hidden="true"></i> {{ 'core.settings.setting_interface'|trans }}</h4>
             <div class="trait"></div>
-            <form method="post" action="/settings/update" role="form">
+            <form method="post" action="{{ path_for('updateSettingUser') }}" role="form">
                 <div class="col-md-12">
                     <fieldset>
                         <legend>{{ 'core.settings.option_homepage'|trans }}</legend>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="active_bloc_info" value="1" id="active_bloc_info" {% if user.bloc_info == true %}checked{% endif %}>
+                                <input type="checkbox" name="active_bloc_info" value="1" id="active_bloc_info" {% if user.enableInfo == true %}checked{% endif %}>
                                 {{ 'core.settings.enable_info_user'|trans }}
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="active_ftp" value="1" id="active_ftp" {% if user.bloc_ftp == true %}checked{% endif %} >
+                                <input type="checkbox" name="active_ftp" value="1" id="active_ftp" {% if user.enableFtp == true %}checked{% endif %} >
                                 {{ 'core.settings.enable_access_ftp'|trans }}
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="active_reboot" value="1" id="active_reboot" {% if user.bloc_rtorrent == true %}checked{% endif %} >
+                                <input type="checkbox" name="active_reboot" value="1" id="active_reboot" {% if user.enableRtorrent == true %}checked{% endif %} >
                                 {{ 'core.settings.enable_reboot_rtorrent'|trans }}
                             </label>
                         </div>
@@ -52,7 +52,7 @@
                             <label for="url-deconnexion">{{ 'core.settings.url_to_redirect'|trans }}</label>
                             <div class="row">
                                 <div class="col-lg-7">
-                                    <input type="url" name="url_redirect" class="form-control" id="url-deconnexion" value="{{ user.url_redirect }}">
+                                    <input type="url" name="url_redirect" class="form-control" id="url-deconnexion" value="{{ user.logoutUrl }}">
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                             <div class="row">
                                 <div class="col-lg-5">
                                     <select name="theme" class="form-control">
-                                    {% for theme in user.get_all_themes %}
+                                    {% for theme in all_themes %}
                                         <option value="{{ theme }}" {% if theme == user.theme %}selected{% endif %}>{{ theme }}</option>
                                     {% endfor %}
                                     </select>
@@ -83,7 +83,7 @@
                             <div class="row">
                                 <div class="col-lg-5">
                                     <select name="language" class="form-control">
-                                    {% for language in user.get_all_languages %}
+                                    {% for language in all_languages %}
                                         <option value="{{ language }}" {% if language == user.language %}selected{% endif %}>{{ language }}</option>
                                     {% endfor %}
                                     </select>

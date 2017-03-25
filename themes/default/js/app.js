@@ -1,7 +1,6 @@
 "use strict";
 
 (function ($) {
-
   $('.load-average').tooltip({
     placement: 'top',
     trigger: 'hover'
@@ -9,7 +8,7 @@
 
   $('.popup-delete-user').click(function () {
     var username = $(this).data('user');
-    $('#deleteUserName').val(username); // id input modal delete user add value="username"
+    $('#deleteUserName').val(username);
     $('#target-delete-user').html(username);
   });
 
@@ -20,10 +19,6 @@
     var host = window.location.host;
     var uri = window.location.pathname;
 
-    var url = protocol + '//' + host + uri;
-
-    console.log(url);
-
     $.ajax({
       xhrFields: {
         withCredentials: true
@@ -31,13 +26,13 @@
       headers: {
         'Authorization': 'Basic ' + btoa('logout:logout')
       },
-      url: url
+      url: protocol + '//' + host + uri
     });
 
     $.loader({
       id: 'jquery-loader',
       className: '',
-      content: '<span>'+logout_message+'</span>',
+      content: '<p><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i></p><p>'+logout_message+'</p>',
       height: 60,
       width: 200,
       background: {id:'jquery-loader-background'}
@@ -47,5 +42,4 @@
       window.location.href = logout_url;
     }, 2000);
   });
-
 })(jQuery);
