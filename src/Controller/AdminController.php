@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Seedbox\Server;
 use App\Seedbox\Users;
 use App\Seedbox\Utils;
 use Psr\Http\Message\ResponseInterface;
@@ -78,19 +77,16 @@ class AdminController
                 'adresse_mail' => $param['adresse_mail']
             ]
         ]);
-
         $logs = $update->write();
         $this->flash->addMessage('admin_update_ini', $logs);
 
         return $response->withStatus(302)->withHeader('Location', $this->router->pathFor('adminProfil', ['username' => $username]));
-
     }
 
     public function delete(ServerRequestInterface $request, ResponseInterface $response)
     {
         $username = $request->getParsedBody()['deleteUserName'];
         $logs = Utils::delete_config_old_user(__DIR__."/../../conf/users/{$username}");
-
         $this->flash->addMessage('admin_delete_user', $logs);
         $this->flash->addMessage('admin_delete_user', $username);
 
