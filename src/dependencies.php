@@ -11,13 +11,9 @@ use \Symfony\Component\Translation\Translator;
 $container = $app->getContainer();
 
 $container['view'] = function ($container) {
-    $view = new Twig(__DIR__.'/../view', [
-        //'cache' => __DIR__.'/../cache'
-    ]);
-
+    $view = new Twig(__DIR__.'/../view', ['cache' => __DIR__.'/../cache']);
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
     $translator = $container->get('translate');
-
     $view->addExtension(new TwigExtension($container['router'], $basePath));
     $view->addExtension(new TranslationExtension($translator));
 
@@ -31,7 +27,6 @@ $container['flash'] = function () {
 $container['translate'] = function () {
     $translator = new Translator('fr', new MessageSelector());
     $translator->addLoader('yaml', new YamlFileLoader());
-
     // add loader (parse directory)
     $translator->addResource('yaml', __DIR__.'/../locale/core.fr.yml', 'fr');
     $translator->addResource('yaml', __DIR__.'/../locale/core.en.yml', 'en');
@@ -66,7 +61,3 @@ $container['\App\Controller\InstallController'] = function ($container) {
 $container['\App\Controller\DownloadController'] = function () {
     return new \App\Controller\DownloadController();
 };
-
-// $container['User'] = function () {
-//     return new Users('', 'username');
-// };

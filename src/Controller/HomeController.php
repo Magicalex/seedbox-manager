@@ -90,7 +90,7 @@ class HomeController
                 'active_reboot' => isset($param['active_reboot']) ? true : false
             ],
             'logout' => [
-                'url_redirect' => $param['url_redirect']
+                'url' => $param['url']
             ]
         ]);
 

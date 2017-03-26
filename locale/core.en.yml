@@ -121,8 +121,8 @@ core:
     modal:
       delete_user: Deleting the user
       body: |
-        <p>&Ecirc;tes-vous sûr de vouloir supprimer la configuration de cette utilisateur ?</p>
-        <p>Cette action est réversible.<br>Dès que votre utilisateur va se connecter les fichiers de configuration seront généré automatiquement (avec une configuration par défaut)</p>
+        <p>Are you sure you want to delete this user's configuration?</p>
+        <p>If your user logs in again the configuration files will be regenerated automatically (with a default configuration)</p>
       cancel: Cancel
       delete: Delete
 

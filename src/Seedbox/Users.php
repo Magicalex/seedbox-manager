@@ -23,7 +23,7 @@ class Users
 
     public function __construct($file_ini, $user)
     {
-        $setting_user_array = parse_ini_file($file_ini, true);
+        $setting_user_array = parse_ini_file($file_ini, true, INI_SCANNER_TYPED);
         $this->username = $user;
         $this->hydrate($setting_user_array);
     }
