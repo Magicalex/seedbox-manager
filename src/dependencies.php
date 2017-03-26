@@ -27,9 +27,15 @@ $container['flash'] = function () {
 $container['translate'] = function () {
     $translator = new Translator('fr', new MessageSelector());
     $translator->addLoader('yaml', new YamlFileLoader());
-    // add loader (parse directory)
-    $translator->addResource('yaml', __DIR__.'/../locale/core.fr.yml', 'fr');
-    $translator->addResource('yaml', __DIR__.'/../locale/core.en.yml', 'en');
+    $files = glob(__DIR__.'/../locale/*.yml');
+
+    foreach ($files as $file) {
+        $info = pathinfo($file);
+        $lang = explode('.', $info['filename']);
+        $lang = $lang[1];
+
+        $translator->addResource('yaml', $file, $lang);
+    }
 
     return $translator;
 };
