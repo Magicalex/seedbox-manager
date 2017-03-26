@@ -4,7 +4,7 @@ use \App\Middleware\Admin as isAdmin;
 use \App\Middleware\Auth as isAuth;
 use \App\Middleware\Installed as checkInstall;
 
-$app->add(new isAuth());
+//$app->add(new isAuth());
 
 $app->group('/', function () {
     $this->get('', '\App\Controller\HomeController:index')->setName('home');

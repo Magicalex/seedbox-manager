@@ -1,6 +1,6 @@
 {
   "name": "seedbox-manager",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "contributors": "magicalex",
   "news": [
     "Suppression du système de support",

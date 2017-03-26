@@ -27,8 +27,6 @@ class DownloadController
             $data = FileConfiguration::transdroid($user, $host);
             $file = 'settings.json';
         } else {
-            $response->getBody()->write('Aucun fichier trouvé');
-
             return $response->withStatus(404);
         }
 
