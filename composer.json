@@ -13,7 +13,8 @@
         "symfony/twig-bridge": "^3.2",
         "symfony/config": "^3.2",
         "symfony/yaml": "^3.2",
-        "magicalex/write-ini-file": "^1.2"
+        "magicalex/write-ini-file": "^1.2",
+        "apfelbox/php-file-download": "^2.1"
     },
     "authors": [
         {

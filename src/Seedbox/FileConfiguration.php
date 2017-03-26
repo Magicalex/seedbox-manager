@@ -2,19 +2,19 @@
 
 namespace App\Seedbox;
 
-class Download
+class FileConfiguration
 {
-    public static function filezilla(Users $user, $server)
+    public static function filezilla(Users $user, $host)
     {
         $filezilla_xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".
         '<FileZilla3>'."\n".
             '<Servers>'."\n".
                 '<Server>'."\n".
-                    '<Host>'.$server['HTTP_HOST'].'</Host>'."\n".
-                    '<Port>'.$user->portFtp().'</Port>'."\n".
+                    '<Host>'.$host.'</Host>'."\n".
+                    '<Port>'.$user->portFtp.'</Port>'."\n".
                     '<Protocol>0</Protocol>'."\n".
                     '<Type>0</Type>'."\n".
-                    '<User>'.$user->name().'</User>'."\n".
+                    '<User>'.$user->name.'</User>'."\n".
                     '<Pass></Pass>'."\n".
                     '<Logontype>1</Logontype>'."\n".
                     '<TimezoneOffset>0</TimezoneOffset>'."\n".
@@ -22,18 +22,18 @@ class Download
                     '<MaximumMultipleConnections>0</MaximumMultipleConnections>'."\n".
                     '<EncodingType>UTF-8</EncodingType>'."\n".
                     '<BypassProxy>0</BypassProxy>'."\n".
-                    '<Name>seedbox-'.$user->name().'-ftp</Name>'."\n".
+                    '<Name>seedbox-'.$user->username.'-ftp</Name>'."\n".
                     '<Comments />'."\n".
                     '<LocalDir />'."\n".
                     '<RemoteDir />'."\n".
-                    '<SyncBrowsing>0</SyncBrowsing>seedbox-'.$user->name().'-ftp&#x0A;'."\n".
+                    '<SyncBrowsing>0</SyncBrowsing>seedbox-'.$user->username.'-ftp&#x0A;'."\n".
                 '</Server>'."\n".
                 '<Server>'."\n".
-                    '<Host>'.$server['HTTP_HOST'].'</Host>'."\n".
-                    '<Port>'.$user->portSftp().'</Port>'."\n".
+                    '<Host>'.$host.'</Host>'."\n".
+                    '<Port>'.$user->portSftp.'</Port>'."\n".
                     '<Protocol>1</Protocol>'."\n".
                     '<Type>0</Type>'."\n".
-                    '<User>'.$user->name().'</User>'."\n".
+                    '<User>'.$user->username.'</User>'."\n".
                     '<Pass></Pass>'."\n".
                     '<Logontype>1</Logontype>'."\n".
                     '<TimezoneOffset>0</TimezoneOffset>'."\n".
@@ -41,11 +41,11 @@ class Download
                     '<MaximumMultipleConnections>0</MaximumMultipleConnections>'."\n".
                     '<EncodingType>Auto</EncodingType>'."\n".
                     '<BypassProxy>0</BypassProxy>'."\n".
-                    '<Name>seedbox-'.$user->name().'-sftp</Name>'."\n".
+                    '<Name>seedbox-'.$user->username.'-sftp</Name>'."\n".
                     '<Comments />'."\n".
                     '<LocalDir />'."\n".
                     '<RemoteDir />'."\n".
-                    '<SyncBrowsing>0</SyncBrowsing>seedbox-'.$user->name().'-sftp&#x0A;'."\n".
+                    '<SyncBrowsing>0</SyncBrowsing>seedbox-'.$user->username.'-sftp&#x0A;'."\n".
                 '</Server>'."\n".
             '</Servers>'."\n".
         '</FileZilla3>';
@@ -53,7 +53,7 @@ class Download
         return $filezilla_xml;
     }
 
-    public static function transdroid(Users $user, $server)
+    public static function transdroid(Users $user, $host)
     {
         $trandroid_data = [
             'ui_swipe_labels' => false,
@@ -70,16 +70,16 @@ class Download
             'search_num_results' => '25',
             'servers' => [[
                 'port' => '443',
-                'host' => $server['HTTP_HOST'],
+                'host' => $host,
                 'ssl' => true,
                 'type' => 'daemon_rtorrent',
                 'password' => '',
                 'os_type' => 'type_linux',
-                'folder' => $user->scgi_folder(),
-                'username' => $user->name(),
+                'folder' => $user->scgi_folder,
+                'username' => $user->username,
                 'use_auth' => true,
-                'name' => 'seedbox-'.$user->name(),
-                'base_ftp_url' => 'ftp://'.$user->name().'@'.$server['HTTP_HOST'].'/torrents/',
+                'name' => 'seedbox-'.$user->username,
+                'base_ftp_url' => 'ftp://'.$user->username.'@'.$host.'/torrents/',
                 'download_alarm' => true,
                 'new_torrent_alarm' => true,
                 'ssl_accept_all' => true
