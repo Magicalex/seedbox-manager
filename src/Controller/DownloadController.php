@@ -2,13 +2,12 @@
 
 namespace App\Controller;
 
+use Apfelbox\FileDownload\FileDownload;
 use App\Seedbox\FileConfiguration;
 use App\Seedbox\Users;
 use App\Seedbox\Utils;
-use Apfelbox\FileDownload\FileDownload;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Http\Stream;
 
 class DownloadController
 {
