@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Seedbox\Install;
 use App\Seedbox\Utils;
-use App\Seedbox\Users;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
@@ -13,7 +12,6 @@ class InstallController
 {
     protected $view;
     protected $username;
-    protected $user;
     protected $fileini;
     protected $router;
 
