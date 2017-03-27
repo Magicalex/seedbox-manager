@@ -3,13 +3,12 @@
     <head>
         <meta charset="utf-8">
         <title>Installation - Seedbox Manager</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link type="text/css" rel="stylesheet" href="assets/install.css">
+        <link rel="stylesheet" href="{{ path_for('home') }}assets/{{ theme }}.css">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1">
     </head>
     <body>
-        <div class="container marg" style="margin-top:50px">
-            <h1 class="page-header dashboard"><i class="glyphicon glyphicon-wrench"></i> Guide d'installation</h1>
+        <div class="container marg" id="install">
+            <h1 class="page-header dashboard"><i class="fa fa-cogs" aria-hidden="true"></i> Guide d'installation</h1>
             <section class="row">
                 <article class="col-md-12">
                     <div class="well well-sm">
@@ -31,7 +30,7 @@
                         <p>Puis ouvrez votre fichier de configuration avec un éditeur de texte.</p>
                         <code>vim {{ root_path }}/conf/users/{{ username }}/config.ini</code>
                         <small><em>Je vous conseille de copier cette commande après rafraichissement normalement cette page ne s'affichera plus jamais.</em></small>
-                        <p>Pour terminer, il vous suffit de mettre owner = yes à la place de no et de quitter en enregistrant.</p>
+                        <p>Pour terminer, il vous suffit de mettre admin = yes à la place de no et de quitter en enregistrant.</p>
                     </div>
                 </article>
             </section>

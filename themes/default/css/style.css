@@ -186,3 +186,19 @@ textarea {
 .modal-body label input {
   margin-right: 2px;
 }
+
+/* install */
+
+#install {
+  margin-top: 50px;
+}
+
+code {
+  display: block;
+  padding: 6px;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+  border-radius: 0;
+  margin-bottom: 10px;
+}

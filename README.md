@@ -99,7 +99,7 @@ To obtain the admin rights :
 ```bash
 vi /var/www/seedbox-manager/conf/users/{utilisateur}/config.ini
 ```
-and replace `owner = no` by `owner = yes`
+and replace `admin = no` by `admin = yes`
 
 ## developement
 

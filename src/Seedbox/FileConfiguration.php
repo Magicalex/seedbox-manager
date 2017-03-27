@@ -14,7 +14,7 @@ class FileConfiguration
                     '<Port>'.$user->portFtp.'</Port>'."\n".
                     '<Protocol>0</Protocol>'."\n".
                     '<Type>0</Type>'."\n".
-                    '<User>'.$user->name.'</User>'."\n".
+                    '<User>'.$user->username.'</User>'."\n".
                     '<Pass></Pass>'."\n".
                     '<Logontype>1</Logontype>'."\n".
                     '<TimezoneOffset>0</TimezoneOffset>'."\n".

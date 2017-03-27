@@ -60,8 +60,9 @@ $container['\App\Controller\AdminController'] = function ($container) {
 
 $container['\App\Controller\InstallController'] = function ($container) {
     $view = $container->get('view');
+    $router = $container->get('router');
 
-    return new \App\Controller\InstallController($view);
+    return new \App\Controller\InstallController($view, $router);
 };
 
 $container['\App\Controller\DownloadController'] = function () {
