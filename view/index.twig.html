@@ -94,8 +94,8 @@
             <div class="trait"></div>
             <h5 class="device"><i class="fa fa-desktop"></i> <strong>{{ 'core.index.server_ftp'|trans }}</strong></h5>
             <ul>
-                <li>{{ 'core.index.address_ftp'|trans }} : <em>(s)ftp://{{ host }}</em></li>
-                <li>{{ 'core.index.user_ftp'|trans }} : <em>{{ user.name }}</em></li>
+                <li>{{ 'core.index.address_ftp'|trans }} : <em>(s)ftp://{{ host.hostname }}</em></li>
+                <li>{{ 'core.index.user_ftp'|trans }} : <em>{{ user.username }}</em></li>
                 <li>{{ 'core.index.port_ftp'|trans }} : <em>{{ user.portFtp }}</em></li>
                 <li>{{ 'core.index.port_sftp'|trans }} : <em>{{ user.portSftp }}</em></li>
                 <li><a class="btn btn-info btn-xs" href="https://filezilla.fr/" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> {{ 'core.index.download_filezilla'|trans }}</a></li>
@@ -104,8 +104,8 @@
             <h5 class="device"><i class="fa fa-android"></i> <strong>{{ 'core.index.app_transdroid'|trans }}</strong></h5>
             <ul>
                 <li>{{ 'core.index.folder_scgi'|trans }} : <em><strong>{{ user.scgi_folder }}</strong></em></li>
-                <li>{{ 'core.index.http_address'|trans }} : <em>{{ host }}</em></li>
-                <li>{{ 'core.index.user_transdroid'|trans }} : <em>{{ user.name }}</em></li>
+                <li>{{ 'core.index.http_address'|trans }} : <em>{{ host.url }}</em></li>
+                <li>{{ 'core.index.user_transdroid'|trans }} : <em>{{ user.username }}</em></li>
                 <li><a class="btn btn-info btn-xs" href="http://transdroid.org/latest"><i class="fa fa-download" aria-hidden="true"></i> {{ 'core.index.download_transdroid'|trans }}</a></li>
                 <li><a id="popuptransdroid" class="btn btn-info btn-xs" data-toggle="popover" href="{{ path_for('download', {'file': 'transdroid'}) }}"><i class="fa fa-files-o"></i> {{ 'core.index.configuration_file'|trans }}</a></li>
             </ul>

@@ -104,9 +104,14 @@ class HomeController
     {
         $host = $param['HTTP_HOST'];
         if (isset($param['HTTPS'])) {
-            $host = "https://{$host}";
+            $url = "https://{$host}";
+        } else {
+            $url = "http://{$host}";
         }
 
-        return $host;
+        return [
+            'url' => $url,
+            'hostname' => $host
+        ];
     }
 }

@@ -108,25 +108,16 @@ button[data-dismiss="modal"] {
   cursor: default;
 }
 
-.glyphicon-refresh {
-  margin-right: 7px;
-}
-
 #popupfilezilla, #popuptransdroid {
   margin-top: 4px;
 }
 
+#bloc-ftp li {
+  margin-bottom: 2px;
+}
+
 .fix-marg-input {
   margin-bottom: 0;
-}
-
-.reply-ticket-h6 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.reply-ticket-h6 .form-group {
-  margin-bottom: 10px;
 }
 
 .alert-sm {
