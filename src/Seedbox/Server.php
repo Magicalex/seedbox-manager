@@ -4,7 +4,7 @@ namespace App\Seedbox;
 
 class Server
 {
-    const VERSION = '3.0.0';
+    const VERSION = '3.0.1';
 
     public static function version()
     {

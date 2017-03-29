@@ -1,11 +1,10 @@
 {
   "name": "seedbox-manager",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "contributors": "magicalex",
   "news": [
-    "Suppression du système de support",
-    "Réécriture complète du code (passage à slim framework 3)",
-    "Traduction de l'interface (fr et en)",
-    "Mise à jour bootstrap 3 et jquery 3"
+    "Correction de bug",
+    "Amélioration de la page d'installation",
+    "Voir les changements : https://github.com/Magicalex/seedbox-manager/compare/v3.0.0...master"
   ]
 }
